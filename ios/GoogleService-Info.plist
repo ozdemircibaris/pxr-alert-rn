@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>69567279341-g0vv8pgidobfbq6ujclrk16j9u6s6adn.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.69567279341-g0vv8pgidobfbq6ujclrk16j9u6s6adn</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB5O4fcuzFXIfQdVfxdLDri1CzXZsSuJyo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>69567279341</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.projectxr.alertapp</string>
+	<key>PROJECT_ID</key>
+	<string>pxr-alert</string>
+	<key>STORAGE_BUCKET</key>
+	<string>pxr-alert.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:69567279341:ios:1b52af9a8b637e785ddce4</string>
+	<key>DATABASE_URL</key>
+	<string>https://pxr-alert.firebaseio.com</string>
+</dict>
+</plist>

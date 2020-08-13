@@ -8,7 +8,7 @@ export default class RouterComp extends Component {
     render() {
         return (
             <Router>
-                <Stack key="root">
+                <Stack key="root" hideNavBar>
                     <Stack key="auth">
                         <Scene
                             key="signIn"
