@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { Router, Stack, Scene } from 'react-native-router-flux';
+import { Router, Stack, Scene ,Drawer} from 'react-native-router-flux';
 import SignIn from './components/authentication/signIn';
 import SignUp from './components/authentication/signUp';
-import Index from './components/pages';
+import SideBar from './components/leftBar/sideBar';
+import Main from './components/pages/Main';
+import Page2 from './components/pages/Page2';
+import Page3 from './components/pages/Page3';
 
 export default class RouterComp extends Component {
     render() {
@@ -15,12 +18,15 @@ export default class RouterComp extends Component {
                             component={SignIn} />
                         <Scene
                             key="signUp"
-                            component={SignUp} />
-                    </Stack>
-                    <Stack key="main">
-                        <Scene
-                            key="index"
-                            component={Index} />
+                            component={SignUp} /></Stack>
+            <Stack key="main" initial>   
+                <Drawer drawerWidth={250} contentComponent={SideBar}>
+                    <Scene key="DrawerMenu" initial>
+                    <Scene key="Main" component={Main} hideNavBar />
+                    <Scene key="page2" component={Page2} hideNavBar />
+                    <Scene key="page3" component={Page3} hideNavBar />
+                    </Scene>
+            </Drawer>
                     </Stack>
                 </Stack>
             </Router>

@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import RouterComp from './src/router';
 import messaging from '@react-native-firebase/messaging';
 
+
 export default class App extends Component {
   componentWillMount() {
     this.requestUserPermission()
@@ -38,6 +39,6 @@ export default class App extends Component {
   }
 
   render() {
-    return <RouterComp />
+    return (<RouterComp />)
   }
 }
