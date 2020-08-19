@@ -16,6 +16,7 @@
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
         android:launchMode="singleTask"
         android:windowSoftInputMode="adjustResize">
+        <meta-data android:name="com.google.firebase.messaging.default_notification_sound" android:resource="@raw/sound2"/>
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />

@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.pxralert"
+        applicationId "com.projectxr.alertapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
