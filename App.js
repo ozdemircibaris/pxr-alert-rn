@@ -4,6 +4,7 @@ import RouterComp from './src/router';
 import messaging from '@react-native-firebase/messaging';
 import OneSignal from 'react-native-onesignal'; // Import package from node modules
 
+
 export default class App extends Component {
   constructor(properties) {
     super(properties);
@@ -104,6 +105,6 @@ export default class App extends Component {
   //   // });
   // }
   render() {
-    return <RouterComp />
+    return (<RouterComp />)
   }
 }
