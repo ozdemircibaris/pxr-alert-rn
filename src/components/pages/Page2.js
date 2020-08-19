@@ -12,7 +12,7 @@ export default class Page2 extends Component {
         <View>
             <Header />
             <View style = {styles.container}>
-                <Text style = {styles.title}> Page 2</Text>
+                <Text style = {styles.title}> Kart Ekle </Text>
             </View>
         </View>
               

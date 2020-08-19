@@ -12,7 +12,7 @@ export default class Page3 extends Component {
         <View>
             <Header />
             <View style = {styles.container}>
-                <Text style = {styles.title}> Page 3 </Text>
+                <Text style = {styles.title}> Bana Gelen Görevler </Text>
             </View>
         </View>
               

@@ -14,10 +14,10 @@ export default class SideBar extends Component {
                    <TouchableOpacity onPress={() => Actions.Main()}><Text style = {styles.title}> Home </Text></TouchableOpacity> 
                 </View>
                 <View style = {styles.textView}>
-                   <TouchableOpacity onPress={() => Actions.page2()}><Text style = {styles.title}> Page 2 </Text></TouchableOpacity> 
+                   <TouchableOpacity onPress={() => Actions.page2()}><Text style = {styles.title}> Kart Ekle</Text></TouchableOpacity> 
                 </View>
                 <View style = {styles.textView}>
-                   <TouchableOpacity onPress={() => Actions.page3()}><Text style = {styles.title}> Page 3 </Text></TouchableOpacity> 
+                   <TouchableOpacity onPress={() => Actions.page3()}><Text style = {styles.title}> Bana Gelen Görevler </Text></TouchableOpacity> 
                 </View>
                 <View style = {styles.textView}>
                     <TouchableOpacity onPress={() => Actions.drawerClose()}><Text style = {styles.title}> Back </Text></TouchableOpacity> 
