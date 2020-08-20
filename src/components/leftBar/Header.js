@@ -10,6 +10,7 @@ export default class Header extends Component {
   render() {
     return (
         <View style = {styles.container}>
+      
                 <TouchableOpacity onPress={() => Actions.drawerToggle()}><Text style = {styles.title}>Menu</Text></TouchableOpacity>
         </View>      
       );
