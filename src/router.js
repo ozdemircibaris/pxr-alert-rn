@@ -6,18 +6,18 @@ import SideBar from './components/leftBar/sideBar';
 import Main from './components/pages/Main';
 import Page2 from './components/pages/Page2';
 import Page3 from './components/pages/Page3';
+import NewDuty from './components/pages/NewDuty';
 
 export default class RouterComp extends Component {
     render() {
         return (
             <Router>
                 <Stack key="root" hideNavBar>
-                    <Stack initial key="auth">
+                    <Stack key="auth">
                         <Scene
                             key="signIn"
                             component={SignIn} />
                         <Scene
-                            initial
                             key="signUp"
                             component={SignUp}
                              /></Stack>
@@ -30,6 +30,15 @@ export default class RouterComp extends Component {
                     </Scene>
             </Drawer>
                     </Stack>
+                    <Scene key="goToLogin"
+                           component={SignIn}
+                           title="Giriş Yap">
+                  </Scene>
+                  <Scene   initial
+                           key="NewDuty"
+                           component={NewDuty}
+                           title="Yeni İş Kitle">
+                  </Scene>
                 </Stack>
             </Router>
         )
