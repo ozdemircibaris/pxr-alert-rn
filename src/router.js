@@ -15,9 +15,10 @@ export default class RouterComp extends Component {
                     <Stack initial key="auth">
                         <Scene
                             key="signIn"
-                            component={SignIn} />
+                            component={SignIn}
+                            initial />
                         <Scene
-                            initial
+                            
                             key="signUp"
                             component={SignUp}
                              /></Stack>

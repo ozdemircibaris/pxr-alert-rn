@@ -32,6 +32,7 @@ let styles = StyleSheet.create({
     container: {
         flexDirection: 'column',
         flex:1,
+        
      },
      textView:{
          padding:-20,

@@ -16,9 +16,10 @@ export default class Main extends Component {
         <View style ={styles.container}>
             {/* <Header /> */}      
             {/* <Text style = {styles.title}> Ana Sayfa  </Text> */}
-            <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={styles.linearGradient}>
+  <LinearGradient colors={['#4d21d0', '#621fb9', '#8825b9']} style={styles.linearGradient}>
   <Text style={styles.buttonText}>
-    Sign in with Facebook
+    
+    
   </Text>
 </LinearGradient>
                 

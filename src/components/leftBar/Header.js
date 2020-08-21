@@ -20,6 +20,7 @@ export default class Header extends Component {
 let styles = StyleSheet.create({
     container: {
         padding: 40,
+        backgroundColor:'black',
         alignItems: 'center',
         borderBottomWidth:1,
         borderBottomColor: 'white',

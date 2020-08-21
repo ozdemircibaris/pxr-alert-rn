@@ -1,15 +1,95 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity } from 'react-native'
+import { Text, View,StyleSheet, TouchableOpacity,Button,SafeAreaView ,TextInput, Image} from 'react-native'
 import { Actions } from 'react-native-router-flux'
+import LinearGradient from 'react-native-linear-gradient';
 
 export default class SignIn extends Component {
     render() {
         return (
-            <View>
-                <TouchableOpacity onPress={() => Actions.jump("index")}>
-                    <Text> SignIn </Text>
-                </TouchableOpacity>
+            
+<View style = {styles.container}>
+    <LinearGradient colors={['#4d21d0', '#621fb9', '#8825b9']} style={styles.linearGradient}>
+        <View style={styles.whiteBox}>
+          <Text style={{fontSize:25}}>Girmek için parolayı söyle</Text>
+        <Image style={styles.ImageWork} source={require('../authentication/work.png')} />
+               
+          <View style={styles.inputsBox}>
+          <TextInput
+                style={{textAlign:'center' , width: '90%',height: 40, borderColor: '#00D1DB', borderWidth: 2 ,margin:40}}
+                onChangeText={text => onChangeText(text)}
+                placeholder='emailinizi giriniz'
+                placeholderTextColor='black'
+                
+              />
+          <TextInput
+              style={{  textAlign:'center',color:'black', width: '90%' ,height: 40, borderColor: '#00D1DB', borderWidth: 2 }}
+              onChangeText={text => onChangeText(text)}
+              placeholder='şifrenizi giriniz'
+              placeholderTextColor='black'
+              
+            />
+   
+        </View> 
+       
+        </View> 
+              <View style={styles.buttonBox}> 
+              <Button style={styles.LoginBtn}
+                onPress={Actions.Main()}
+                title="giriş yap"
+                color="white"
+                accessibilityLabel="Learn more about this purple button"
+              />  
             </View>
+        
+    </LinearGradient>
+   
+</View>
         )
     }
 }
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      flexDirection: "column",
+   
+
+    },linearGradient: {
+      height:'100%',
+      paddingLeft: 15,
+      paddingRight: 15,
+      borderRadius: 2,
+    
+    },LoginBtn:{
+        zIndex: 3 ,
+        position: 'absolute',
+        height: 40, 
+        width: '100%' ,
+       
+    },
+    buttonBox:{
+       position: 'absolute',
+       zIndex: 3 ,
+       marginTop:600,
+       backgroundColor:'#00D1DB',
+       marginLeft:45,
+       width: '85%' ,
+       
+    },
+    inputsBox:{
+      alignItems:'center'
+    },
+    whiteBox:{
+      backgroundColor:'white',
+      paddingLeft: 13,
+      paddingRight: 13,
+      height:300,
+      borderRadius:30,
+      marginTop:390
+      
+    },
+    ImageWork:{
+      height:120,
+      width:120
+    }
+
+  });
