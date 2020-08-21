@@ -84,12 +84,13 @@ const styles = StyleSheet.create({
       paddingRight: 13,
       height:300,
       borderRadius:30,
-      marginTop:390
-      
+      marginTop:390,
+      justifyContent:'center'
     },
     ImageWork:{
       height:120,
-      width:120
+      width:120,
+     
     }
 
   });
