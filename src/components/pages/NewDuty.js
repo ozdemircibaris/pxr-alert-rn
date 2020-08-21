@@ -7,22 +7,23 @@ export default class SignIn extends Component {
     render() {
         return (
           <LinearGradient colors={['#5701d4', '#5b00bf', '#9300c0']} style={styles.linearGradient}>
+            <Text style={styles.hello}>Merhaba Murat.Birine iş kitlemek için harika bir gün!</Text>
                    <TextInput style={styles.dutyHeader}
                             placeholder="İş Başlığı"
                             placeholderTextColor='white'
                             >
                    </TextInput>
                    <TextInput style={styles.dutyInfo}
-                            placeholder="İşinTanımı"
+                            placeholder="İşin Tanımı"
                             placeholderTextColor='white'
                             >
                    </TextInput>
                   <View style={styles.datAndTime}>
                       <View style={styles.date}>
-                          <Text>Tarih</Text>
+                          <Text style={styles.dateText}>Tarih</Text>
                       </View>
                       <View style={styles.time}>
-                      <Text>Saat</Text>
+                      <Text style={styles.timeText}>Saat</Text>
                       </View>
                   </View>
           
@@ -36,17 +37,18 @@ const styles = StyleSheet.create({
          flex: 1,
          paddingLeft: 15,
          paddingRight: 15,
+        
         //  justifyContent:"center",
          alignItems:"center",   
        },
        dutyHeader:{
-          borderWidth:1.5,
+          borderWidth:1,
           width:350,
           height:60,
           borderColor:"white",
           borderRadius:5,
           textAlign:"center",
-          fontSize:16, 
+          fontSize:18, 
           top:150,
        },
        dutyHeaderText:{
@@ -56,13 +58,13 @@ const styles = StyleSheet.create({
            color:"white",
        },
        dutyInfo:{
-        borderWidth:1.5,
+        borderWidth:1,
         width:350,
         height:200,
         borderColor:"white",
         borderRadius:5,
         textAlign:"center",
-        fontSize:16, 
+        fontSize:18, 
         top:180,
        },
   datAndTime:{
@@ -73,17 +75,33 @@ const styles = StyleSheet.create({
   },
 
   time:{
-    borderWidth:1.5,
+    borderWidth:1,
     borderColor:"white",
     width: 175,
      height: 50, 
    
   },
   date:{
-    borderWidth:1.5,
+    borderWidth:1,
     borderColor:"white",
     width: 175,
     height: 50, 
    
+  },
+  hello:{
+     fontSize:30,
+     top:50
+  },
+  dateText:{
+    color:"white",
+    textAlign:"center",
+    fontSize:18,
+    marginTop:10
+  },
+  timeText:{
+    color:"white",
+    textAlign:"center",
+    fontSize:18,
+    marginTop:10
   }
   });

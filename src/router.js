@@ -14,7 +14,7 @@ export default class RouterComp extends Component {
     render() {
         return (
             <Router>
-                <Stack initial key="root" hideNavBar>
+                <Stack  key="root" hideNavBar>
                     <Stack key="auth">
                         <Scene
                             key="signIn"
@@ -41,7 +41,7 @@ export default class RouterComp extends Component {
                         component={NewDuty}
                         title="Yeni İş Kitle">
                     </Scene>
-                    <Scene initial key="Users" component={Users} />
+                    <Scene key="Users" component={Users} />
                 </Stack>
             </Router>
         )
