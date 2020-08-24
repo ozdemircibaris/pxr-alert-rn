@@ -9,9 +9,10 @@ export default class SignIn extends Component {
             
 <View style = {styles.container}>
     <LinearGradient colors={['#4d21d0', '#621fb9', '#8825b9']} style={styles.linearGradient}>
+    <Image style={styles.ImageWork} source={require('../authentication/work.png')} />
         <View style={styles.whiteBox}>
           <Text style={{fontSize:25}}>Girmek için parolayı söyle</Text>
-        <Image style={styles.ImageWork} source={require('../authentication/work.png')} />
+       
                
           <View style={styles.inputsBox}>
           <TextInput
@@ -65,14 +66,16 @@ const styles = StyleSheet.create({
         height: 40, 
         width: '100%' ,
        
+       
     },
     buttonBox:{
        position: 'absolute',
        zIndex: 3 ,
-       marginTop:600,
+       marginTop:675,
        backgroundColor:'#00D1DB',
        marginLeft:45,
        width: '85%' ,
+
        
     },
     inputsBox:{
@@ -84,13 +87,14 @@ const styles = StyleSheet.create({
       paddingRight: 13,
       height:300,
       borderRadius:30,
-      marginTop:390,
-      justifyContent:'center'
-    },
-    ImageWork:{
-      height:120,
-      width:120,
-     
+      marginTop:310,
+      
+    },ImageWork:{
+      height:70,
+      width:60,
+      marginTop:50,
+      marginLeft:160
     }
+    
 
   });

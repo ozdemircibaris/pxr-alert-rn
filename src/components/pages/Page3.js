@@ -22,13 +22,13 @@ export default class Page3 extends Component {
 
 let styles = StyleSheet.create({
     container: {
-        padding: 10,
+        padding: 20,
         alignItems: 'center',
         borderBottomWidth:1,
         borderBottomColor: 'white',
         flexDirection: 'row',
      },
      title:{
-      fontSize:18
+      fontSize:17
      },     
 });
