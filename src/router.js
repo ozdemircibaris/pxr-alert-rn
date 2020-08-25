@@ -7,7 +7,7 @@ import Main from './components/pages/Main';
 import Page2 from './components/pages/Page2';
 import Page3 from './components/pages/Page3';
 import Users from './components/pages/Users';
-import NewDuty from './components/pages/NewDuty';
+import NewDuty from './components/pages/CreateTask';
 
 
 export default class RouterComp extends Component {
@@ -37,9 +37,9 @@ export default class RouterComp extends Component {
                         component={SignIn}
                         title="Giriş Yap">
                     </Scene>
-                    <Scene 
-                        key="NewDuty"
-                        component={NewDuty}
+                    <Scene initial
+                        key="CreateTask"
+                        component={CreateTask}
                         title="Yeni İş Kitle">
                     </Scene>
                     <Scene key="Users" component={Users} />

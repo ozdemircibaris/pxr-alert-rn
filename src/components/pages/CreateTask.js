@@ -1,9 +1,34 @@
 import React, { Component } from 'react';
-import { Button,Text, TextInput,View ,StyleSheet,Image, ImageBackground} from 'react-native';
+import { Button,Platform, Text,TextInput,View ,StyleSheet,Image, ImageBackground} from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import LinearGradient from 'react-native-linear-gradient';
 
 export default class SignIn extends Component {
+  state={
+    date:new Date(),
+    mode:'date',
+    show:false
+  };
+
+   onChange = (event,selectedDate) => {
+    const currentDate = selectedDate ||date;
+    date = currentDate;
+  };
+  
+  showMode = (currentMode) => {
+    this.state.show = true;
+     this.state.mode = currentMode;
+  };
+
+  showDatepicker = () => {
+    this.state.mode='date';
+  };
+
+  showTimepicker = () => {
+    this.state.mode='time';
+  }
+
     render() {
         return (
           <LinearGradient colors={['#5701d4', '#5b00bf', '#9300c0']} style={styles.linearGradient}>
@@ -18,15 +43,22 @@ export default class SignIn extends Component {
                             placeholderTextColor='white'
                             >
                    </TextInput>
-                  <View style={styles.datAndTime}>
-                      <View style={styles.date}>
-                          <Text style={styles.dateText}>Tarih</Text>
-                      </View>
-                      <View style={styles.time}>
-                      <Text style={styles.timeText}>Saat</Text>
-                      </View>
+
+                 <View><View>
+                    <Button onPress={this.showDatepicker} title="Tarih"></Button>
+                    </View>
+                    <View>
+                    <Button onPress={this.showTimepicker} title="Saat"></Button>
+                    </View>
+                    <DateTimePicker
+                      testID="dateTimePicker"
+                      value={this.state.date}
+                      mode={this.state.mode}
+                      is24Hour={true}
+                      display="default"
+                      onChange={this.onChange}
+                    />
                   </View>
-          
             </LinearGradient>  
         )
     }
@@ -37,7 +69,6 @@ const styles = StyleSheet.create({
          flex: 1,
          paddingLeft: 15,
          paddingRight: 15,
-        
         //  justifyContent:"center",
          alignItems:"center",   
        },
@@ -67,12 +98,12 @@ const styles = StyleSheet.create({
         fontSize:18, 
         top:180,
        },
-  datAndTime:{
-      flex:1,
-      top:200,
-      flexDirection:"row",
-    // justifyContent:"space-around",
-  },
+  // datAndTime:{
+  //     flex:1,
+  //     top:200,
+  //     flexDirection:"row",
+  //   // justifyContent:"space-around",
+  // },
 
   time:{
     borderWidth:1,
@@ -92,16 +123,16 @@ const styles = StyleSheet.create({
      fontSize:30,
      top:50
   },
-  dateText:{
-    color:"white",
-    textAlign:"center",
-    fontSize:18,
-    marginTop:10
-  },
-  timeText:{
-    color:"white",
-    textAlign:"center",
-    fontSize:18,
-    marginTop:10
-  }
+  // dateText:{
+  //   color:"white",
+  //   textAlign:"center",
+  //   fontSize:18,
+  //   marginTop:10
+  // },
+  // timeText:{
+  //   color:"white",
+  //   textAlign:"center",
+  //   fontSize:18,
+  //   marginTop:10
+  // }
   });
