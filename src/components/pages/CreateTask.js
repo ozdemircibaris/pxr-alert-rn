@@ -3,64 +3,56 @@ import { Button,Platform, Text,TextInput,View ,StyleSheet,Image, ImageBackground
 import { Actions } from 'react-native-router-flux';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import LinearGradient from 'react-native-linear-gradient';
+import moment from 'moment'
+import 'moment/dist/locale/tr';
 
 export default class SignIn extends Component {
   state={
-    date:new Date(),
-    mode:'date',
-    show:false
+    dateValue : new Date(),
+    pickerMode: 'date',
+    show: false
   };
 
-   onChange = (event,selectedDate) => {
-    const currentDate = selectedDate ||date;
-    date = currentDate;
-  };
+  onChange = (event, selectedDate) => this.setState({ dateValue: selectedDate });
   
-  showMode = (currentMode) => {
-    this.state.show = true;
-     this.state.mode = currentMode;
-  };
-
-  showDatepicker = () => {
-    this.state.mode='date';
-  };
-
-  showTimepicker = () => {
-    this.state.mode='time';
-  }
-
+  showDate = () => this.setState({ pickerMode: "date", show: true, })
+  showTime = () => this.setState({ pickerMode: "time", show: true, });
     render() {
-        return (
-          <LinearGradient colors={['#5701d4', '#5b00bf', '#9300c0']} style={styles.linearGradient}>
-            <Text style={styles.hello}>Merhaba Murat.Birine iş kitlemek için harika bir gün!</Text>
-                   <TextInput style={styles.dutyHeader}
-                            placeholder="İş Başlığı"
-                            placeholderTextColor='white'
-                            >
-                   </TextInput>
-                   <TextInput style={styles.dutyInfo}
-                            placeholder="İşin Tanımı"
-                            placeholderTextColor='white'
-                            >
-                   </TextInput>
+      const { show, dateValue, pickerMode } = this.state
+      console.log("date", moment(dateValue).format('L'))
+      return (
+        <LinearGradient colors={['#5701d4', '#5b00bf', '#9300c0']} style={styles.linearGradient}>
+          <Text style={styles.hello}>Merhaba Murat.Birine iş kitlemek için harika bir gün!</Text>
+            <TextInput style={styles.dutyHeader}
+              placeholder="İş Başlığı"
+              placeholderTextColor='white'
+              >
+            </TextInput>
+            <TextInput style={styles.dutyInfo}
+              placeholder="İşin Tanımı"
+              placeholderTextColor='white'
+              >
+            </TextInput>
 
-                 <View><View>
-                    <Button onPress={this.showDatepicker} title="Tarih"></Button>
-                    </View>
-                    <View>
-                    <Button onPress={this.showTimepicker} title="Saat"></Button>
-                    </View>
-                    <DateTimePicker
-                      testID="dateTimePicker"
-                      value={this.state.date}
-                      mode={this.state.mode}
-                      is24Hour={true}
-                      display="default"
-                      onChange={this.onChange}
-                    />
-                  </View>
-            </LinearGradient>  
-        )
+          <View><View>
+            <Button onPress={this.showDate} title="Tarih"></Button>
+            </View>
+            <View>
+            <Button onPress={this.showTime} title="Saat"></Button>
+            </View>
+            {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={dateValue}
+          mode={pickerMode}
+          is24Hour={true}
+          display="spinner"
+          onChange={this.onChange}
+        />
+      )}
+          </View>
+        </LinearGradient>  
+      )
     }
 }
 
