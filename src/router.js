@@ -36,7 +36,7 @@ export default class RouterComp extends Component {
                         component={SignIn}
                         title="Giriş Yap">
                     </Scene>
-                    <Scene initial
+                    <Scene i
                         key="NewDuty"
                         component={NewDuty}
                         title="Yeni İş Kitle">

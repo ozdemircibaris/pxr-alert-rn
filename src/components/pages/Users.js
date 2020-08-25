@@ -4,6 +4,7 @@ import { StyleSheet, View, Text, CheckBox, Image, Button, TouchableOpacity } fro
 import LinearGradient from 'react-native-linear-gradient';
 import { Actions } from 'react-native-router-flux';
 import { color } from 'react-native-reanimated';
+import { ScrollView } from 'react-native-gesture-handler';
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default class Main extends Component {
@@ -15,65 +16,183 @@ export default class Main extends Component {
 
         return (
 
-            <View style={styles.container}>
-                <View style={styles.body}>
-                    <View style={styles.users}>
-                        <CheckBox style={styles.checkbox}/>
-                        <Text style={styles.usersName}>Do you like React Native?</Text>
+            <LinearGradient colors={['#7d00d8', '#7a00c6', '#b100bf']} style={styles.linearGradient}>
+                <View style={styles.container}>
+                    <View style={styles.header}>
+                        <Text style={styles.headertext}>Merhaba Murat</Text>
+                        <Text style={styles.headertext}> Bu şerefe kimlerin nail olacağını seç</Text>
                     </View>
-                    <View style={styles.users}>
-                        <CheckBox style={styles.checkbox}/>
-                        <Text style={styles.usersName}>Do you like React Native?</Text>
+                    <View style={styles.body}>
+                        <ScrollView>
+                            <View style={styles.users}>
+                                <CheckBox style={styles.checkbox}
+                                    checkedIcon='dot-circle-o'
+                                    uncheckedIcon='circle-o'
+                                    title='checkbox 1'
+                                    checkedColor='red'
+                                    tintColors={{ true: 'white', false: 'black' }}
+                                // checked1={this.state.checked1}
+                                // onPress={() => this.setState({ checked1: !this.state.checked1 })}
+                                />
+                                <Text style={styles.usersName}>Do you like React Native?</Text>
+                            </View>
+                            <View style={styles.users}>
+                                <CheckBox style={styles.checkbox}
+                                    checkedIcon='dot-circle-o'
+                                    uncheckedIcon='circle-o'
+                                    title='checkbox 1'
+                                    checkedColor='red'
+                                    tintColors={{ true: 'white', false: 'black' }}
+                                // checked1={this.state.checked1}
+                                // onPress={() => this.setState({ checked1: !this.state.checked1 })}
+                                />
+                                <Text style={styles.usersName}>Do you like React Native?</Text>
+                            </View>
+                            <View style={styles.users}>
+                                <CheckBox style={styles.checkbox}
+                                    checkedIcon='dot-circle-o'
+                                    uncheckedIcon='circle-o'
+                                    title='checkbox 1'
+                                    checkedColor='red'
+                                    tintColors={{ true: 'white', false: 'black' }}
+                                // checked1={this.state.checked1}
+                                // onPress={() => this.setState({ checked1: !this.state.checked1 })}
+                                />
+                                <Text style={styles.usersName}>Do you like React Native?</Text>
+                            </View>
+                            <View style={styles.users}>
+                                <CheckBox style={styles.checkbox}
+                                    checkedIcon='dot-circle-o'
+                                    uncheckedIcon='circle-o'
+                                    title='checkbox 1'
+                                    checkedColor='red'
+                                    tintColors={{ true: 'white', false: 'black' }}
+                                // checked1={this.state.checked1}
+                                // onPress={() => this.setState({ checked1: !this.state.checked1 })}
+                                />
+                                <Text style={styles.usersName}>Do you like React Native?</Text>
+                            </View>
+                            <View style={styles.users}>
+                                <CheckBox style={styles.checkbox}
+                                    checkedIcon='dot-circle-o'
+                                    uncheckedIcon='circle-o'
+                                    title='checkbox 1'
+                                    checkedColor='red'
+                                    tintColors={{ true: 'white', false: 'black' }}
+                                // checked1={this.state.checked1}
+                                // onPress={() => this.setState({ checked1: !this.state.checked1 })}
+                                />
+                                <Text style={styles.usersName}>Do you like React Native?</Text>
+                            </View>
+                            <View style={styles.users}>
+                                <CheckBox style={styles.checkbox}
+                                    checkedIcon='dot-circle-o'
+                                    uncheckedIcon='circle-o'
+                                    title='checkbox 1'
+                                    checkedColor='red'
+                                    tintColors={{ true: 'white', false: 'black' }}
+                                    tintColors={{ true: 'white', false: 'black' }}
+                                // checked1={this.state.checked1}
+                                // onPress={() => this.setState({ checked1: !this.state.checked1 })}
+                                />
+                                <Text style={styles.usersName}>Do you like React Native?</Text>
+                            </View>
+                            <View style={styles.users}>
+                                <CheckBox style={styles.checkbox}
+                                    checkedIcon='dot-circle-o'
+                                    uncheckedIcon='circle-o'
+                                    title='checkbox 1'
+                                    checkedColor='red'
+                                    tintColors={{ true: 'white', false: 'black' }}
+                                // checked1={this.state.checked1}
+                                // onPress={() => this.setState({ checked1: !this.state.checked1 })}
+                                />
+                                <Text style={styles.usersName}>Do you like React Native?</Text>
+                            </View>
+                            <View style={styles.users}>
+                                <CheckBox style={styles.checkbox}
+                                    checkedIcon='dot-circle-o'
+                                    uncheckedIcon='circle-o'
+                                    title='checkbox 1'
+                                    checkedColor='red'
+                                    tintColors={{ true: 'white', false: 'black' }}
+                                // checked1={this.state.checked1}
+                                // onPress={() => this.setState({ checked1: !this.state.checked1 })}
+                                />
+                                <Text style={styles.usersName}>Do you like React Native?</Text>
+                            </View>
+                            <View style={styles.users}>
+                                <CheckBox style={styles.checkbox}
+                                    checkedIcon='dot-circle-o'
+                                    uncheckedIcon='circle-o'
+                                    title='checkbox 1'
+                                    checkedColor='red'
+                                    tintColors={{ true: 'white', false: 'black' }}
+                                // checked1={this.state.checked1}
+                                // onPress={() => this.setState({ checked1: !this.state.checked1 })}
+                                />
+                                <Text style={styles.usersName}>Do you like React Native?</Text>
+                            </View>
+                        </ScrollView>
                     </View>
-                    <View style={styles.users}>
-                        <CheckBox style={styles.checkbox}/>
-                        <Text style={styles.usersName}>Do you like React Native?</Text>
-                    </View>
-                    <View style={styles.users}>
-                        <CheckBox style={styles.checkbox}/>
-                        <Text style={styles.usersName}>Do you like React Native?</Text>
-                    </View>
-                    <View style={styles.users}>
-                        <CheckBox style={styles.checkbox}/>
-                        <Text style={styles.usersName}>Do you like React Native?</Text>
-                    </View>
-                    <View style={styles.users}>
-                        <CheckBox style={styles.checkbox}/>
-                        <Text style={styles.usersName}>Do you like React Native?</Text>
+                    <View style={styles.end}>
+                        <Button color="#4f1aff" title="KİTLEEE!"></Button>
                     </View>
                 </View>
-                <Button title="KİTLEEE!"></Button>
-            </View>
+            </LinearGradient>
 
         );
     }
 }
 
 const styles = StyleSheet.create({
-    body: {
-        borderWidth: 1,
-        width: 410,
-        height: 350,
-        top: 150,
-        flexDirection: 'column',
-        justifyContent: 'space-evenly',
-        padding:0
+    linearGradient: {
+        flex: 1,
+        
+       
+    },
+    header:{
+        borderWidth: 0,
+        top: 70,
+        
         
     },
+    headertext:{
+        fontSize:17,
+        color: 'white',
+        left: 30,
+    } ,
+    body: {
+        borderWidth: 0,
+        width: 410,
+        height: 310,
+        top: 130,
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        padding: 0
+
+    },
     users: {
-        borderWidth: 1,
+        borderWidth: 0,
         width: 400,
         height: 40,
-        left: 5,
-        top: 0,
+        left: 30,
         flexDirection: 'row',
     },
-    checkbox:{
+    checkbox: {
         alignSelf: 'flex-start',
         left: 10,
     },
-    usersName:{
-        top:8,
-        left: 60
+    usersName: {
+        top: 8,
+        left: 60,
+        color: 'white'
+    },
+    end: {
+        height: 40,
+        width: 250,
+        top: 160,
+        left: 80,
+        borderWidth:0
     }
 });
