@@ -24,12 +24,12 @@ export default class RouterComp extends Component {
                             key="signUp"
                             component={SignUp}
                         /></Stack>
-                    <Stack key="main" >
+                    <Stack key="main" initial >
                         <Drawer   drawerWidth={250} contentComponent={SideBar} >
                             <Scene  key="DrawerMenu" >
                                 <Scene  key="Main" component={Main}   />
                                 <Scene key="page2" component={Page2}  />
-                                <Scene key="page3" component={Page3}  />
+                                <Scene key="page3" component={Page3}  initial />
                             </Scene>
                         </Drawer>
                     </Stack>

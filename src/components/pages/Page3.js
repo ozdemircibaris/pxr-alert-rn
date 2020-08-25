@@ -10,9 +10,13 @@ export default class Page3 extends Component {
   render() {
     return (
         <View>
-            <Header />
+            {/* <Header /> */}
             <View style = {styles.container}>
-                <Text style = {styles.title}> Bana Gelen Görevler </Text>
+            <View style={styles.whiteBox}></View>
+            <View style={styles.whiteBox}></View>
+            <View style={styles.whiteBox}></View>
+
+
             </View>
         </View>
               
@@ -22,13 +26,22 @@ export default class Page3 extends Component {
 
 let styles = StyleSheet.create({
     container: {
-        padding: 20,
-        alignItems: 'center',
-        borderBottomWidth:1,
-        borderBottomColor: 'white',
-        flexDirection: 'row',
-     },
-     title:{
-      fontSize:17
-     },     
+        flex:1,
+        // flexDirection:'column',
+        flexDirection:'row',
+        flexWrap:"wrap",
+        justifyContent:'space-between',
+        padding: 7,
+        borderBottomColor:'white',   
+     }
+     ,title:{
+       fontSize:17
+     }
+     ,whiteBox:{ 
+       
+        backgroundColor:'pink',
+        height:70,
+        width:70,
+        borderRadius:10
+      }  
 });
