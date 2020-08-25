@@ -24,7 +24,7 @@ export default class RouterComp extends Component {
                             key="signUp"
                             component={SignUp}
                         /></Stack>
-                    <Stack key="main" >
+                    <Stack initial key="main" >
                         <Drawer   drawerWidth={250} contentComponent={SideBar}>
                             <Scene  key="DrawerMenu" >
                                 <Scene  key="Main" component={Main} hideNavBar initial />
@@ -37,7 +37,8 @@ export default class RouterComp extends Component {
                         component={SignIn}
                         title="Giriş Yap">
                     </Scene>
-                    <Scene 
+                    <Scene
+                    initial
                         key="NewDuty"
                         component={NewDuty}
                         title="Yeni İş Kitle">
