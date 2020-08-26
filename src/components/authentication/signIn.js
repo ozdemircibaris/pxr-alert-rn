@@ -59,14 +59,11 @@ const styles = StyleSheet.create({
       paddingLeft: 15,
       paddingRight: 15,
       borderRadius: 2,
-    
     },LoginBtn:{
         zIndex: 3 ,
         position: 'absolute',
         height: 40, 
         width: '100%' ,
-       
-       
     },
     buttonBox:{
        position: 'absolute',
@@ -75,8 +72,6 @@ const styles = StyleSheet.create({
        backgroundColor:'#00D1DB',
        marginLeft:45,
        width: '85%' ,
-
-       
     },
     inputsBox:{
       alignItems:'center'
