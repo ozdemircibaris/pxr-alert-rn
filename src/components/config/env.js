@@ -1,5 +1,5 @@
 import { Dimensions } from 'react-native'
-import { Platform } from 'react-native'
+import { Platform, PixelRatio } from 'react-native'
 
 export const PhoneHeight = Dimensions.get("window").height;
 export const PhoneWidth  = Dimensions.get("window").width;
