@@ -382,7 +382,7 @@ PODS:
     - React-Core (= 0.63.2)
     - React-cxxreact (= 0.63.2)
     - React-jsi (= 0.63.2)
-  - RNDateTimePicker (3.0.1):
+  - RNDateTimePicker (2.2.3):
     - React
   - RNFBApp (8.3.0):
     - Firebase/CoreOnly (~> 6.28.1)
@@ -612,7 +612,7 @@ SPEC CHECKSUMS:
   React-RCTText: 1b6773e776e4b33f90468c20fe3b16ca3e224bb8
   React-RCTVibration: 4d2e726957f4087449739b595f107c0d4b6c2d2d
   ReactCommon: a0a1edbebcac5e91338371b72ffc66aa822792ce
-  RNDateTimePicker: 3422306266e1743914cf9ce78d7dc4add3fad0e1
+  RNDateTimePicker: bc947b8ee2d74cf940df1915bf1dd3359f375c9f
   RNFBApp: d55b3a69d199cff25ecf4f3bf41a86c47aa37d57
   RNFBMessaging: 3bb7dcf398789ce359a9f6b97b83472a3090f65a
   RNGestureHandler: b6b359bb800ae399a9c8b27032bdbf7c18f08a08
@@ -621,6 +621,6 @@ SPEC CHECKSUMS:
   Yoga: 7740b94929bbacbddda59bf115b5317e9a161598
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 28b5075d85334efa181388f28385dd712a531af4
+PODFILE CHECKSUM: 61f3b7a3b7892bab2109427882a693367f1a6771
 
 COCOAPODS: 1.9.3

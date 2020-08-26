@@ -14,18 +14,19 @@ export default class RouterComp extends Component {
     render() {
         return (
             <Router>
-                <Stack  key="root" hideNavBar>
-                    <Stack key="auth">
-                        <Scene
+                <Stack  key="root" hideNavBar >
+                    <Stack key="auth" initial>
+                        <Scene 
                             key="signIn"
                             component={SignIn}
+                            initial 
                             />
                         <Scene
                             key="signUp"
                             component={SignUp}
                         /></Stack>
                     <Stack key="main" >
-                        <Drawer   drawerWidth={250} contentComponent={SideBar} >
+                        <Drawer   drawerWidth={250} contentComponent={SideBar}>
                             <Scene  key="DrawerMenu" >
                                 <Scene  key="Main" component={Main}   />
                                 <Scene key="page2" component={Page2}  />
@@ -37,7 +38,8 @@ export default class RouterComp extends Component {
                         component={SignIn}
                         title="Giriş Yap">
                     </Scene>
-                    <Scene 
+                    <Scene
+                  
                         key="NewDuty"
                         component={NewDuty}
                         title="Yeni İş Kitle">
