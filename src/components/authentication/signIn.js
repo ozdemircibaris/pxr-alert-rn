@@ -75,8 +75,6 @@ const styles = StyleSheet.create({
        backgroundColor:'#00D1DB',
        marginLeft:45,
        width: '85%' ,
-
-       
     },
     inputsBox:{
       alignItems:'center'
