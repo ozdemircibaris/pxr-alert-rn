@@ -7,10 +7,48 @@ import { color } from 'react-native-reanimated';
 import { ScrollView } from 'react-native-gesture-handler';
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 
+const users = [
+    { id: "1", info: "Murat Erdoğan" },
+    { id: "2", info: "Seyithan Erdoğan" },
+    { id: "3", info: "Barış Özdemirci" },
+    { id: "4", info: "Sühacan Uluer" },
+    { id: "5", info: "Emir Akkurt" },
+    { id: "6", info: "Hüseyin Mercanlı" },
+    { id: "7", info: "İlayda Arslan" },
+    { id: "8", info: "Umut Güler" },
+    { id: "9", info: "Berat Üçgül" },
+    { id: "10", info: "Zeynep Altıparmak" }
+]
+
+
 export default class Main extends Component {
     constructor(props) {
         super(props);
+
     }
+
+
+    // list = () => {
+    //     return users.map(element => {
+    //         return (
+    //         <View style={styles.users} key={element.id}>
+    //             <CheckBox style={styles.checkbox}
+    //                 checkedIcon='dot-circle-o'
+    //                 uncheckedIcon='circle-o'
+    //                 title='checkbox 1'
+    //                 checkedColor='red'
+    //                 tintColors={{ true: 'white', false: 'black' }}
+    //             // checked1={this.state.checked1}
+    //             // onPress={() => this.setState({ checked1: !this.state.checked1 })}
+    //             />
+    //             <Text style={styles.usersName}>{element.info}</Text>
+    //         </View>
+    //         )
+    //     });
+    // }
+
+
+
     render() {
 
 
@@ -24,7 +62,28 @@ export default class Main extends Component {
                     </View>
                     <View style={styles.body}>
                         <ScrollView>
-                            <View style={styles.users}>
+
+                            {/* {this.list()} */}
+
+
+                            {users.map(item => {
+                                return (
+                                    <View style={styles.users} key={item.id}>
+                                        <CheckBox style={styles.checkbox}
+                                            checkedIcon='dot-circle-o'
+                                            uncheckedIcon='circle-o'
+                                            title='checkbox 1'
+                                            checkedColor='red'
+                                            tintColors={{ true: 'white', false: 'black' }}
+                                        // checked1={this.state.checked1}
+                                        // onPress={() => this.setState({ checked1: !this.state.checked1 })}
+                                        />
+                                        <Text style={styles.usersName}>{item.info}</Text>
+                                    </View>)
+                            })}
+
+
+                            {/* <View style={styles.users}>
                                 <CheckBox style={styles.checkbox}
                                     checkedIcon='dot-circle-o'
                                     uncheckedIcon='circle-o'
@@ -132,7 +191,7 @@ export default class Main extends Component {
                                 // onPress={() => this.setState({ checked1: !this.state.checked1 })}
                                 />
                                 <Text style={styles.usersName}>Do you like React Native?</Text>
-                            </View>
+                            </View> */}
                         </ScrollView>
                     </View>
                     <View style={styles.end}>
@@ -148,20 +207,20 @@ export default class Main extends Component {
 const styles = StyleSheet.create({
     linearGradient: {
         flex: 1,
-        
-       
+
+
     },
-    header:{
+    header: {
         borderWidth: 0,
         top: 70,
-        
-        
+
+
     },
-    headertext:{
-        fontSize:17,
+    headertext: {
+        fontSize: 17,
         color: 'white',
         left: 30,
-    } ,
+    },
     body: {
         borderWidth: 0,
         width: 410,
@@ -193,6 +252,6 @@ const styles = StyleSheet.create({
         width: 250,
         top: 160,
         left: 80,
-        borderWidth:0
+        borderWidth: 0
     }
 });
