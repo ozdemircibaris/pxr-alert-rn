@@ -18,7 +18,7 @@ export default class SignIn extends Component {
           <TextInput
                 style={{textAlign:'center' , width: '90%',height: 40, borderColor: '#00D1DB', borderWidth: 2 ,margin:40}}
                 onChangeText={text => onChangeText(text)}
-                placeholder='emailinizi giriniz'
+                placeholder='emailinizi girinizz'
                 placeholderTextColor='black'
                 
               />
