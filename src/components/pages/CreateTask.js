@@ -5,6 +5,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment'
 import 'moment/dist/locale/tr';
+import { PhoneHeight,PhoneWidth } from '../config/env';
 
 export default class SignIn extends Component {
   state={
@@ -19,7 +20,10 @@ export default class SignIn extends Component {
   showTime = () => this.setState({ pickerMode: "time", show: true, });
     render() {
       const { show, dateValue, pickerMode } = this.state
-      console.log("date", moment(dateValue).format('L'))
+
+      console.log("height: ", PhoneHeight );
+      console.log("width: ", PhoneWidth );
+      // console.log("date", moment(dateValue).format('L'))
       return (
         <LinearGradient colors={['#5701d4', '#5b00bf', '#9300c0']} style={styles.linearGradient}>
           <Text style={styles.hello}>Merhaba Murat.Birine iş kitlemek için harika bir gün!</Text>
@@ -61,7 +65,6 @@ const styles = StyleSheet.create({
          flex: 1,
          paddingLeft: 15,
          paddingRight: 15,
-        //  justifyContent:"center",
          alignItems:"center",   
        },
        dutyHeader:{
@@ -90,12 +93,6 @@ const styles = StyleSheet.create({
         fontSize:18, 
         top:180,
        },
-  // datAndTime:{
-  //     flex:1,
-  //     top:200,
-  //     flexDirection:"row",
-  //   // justifyContent:"space-around",
-  // },
 
   time:{
     borderWidth:1,
@@ -115,16 +112,4 @@ const styles = StyleSheet.create({
      fontSize:30,
      top:50
   },
-  // dateText:{
-  //   color:"white",
-  //   textAlign:"center",
-  //   fontSize:18,
-  //   marginTop:10
-  // },
-  // timeText:{
-  //   color:"white",
-  //   textAlign:"center",
-  //   fontSize:18,
-  //   marginTop:10
-  // }
   });
