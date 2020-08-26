@@ -1,10 +1,22 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, ImageBackground, Image, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, ImageBackground, Image, Button, TouchableOpacity, ScrollView } from 'react-native';
 // import Header from '../leftBar/Header';
 import LinearGradient from 'react-native-linear-gradient';
 import { Actions } from 'react-native-router-flux';
 import { color } from 'react-native-reanimated';
 // import { TouchableOpacity } from 'react-native-gesture-handler';
+
+
+const mission = [
+  { id: "1", title: "Çöp At", body: "Ofisten çıkmadan önce tüm çöpleri at", color: "#ffaaff" },
+  { id: "1", title: "Temizlik", body: "Yarın toplu temizlik yapılacak.",  color: "#ffff7f" },
+  { id: "1", title: "Hatırlatma", body: "Birlikte yapılacak işi unutma.!!",  color: "#55ffff" },
+  { id: "1", title: "Randevu", body: "Birazdan müşteri görüşmesi var. Unutma!",  color: "#aaaaff" },
+  { id: "1", title: "Bulaşıkları Yıka", body: "Ofise geldiğinde bulaşıkları yıkamayı unutma",  color: "#aaff7f" },
+  { id: "1", title: "İş", body: "Yarına yetiştirilecek iş var unutma.",  color: "#ffaa7f" },
+  { id: "1", title: "Toplantı", body: "Yarın saat 2:00' de toplantı var unutma unutturma.",  color: "#d991d9" },
+]
+
 
 export default class Main extends Component {
   constructor(props) {
@@ -22,27 +34,26 @@ export default class Main extends Component {
 
         <View style={styles.missionFirst}></View>
         <View style={styles.body}>
-          <View style={styles.a}>
-            <View style={styles.hr}></View>
-            <View style={styles.circle} backgroundColor="#ffff7f"></View>
-            <View style={styles.mission}>
-              <View style={styles.categoryColor} backgroundColor="#ffff7f" ></View>
-            </View>
-          </View>
-          <View style={styles.a}>
-            <View style={styles.hr}></View>
-            <View style={styles.circle} backgroundColor="#aaaaff"></View>
-            <View style={styles.mission}>
-              <View style={styles.categoryColor} backgroundColor="#aaaaff" ></View>
-            </View>
-          </View>
-          <View style={styles.a}>
-            <View style={styles.hr}></View>
-            <View style={styles.circle} backgroundColor="#ffaaff"></View>
-            <View style={styles.mission}>
-              <View style={styles.categoryColor} backgroundColor="#ffaaff" ></View>
-            </View>
-          </View>
+          <ScrollView>
+
+            {mission.map(item => {
+              return (
+                <View style={styles.a} key={item.id}>
+                  <View style={styles.hr}></View>
+                  <View style={styles.circle} backgroundColor={item.color}></View>
+                  <View style={styles.mission}>
+                    <Text>{item.title}</Text>
+                    <Text>{item.body}</Text>
+                    <View style={styles.categoryColor} backgroundColor={item.color} ></View>
+                  </View>
+                </View>
+              )
+            })}
+
+
+
+            
+          </ScrollView>
         </View>
         <View style={styles.end}></View>
         <TouchableOpacity
@@ -150,7 +161,7 @@ const styles = StyleSheet.create({
     width: 12,
     // backgroundColor:'purple',
     borderRadius: 20,
-    top: 45,
+    top: 15,
     left: 10
   },
   a: {
@@ -159,22 +170,22 @@ const styles = StyleSheet.create({
     height: 90,
     borderWidth: 0
   },
-  hr:{
-    width:0,
-    height:90,
-    borderWidth:1,
+  hr: {
+    width: 0,
+    height: 90,
+    borderWidth: 1,
     left: 80,
     borderColor: '#d9d9d9',
     left: 60
   },
-  circle:{
+  circle: {
     borderWidth: 1,
-    width:12,
+    width: 12,
     height: 12,
     borderRadius: 20,
     borderColor: '#d8d8d8',
-    left:53,
-    top:35
+    left: 53,
+    top: 35
   }
 });
 

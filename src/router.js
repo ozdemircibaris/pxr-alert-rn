@@ -23,7 +23,7 @@ export default class RouterComp extends Component {
                             key="signUp"
                             component={SignUp}
                         /></Stack>
-                    <Stack key="main" >
+                    <Stack initial key="main" >
                         <Drawer drawerWidth={250} contentComponent={SideBar}>
                             <Scene key="DrawerMenu" >
                                 <Scene key="Main" component={Main} hideNavBar />
@@ -41,7 +41,7 @@ export default class RouterComp extends Component {
                         component={NewDuty}
                         title="Yeni İş Kitle">
                     </Scene>
-                    <Scene initial key="Users" component={Users} />
+                    <Scene  key="Users" component={Users} />
                 </Stack>
             </Router>
         )
