@@ -1,114 +1,102 @@
 import React, { Component } from 'react';
-import { Button,Text, TextInput,View ,StyleSheet,Image, ImageBackground} from 'react-native';
+import { Button,Text,TouchableOpacity,TextInput,View ,StyleSheet,Image, ImageBackground} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import LinearGradient from 'react-native-linear-gradient';
+import { PhoneHeight,PhoneWidth,responsiveSize } from '../config/env';
 
 export default class SignIn extends Component {
     render() {
         return (
-          <LinearGradient  colors={['#5701d4', '#5b00bf', '#9300c0']} style={styles.linearGradient}>
-              <Image style={styles.colorfulCircle ,{width:75,height:75}}
-              source={require('../pages/color-circle.png')}>
-
-              </Image>
-                 {/* <View style={styles.div}> */}
-                            <TextInput style={styles.input}
-                            placeholder='AD SOYAD'
-                            autoCapitalize="none"
-                            placeholderTextColor='white'
-                            onChangeText={val => this.onChangeText('username', val)}/>
-                             <TextInput style={styles.input}
-                            placeholder='E-POSTA'
-                            autoCapitalize="none"
-                            placeholderTextColor='white'
-                            onChangeText={val => this.onChangeText('username', val)}/>
-                             <TextInput style={styles.input}
-                            placeholder='ŞİFRE'
-                            autoCapitalize="none"
-                            placeholderTextColor='white'
-                            onChangeText={val => this.onChangeText('username', val)}/>
-                             <TextInput style={styles.input}
-                            placeholder='ŞİFRE TEKRAR'
-                            autoCapitalize="none"
-                            placeholderTextColor='white'
-                            onChangeText={val => this.onChangeText('username', val)}/>
-                          
-                          <View style={[{ width: "67%", margin: 10,}]}>
-                            <Button style={{ height: 40, width: 95}}
-                              title='kayıt ol' 
-                              color="#00d1db"
-                             />
-                             </View>
-                             <Text>Hesabın varsa burda ne işin var?
-                                 <Text style={styles.login} onPress={()=> Actions.goToLogin()}> Giriş yap</Text>
-                             </Text>
-                {/* </View> */}
-            </LinearGradient>  
+          <LinearGradient colors={['#5701d4', '#5b00bf', '#9300c0']} style={styles.linearGradient}>
+            <Image style={styles.icon}
+                source={require('../pages/candies.png')}>
+             </Image>
+            <View style={styles.container}>
+            <TextInput 
+                style={styles.input}
+                placeholder='AD SOYAD'
+                placeholderTextColor='white'
+                onChangeText={val => this.onChangeText('username', val)}/>
+            <TextInput 
+                style={styles.input}
+                placeholder='E-POSTA'
+                placeholderTextColor='white'
+                onChangeText={val => this.onChangeText('email', val)}/>
+             <TextInput 
+                style={styles.input}
+                placeholder='ŞİFRE'
+                placeholderTextColor='white'
+                onChangeText={val => this.onChangeText('password', val)}/>
+            <TextInput 
+                style={styles.input}
+                placeholder='ŞİFRE TEKRAR'
+                placeholderTextColor='white'
+                onChangeText={val => this.onChangeText('confirmPassword', val)}/>               
+            <TouchableOpacity style={styles.signUpButton}>
+              <Text style={styles.signUpButtonText}>Kayıt Ol</Text> 
+            </TouchableOpacity>
+                <Text style={styles.questionText}>Hesabın varsa burda ne işin var?
+                    <Text style={styles.loginButtonText} onPress={()=> Actions.goToLogin()}> Giriş yap</Text>
+                </Text></View>  
+          </LinearGradient>  
         )
     }
 }
-
 const styles = StyleSheet.create({
-    linearGradient: {
-         flex: 1,
-         paddingLeft: 15,
-         paddingRight: 15,
-         justifyContent:"center",
-         alignItems:"center", 
-        
-       },
-    //    div:{
-    //        backgroundColor:"white",
-    //        width:370,
-    //        height:300,
-    //        borderRadius:24,
-    //        position:"absolute",
-    //        justifyContent:"center",
-    //        alignItems:"center",
-    //        bottom:40
-    //    },
-       input: {
-        width: 270,
-        height: 35,
-        // backgroundColor: 'white',
-        margin: 15,
-        padding: 5,
-        color: 'white',
-        fontSize: 13,
-        fontWeight: '500',
-        textAlign:"center",
-        borderColor:"#00d1db",
-        borderWidth:2,
-        marginBottom:2,
-        borderRadius:8,
-     
-      },
-
-      button:{
-          justifyContent:"center",
-          alignItems:"center",
-       
-      },
-      divText:{
-          color:"black",
-          fontWeight:"bold",
-          fontSize:20
-      },
-      header:{
-          flex:1,
-          fontSize:40,
-          fontWeight:"bold"
-          
-      },
-      login:{
-          color:"#00d1db"
-      },
-      colorfulCircle:{
-          flex:1,
-          alignItems:"center",
-          justifyContent:"center",
-              
-     
-      }
-
-  });
+    linearGradient:{
+      flex: 1, 
+      alignItems: "center",
+    },
+    icon:{
+      width: PhoneWidth * 0.25,
+      height: PhoneHeight * 0.15,
+      alignSelf: "center",
+      marginTop: 20,
+    },
+    container:{
+      width: PhoneWidth * 0.70,
+      height: PhoneHeight * 0.50,  
+      justifyContent:"center",
+      alignItems:"center"
+    },
+    input: {
+      width: PhoneWidth * 0.7,
+      height: PhoneHeight * 0.05,
+      margin: 10,
+      color: 'white',
+      fontSize: responsiveSize(11),
+      textAlign: "center",
+      borderColor: "#00d1db",
+      borderWidth: 2,
+      borderRadius: 8,
+    },
+    signUpButton:{
+      width: PhoneWidth * 0.5,
+      height: PhoneHeight * 0.05, 
+      alignSelf: "center",
+      marginTop: 10,
+      backgroundColor: "#00d1db",
+    },
+    signUpButtonText:{
+      color: "white",
+      textAlign: "center",
+      fontSize: responsiveSize(14),
+      marginTop: 4.5,
+    },
+    questionText:{
+      paddingTop:10,
+      fontSize: responsiveSize(13),
+    },
+    loginButtonText:{
+      paddingTop:10,
+      color: "#00d1db",
+    },
+    header:{
+      flex: 1,
+      fontSize: 40,
+      fontWeight: "bold"      
+    },
+    login:{
+      color: "#00d1db"
+    }
+});
