@@ -5,7 +5,14 @@ import LinearGradient from 'react-native-linear-gradient';
 import { PhoneHeight,PhoneWidth,responsiveSize } from '../config/env';
 
 export default class SignIn extends Component {
+  state = {
+    nameSurname: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  }
     render() {
+      console.log(this.state.password);
         return (
           <LinearGradient colors={['#5701d4', '#5b00bf', '#9300c0']} style={styles.linearGradient}>
             <Image style={styles.icon}
@@ -16,22 +23,42 @@ export default class SignIn extends Component {
                 style={styles.input}
                 placeholder='AD SOYAD'
                 placeholderTextColor='white'
-                onChangeText={val => this.onChangeText('username', val)}/>
+                onChangeText={( )=>{
+                  this.setState({
+                      nameSurname:text
+                  })
+                }}
+                value={this.state.nameSurname}/>
             <TextInput 
                 style={styles.input}
                 placeholder='E-POSTA'
                 placeholderTextColor='white'
-                onChangeText={val => this.onChangeText('email', val)}/>
+                onChangeText={(text)=>{
+                  this.setState({
+                      email:text
+                  })
+                }}
+                value={this.state.email}/>
              <TextInput 
                 style={styles.input}
                 placeholder='ŞİFRE'
                 placeholderTextColor='white'
-                onChangeText={val => this.onChangeText('password', val)}/>
+                onChangeText={(text)=>{
+                  this.setState({
+                      password:text
+                  })
+                }}
+                value={this.state.password}/>
             <TextInput 
                 style={styles.input}
                 placeholder='ŞİFRE TEKRAR'
                 placeholderTextColor='white'
-                onChangeText={val => this.onChangeText('confirmPassword', val)}/>               
+                onChangeText={(text)=>{
+                  this.setState({
+                      confirmPassword:text
+                  })
+                }}
+                value={this.state.confirmPassword}/>              
             <TouchableOpacity style={styles.signUpButton}>
               <Text style={styles.signUpButtonText}>Kayıt Ol</Text> 
             </TouchableOpacity>
@@ -90,11 +117,6 @@ const styles = StyleSheet.create({
     loginButtonText:{
       paddingTop:10,
       color: "#00d1db",
-    },
-    header:{
-      flex: 1,
-      fontSize: 40,
-      fontWeight: "bold"      
     },
     login:{
       color: "#00d1db"
