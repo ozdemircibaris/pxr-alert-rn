@@ -8,6 +8,8 @@ import Page2 from './components/pages/Page2';
 import Page3 from './components/pages/Page3';
 import Users from './components/pages/Users';
 import NewDuty from './components/pages/NewDuty';
+import CreateTask from './components/pages/CreateTask';
+
 
 
 export default class RouterComp extends Component {
@@ -15,19 +17,19 @@ export default class RouterComp extends Component {
         return (
             <Router>
                 <Stack  key="root" hideNavBar >
-                    <Stack key="auth" initial>
+                    <Stack key="auth" >
                         <Scene 
                             key="signIn"
                             component={SignIn}
-                            initial 
+                             
                             />
                         <Scene
                             key="signUp"
                             component={SignUp}
                         /></Stack>
-                    <Stack key="main" >
+                    <Stack key="main" initial >
                         <Drawer   drawerWidth={250} contentComponent={SideBar}>
-                            <Scene  key="DrawerMenu" >
+                            <Scene  key="DrawerMenu"  initial>
                                 <Scene  key="Main" component={Main}   />
                                 <Scene key="page2" component={Page2}  />
                                 <Scene key="page3" component={Page3}  />
@@ -37,11 +39,11 @@ export default class RouterComp extends Component {
                     <Scene key="goToLogin"
                         component={SignIn}
                         title="Giriş Yap">
+                            
                     </Scene>
-                    <Scene
-                  
-                        key="NewDuty"
-                        component={NewDuty}
+                    <Scene 
+                        key="CreateTask"
+                        component={CreateTask}
                         title="Yeni İş Kitle">
                     </Scene>
                     <Scene key="Users" component={Users} />
