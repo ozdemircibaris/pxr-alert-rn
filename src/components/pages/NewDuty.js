@@ -6,28 +6,28 @@ import LinearGradient from 'react-native-linear-gradient';
 export default class SignIn extends Component {
     render() {
         return (
-          <LinearGradient colors={['#5701d4', '#5b00bf', '#9300c0']} style={styles.linearGradient}>
-            <Text style={styles.hello}>Merhaba Murat.Birine iş kitlemek için harika bir gün!</Text>
-                   <TextInput style={styles.dutyHeader}
-                            placeholder="İş Başlığı"
-                            placeholderTextColor='white'
-                            >
-                   </TextInput>
-                   <TextInput style={styles.dutyInfo}
-                            placeholder="İşin Tanımı"
-                            placeholderTextColor='white'
-                            >
-                   </TextInput>
-                  <View style={styles.datAndTime}>
-                      <View style={styles.date}>
-                          <Text style={styles.dateText}>Tarih</Text>
-                      </View>
-                      <View style={styles.time}>
-                      <Text style={styles.timeText}>Saat</Text>
-                      </View>
-                  </View>
-          
-            </LinearGradient>  
+        <LinearGradient colors={['#5701d4', '#5b00bf', '#9300c0']} style={styles.linearGradient}>
+          <Text style={styles.hello}>Merhaba Murat.Birine iş kitlemek için harika bir gün!</Text>
+            <TextInput style={styles.dutyHeader}
+                placeholder="İş Başlığı"
+                placeholderTextColor='white'
+                    >
+            </TextInput>
+            <TextInput style={styles.dutyInfo}
+                placeholder="İşin Tanımı"
+                placeholderTextColor='white'
+                    >
+            </TextInput>
+          <View style={styles.datAndTime}>
+              <View style={styles.date}>
+                <Text style={styles.dateText}>Tarih</Text>
+              </View>
+              <View style={styles.time}>
+              <Text style={styles.timeText}>Saat</Text>
+              </View>
+          </View>
+        
+          </LinearGradient>  
         )
     }
 }
