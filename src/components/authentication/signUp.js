@@ -14,7 +14,7 @@ export default class SignIn extends Component {
     render() {
       console.log(this.state.password);
         return (
-          <LinearGradient colors={['#5701d4', '#5b00bf', '#9300c0']} style={styles.linearGradient}>
+          <View style={styles.background}>
             <Image style={styles.icon}
                 source={require('../pages/candies.png')}>
              </Image>
@@ -22,7 +22,7 @@ export default class SignIn extends Component {
             <TextInput 
                 style={styles.input}
                 placeholder='AD SOYAD'
-                placeholderTextColor='white'
+                placeholderTextColor='black'
                 onChangeText={( )=>{
                   this.setState({
                       nameSurname:text
@@ -32,7 +32,7 @@ export default class SignIn extends Component {
             <TextInput 
                 style={styles.input}
                 placeholder='E-POSTA'
-                placeholderTextColor='white'
+                placeholderTextColor='black'
                 onChangeText={(text)=>{
                   this.setState({
                       email:text
@@ -42,7 +42,7 @@ export default class SignIn extends Component {
              <TextInput 
                 style={styles.input}
                 placeholder='ŞİFRE'
-                placeholderTextColor='white'
+                placeholderTextColor='black'
                 onChangeText={(text)=>{
                   this.setState({
                       password:text
@@ -52,7 +52,7 @@ export default class SignIn extends Component {
             <TextInput 
                 style={styles.input}
                 placeholder='ŞİFRE TEKRAR'
-                placeholderTextColor='white'
+                placeholderTextColor='black'
                 onChangeText={(text)=>{
                   this.setState({
                       confirmPassword:text
@@ -64,21 +64,21 @@ export default class SignIn extends Component {
             </TouchableOpacity>
                 <Text style={styles.questionText}>Hesabın varsa burda ne işin var?
                     <Text style={styles.loginButtonText} onPress={()=> Actions.goToLogin()}> Giriş yap</Text>
-                </Text></View>  
-          </LinearGradient>  
+                </Text></View>
+          </View>   
         )
     }
 }
 const styles = StyleSheet.create({
-    linearGradient:{
-      flex: 1, 
-      alignItems: "center",
+  background:{
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
     },
     icon:{
       width: PhoneWidth * 0.25,
       height: PhoneHeight * 0.15,
       alignSelf: "center",
-      marginTop: 20,
     },
     container:{
       width: PhoneWidth * 0.70,
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
       color: 'white',
       fontSize: responsiveSize(11),
       textAlign: "center",
-      borderColor: "#00d1db",
+      borderColor: "#852e4c",
       borderWidth: 2,
       borderRadius: 8,
     },
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
       height: PhoneHeight * 0.05, 
       alignSelf: "center",
       marginTop: 10,
-      backgroundColor: "#00d1db",
+      backgroundColor: "#852e4c",
     },
     signUpButtonText:{
       color: "white",
@@ -116,9 +116,9 @@ const styles = StyleSheet.create({
     },
     loginButtonText:{
       paddingTop:10,
-      color: "#00d1db",
+      color: "#852e4c",
     },
     login:{
-      color: "#00d1db"
+      color: "#852e4c"
     }
 });
