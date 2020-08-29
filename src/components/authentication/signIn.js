@@ -11,7 +11,7 @@ export default class SignIn extends Component {
             
 <View style = {styles.container}>
  <LinearGradient colors={['#4d21d0', '#621fb9', '#8825b9']} style={styles.linearGradient}>
-    <Image style ={styles.image} source={require('../pages/color-circle.png')}/>
+    <Image style ={styles.image} source={require('../pages/candies.png')}/>
   <View style={styles.whiteBox}>
     <Text style={styles.txt}>Girmek için parolayı söyle</Text>
 

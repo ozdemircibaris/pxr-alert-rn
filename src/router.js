@@ -7,30 +7,29 @@ import Main from './components/pages/Main';
 import Page2 from './components/pages/Page2';
 import Page3 from './components/pages/Page3';
 import Users from './components/pages/Users';
-import NewDuty from './components/pages/NewDuty';
+import CreateTask from './components/pages/CreateTask';
 
 
 export default class RouterComp extends Component {
     render() {
         return (
             <Router>
-                <Stack  key="root" hideNavBar >
-                    <Stack key="auth" initial>
-                        <Scene 
+                <Stack key="root" hideNavBar>
+                    <Stack key="auth">
+                        <Scene
                             key="signIn"
                             component={SignIn}
-                            initial 
                             />
-                        <Scene
+                        <Scene hideNavBar
                             key="signUp"
                             component={SignUp}
                         /></Stack>
                     <Stack key="main" >
-                        <Drawer   drawerWidth={250} contentComponent={SideBar}>
+                        <Drawer drawerWidth={250} contentComponent={SideBar}>
                             <Scene  key="DrawerMenu" >
-                                <Scene  key="Main" component={Main}   />
-                                <Scene key="page2" component={Page2}  />
-                                <Scene key="page3" component={Page3}  />
+                                <Scene key="Main" component={Main} hideNavBar initial />
+                                <Scene key="page2" component={Page2} hideNavBar />
+                                <Scene key="page3" component={Page3} hideNavBar />
                             </Scene>
                         </Drawer>
                     </Stack>
@@ -38,10 +37,9 @@ export default class RouterComp extends Component {
                         component={SignIn}
                         title="Giriş Yap">
                     </Scene>
-                    <Scene
-                  
-                        key="NewDuty"
-                        component={NewDuty}
+                    <Scene initial
+                        key="CreateTask"
+                        component={CreateTask}
                         title="Yeni İş Kitle">
                     </Scene>
                     <Scene key="Users" component={Users} />
