@@ -13,9 +13,10 @@ import NewDuty from './components/pages/NewDuty';
 export default class RouterComp extends Component {
     render() {
         return (
-            <Router>
-                <Stack  key="root" hideNavBar >
-                    <Stack key="auth" initial>
+            <Router hideNavBar  >
+                
+                <Stack  key="root"  hideNavBar  >
+                    <Stack key="auth" initial  hideNavBar>
                         <Scene 
                             key="signIn"
                             component={SignIn}
@@ -25,7 +26,7 @@ export default class RouterComp extends Component {
                             key="signUp"
                             component={SignUp}
                         /></Stack>
-                    <Stack key="main" >
+                    <Stack key="main" hideNavBar>
                         <Drawer   drawerWidth={250} contentComponent={SideBar}>
                             <Scene  key="DrawerMenu" >
                                 <Scene  key="Main" component={Main}   />
@@ -37,6 +38,10 @@ export default class RouterComp extends Component {
                     <Scene key="goToLogin"
                         component={SignIn}
                         title="Giriş Yap">
+                    </Scene>
+                    <Scene key="goToSignUp"
+                        component={SignUp}
+                        title="Üye Ol !">
                     </Scene>
                     <Scene
                   

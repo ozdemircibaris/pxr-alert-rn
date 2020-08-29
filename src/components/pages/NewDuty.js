@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
          flex: 1,
          paddingLeft: 15,
          paddingRight: 15,
-        
         //  justifyContent:"center",
          alignItems:"center",   
        },
@@ -52,10 +51,10 @@ const styles = StyleSheet.create({
           top:150,
        },
        dutyHeaderText:{
-           flex:1,
-           textAlign:"center",
-           marginTop:10,
-           color:"white",
+          flex:1,
+          textAlign:"center",
+          marginTop:10,
+          color:"white",
        },
        dutyInfo:{
         borderWidth:1,
@@ -73,24 +72,21 @@ const styles = StyleSheet.create({
       flexDirection:"row",
     // justifyContent:"space-around",
   },
-
   time:{
     borderWidth:1,
     borderColor:"white",
     width: 175,
-     height: 50, 
-   
+    height: 50, 
   },
   date:{
     borderWidth:1,
     borderColor:"white",
     width: 175,
     height: 50, 
-   
   },
   hello:{
-     fontSize:30,
-     top:50
+    fontSize:30,
+    top:50
   },
   dateText:{
     color:"white",
