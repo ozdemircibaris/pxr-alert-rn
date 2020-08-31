@@ -16,7 +16,7 @@ export default class SignIn extends Component {
         return (
           <View style={styles.background}>
             <Image style={styles.icon}
-                source={require('../pages/candies.png')}>
+                source={require('../../images/candies.png')}>
              </Image>
             <View style={styles.container}>
             <TextInput 
@@ -76,8 +76,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     },
     icon:{
-      width: PhoneWidth * 0.25,
-      height: PhoneHeight * 0.15,
+      width: responsiveSize(80),
+      height: responsiveSize(80),
       alignSelf: "center",
     },
     container:{
@@ -98,17 +98,18 @@ const styles = StyleSheet.create({
       borderRadius: 8,
     },
     signUpButton:{
-      width: PhoneWidth * 0.5,
-      height: PhoneHeight * 0.05, 
+      height: responsiveSize(28),
+      width: responsiveSize(170), 
       alignSelf: "center",
       marginTop: 10,
       backgroundColor: "#852e4c",
+      justifyContent:"center"
     },
     signUpButtonText:{
       color: "white",
       textAlign: "center",
       fontSize: responsiveSize(14),
-      marginTop: 4.5,
+    
     },
     questionText:{
       paddingTop:10,
