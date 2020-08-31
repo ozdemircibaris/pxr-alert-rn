@@ -20,7 +20,7 @@ export default class RouterComp extends Component {
                             key="signIn"
                             component={SignIn}
                             />
-                        <Scene hideNavBar
+                        <Scene hideNavBar initial
                             key="signUp"
                             component={SignUp}
                         /></Stack>
@@ -38,7 +38,7 @@ export default class RouterComp extends Component {
                         title="Giriş Yap">
                             
                     </Scene>
-                    <Scene initial
+                    <Scene 
                         key="CreateTask"
                         component={CreateTask}
                         title="Yeni İş Kitle">

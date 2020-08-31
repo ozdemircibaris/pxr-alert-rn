@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { PhoneHeight } from '../config/env';
 
 export default class SideBar extends Component {
     constructor(props) {
@@ -8,8 +9,9 @@ export default class SideBar extends Component {
     }  
   render() {
     return (
-       <View>
+       <View style ={styles.outContainer}>
            <View style = {styles.container}>
+               <View style = {styles.deneme}>
                 <View style = {styles.textView}>
                    <TouchableOpacity onPress={() => Actions.Main()}><Text style = {styles.title}> Home </Text></TouchableOpacity> 
                 </View>
@@ -23,6 +25,7 @@ export default class SideBar extends Component {
                     <TouchableOpacity onPress={() => Actions.drawerClose()}><Text style = {styles.title}> Back </Text></TouchableOpacity> 
                 </View>
             </View>
+         </View>
        </View>       
       );
   }
@@ -32,14 +35,28 @@ let styles = StyleSheet.create({
     container: {
         flexDirection: 'column',
         flex:1,
+
+        justifyContent:'space-between'
+
+
      },
      textView:{
-         padding:-20,
-        height: 30,
+        height: PhoneHeight * 0.05 ,
         width:'100%',
         alignItems: 'center',
+        backgroundColor:'#852e4c',
+        borderRadius:10,
+        justifyContent:'space-between'
      },
      title:{
-      fontSize:18
-     },     
+        backgroundColor:'#852e4c',
+        fontSize:18,
+        justifyContent:'space-between'
+     }
+     ,deneme:{
+        backgroundColor:'green',
+        marginTop:'25%',
+        justifyContent:'space-between'
+
+     }   
 });
