@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text} from 'react-native';
-import Header from '../leftBar/Header';
+import Header from '../helpComponents/Header';
 
 
 export default class Page2 extends Component {
