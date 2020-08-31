@@ -40,18 +40,15 @@ export default class Main extends Component {
         super(props);
 
     }
+    usersRenderItem = ({item}) => {
+        console.log(item);
+        return <Item info={item.info} />
+    }
 
 
 
     render() {
-
-        const renderItem = ({ item }) => (
-            <Item info={item.info} />
-        );
-
-
         return (
-
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Text style={styles.headertext}>Merhaba Murat</Text>
@@ -62,7 +59,7 @@ export default class Main extends Component {
 
                         <FlatList
                             data={users}
-                            renderItem={renderItem}
+                            renderItem={this.usersRenderItem}
                             keyExtractor={item => item.id}
                         />
 
