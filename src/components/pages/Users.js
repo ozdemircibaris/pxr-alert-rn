@@ -43,28 +43,6 @@ export default class Main extends Component {
 
 
 
-
-    // list = () => {
-    //     return users.map(element => {
-    //         return (
-    //         <View style={styles.users} key={element.id}>
-    //             <CheckBox style={styles.checkbox}
-    //                 checkedIcon='dot-circle-o'
-    //                 uncheckedIcon='circle-o'
-    //                 title='checkbox 1'
-    //                 checkedColor='red'
-    //                 tintColors={{ true: 'white', false: 'black' }}
-    //             // checked1={this.state.checked1}
-    //             // onPress={() => this.setState({ checked1: !this.state.checked1 })}
-    //             />
-    //             <Text style={styles.usersName}>{element.info}</Text>
-    //         </View>
-    //         )
-    //     });
-    // }
-
-
-
     render() {
 
         const renderItem = ({ item }) => (
@@ -82,24 +60,7 @@ export default class Main extends Component {
                 <View style={styles.body}>
                     <ScrollView>
 
-                        {/* {this.list()} */}
-
-
-                        {/* {users.map(item => {
-                                return (
-                                    <View style={styles.users} key={item.id}>
-                                        <CheckBox style={styles.checkbox}
-                                            checkedIcon='dot-circle-o'
-                                            uncheckedIcon='circle-o'
-                                            title='checkbox 1'
-                                            checkedColor='red'
-                                            tintColors={{ true: 'white', false: 'black' }}
-                                        // checked1={this.state.checked1}
-                                        // onPress={() => this.setState({ checked1: !this.state.checked1 })}
-                                        />
-                                        <Text style={styles.usersName}>{item.info}</Text>
-                                    </View>)
-                            })} */}
+                       
 
                         <FlatList
                             data={users}
