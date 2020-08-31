@@ -53,8 +53,6 @@ export default class Main extends Component {
         <View style={styles.body}>
           <ScrollView>
 
-            
-
             <FlatList
               data={mission}
               renderItem={this.missionRenderItem}
