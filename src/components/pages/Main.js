@@ -6,8 +6,6 @@ import { Actions } from 'react-native-router-flux';
 import { color } from 'react-native-reanimated';
 import { PhoneWidth, PhoneHeight } from '../config/env';
 
-
-
 const mission = [
   { id: "1", title: "Çöp At", body: "Ofisten çıkmadan önce tüm çöpleri at", color: "#ffaaff" },
   { id: "1", title: "Temizlik", body: "Yarın toplu temizlik yapılacak.", color: "#ffff7f" },
@@ -30,8 +28,6 @@ const Item = ({ title, body, color }) => (
   </View>
 );
 
-
-
 export default class Main extends Component {
   constructor(props) {
     super(props);
@@ -40,37 +36,28 @@ export default class Main extends Component {
     <Item title={item.title} body={item.body} color={item.color}/>
   );
 
-
   render() {
     return (
-
       <View style={styles.container}>
         <Text style={styles.containertext}>Merhaba Murat.</Text>
         <Text style={styles.containertext}>Sana kitlenenler burda</Text>
-
-
         <View style={styles.missionFirst}></View>
         <View style={styles.body}>
           <ScrollView>
-
             <FlatList
               data={mission}
               renderItem={this.missionRenderItem}
               keyExtractor={item => item.id}
             />
-
           </ScrollView>
         </View>
         <View style={styles.end}></View>
         <TouchableOpacity
           style={styles.SubmitButtonStyle}
           activeOpacity={.5}>
-
           <Text style={styles.TextStyle}> + </Text>
-
         </TouchableOpacity>
       </View>
-
     );
   }
 }
@@ -83,7 +70,6 @@ const styles = StyleSheet.create({
     // margin: 10,
     backgroundColor: '#ffffff',
     // alignItems: 'center'
-
   },
   missionFirst: {
     backgroundColor: 'cyan',
@@ -101,7 +87,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#d8d8d8',
     left: 83,
-
   },
   containertext: {
     left: 40,
@@ -118,11 +103,9 @@ const styles = StyleSheet.create({
   //   color: 'white',
   //   left: 30,
   //   top: 10,
-
   // },
   body: {
     backgroundColor: 'white',
-    
     // borderWidth: 1,
     borderWidth: 0,
     width: PhoneWidth * 1,
@@ -136,7 +119,6 @@ const styles = StyleSheet.create({
     paddingRight: 15,
     borderRadius: 5
   },
-
   end: {
     flexDirection: 'row',
     width: PhoneWidth * 1,
