@@ -60,8 +60,6 @@ export default class Main extends Component {
                 <View style={styles.body}>
                     <ScrollView>
 
-                       
-
                         <FlatList
                             data={users}
                             renderItem={renderItem}
