@@ -22,7 +22,6 @@ export default class SignIn extends Component {
       const { show, dateValue, pickerMode } = this.state
       return (
         <LinearGradient colors={['#5701d4', '#5b00bf', '#9300c0']} style={styles.linearGradient}>
-        <View style={styles.background}>
           <View style={styles.header}>
            <Text style={styles.headerText}>Merhaba Murat.{"\n"}Birine iş kitlemek için harika bir gün!</Text>
           </View>
@@ -31,13 +30,11 @@ export default class SignIn extends Component {
               style={styles.taskHeaderInput}
               placeholder="İşin Başlığı"
               placeholderTextColor='white'>
-              placeholderTextColor='#852e4c'>
             </TextInput>
             <TextInput 
               style={styles.taskInfoInput}
               placeholder="İşin Tanımı"
               placeholderTextColor='white'>
-              placeholderTextColor='#852e4c'>
             </TextInput>
             <View style={styles.calendar}>
               <TouchableOpacity style={styles.dateButton} onPress={this.showDate}>
@@ -57,21 +54,17 @@ export default class SignIn extends Component {
               />
             )}
           </View>
-          <View style={styles.focusButtonContainer}>
           <TouchableOpacity style={styles.focusButton}>
              <Text style={styles.focusButtonText}>Hedefe Kitlen</Text>
           </TouchableOpacity>
           </View>
         </LinearGradient>  
-          </View>
-        </View>  
       )
     }
 }
 
 const styles = StyleSheet.create({
     linearGradient: {
-    background: {
       flex: 1,
       paddingLeft: 15,
       paddingRight: 15,
@@ -104,29 +97,6 @@ const styles = StyleSheet.create({
       height: PhoneHeight * 0.25,
       borderColor: "white",
       borderRadius: 5,
-      marginTop: 5,
-    },
-    headerText:{
-      fontSize: responsiveSize(19),
-      color: "#852e4c",
-      fontWeight: "bold"
-    },
-    taskHeaderInput:{
-      borderWidth: 2,
-      width: PhoneWidth * 0.85,
-      height: PhoneHeight * 0.07,
-      borderColor: "#852e4c",
-      borderRadius: 8,
-      textAlign: "center",
-      fontSize: responsiveSize(15), 
-      alignSelf: "center",   
-    },
-    taskInfoInput:{
-      borderWidth: 2,
-      width: PhoneWidth * 0.85,
-      height: PhoneHeight * 0.25,
-      borderColor: "#852e4c",
-      borderRadius: 8,
       textAlign: "center",
       fontSize: responsiveSize(15), 
       marginTop: 20,
@@ -139,16 +109,11 @@ const styles = StyleSheet.create({
       height: PhoneHeight * 0.057,  
       borderRadius: 5,
       borderColor: "white",
-      borderWidth: 2,
-      height: PhoneHeight * 0.057,  
-      borderRadius: 8,
-      borderColor: "#852e4c",
       marginLeft: 16,
     },
     dateButtonText:{
       textAlign: "center",
       color: "white",
-      color: "#852e4c",
       fontSize: responsiveSize(15),
       marginTop: 5
     },
@@ -158,10 +123,6 @@ const styles = StyleSheet.create({
       height: PhoneHeight * 0.057,
       borderRadius: 5,
       borderColor: "white",  
-      borderWidth: 2,
-      height: PhoneHeight * 0.057,
-      borderRadius: 8,
-      borderColor: "#852e4c",  
       marginRight: 16 
     },
     timeButtonText:{
@@ -184,27 +145,6 @@ const styles = StyleSheet.create({
       color: "#6d00bf",
       fontSize: responsiveSize(15),
       fontWeight: "bold",
-      color: "#852e4c",
-      fontSize: responsiveSize(15),
-      marginTop: 5
-    }, 
-    focusButtonContainer:{
-      marginTop: 20,
-      paddingTop: 20
-    },
-    focusButton:{
-      width: PhoneWidth * 0.85,
-      borderWidth: 2,
-      height: PhoneHeight * 0.057,
-      borderColor: "#852e4c",  
-      alignSelf: "center",
-      marginTop: 20,
-      backgroundColor: "#852e4c"
-    },
-    focusButtonText:{
-      textAlign: "center",
-      color: "white",
-      fontSize: responsiveSize(15),
       marginTop: 4
     },
     calendar:{
@@ -215,6 +155,5 @@ const styles = StyleSheet.create({
     },
     container:{
       flex: 0.5,
-      flex: 1,
     }
 });

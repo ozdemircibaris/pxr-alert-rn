@@ -23,10 +23,9 @@ let styles = StyleSheet.create({
         backgroundColor:'black',
         alignItems: 'center',
         borderBottomWidth:1,
-        borderBottomColor: 'white',
         flexDirection: 'row',
      },
      title:{
-      fontSize:18
+      fontSize:10
      },     
 });
