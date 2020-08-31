@@ -76,8 +76,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     },
     icon:{
-      width: PhoneWidth * 0.25,
-      height: PhoneHeight * 0.15,
+      width: responsiveSize(15),
+      height: responsiveSize(15),
       alignSelf: "center",
     },
     container:{
