@@ -45,8 +45,6 @@ export default class Main extends Component {
         return <Item info={item.info} />
     }
 
-
-
     render() {
         return (
             <View style={styles.container}>
