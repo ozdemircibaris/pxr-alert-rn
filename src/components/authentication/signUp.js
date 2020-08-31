@@ -64,7 +64,8 @@ export default class SignIn extends Component {
             </TouchableOpacity>
                 <Text style={styles.questionText}>Hesabın varsa burda ne işin var?
                     <Text style={styles.loginButtonText} onPress={()=> Actions.goToLogin()}> Giriş yap</Text>
-                </Text></View>
+                </Text>
+            </View>
           </View>   
         )
     }
@@ -78,10 +79,10 @@ const styles = StyleSheet.create({
     icon:{
       width: responsiveSize(80),
       height: responsiveSize(80),
+      resizeMode: "contain",
       alignSelf: "center",
     },
     container:{
-      width: PhoneWidth * 0.70,
       height: PhoneHeight * 0.50,  
       justifyContent:"center",
       alignItems:"center"

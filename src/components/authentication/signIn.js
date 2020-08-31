@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
       marginLeft:'0%',
       marginTop:20,
       alignSelf:'center',
+      resizeMode:"contain",
     }
     ,LoginBtn:{
       backgroundColor:'#852E4C',
