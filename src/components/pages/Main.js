@@ -5,7 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { Actions } from 'react-native-router-flux';
 import { color } from 'react-native-reanimated';
 import { PhoneWidth, PhoneHeight } from '../config/env';
-// import { TouchableOpacity } from 'react-native-gesture-handler';
+
 
 
 const mission = [
@@ -37,17 +37,7 @@ export default class Main extends Component {
     super(props);
   }
   render() {
-    // const Item = ({ title, body }) => (
-    //   <View style={styles.a} >
-    //     <View style={styles.hr}></View>
-    //     <View style={styles.circle} backgroundColor={item.color}></View>
-    //     <View style={styles.mission}>
-    //       <Text>{title}</Text>
-    //       <Text>{body}</Text>
-    //       <View style={styles.categoryColor} backgroundColor={item.color} ></View>
-    //     </View>
-    //   </View>
-    // );
+   
 
 
       const renderItem = ({ item }) => (
@@ -66,19 +56,7 @@ export default class Main extends Component {
         <View style={styles.body}>
           <ScrollView>
 
-            {/* {mission.map(item => {
-              return (
-                <View style={styles.a} key={item.id}>
-                  <View style={styles.hr}></View>
-                  <View style={styles.circle} backgroundColor={item.color}></View>
-                  <View style={styles.mission}>
-                    <Text>{item.title}</Text>
-                    <Text>{item.body}</Text>
-                    <View style={styles.categoryColor} backgroundColor={item.color} ></View>
-                  </View>
-                </View>
-              )
-            })} */}
+            
 
             <FlatList
               data={mission}
@@ -152,9 +130,7 @@ const styles = StyleSheet.create({
   // },
   body: {
     backgroundColor: 'white',
-    // flexDirection: 'column',
-    // alignItems: 'center',
-    // justifyContent: 'space-between',
+    
     // borderWidth: 1,
     borderWidth: 0,
     width: PhoneWidth * 1,
