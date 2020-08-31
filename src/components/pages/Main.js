@@ -64,9 +64,6 @@ export default class Main extends Component {
               keyExtractor={item => item.id}
             />
 
-
-
-
           </ScrollView>
         </View>
         <View style={styles.end}></View>
