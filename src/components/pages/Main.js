@@ -36,15 +36,12 @@ export default class Main extends Component {
   constructor(props) {
     super(props);
   }
+  missionRenderItem = ({ item }) => (
+    <Item title={item.title} body={item.body} color={item.color}/>
+  );
+
+
   render() {
-   
-
-
-      const renderItem = ({ item }) => (
-        <Item title={item.title} body={item.body} color={item.color}/>
-      );
-
-
     return (
 
       <View style={styles.container}>
@@ -60,7 +57,7 @@ export default class Main extends Component {
 
             <FlatList
               data={mission}
-              renderItem={renderItem}
+              renderItem={this.missionRenderItem}
               keyExtractor={item => item.id}
             />
 
