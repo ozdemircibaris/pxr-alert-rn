@@ -6,13 +6,13 @@ import { color } from 'react-native-reanimated';
 import { PhoneWidth, PhoneHeight, responsiveSize } from '../config/env';
 
 const mission = [
-  { id: "1", title: "Çöp At", body: "Ofisten çıkmadan önce tüm çöpleri at", color: "#ffaaff" },
-  { id: "1", title: "Temizlik", body: "Yarın toplu temizlik yapılacak.", color: "#ffff7f" },
-  { id: "1", title: "Hatırlatma", body: "Birlikte yapılacak işi unutma.!!", color: "#55ffff" },
-  { id: "1", title: "Randevu", body: "Birazdan müşteri görüşmesi var. Unutma!", color: "#aaaaff" },
-  { id: "1", title: "Bulaşıkları Yıka", body: "Ofise geldiğinde bulaşıkları yıkamayı unutma", color: "#aaff7f" },
-  { id: "1", title: "İş", body: "Yarına yetiştirilecek iş var unutma.", color: "#ffaa7f" },
-  { id: "1", title: "Toplantı", body: "Yarın saat 2:00' de toplantı var unutma unutturma.", color: "#d991d9" },
+  { id: "1", title: "Çöp At", body: "Ofisten çıkmadan önce tüm çöpleri at", color: "#FFA1AC" },
+  { id: "1", title: "Temizlik", body: "Yarın toplu temizlik yapılacak.", color: "#ff78" },
+  { id: "1", title: "Hatırlatma", body: "Birlikte yapılacak işi unutma.!!", color: "#A2D5F2" },
+  { id: "1", title: "Randevu", body: "Birazdan müşteri görüşmesi var. Unutma!", color: "#C3AED6" },
+  { id: "1", title: "Bulaşıkları Yıka", body: "Ofise geldiğinde bulaşıkları yıkamayı unutma", color: "#ADE498" },
+  { id: "1", title: "İş", body: "Yarına yetiştirilecek iş var unutma.", color: "#FFBB91" },
+  { id: "1", title: "Toplantı", body: "Yarın saat 2:00' de toplantı var unutma unutturma.", color: "#FF847C" },
 ];
 
 const Item = ({ title, body, color }) => (
