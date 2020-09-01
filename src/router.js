@@ -34,13 +34,13 @@ export default class RouterComp extends Component {
                                 <Scene initial key="Main" component={Main} hideNavBar  />
                                 <Scene key="page2" component={Page2} hideNavBar />
                                 <Scene key="page3" component={Page3} hideNavBar />
+                                <Scene  key="page3" component={Page3} hideNavBar />
                             </Scene>
                         </Drawer>
                     </Stack>
                     <Scene key="goToLogin"
                         component={SignIn}
-                        title="Giriş Yap">
-                            
+                        title="Giriş Yap">       
                     </Scene>
                     <Scene 
                         key="CreateTask"
@@ -48,7 +48,6 @@ export default class RouterComp extends Component {
                         title="Yeni İş Kitle">
                     </Scene>
                     <Scene key="Users" component={Users} />
-                    <Scene  key="Users" component={Users} />
                 </Stack>
             </Router>
         )
