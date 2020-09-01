@@ -60,8 +60,7 @@ export default class Main extends Component {
             style={styles.submitButton}
             activeOpacity={.5}>
           </TouchableOpacity>
-          </View>
-          
+          </View>  
         </View>
       </View>
     );
