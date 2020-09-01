@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, ImageBackground, Image, Button, TouchableOpacity, ScrollView, FlatList } from 'react-native';
-// import Header from '../leftBar/Header';
 import LinearGradient from 'react-native-linear-gradient';
 import { Actions } from 'react-native-router-flux';
 import { color } from 'react-native-reanimated';
-import { PhoneWidth, PhoneHeight } from '../config/env';
+import { PhoneWidth, PhoneHeight, responsiveSize } from '../config/env';
 
 const mission = [
   { id: "1", title: "Çöp At", body: "Ofisten çıkmadan önce tüm çöpleri at", color: "#ffaaff" },
@@ -17,14 +16,16 @@ const mission = [
 ];
 
 const Item = ({ title, body, color }) => (
-  <View style={styles.missionBox} >
-    <View style={styles.hr}></View>
-    <View style={styles.circle} backgroundColor={color}></View>
-    <View style={styles.missionBodyBox}>
+  <View style={styles.taskBox} >
+    <View style={styles.categoryColorView}>
+      <View style={styles.hr}>
+        <View style={styles.circle} backgroundColor={color}></View>
+      </View>
+    </View>
+    <TouchableOpacity style={styles.taskBodyBox}>
       <Text>{title}</Text>
       <Text>{body}</Text>
-      <View style={styles.categoryColor} backgroundColor={color} ></View>
-    </View>
+    </TouchableOpacity>
   </View>
 );
 
@@ -33,15 +34,17 @@ export default class Main extends Component {
     super(props);
   }
   missionRenderItem = ({ item }) => (
-    <Item title={item.title} body={item.body} color={item.color}/>
+    <Item title={item.title} body={item.body} color={item.color} />
   );
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.containertext}>Merhaba Murat.</Text>
-        <Text style={styles.containertext}>Sana kitlenenler burda</Text>
-        <View style={styles.missionFirst}></View>
+        <View style={styles.greetingContainer}>
+          <Text style={styles.greetingText}>Merhaba Murat.</Text>
+          <Text style={styles.containerText}>Sana kitlenenler burda</Text>
+        </View>
+        <View style={styles.currentTask}></View>
         <View style={styles.body}>
           <ScrollView>
             <FlatList
@@ -51,119 +54,76 @@ export default class Main extends Component {
             />
           </ScrollView>
         </View>
-        <View style={styles.end}></View>
-        <TouchableOpacity
-          style={styles.SubmitButtonStyle}
-          activeOpacity={.5}>
-          <Text style={styles.TextStyle}> + </Text>
-        </TouchableOpacity>
+        <View style={styles.buttonView}>
+          <View style={styles.end}>
+          <TouchableOpacity
+            style={styles.submitButton}
+            activeOpacity={.5}>
+          </TouchableOpacity>
+          </View>  
+        </View>
       </View>
     );
   }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    // justifyContent: 'center',
-    // margin: 10,
-    backgroundColor: '#ffffff',
-    // alignItems: 'center'
   },
-  missionFirst: {
-    backgroundColor: 'cyan',
-    width: PhoneWidth * 0.68,
-    height: PhoneHeight * 0.2,
-    borderColor: 'white',
-    borderWidth: 1,
-    top: 45,
-    left: 72,
-    borderRadius: 10
+  greetingText: {
+    marginTop: 20,
+    marginLeft: 20,
+    fontSize: responsiveSize(15)
   },
-  missionBodyBox: {
-    width: PhoneWidth * 0.565,
-    height: PhoneHeight * 0.12,
+  greetingContainer: {
+    marginTop: 20
+  },
+  containerText: {
+    marginTop: 5,
+    marginLeft: 20,
+    fontSize: responsiveSize(14)
+  },
+  currentTask: {
+    backgroundColor: 'pink',
+    alignSelf: "center",
+    width: PhoneWidth * 0.65,
+    height: PhoneHeight * 0.20,
+    borderRadius: 10,
+    marginTop: 20
+  },
+  body: {
+    marginTop: 20,
+    height: PhoneHeight * 0.50,
+    paddingLeft: 20,
+    borderWidth:0
+  },
+  taskBox: {
+    flex: 0,
+    flexDirection: 'row',
+    height: PhoneHeight * 0.13,
+    width: PhoneWidth * 0.75,
+    marginLeft: 20
+  },
+  taskBodyBox: {
+    width: PhoneWidth * 0.57,
+    height: PhoneHeight * 0.10,
     borderWidth: 1,
     borderColor: '#d8d8d8',
-    left: 83,
+    marginLeft: 20,
+    marginTop: 0
   },
-  containertext: {
-    left: 40,
-    fontWeight: 'bold',
-    top: 10
-  },
-  // title: {
-  //   color: 'white',
-  //   left: 50,
-  //   fontSize: 25,
-  //   top: 6
-  // },
-  // text: {
-  //   color: 'white',
-  //   left: 30,
-  //   top: 10,
-  // },
-  body: {
-    backgroundColor: 'white',
-    // borderWidth: 1,
-    borderWidth: 0,
-    width: PhoneWidth * 1,
-    height: PhoneHeight * 0.459,
-    top: 75,
-    padding: 20
-  },
-  linearGradient: {
-    flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderRadius: 5
-  },
-  end: {
-    flexDirection: 'row',
-    width: PhoneWidth * 1,
-    borderTopWidth: 1,
-    borderTopColor: '#d8d8d8',
-    justifyContent: 'center',
-    // alignItems: '',
-    top: 90
-  },
-  SubmitButtonStyle: {
-    height: PhoneHeight * 0.072,
-    width: PhoneWidth * 0.12,
-    backgroundColor: '#4d6af9',
-    borderRadius: 30,
-    borderWidth: 1,
-    borderColor: '#fff',
-    left: 180,
-    top: 65
-  },
-  TextStyle: {
-    color: '#fff',
-    textAlign: 'center',
-  },
-  categoryColor: {
-    borderWidth: 0,
-    height: PhoneHeight * 0.016,
-    width: PhoneWidth * 0.027,
-    // backgroundColor:'purple',
-    borderRadius: 20,
-    top: 13,
-    left: 10
-  },
-  missionBox: {
-    flexDirection: 'row',
-    // borderWidth:1,
-    height: PhoneHeight * 0.132,
-    borderWidth: 0
+  categoryColorView: {
+    marginLeft: 20,
   },
   hr: {
-    width: 0,
+    width: 1,
     height: PhoneHeight * 0.132,
     borderWidth: 1,
-    left: 80,
-    borderColor: '#d9d9d9',
-    left: 60
+    marginLeft: 20,
+    borderColor: 'black',
+    alignItems: "center",
+    borderColor: '#d9d9d9'
   },
   circle: {
     borderWidth: 1,
@@ -171,8 +131,31 @@ const styles = StyleSheet.create({
     width: PhoneWidth * 0.035,
     borderRadius: 20,
     borderColor: '#d8d8d8',
-    left: 52,
-    top: 35
-  }
+    left: 0,
+    alignSelf: "center"
+  },
+  buttonView:{
+    marginTop:6,
+    borderWidth: 0,
+    height: 0
+  },
+  end: {
+    flexDirection: 'row',
+    width: PhoneWidth ,
+    borderTopWidth: 1,
+    borderTopColor: 'black',
+    justifyContent: 'center',
+    marginTop: 20,
+    alignItems: 'center'
+  },
+  submitButton: {
+    height: PhoneHeight * 0.072,
+    width: PhoneWidth * 0.12,
+    backgroundColor: '#4d6af9',
+    borderRadius: 30,
+    borderWidth: 1,
+    borderColor: '#fff',
+    
+  },
 });
 
