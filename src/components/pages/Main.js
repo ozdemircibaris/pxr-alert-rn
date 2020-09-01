@@ -7,12 +7,12 @@ import { PhoneWidth, PhoneHeight, responsiveSize } from '../config/env';
 
 const mission = [
   { id: "1", title: "Çöp At", body: "Ofisten çıkmadan önce tüm çöpleri at", color: "#FFA1AC" },
-  { id: "1", title: "Temizlik", body: "Yarın toplu temizlik yapılacak.", color: "#ff78" },
-  { id: "1", title: "Hatırlatma", body: "Birlikte yapılacak işi unutma.!!", color: "#A2D5F2" },
-  { id: "1", title: "Randevu", body: "Birazdan müşteri görüşmesi var. Unutma!", color: "#C3AED6" },
-  { id: "1", title: "Bulaşıkları Yıka", body: "Ofise geldiğinde bulaşıkları yıkamayı unutma", color: "#ADE498" },
-  { id: "1", title: "İş", body: "Yarına yetiştirilecek iş var unutma.", color: "#FFBB91" },
-  { id: "1", title: "Toplantı", body: "Yarın saat 2:00' de toplantı var unutma unutturma.", color: "#FF847C" },
+  { id: "2", title: "Temizlik", body: "Yarın toplu temizlik yapılacak.", color: "#ff78" },
+  { id: "3", title: "Hatırlatma", body: "Birlikte yapılacak işi unutma.!!", color: "#A2D5F2" },
+  { id: "4", title: "Randevu", body: "Birazdan müşteri görüşmesi var. Unutma!", color: "#C3AED6" },
+  { id: "5", title: "Bulaşıkları Yıka", body: "Ofise geldiğinde bulaşıkları yıkamayı unutma", color: "#ADE498" },
+  { id: "6", title: "İş", body: "Yarına yetiştirilecek iş var unutma.", color: "#FFBB91" },
+  { id: "7", title: "Toplantı", body: "Yarın saat 2:00' de toplantı var unutma unutturma.", color: "#FF847C" },
 ];
 
 const Item = ({ title, body, color }) => (
@@ -40,6 +40,24 @@ export default class Main extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text style={styles.containertext}>Merhaba Murat.</Text>
+        <Text style={styles.containertext}>Sana kitlenenler burda</Text>
+        <View style={styles.missionFirst}></View>
+      <View style={styles.body}>
+        <ScrollView>
+          <FlatList
+            data={mission}
+            renderItem={this.missionRenderItem}
+            keyExtractor={item => item.id}
+          />
+        </ScrollView>
+      </View>
+        <View style={styles.end}></View>
+        <TouchableOpacity
+          style={styles.SubmitButtonStyle}
+          activeOpacity={.5}>
+          <Text style={styles.TextStyle}> + </Text>
+        </TouchableOpacity>
         <View style={styles.greetingContainer}>
           <Text style={styles.greetingText}>Merhaba Murat.</Text>
           <Text style={styles.containerText}>Sana kitlenenler burda</Text>
