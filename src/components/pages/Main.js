@@ -58,15 +58,17 @@ export default class Main extends Component {
           activeOpacity={.5}>
           <Text style={styles.TextStyle}> + </Text>
         </TouchableOpacity>
+        <View style={styles.greetingContainer}>
+          <Text style={styles.greetingText}>Merhaba Murat.</Text>
+          <Text style={styles.containerText}>Sana kitlenenler burda</Text>
+        </View>
         <View style={styles.currentTask}></View>
         <View style={styles.body}>
-          <ScrollView>
-            <FlatList
-              data={mission}
-              renderItem={this.missionRenderItem}
-              keyExtractor={item => item.id}
-            />
-          </ScrollView>
+          <FlatList
+            data={mission}
+            renderItem={this.missionRenderItem}
+            keyExtractor={item => item.id}
+          />
         </View>
         <View style={styles.buttonView}>
           <View style={styles.end}>
