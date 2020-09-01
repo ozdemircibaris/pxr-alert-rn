@@ -19,22 +19,18 @@ export default class RouterComp extends Component {
                         <Scene
                             key="signIn"
                             component={SignIn}
-                            />
+                        />
                         <Scene hideNavBar 
                             key="signUp"
                             component={SignUp}
-                        /></Stack>
-                    <Stack key="main" initial>
-                        <Drawer drawerWidth={250} contentComponent={SideBar} hideNavBar initial>
-                            <Scene  key="DrawerMenu" hideNavBar >
-                                <Scene key="Main" component={Main} hideNavBar  />
+                        />
+                    </Stack>
                     <Stack initial key="main" hideNavBar>
                         <Drawer initial drawerWidth={250} contentComponent={SideBar}>
                             <Scene  key="DrawerMenu" >
-                                <Scene initial key="Main" component={Main} hideNavBar  />
+                                <Scene  initial key="Main" component={Main} hideNavBar  />
                                 <Scene key="page2" component={Page2} hideNavBar />
                                 <Scene key="page3" component={Page3} hideNavBar />
-                                <Scene  key="page3" component={Page3} hideNavBar />
                             </Scene>
                         </Drawer>
                     </Stack>

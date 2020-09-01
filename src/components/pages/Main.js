@@ -40,24 +40,6 @@ export default class Main extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.containertext}>Merhaba Murat.</Text>
-        <Text style={styles.containertext}>Sana kitlenenler burda</Text>
-        <View style={styles.missionFirst}></View>
-      <View style={styles.body}>
-        <ScrollView>
-          <FlatList
-            data={mission}
-            renderItem={this.missionRenderItem}
-            keyExtractor={item => item.id}
-          />
-        </ScrollView>
-      </View>
-        <View style={styles.end}></View>
-        <TouchableOpacity
-          style={styles.SubmitButtonStyle}
-          activeOpacity={.5}>
-          <Text style={styles.TextStyle}> + </Text>
-        </TouchableOpacity>
         <View style={styles.greetingContainer}>
           <Text style={styles.greetingText}>Merhaba Murat.</Text>
           <Text style={styles.containerText}>Sana kitlenenler burda</Text>
@@ -71,12 +53,11 @@ export default class Main extends Component {
           />
         </View>
         <View style={styles.buttonView}>
-          <View style={styles.end}>
           <TouchableOpacity
             style={styles.submitButton}
             activeOpacity={.5}>
+              <Image style ={styles.TextStyle} source={require('../../images/plus.png')}/>
           </TouchableOpacity>
-          </View>  
         </View>
       </View>
     );
@@ -110,7 +91,7 @@ const styles = StyleSheet.create({
   },
   body: {
     marginTop: 20,
-    height: PhoneHeight * 0.50,
+    height: PhoneHeight * 0.40,
     paddingLeft: 20,
     borderWidth:0
   },
@@ -151,27 +132,24 @@ const styles = StyleSheet.create({
     alignSelf: "center"
   },
   buttonView:{
-    marginTop:6,
+    marginTop:5,
     borderWidth: 0,
-    height: 0
-  },
-  end: {
-    flexDirection: 'row',
-    width: PhoneWidth ,
-    borderTopWidth: 1,
-    borderTopColor: 'black',
-    justifyContent: 'center',
-    marginTop: 20,
+    height: 0,
     alignItems: 'center'
   },
   submitButton: {
-    height: PhoneHeight * 0.072,
-    width: PhoneWidth * 0.12,
-    backgroundColor: '#4d6af9',
+    height: PhoneHeight * 0.082,
+    width: PhoneWidth * 0.15,
     borderRadius: 30,
     borderWidth: 1,
     borderColor: '#fff',
-    
+    marginTop: 15
   },
+  TextStyle: {
+    alignSelf:'center',
+    width: responsiveSize(50), //buton size ı için responsive kullandık 
+    height: responsiveSize(50),
+    marginTop:15
+  }
 });
 
