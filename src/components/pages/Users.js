@@ -42,7 +42,6 @@ export default class Main extends Component {
         console.log(item);
         return <Item info={item.info} />
     }
-
   render() {
      return (
         <View style={styles.container}>
