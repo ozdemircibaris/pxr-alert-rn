@@ -6,6 +6,7 @@ import { color } from 'react-native-reanimated';
 import { PhoneWidth, PhoneHeight } from '../config/env';
 
 
+
 const users = [
     { id: "1", info: "Murat Erdoğan" },
     { id: "2", info: "Seyithan Erdoğan" },

@@ -50,17 +50,17 @@ export default class Main extends Component {
 
 
         <View style={styles.missionFirst}></View>
-        <View style={styles.body}>
-          <ScrollView>
+      <View style={styles.body}>
+        <ScrollView>
 
-            <FlatList
-              data={mission}
-              renderItem={this.missionRenderItem}
-              keyExtractor={item => item.id}
-            />
+          <FlatList
+            data={mission}
+            renderItem={this.missionRenderItem}
+            keyExtractor={item => item.id}
+          />
 
-          </ScrollView>
-        </View>
+        </ScrollView>
+      </View>
         <View style={styles.end}></View>
         <TouchableOpacity
           style={styles.SubmitButtonStyle}
