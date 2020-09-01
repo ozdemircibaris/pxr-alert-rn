@@ -11,8 +11,8 @@ import CreateTask from './components/pages/CreateTask';
 
 
 export default class RouterComp extends Component {
-    render() {
-        return (
+ render() {
+      return (
             <Router>
                 <Stack key="root" hideNavBar>
                     <Stack key="auth" >
@@ -28,6 +28,10 @@ export default class RouterComp extends Component {
                         <Drawer drawerWidth={250} contentComponent={SideBar} hideNavBar>
                             <Scene  key="DrawerMenu" hideNavBar >
                                 <Scene key="Main" component={Main} hideNavBar  />
+                    <Stack initial key="main" hideNavBar>
+                        <Drawer initial drawerWidth={250} contentComponent={SideBar}>
+                            <Scene  key="DrawerMenu" >
+                                <Scene initial key="Main" component={Main} hideNavBar  />
                                 <Scene key="page2" component={Page2} hideNavBar />
                                 <Scene key="page3" component={Page3} hideNavBar initial/>
                             </Scene>
@@ -44,6 +48,7 @@ export default class RouterComp extends Component {
                         title="Yeni İş Kitle">
                     </Scene>
                     <Scene key="Users" component={Users} />
+                    <Scene  key="Users" component={Users} />
                 </Stack>
             </Router>
         )
