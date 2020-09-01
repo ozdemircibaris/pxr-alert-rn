@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { Text, View,StyleSheet, TouchableOpacity,Button,SafeAreaView ,TextInput, Image} from 'react-native'
+import { Text, View,StyleSheet, TouchableOpacity,Button,SafeAreaView ,TextInput, Image,} from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import LinearGradient from 'react-native-linear-gradient';
 import {PhoneWidth , PhoneHeight, responsiveSize} from '../config/env';
+
+
 export default class SignIn extends Component {
     render() {
         return (
