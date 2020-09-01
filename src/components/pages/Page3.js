@@ -39,10 +39,11 @@ render() {
   return (
 
    <View style={styles.container}>
-        <Text style={styles.greetingtext}>Merhaba Murat.</Text>
+       
+      <View style={styles.body}>
+      <Text style={styles.greetingtext}>Merhaba Murat.</Text>
         <Text style={styles.containertext}>Sana kitlenenler burda</Text>
 
-      <View style={styles.body}>
           <ScrollView>
             <FlatList style = {styles.missions}
                 data={mission}
@@ -73,8 +74,7 @@ const styles = StyleSheet.create({
   },
   headersBtn:{
     // backgroundColor:'pink',
-    width: responsiveSize(200),
-    height: responsiveSize(150),
+   
 
   },infoTxt:{
     alignSelf:'center',
@@ -91,41 +91,38 @@ const styles = StyleSheet.create({
     paddingBottom:'5%',
   }
   ,containertext: {
-    width: responsiveSize(270),
-    height: responsiveSize(28),
-    fontSize:18,
+    fontSize:14,
     paddingBottom:9,
- 
   }
   ,greetingtext:{
-    width: responsiveSize(270),
-    height: responsiveSize(20),
-    fontSize:18,
+    fontSize:14,
     paddingTop:6,
-  
   },
   titleTxt:{
     paddingTop:'10%',
     alignSelf:'center',
-    width: responsiveSize(150),
-    height: responsiveSize(60),
     fontWeight:'bold'
   }
   ,body: {
     backgroundColor: 'white',
-    width: responsiveSize(300),
-    height:responsiveSize(480),
+    width:PhoneWidth * 0.9,
+    height: PhoneHeight * 0.8,
+    alignSelf:'center',
     justifyContent:'center',
-    justifyContent:'space-between'
+    justifyContent:'space-between',
+    borderWidth:0
   },
   TextStyle: {
     alignSelf:'center',
-    width: responsiveSize(50),
+    width: responsiveSize(50), //buton size ı için responsive kullandık 
     height: responsiveSize(50),
     marginTop:0
   },missionBox:{
     alignItems:'center',
     padding:10
+  },
+  SubmitButtonStyle:{
+    paddingTop:'8%'
   }
   
   
