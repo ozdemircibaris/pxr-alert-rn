@@ -3,8 +3,7 @@ import { StyleSheet, View, Text, CheckBox, Image, Button, TouchableOpacity, Scro
 // import Header from '../leftBar/Header';
 import { Actions } from 'react-native-router-flux';
 import { color } from 'react-native-reanimated';
-import { PhoneWidth, PhoneHeight } from '../config/env';
-
+import { PhoneWidth, PhoneHeight, responsiveSize } from '../config/env';
 
 const users = [
     { id: "1", info: "Murat Erdoğan" },
@@ -34,7 +33,6 @@ const Item = ({ info }) => (
     </View>
 );
 
-
 export default class Main extends Component {
     constructor(props) {
         super(props);
@@ -44,93 +42,78 @@ export default class Main extends Component {
         console.log(item);
         return <Item info={item.info} />
     }
-
-    render() {
-        return (
-            <View style={styles.container}>
-                <View style={styles.header}>
-                    <Text style={styles.headertext}>Merhaba Murat</Text>
-                    <Text style={styles.headertext}> Bu şerefe kimlerin nail olacağını seç</Text>
-                </View>
-                <View style={styles.body}>
-                    <ScrollView>
-
-                        <FlatList
-                            data={users}
-                            renderItem={this.usersRenderItem}
-                            keyExtractor={item => item.id}
-                        />
-
-
-
-                    </ScrollView>
-                </View>
-                <TouchableOpacity
-                    style={styles.end}
-                    activeOpacity={.5}>
-
-                    <Text style={styles.buttonText}> KİTLEEE! </Text>
-
+  render() {
+     return (
+        <View style={styles.container}>
+            <View style={styles.header}>
+                <Text style={styles.headertext}>Merhaba Murat</Text>
+                <Text style={styles.headertext}> Bu şerefe kimlerin nail olacağını seç</Text>
+            </View>
+            <View style={styles.body}>
+                <ScrollView>
+                 <FlatList
+                    data={users}
+                    renderItem={this.usersRenderItem}
+                    keyExtractor={item => item.id}
+                 />
+                </ScrollView>
+                <TouchableOpacity style={styles.button}>
+                    <Text style={styles.btnText}>KİTLEEE!</Text>
                 </TouchableOpacity>
             </View>
-
-
+        </View>
         );
     }
 }
-
 const styles = StyleSheet.create({
     container: {
-
+      flex: 1,
+      padding: 20
     },
     header: {
-        borderWidth: 0,
-        top: 70,
+        flex: 0.3,
+        marginTop: 20,
+        flexDirection: "column",
+        marginLeft: 10,
+        marginBottom: 15
     },
     headertext: {
-        fontSize: 17,
-        color: 'black',
-        left: 30,
+        fontSize: responsiveSize(16),
+        color: '#852e4c',
     },
     body: {
         borderWidth: 0,
-        width: PhoneWidth * 1,
-        height: PhoneHeight * 0.47,
-        top: 150,
-        flexDirection: 'column',
-        justifyContent: 'space-evenly',
-        padding: 0
-
+        width: responsiveSize(295),
+        height: responsiveSize(322),
+        padding: 0,
+        marginTop: 20,
     },
     users: {
         borderWidth: 0,
-        width: PhoneWidth * 1,
-        height: PhoneHeight * 0.0587,
-        left: 5,
-        top: 0,
+        width: responsiveSize(290),
+        height: responsiveSize(37),
         flexDirection: 'row',
     },
     checkbox: {
-        alignSelf: 'flex-start',
-        left: 10,
+       marginLeft: 20
     },
     usersName: {
-        top: 8,
-        left: 60,
-        color: 'black'
+        marginTop: 5,
+        color: 'black',
+        fontSize: responsiveSize(15)
     },
-    end: {
-        height: PhoneHeight * 0.057,
-        width: PhoneWidth * 0.55,
-        top: 200,
-        left: 90,
-        backgroundColor: '#694ece',
-        borderWidth: 0
+    button:{
+        borderWidth: 0,
+        height: responsiveSize(35),
+        width: responsiveSize(190),
+        top: 30,
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#852e4c'
     },
-    buttonText:{
+    btnText:{
         color: 'white',
-        fontSize: 20,
-        left: 70,
-        top: 5
+        fontSize: responsiveSize(17)
     }
 });
