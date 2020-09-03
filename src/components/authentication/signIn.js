@@ -4,8 +4,18 @@ import { Actions } from 'react-native-router-flux'
 import LinearGradient from 'react-native-linear-gradient';
 import {PhoneWidth , PhoneHeight, responsiveSize} from '../config/env';
 
+   //Here is for API 
+//     const token =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6eyJpZCI6MjUsImZ1bGxOYW1lIjoiYWhtZXQiLCJlbWFpbCI6InVtdXRAZ21haWwuY29tIiwicGFzc3dvcmQiOiJ5dXl1eXV5dSIsInBob25lVG9rZW4iOiJqa2tramtqa2tqa2pra2pqIiwiY3JlYXRlZEF0IjoiMjAyMC0wOS0wMlQxNTo0ODozNS4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMC0wOS0wMlQxNTo0ODozNS4wMDBaIn0sImVtYWlsIjoidW11dEBnbWFpbC5jb20iLCJpYXQiOjE1OTkwNjE4NzMsImV4cCI6MTU5OTA2OTA3M30.j6WSohc3flDoiBSru4gXzk4f-z4R61_Puv09YsE05P8";
 
+// axios.post(`http://185.171.90.223:3000`, {
+    
+// }, {
+//   headers: {
+//     'Authorization': `Bearer ${token}` 
+//   }
+// })
 export default class SignIn extends Component {
+  
     render() {
         return (
 <View style = {styles.container}>
