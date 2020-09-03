@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
+    borderWidth: 0
   },
   greetingText: {
     marginTop: 20,
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
     fontSize: responsiveSize(15)
   },
   greetingContainer: {
-    marginTop: 20
+    marginTop: 0
   },
   containerText: {
     marginTop: 5,
@@ -143,13 +144,13 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     borderWidth: 1,
     borderColor: '#fff',
-    marginTop: 15
+    marginTop: 10
   },
   TextStyle: {
     alignSelf:'center',
     width: responsiveSize(50), //buton size ı için responsive kullandık 
     height: responsiveSize(50),
-    marginTop:15
+    marginTop: 5
   }
 });
 
