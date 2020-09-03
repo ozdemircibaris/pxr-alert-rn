@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, ImageBackground, Image, Button, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 import Header from '../helpComponents/Header';
+import Sidebar from '../helpComponents/sideBar'
 import LinearGradient from 'react-native-linear-gradient';
 import { Actions } from 'react-native-router-flux';
 import { color } from 'react-native-reanimated';
@@ -37,7 +38,6 @@ export default class Page3 extends Component {
 
 render() {
   return (
-
    <View style={styles.container}>
        
       <View style={styles.body}>

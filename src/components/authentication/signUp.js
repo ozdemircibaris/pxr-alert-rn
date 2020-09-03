@@ -3,16 +3,32 @@ import { Button,Text,TouchableOpacity,TextInput,View ,StyleSheet,Image, ImageBac
 import { Actions } from 'react-native-router-flux';
 import LinearGradient from 'react-native-linear-gradient';
 import { PhoneHeight,PhoneWidth,responsiveSize } from '../config/env';
+import axios from 'axios';
 
 export default class SignIn extends Component {
   state = {
-    nameSurname: '',
+    fullName: '',
     email: '',
     password: '',
-    confirmPassword: ''
-  }
+    phoneToken: 'zeynep123'
+  };
+  
+  signUp = () => {
+    axios.post('http://185.171.90.223:3000/users/signup', {
+      fullName: this.state.fullName,
+      email: this.state.email,
+      password: this.state.password,
+      phoneToken: this.state.phoneToken
+    })
+    .then(response => {
+      console.log(response);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+    Actions.goToLogin();
+}
     render() {
-      console.log(this.state.password);
         return (
           <View style={styles.background}>
             <Image style={styles.icon}
@@ -23,17 +39,17 @@ export default class SignIn extends Component {
                 style={styles.input}
                 placeholder='AD SOYAD'
                 placeholderTextColor='black'
-                onChangeText={( )=>{
+                onChangeText={(text)=>{
                   this.setState({
-                      nameSurname:text
+                      fullName:text
                   })
                 }}
-                value={this.state.nameSurname}/>
+                value={this.state.fullName}/>
             <TextInput 
                 style={styles.input}
                 placeholder='E-POSTA'
                 placeholderTextColor='black'
-                onChangeText={(text)=>{
+                onChangeText={(text) => {
                   this.setState({
                       email:text
                   })
@@ -43,27 +59,20 @@ export default class SignIn extends Component {
                 style={styles.input}
                 placeholder='ŞİFRE'
                 placeholderTextColor='black'
-                onChangeText={(text)=>{
+                onChangeText={(text) => {
                   this.setState({
                       password:text
                   })
                 }}
-                value={this.state.password}/>
-            <TextInput 
-                style={styles.input}
-                placeholder='ŞİFRE TEKRAR'
-                placeholderTextColor='black'
-                onChangeText={(text)=>{
-                  this.setState({
-                      confirmPassword:text
-                  })
-                }}
-                value={this.state.confirmPassword}/>              
-            <TouchableOpacity style={styles.signUpButton}>
-              <Text style={styles.signUpButtonText}>Kayıt Ol</Text> 
+                value={this.state.password}/>            
+            <TouchableOpacity
+                onPress={() => this.signUp()} 
+                style={styles.signUpButton}>
+              <Text style={styles.signUpButtonText}> Kayıt Ol </Text> 
             </TouchableOpacity>
                 <Text style={styles.questionText}>Hesabın varsa burda ne işin var?
-                    <Text style={styles.loginButtonText} onPress={()=> Actions.goToLogin()}> Giriş yap</Text>
+                    <Text style={styles.loginButtonText}
+                          onPress = {() => Actions.goToLogin()}> Giriş yap </Text>
                 </Text>
             </View>
           </View>   
@@ -91,7 +100,7 @@ const styles = StyleSheet.create({
       width: PhoneWidth * 0.7,
       height: PhoneHeight * 0.05,
       margin: 10,
-      color: 'white',
+      color: 'red',
       fontSize: responsiveSize(11),
       textAlign: "center",
       borderColor: "#852e4c",
