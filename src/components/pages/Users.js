@@ -4,9 +4,10 @@ import { StyleSheet, View, Text, CheckBox, Image, Button, TouchableOpacity, Scro
 import { Actions } from 'react-native-router-flux';
 import { color } from 'react-native-reanimated';
 import { PhoneWidth, PhoneHeight, responsiveSize } from '../config/env';
+import axios from 'axios';
 
 
-const users = [
+const Users = [
     { id: "1", info: "Murat Erdoğan" },
     { id: "2", info: "Seyithan Erdoğan" },
     { id: "3", info: "Barış Özdemirci" },
@@ -37,39 +38,58 @@ const Item = ({ info }) => (
 export default class Main extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            users: [],
+            checked: 'false'
+        };
 
     }
-    usersRenderItem = ({item}) => {
-        console.log(item);
-        return <Item info={item.info} />
+    usersRenderItem = ({ item }) => {
+        return <Item info={item.fullName} />
     }
-  render() {
-     return (
-        <View style={styles.container}>
-            <View style={styles.header}>
-                <Text style={styles.headertext}>Merhaba Murat</Text>
-                <Text style={styles.headertext}> Bu şerefe kimlerin nail olacağını seç</Text>
+
+
+    componentDidMount() {
+        axios.get("http://185.171.90.223:3000/users/")
+            .then((res) => {
+                console.log("res :", res.data.data)
+                this.setState({
+                    users: res.data.data
+                })
+                console.log("array :", this.state.users)
+            })
+            .catch((error) => {
+                console.log("error :", error)
+            })
+    }
+    
+
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <View style={styles.header}>
+                    <Text style={styles.headertext}>Merhaba Murat</Text>
+                    <Text style={styles.headertext}> Bu şerefe kimlerin nail olacağını seç</Text>
+                </View>
+                <View style={styles.body}>
+                    <FlatList
+                        data={this.state.users}
+                        renderItem={this.usersRenderItem}
+                        keyExtractor={item => item.id}
+                    />
+                    <TouchableOpacity style={styles.button}>
+                        <Text style={styles.btnText}>KİTLEEE!</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-            <View style={styles.body}>
-                <ScrollView>
-                 <FlatList
-                    data={users}
-                    renderItem={this.usersRenderItem}
-                    keyExtractor={item => item.id}
-                 />
-                </ScrollView>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.btnText}>KİTLEEE!</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
         );
     }
 }
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      padding: 20
+        flex: 1,
+        padding: 20
     },
     header: {
         flex: 0.3,
@@ -96,14 +116,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     checkbox: {
-       marginLeft: 20
+        marginLeft: 20
     },
     usersName: {
         marginTop: 5,
         color: 'black',
         fontSize: responsiveSize(15)
     },
-    button:{
+    button: {
         borderWidth: 0,
         height: responsiveSize(35),
         width: responsiveSize(190),
@@ -113,7 +133,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#852e4c'
     },
-    btnText:{
+    btnText: {
         color: 'white',
         fontSize: responsiveSize(17)
     }
