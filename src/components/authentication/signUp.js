@@ -13,7 +13,7 @@ export default class SignIn extends Component {
     phoneToken: 'zeynep123'
   };
   
-  signUp(){
+  signUp = () => {
     axios.post('http://185.171.90.223:3000/users/signup', {
       fullName: this.state.fullName,
       email: this.state.email,
@@ -49,7 +49,7 @@ export default class SignIn extends Component {
                 style={styles.input}
                 placeholder='E-POSTA'
                 placeholderTextColor='black'
-                onChangeText={(text)=>{
+                onChangeText={(text) => {
                   this.setState({
                       email:text
                   })
@@ -59,7 +59,7 @@ export default class SignIn extends Component {
                 style={styles.input}
                 placeholder='ŞİFRE'
                 placeholderTextColor='black'
-                onChangeText={(text)=>{
+                onChangeText={(text) => {
                   this.setState({
                       password:text
                   })
@@ -68,11 +68,11 @@ export default class SignIn extends Component {
             <TouchableOpacity
                 onPress={() => this.signUp()} 
                 style={styles.signUpButton}>
-              <Text style={styles.signUpButtonText}>Kayıt Ol</Text> 
+              <Text style={styles.signUpButtonText}> Kayıt Ol </Text> 
             </TouchableOpacity>
                 <Text style={styles.questionText}>Hesabın varsa burda ne işin var?
                     <Text style={styles.loginButtonText}
-                          onPress = {() => Actions.goToLogin()}> Giriş yap</Text>
+                          onPress = {() => Actions.goToLogin()}> Giriş yap </Text>
                 </Text>
             </View>
           </View>   
