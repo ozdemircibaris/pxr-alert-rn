@@ -1,21 +1,56 @@
 import React, { Component } from 'react'
-import { Text, View,StyleSheet, TouchableOpacity,Button,SafeAreaView ,TextInput, Image,} from 'react-native'
+import { Text, View,StyleSheet, TouchableOpacity,Button,SafeAreaView ,TextInput, Image,AsyncStorage} from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import LinearGradient from 'react-native-linear-gradient';
 import {PhoneWidth , PhoneHeight, responsiveSize} from '../config/env';
+import axios from 'axios';
+ 
 
-   //Here is for API 
-//     const token =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6eyJpZCI6MjUsImZ1bGxOYW1lIjoiYWhtZXQiLCJlbWFpbCI6InVtdXRAZ21haWwuY29tIiwicGFzc3dvcmQiOiJ5dXl1eXV5dSIsInBob25lVG9rZW4iOiJqa2tramtqa2tqa2pra2pqIiwiY3JlYXRlZEF0IjoiMjAyMC0wOS0wMlQxNTo0ODozNS4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMC0wOS0wMlQxNTo0ODozNS4wMDBaIn0sImVtYWlsIjoidW11dEBnbWFpbC5jb20iLCJpYXQiOjE1OTkwNjE4NzMsImV4cCI6MTU5OTA2OTA3M30.j6WSohc3flDoiBSru4gXzk4f-z4R61_Puv09YsE05P8";
+export default class SignIn extends Component {
 
-// axios.post(`http://185.171.90.223:3000`, {
-    
+  constructor(props) {
+    super(props);
+    this.state = {email:'',password:''};
+    }
+
+  // componentWillMount(){
+  //   const token =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6eyJpZCI6MjUsImZ1bGxOYW1lIjoiYWhtZXQiLCJlbWFpbCI6InVtdXRAZ21haWwuY29tIiwicGFzc3dvcmQiOiJ5dXl1eXV5dSIsInBob25lVG9rZW4iOiJqa2tramtqa2tqa2pra2pqIiwiY3JlYXRlZEF0IjoiMjAyMC0wOS0wMlQxNTo0ODozNS4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMC0wOS0wMlQxNTo0ODozNS4wMDBaIn0sImVtYWlsIjoidW11dEBnbWFpbC5jb20iLCJpYXQiOjE1OTkwNjE4NzMsImV4cCI6MTU5OTA2OTA3M30.j6WSohc3flDoiBSru4gXzk4f-z4R61_Puv09YsE05P8";
+
+// axios.post(`http://185.171.90.223:3000/users/signin`, {
+//   "id": {
+//     "id": 25,
+//     "fullName": "ahmet",
+//     "email": "umut@gmail.com",
+//     "password": "yuyuyuyu",
+//     "phoneToken": "jkkkjkjkkjkjkkjj",
+//     "createdAt": "2020-09-02T15:48:35.000Z",
+//     "updatedAt": "2020-09-02T15:48:35.000Z"
+//   },
+//   "email": "umut@gmail.com",
+//   "iat": 1599061873,
+//   "exp": 1599069073  
 // }, {
 //   headers: {
 //     'Authorization': `Bearer ${token}` 
 //   }
 // })
-export default class SignIn extends Component {
-  
+// console.log('tokenaklsdş')
+//   }
+
+signIn(){ //when the user press the button it will work.
+  axios.post('http://185.171.90.223:3000/users/signin', {
+    email: this.state.email,
+    password: this.state.password,
+  })
+  .then((response) => {
+    console.log(response);
+    Actions.Main();
+  })
+  .catch(error => {
+    alert('hatalı şifre veya email')
+    console.log(error);
+  });
+}
     render() {
         return (
 <View style = {styles.container}>
@@ -26,19 +61,19 @@ export default class SignIn extends Component {
 <View style={styles.generalBox}>
     <TextInput
       style={styles.userNameWrapper}
-      onChangeText={text => onChangeText(text)}
+      onChangeText={text => this.setState({ email: text })}
       placeholder='E-POSTA'
       placeholderTextColor='black'
         />
     <TextInput
       style={styles.passwordWrapper}
-      onChangeText={text => onChangeText(text)}
+      onChangeText={text => this.setState({ password: text })}
       placeholder='ŞİFRE'
       placeholderTextColor='black'
         />
       <View style ={styles.buttonBox}>
         <TouchableOpacity style={styles.LoginBtn}
-          onPress={()=>Actions.jump('Main')}>
+             onPress={()=> this.signIn()}>
           <Text style={styles.loginTxt}>Giriş Yap</Text>
         </TouchableOpacity>
       </View>
