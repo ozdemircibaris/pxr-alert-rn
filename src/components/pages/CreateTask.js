@@ -11,17 +11,18 @@ export default class SignIn extends Component {
   state={
     dateValue : new Date(),
     pickerMode: 'date',
-    show: false,
-    taskHeader: '',
-    taskInfo: ''
+    show: false
   };
 
   onChange = (event, selectedDate) => this.setState({ dateValue: selectedDate });
-  
+
+
   showDate = () => this.setState({ pickerMode: "date", show: true, })
   showTime = () => this.setState({ pickerMode: "time", show: true, });
+  
     render() {
       const { show, dateValue, pickerMode } = this.state
+      console.log(dateValue);
       return (
         <View style={styles.background}>
           <View style={styles.header}>
@@ -31,22 +32,12 @@ export default class SignIn extends Component {
             <TextInput 
               style={styles.taskHeaderInput}
               placeholder="İşin Başlığı"
-              placeholderTextColor='#852e4c'
-              onChangeText={(text)=>{
-                this.setState({
-                    taskHeader:text
-                })
-              }}>
+              placeholderTextColor='#852e4c'>
             </TextInput>
             <TextInput 
               style={styles.taskInfoInput}
               placeholder="İşin Tanımı"
-              placeholderTextColor='#852e4c'
-              onChangeText={(text)=>{
-                this.setState({
-                    taskInfo:text
-                })
-              }}>
+              placeholderTextColor='#852e4c'>
             </TextInput>
             <View style={styles.calendar}>
               <TouchableOpacity style={styles.dateButton} onPress={this.showDate}>
@@ -62,7 +53,7 @@ export default class SignIn extends Component {
                 mode={pickerMode}
                 is24Hour={true}
                 display="spinner"
-                onChange={this.onChange}
+                onChange={()=> this.onChange} 
               />
             )}
           </View>
