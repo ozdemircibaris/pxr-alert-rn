@@ -16,7 +16,7 @@ export default class RouterComp extends Component {
             <Router>
                 <Stack  key="root" hideNavBar >
                     <Stack  key="auth" >
-                        <Scene
+                        <Scene hideNavBar
                             key="signIn"
                             component={SignIn}
                         />
