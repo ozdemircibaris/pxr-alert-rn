@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text} from 'react-native';
-import Header from '../helpComponents/Header';
-
 
 export default class Page2 extends Component {
     constructor(props) {
@@ -10,25 +8,14 @@ export default class Page2 extends Component {
   render() {
     return (
         <View>
-            <Header />
             <View style = {styles.container}>
                 <Text style = {styles.title}> Kart Ekle </Text>
             </View>
-        </View>
-              
+        </View>        
       );
   }
 }
 
-let styles = StyleSheet.create({
-    container: {
-        padding: 10,
-        alignItems: 'center',
-        borderBottomWidth:1,
-        borderBottomColor: 'white',
-        flexDirection: 'row',
-     },
-     title:{
-      fontSize:18
-     },     
+const styles = StyleSheet.create({
+       
 });

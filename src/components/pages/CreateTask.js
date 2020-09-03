@@ -11,7 +11,9 @@ export default class SignIn extends Component {
   state={
     dateValue : new Date(),
     pickerMode: 'date',
-    show: false
+    show: false,
+    taskHeader: '',
+    taskInfo: ''
   };
 
   onChange = (event, selectedDate) => this.setState({ dateValue: selectedDate });
@@ -29,12 +31,22 @@ export default class SignIn extends Component {
             <TextInput 
               style={styles.taskHeaderInput}
               placeholder="İşin Başlığı"
-              placeholderTextColor='#852e4c'>
+              placeholderTextColor='#852e4c'
+              onChangeText={(text)=>{
+                this.setState({
+                    taskHeader:text
+                })
+              }}>
             </TextInput>
             <TextInput 
               style={styles.taskInfoInput}
               placeholder="İşin Tanımı"
-              placeholderTextColor='#852e4c'>
+              placeholderTextColor='#852e4c'
+              onChangeText={(text)=>{
+                this.setState({
+                    taskInfo:text
+                })
+              }}>
             </TextInput>
             <View style={styles.calendar}>
               <TouchableOpacity style={styles.dateButton} onPress={this.showDate}>

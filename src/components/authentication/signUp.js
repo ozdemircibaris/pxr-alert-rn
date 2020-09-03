@@ -12,7 +12,6 @@ export default class SignIn extends Component {
     confirmPassword: ''
   }
     render() {
-      console.log(this.state.password);
         return (
           <View style={styles.background}>
             <Image style={styles.icon}

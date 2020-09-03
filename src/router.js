@@ -26,11 +26,11 @@ export default class RouterComp extends Component {
                         />
                     </Stack>
                     <Stack initial key="main" hideNavBar>
-                        <Drawer initial drawerWidth={250} contentComponent={SideBar}>
+                        <Drawer  drawerWidth={250} contentComponent={SideBar}>
                             <Scene  key="DrawerMenu" >
-                                <Scene  initial key="Main" component={Main} hideNavBar  />
-                                <Scene key="page2" component={Page2} hideNavBar />
-                                <Scene key="page3" component={Page3} hideNavBar />
+                                <Scene   key="Main" component={Main} hideNavBar  />
+                                <Scene initial key="page2" component={Page2} hideNavBar />
+                                <Scene  key="page3" component={Page3} hideNavBar />
                             </Scene>
                         </Drawer>
                     </Stack>
