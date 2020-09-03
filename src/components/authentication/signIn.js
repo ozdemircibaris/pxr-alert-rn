@@ -13,31 +13,7 @@ export default class SignIn extends Component {
     this.state = {email:'',password:''};
     }
 
-  // componentWillMount(){
-  //   const token =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6eyJpZCI6MjUsImZ1bGxOYW1lIjoiYWhtZXQiLCJlbWFpbCI6InVtdXRAZ21haWwuY29tIiwicGFzc3dvcmQiOiJ5dXl1eXV5dSIsInBob25lVG9rZW4iOiJqa2tramtqa2tqa2pra2pqIiwiY3JlYXRlZEF0IjoiMjAyMC0wOS0wMlQxNTo0ODozNS4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMC0wOS0wMlQxNTo0ODozNS4wMDBaIn0sImVtYWlsIjoidW11dEBnbWFpbC5jb20iLCJpYXQiOjE1OTkwNjE4NzMsImV4cCI6MTU5OTA2OTA3M30.j6WSohc3flDoiBSru4gXzk4f-z4R61_Puv09YsE05P8";
-
-// axios.post(`http://185.171.90.223:3000/users/signin`, {
-//   "id": {
-//     "id": 25,
-//     "fullName": "ahmet",
-//     "email": "umut@gmail.com",
-//     "password": "yuyuyuyu",
-//     "phoneToken": "jkkkjkjkkjkjkkjj",
-//     "createdAt": "2020-09-02T15:48:35.000Z",
-//     "updatedAt": "2020-09-02T15:48:35.000Z"
-//   },
-//   "email": "umut@gmail.com",
-//   "iat": 1599061873,
-//   "exp": 1599069073  
-// }, {
-//   headers: {
-//     'Authorization': `Bearer ${token}` 
-//   }
-// })
-// console.log('tokenaklsdş')
-//   }
-
-signIn(){ //when the user press the button it will work.
+signIn=()=> { //when the user press the button it will work.
   axios.post('http://185.171.90.223:3000/users/signin', {
     email: this.state.email,
     password: this.state.password,
