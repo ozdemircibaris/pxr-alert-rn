@@ -14,30 +14,37 @@ export default class RouterComp extends Component {
  render() {
       return (
             <Router>
-                <Stack key="root" hideNavBar>
-                    <Stack key="auth" >
+                <Stack  key="root" hideNavBar >
+                    <Stack  key="auth" >
                         <Scene
                             key="signIn"
                             component={SignIn}
                         />
                         <Scene hideNavBar 
+                            
                             key="signUp"
                             component={SignUp}
                         />
                     </Stack>
-                    <Stack initial key="main" hideNavBar>
-                        <Drawer initial drawerWidth={250} contentComponent={SideBar}>
-                            <Scene  key="DrawerMenu" >
-                                <Scene  initial key="Main" component={Main} hideNavBar  />
-                                <Scene key="page2" component={Page2} hideNavBar />
-                                <Scene key="page3" component={Page3} hideNavBar />
-                            </Scene>
+                    <Stack   key="main" hideNavBar>
+                        <Drawer  drawerWidth={250} contentComponent={SideBar}>
+                           
+                                <Scene  key="Main" component={Main}   />
+                                <Scene key="page2" component={Page2}  />
+                                <Scene  key="page3" component={Page3}  />
+                          
                         </Drawer>
-                    </Stack>
+                    </Stack>    
+
                     <Scene key="goToLogin"
                         component={SignIn}
                         title="Giriş Yap">       
                     </Scene>
+                    <Scene key="goToSignUp"
+                        component={SignUp}
+                        title="Üye ol">       
+                    </Scene>
+
                     <Scene 
                         key="CreateTask"
                         component={CreateTask}
