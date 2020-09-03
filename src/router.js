@@ -50,7 +50,7 @@ export default class RouterComp extends Component {
                         component={CreateTask}
                         title="Yeni İş Kitle">
                     </Scene>
-                    <Scene key="Users" component={Users} />
+                    <Scene initial key="Users" component={Users} />
                 </Stack>
             </Router>
         )
