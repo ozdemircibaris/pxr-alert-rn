@@ -15,7 +15,11 @@ export default class RouterComp extends Component {
             <Router>
                 <Stack key="root" hideNavBar >
                     <Stack  key="auth" >
+<<<<<<< HEAD
                         <Scene 
+=======
+                        <Scene hideNavBar
+>>>>>>> 9c5fb88634490b052f04bc0cbeca802a96cfce5a
                             key="signIn"
                             component={SignIn}
                         />
@@ -25,11 +29,26 @@ export default class RouterComp extends Component {
         
                         />
                     </Stack>
+<<<<<<< HEAD
                     <Stack initial key="main" hideNavBar>
                         <Drawer drawerWidth={250} contentComponent={SideBar}>        
                                 <Scene initial key="Main" component={Main}/>
                                 <Scene key="page2" component={Page2}/>
                                 <Scene key="page3" component={Page3}/>
+=======
+                    <Stack  key="main" hideNavBar>
+                        <Drawer  drawerWidth={250} contentComponent={SideBar}>        
+                                <Scene  key="Main" component={Main}/>
+                                <Scene  key="page2" component={Page2}/>
+                                <Scene  key="page3" component={Page3}/>
+                    <Stack  initial key="main" hideNavBar>
+                        <Drawer  drawerWidth={250} contentComponent={SideBar}>
+                           
+                                <Scene initial key="Main" component={Main}   />
+                                <Scene key="page2" component={Page2}  />
+                                <Scene  key="page3" component={Page3}  />
+                          
+>>>>>>> 9c5fb88634490b052f04bc0cbeca802a96cfce5a
                         </Drawer>
                     </Stack>    
 
@@ -46,7 +65,7 @@ export default class RouterComp extends Component {
                         component={CreateTask}
                         title="Yeni İş Kitle">
                     </Scene>
-                    <Scene key="Users" component={Users} />
+                    <Scene initial key="Users" component={Users} />
                 </Stack>
             </Router>
         )
