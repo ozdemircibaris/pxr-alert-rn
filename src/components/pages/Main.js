@@ -69,15 +69,14 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   greetingText: {
-    marginTop: 20,
     marginLeft: 20,
     fontSize: responsiveSize(15)
   },
   greetingContainer: {
-    marginTop: 20
+    marginTop: 5
   },
   containerText: {
-    marginTop: 5,
+    marginTop: 0,
     marginLeft: 20,
     fontSize: responsiveSize(14)
   },
@@ -132,24 +131,20 @@ const styles = StyleSheet.create({
     alignSelf: "center"
   },
   buttonView:{
-    marginTop:5,
-    borderWidth: 0,
-    height: 0,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   submitButton: {
     height: PhoneHeight * 0.082,
     width: PhoneWidth * 0.15,
     borderRadius: 30,
     borderWidth: 1,
-    borderColor: '#fff',
-    marginTop: 15
+    borderColor: '#fff'
   },
   TextStyle: {
     alignSelf:'center',
-    width: responsiveSize(50), //buton size ı için responsive kullandık 
-    height: responsiveSize(50),
-    marginTop:15
+    width: responsiveSize(45),
+    height: responsiveSize(45),
+    marginTop:20
   }
 });
 

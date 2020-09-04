@@ -10,11 +10,11 @@ export default class SignIn extends Component {
     fullName: '',
     email: '',
     password: '',
-    phoneToken: 'zeynep123'
+    phoneToken: 'zeynep12'
   };
   
   signUp = () => {
-    axios.post('http://185.171.90.223:3000/users/signup', {
+    axios.post('http://pxralert.ozdemircibaris.xyz/api/v1/users/signup', {
       fullName: this.state.fullName,
       email: this.state.email,
       password: this.state.password,

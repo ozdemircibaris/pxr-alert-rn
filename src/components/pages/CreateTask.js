@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Button,Platform, Text,TextInput,View ,TouchableOpacity,StyleSheet,Image, ImageBackground} from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment'
 import 'moment/dist/locale/tr';
@@ -16,13 +15,12 @@ export default class SignIn extends Component {
 
   onChange = (event, selectedDate) => this.setState({ dateValue: selectedDate });
 
-
   showDate = () => this.setState({ pickerMode: "date", show: true, })
   showTime = () => this.setState({ pickerMode: "time", show: true, });
   
     render() {
       const { show, dateValue, pickerMode } = this.state
-      console.log(dateValue);
+      // console.log("dateValue", moment(dateValue).format("LLL"));
       return (
         <View style={styles.background}>
           <View style={styles.header}>
@@ -53,7 +51,7 @@ export default class SignIn extends Component {
                 mode={pickerMode}
                 is24Hour={true}
                 display="spinner"
-                onChange={()=> this.onChange} 
+                onChange={this.onChange}   
               />
             )}
           </View>
@@ -67,7 +65,6 @@ export default class SignIn extends Component {
       )
     }
 }
-
 const styles = StyleSheet.create({
     background: {
       flex: 1,
