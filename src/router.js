@@ -9,23 +9,33 @@ import Page3 from './components/pages/Page3';
 import Users from './components/pages/Users';
 import CreateTask from './components/pages/CreateTask';
 
-
 export default class RouterComp extends Component {
  render() {
       return (
             <Router>
                 <Stack key="root" hideNavBar >
                     <Stack  key="auth" >
+<<<<<<< HEAD
+                        <Scene 
+=======
                         <Scene hideNavBar
+>>>>>>> 9c5fb88634490b052f04bc0cbeca802a96cfce5a
                             key="signIn"
                             component={SignIn}
                         />
-                        <Scene  initial hideNavBar      
+                        <Scene hideNavBar      
                             key="signUp"
                             component={SignUp} 
         
                         />
                     </Stack>
+<<<<<<< HEAD
+                    <Stack initial key="main" hideNavBar>
+                        <Drawer drawerWidth={250} contentComponent={SideBar}>        
+                                <Scene initial key="Main" component={Main}/>
+                                <Scene key="page2" component={Page2}/>
+                                <Scene key="page3" component={Page3}/>
+=======
                     <Stack  key="main" hideNavBar>
                         <Drawer  drawerWidth={250} contentComponent={SideBar}>        
                                 <Scene  key="Main" component={Main}/>
@@ -38,6 +48,7 @@ export default class RouterComp extends Component {
                                 <Scene key="page2" component={Page2}  />
                                 <Scene  key="page3" component={Page3}  />
                           
+>>>>>>> 9c5fb88634490b052f04bc0cbeca802a96cfce5a
                         </Drawer>
                     </Stack>    
 

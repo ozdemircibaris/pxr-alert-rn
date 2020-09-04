@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Button,Platform, Text,TextInput,View ,TouchableOpacity,StyleSheet,Image, ImageBackground} from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import LinearGradient from 'react-native-linear-gradient';
 import { PhoneHeight,PhoneWidth,responsiveSize } from '../config/env';
 

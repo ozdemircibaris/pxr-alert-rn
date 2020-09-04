@@ -70,15 +70,18 @@ const styles = StyleSheet.create({
     borderWidth: 0
   },
   greetingText: {
-    marginTop: 20,
     marginLeft: 20,
     fontSize: responsiveSize(15)
   },
   greetingContainer: {
+<<<<<<< HEAD
+    marginTop: 5
+=======
     marginTop: 0
+>>>>>>> 9c5fb88634490b052f04bc0cbeca802a96cfce5a
   },
   containerText: {
-    marginTop: 5,
+    marginTop: 0,
     marginLeft: 20,
     fontSize: responsiveSize(14)
   },
@@ -133,16 +136,22 @@ const styles = StyleSheet.create({
     alignSelf: "center"
   },
   buttonView:{
-    marginTop:5,
-    borderWidth: 0,
-    height: 0,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   submitButton: {
     height: PhoneHeight * 0.082,
     width: PhoneWidth * 0.15,
     borderRadius: 30,
     borderWidth: 1,
+<<<<<<< HEAD
+    borderColor: '#fff'
+  },
+  TextStyle: {
+    alignSelf:'center',
+    width: responsiveSize(45),
+    height: responsiveSize(45),
+    marginTop:20
+=======
     borderColor: '#fff',
     marginTop: 10
   },
@@ -151,6 +160,7 @@ const styles = StyleSheet.create({
     width: responsiveSize(50), //buton size ı için responsive kullandık 
     height: responsiveSize(50),
     marginTop: 5
+>>>>>>> 9c5fb88634490b052f04bc0cbeca802a96cfce5a
   }
 });
 
