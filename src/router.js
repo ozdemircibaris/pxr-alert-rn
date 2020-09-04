@@ -9,7 +9,6 @@ import Page3 from './components/pages/Page3';
 import Users from './components/pages/Users';
 import CreateTask from './components/pages/CreateTask';
 
-
 export default class RouterComp extends Component {
  render() {
       return (
