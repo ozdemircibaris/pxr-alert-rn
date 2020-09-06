@@ -1,180 +1,166 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, ImageBackground, Image, Button, TouchableOpacity } from 'react-native';
-// import Header from '../leftBar/Header';
+import { StyleSheet, View, Text, ImageBackground, Image, Button, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Actions } from 'react-native-router-flux';
 import { color } from 'react-native-reanimated';
-// import { TouchableOpacity } from 'react-native-gesture-handler';
+import { PhoneWidth, PhoneHeight, responsiveSize } from '../config/env';
+
+const mission = [
+  { id: "1", title: "Çöp At", body: "Ofisten çıkmadan önce tüm çöpleri at", color: "#FFA1AC" },
+  { id: "2", title: "Temizlik", body: "Yarın toplu temizlik yapılacak.", color: "#ff78" },
+  { id: "3", title: "Hatırlatma", body: "Birlikte yapılacak işi unutma.!!", color: "#A2D5F2" },
+  { id: "4", title: "Randevu", body: "Birazdan müşteri görüşmesi var. Unutma!", color: "#C3AED6" },
+  { id: "5", title: "Bulaşıkları Yıka", body: "Ofise geldiğinde bulaşıkları yıkamayı unutma", color: "#ADE498" },
+  { id: "6", title: "İş", body: "Yarına yetiştirilecek iş var unutma.", color: "#FFBB91" },
+  { id: "7", title: "Toplantı", body: "Yarın saat 2:00' de toplantı var unutma unutturma.", color: "#FF847C" },
+];
+
+const Item = ({ title, body, color }) => (
+  <View style={styles.taskBox} >
+    <View style={styles.categoryColorView}>
+      <View style={styles.hr}>
+        <View style={styles.circle} backgroundColor={color}></View>
+      </View>
+    </View>
+    <TouchableOpacity style={styles.taskBodyBox}>
+      <Text>{title}</Text>
+      <Text>{body}</Text>
+    </TouchableOpacity>
+  </View>
+);
 
 export default class Main extends Component {
   constructor(props) {
     super(props);
   }
+  missionRenderItem = ({ item }) => (
+    <Item title={item.title} body={item.body} color={item.color} />
+  );
+
   render() {
-
-
     return (
-
       <View style={styles.container}>
-        <Text style={styles.containertext}>Merhaba Murat.</Text>
-        <Text style={styles.containertext}>Sana kitlenenler burda</Text>
-
-
-        <View style={styles.missionFirst}></View>
-        <View style={styles.body}>
-          <View style={styles.a}>
-            <View style={styles.hr}></View>
-            <View style={styles.circle} backgroundColor="#ffff7f"></View>
-            <View style={styles.mission}>
-              <View style={styles.categoryColor} backgroundColor="#ffff7f" ></View>
-            </View>
-          </View>
-          <View style={styles.a}>
-            <View style={styles.hr}></View>
-            <View style={styles.circle} backgroundColor="#aaaaff"></View>
-            <View style={styles.mission}>
-              <View style={styles.categoryColor} backgroundColor="#aaaaff" ></View>
-            </View>
-          </View>
-          <View style={styles.a}>
-            <View style={styles.hr}></View>
-            <View style={styles.circle} backgroundColor="#ffaaff"></View>
-            <View style={styles.mission}>
-              <View style={styles.categoryColor} backgroundColor="#ffaaff" ></View>
-            </View>
-          </View>
+        <View style={styles.greetingContainer}>
+          <Text style={styles.greetingText}>Merhaba Murat.</Text>
+          <Text style={styles.containerText}>Sana kitlenenler burda</Text>
         </View>
-        <View style={styles.end}></View>
-        <TouchableOpacity
-          style={styles.SubmitButtonStyle}
-          activeOpacity={.5}>
-
-          <Text style={styles.TextStyle}> + </Text>
-
-        </TouchableOpacity>
+        <View style={styles.currentTask}></View>
+        <View style={styles.body}>
+          <FlatList
+            data={mission}
+            renderItem={this.missionRenderItem}
+            keyExtractor={item => item.id}
+          />
+        </View>
+        <View style={styles.buttonView}>
+          <TouchableOpacity
+            style={styles.submitButton}
+            activeOpacity={.5}>
+              <Image style ={styles.TextStyle} source={require('../../images/plus.png')}/>
+          </TouchableOpacity>
+        </View>
       </View>
-
     );
   }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    // justifyContent: 'center',
-    // margin: 10,
-    backgroundColor: '#ffffff',
-    // alignItems: 'center'
-
-  },
-  missionFirst: {
-    backgroundColor: 'cyan',
-    width: 280,
-    height: 160,
-    borderColor: 'white',
-    borderWidth: 1,
-    top: 45,
-    left: 72,
-    borderRadius: 10
-  },
-  mission: {
-    width: 230,
-    height: 70,
-    borderWidth: 1,
-    borderColor: '#d8d8d8',
-    left: 85,
-
-  },
-  containertext: {
-    left: 40,
-    fontWeight: 'bold',
-    top: 10
-  },
-  // title: {
-  //   color: 'white',
-  //   left: 50,
-  //   fontSize: 25,
-  //   top: 6
-  // },
-  // text: {
-  //   color: 'white',
-  //   left: 30,
-  //   top: 10,
-
-  // },
-  body: {
-    backgroundColor: 'white',
-    // flexDirection: 'column',
-    // alignItems: 'center',
-    // justifyContent: 'space-between',
-    // borderWidth: 1,
-    width: 412,
-    height: 290,
-    top: 75,
-    padding: 20
-  },
-  linearGradient: {
-    flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderRadius: 5
-  },
-
-  end: {
-    flexDirection: 'row',
-    width: 412,
-    borderTopWidth: 1,
-    borderTopColor: '#d8d8d8',
-    justifyContent: 'center',
-    // alignItems: '',
-    top: 90
-  },
-  SubmitButtonStyle: {
-    height: 50,
-    width: 50,
-    backgroundColor: '#4d6af9',
-    borderRadius: 30,
-    borderWidth: 1,
-    borderColor: '#fff',
-    left: 180,
-    top: 65
-  },
-  TextStyle: {
-    color: '#fff',
-    textAlign: 'center',
-  },
-  categoryColor: {
-    borderWidth: 0,
-    height: 12,
-    width: 12,
-    // backgroundColor:'purple',
-    borderRadius: 20,
-    top: 45,
-    left: 10
-  },
-  a: {
-    flexDirection: 'row',
-    // borderWidth:1,
-    height: 90,
     borderWidth: 0
   },
-  hr:{
-    width:0,
-    height:90,
-    borderWidth:1,
-    left: 80,
-    borderColor: '#d9d9d9',
-    left: 60
+  greetingText: {
+    marginLeft: 20,
+    fontSize: responsiveSize(15)
   },
-  circle:{
+  greetingContainer: {
+<<<<<<< HEAD
+    marginTop: 5
+=======
+    marginTop: 0
+>>>>>>> 9c5fb88634490b052f04bc0cbeca802a96cfce5a
+  },
+  containerText: {
+    marginTop: 0,
+    marginLeft: 20,
+    fontSize: responsiveSize(14)
+  },
+  currentTask: {
+    backgroundColor: 'pink',
+    alignSelf: "center",
+    width: PhoneWidth * 0.65,
+    height: PhoneHeight * 0.20,
+    borderRadius: 10,
+    marginTop: 20
+  },
+  body: {
+    marginTop: 20,
+    height: PhoneHeight * 0.40,
+    paddingLeft: 20,
+    borderWidth:0
+  },
+  taskBox: {
+    flex: 0,
+    flexDirection: 'row',
+    height: PhoneHeight * 0.13,
+    width: PhoneWidth * 0.75,
+    marginLeft: 20
+  },
+  taskBodyBox: {
+    width: PhoneWidth * 0.57,
+    height: PhoneHeight * 0.10,
     borderWidth: 1,
-    width:12,
-    height: 12,
+    borderColor: '#d8d8d8',
+    marginLeft: 20,
+    marginTop: 0
+  },
+  categoryColorView: {
+    marginLeft: 20,
+  },
+  hr: {
+    width: 1,
+    height: PhoneHeight * 0.132,
+    borderWidth: 1,
+    marginLeft: 20,
+    borderColor: 'black',
+    alignItems: "center",
+    borderColor: '#d9d9d9'
+  },
+  circle: {
+    borderWidth: 1,
+    height: PhoneHeight * 0.02,
+    width: PhoneWidth * 0.035,
     borderRadius: 20,
     borderColor: '#d8d8d8',
-    left:53,
-    top:35
+    left: 0,
+    alignSelf: "center"
+  },
+  buttonView:{
+    alignItems: 'center',
+  },
+  submitButton: {
+    height: PhoneHeight * 0.082,
+    width: PhoneWidth * 0.15,
+    borderRadius: 30,
+    borderWidth: 1,
+<<<<<<< HEAD
+    borderColor: '#fff'
+  },
+  TextStyle: {
+    alignSelf:'center',
+    width: responsiveSize(45),
+    height: responsiveSize(45),
+    marginTop:20
+=======
+    borderColor: '#fff',
+    marginTop: 10
+  },
+  TextStyle: {
+    alignSelf:'center',
+    width: responsiveSize(50), //buton size ı için responsive kullandık 
+    height: responsiveSize(50),
+    marginTop: 5
+>>>>>>> 9c5fb88634490b052f04bc0cbeca802a96cfce5a
   }
 });
 

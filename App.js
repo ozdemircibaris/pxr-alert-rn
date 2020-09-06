@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import RouterComp from './src/router';
-import messaging from '@react-native-firebase/messaging';
 import OneSignal from 'react-native-onesignal'; // Import package from node modules
 
 
