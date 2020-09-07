@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { emailChange, passwordChange } from '../../actions/exampleAction';
+import { emailChange, passwordChange, buttonClicked} from '../../actions/exampleAction';
 import { zsuInputChange } from '../../actions/zsuAction';
 import { PhoneWidth, PhoneHeight } from '../config/env';
 
 class Examples extends Component {
     onEmailChanged    = (value) => this.props.emailChange(value)
     onPasswordChanged = (value) => this.props.passwordChange(value)
+    buttonClicked = (event) => this.props.buttonClicked(event);
     render() {
     const { emailValue, passwordValue, zsuInputValue } = this.props;
-    console.log(this.props)
+    // console.log(this.props)
         return (
             <View style={styles.container}>
                 <Text style={styles.topTitle}> Barbie App </Text>
@@ -26,6 +27,7 @@ class Examples extends Component {
                         placeholder="password" />
 
                     <TouchableOpacity
+                        onPress = { (event) => this.props.buttonClicked(event) }
                         style={styles.signIn}>
                         <Text style={styles.buttonTitle}> Sign in</Text>
                     </TouchableOpacity>
@@ -81,6 +83,7 @@ export default connect(
     {
         emailChange,
         passwordChange,
-        zsuInputChange
+        zsuInputChange,
+        buttonClicked
     }
 )(Examples)

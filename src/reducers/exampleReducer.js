@@ -1,6 +1,7 @@
 import {
     EMAIL_CHANGE,
-    PASSWORD_CHANGE
+    PASSWORD_CHANGE,
+    BUTTON_CLICKED
 } from "../actions/exampleAction";
 
 const INITIAL_STATE = {
@@ -19,6 +20,10 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 passwordValue: action.payload
+            }
+        case BUTTON_CLICKED:
+            return {
+                ...state,
             }
         default:
             return state;
