@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { Provider } from 'react-redux';
+import { applyMiddleware, createStore } from 'redux';
+import ReduxThunk from 'redux-thunk';
+import rootReducer from './src/reducers/rootReducer';
 import RouterComp from './src/router';
 import OneSignal from 'react-native-onesignal'; // Import package from node modules
 
@@ -104,6 +107,11 @@ export default class App extends Component {
   //   // });
   // }
   render() {
-    return (<RouterComp />)
+    const store = createStore(rootReducer, {}, applyMiddleware(ReduxThunk))
+    return (
+      <Provider store={store}>
+        <RouterComp />
+      </Provider>
+    )
   }
 }

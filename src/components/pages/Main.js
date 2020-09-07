@@ -74,11 +74,7 @@ const styles = StyleSheet.create({
     fontSize: responsiveSize(15)
   },
   greetingContainer: {
-<<<<<<< HEAD
     marginTop: 5
-=======
-    marginTop: 0
->>>>>>> 9c5fb88634490b052f04bc0cbeca802a96cfce5a
   },
   containerText: {
     marginTop: 0,
@@ -143,7 +139,6 @@ const styles = StyleSheet.create({
     width: PhoneWidth * 0.15,
     borderRadius: 30,
     borderWidth: 1,
-<<<<<<< HEAD
     borderColor: '#fff'
   },
   TextStyle: {
@@ -151,16 +146,6 @@ const styles = StyleSheet.create({
     width: responsiveSize(45),
     height: responsiveSize(45),
     marginTop:20
-=======
-    borderColor: '#fff',
-    marginTop: 10
-  },
-  TextStyle: {
-    alignSelf:'center',
-    width: responsiveSize(50), //buton size ı için responsive kullandık 
-    height: responsiveSize(50),
-    marginTop: 5
->>>>>>> 9c5fb88634490b052f04bc0cbeca802a96cfce5a
   }
 });
 
