@@ -22,7 +22,9 @@ const Item = ({ title, body, color }) => (
         <View style={styles.circle} backgroundColor={color}></View>
       </View>
     </View>
-    <TouchableOpacity style={styles.taskBodyBox}>
+    <TouchableOpacity 
+      onPress={() => Actions.CreateTask({newTaskStatus: 'own'})}
+      style={styles.taskBodyBox}>
       <Text>{title}</Text>
       <Text>{body}</Text>
     </TouchableOpacity>
@@ -33,11 +35,29 @@ export default class Main extends Component {
   constructor(props) {
     super(props);
   }
-  missionRenderItem = ({ item }) => (
-    <Item title={item.title} body={item.body} color={item.color} />
-  );
+  // missionRenderItem = ({ item }) => (
+  //   <Item title={item.title} body={item.body} color={item.color} item={item}/>
+  // );
+  missionRenderItem = ({ item }) => {
+    return(
+      <View style={styles.taskBox} >
+    <View style={styles.categoryColorView}>
+      <View style={styles.hr}>
+        <View style={styles.circle} backgroundColor={item.color}></View>
+      </View>
+    </View>
+    <TouchableOpacity 
+      onPress={() => Actions.CreateTask({newTaskStatus: 'other', task: {item}})}
+      style={styles.taskBodyBox}>
+      <Text>{item.title}</Text>
+      <Text>{item.body}</Text>
+    </TouchableOpacity>
+  </View>
+    )
+    };
 
   render() {
+    // console.log(mission);
     return (
       <View style={styles.container}>
         <View style={styles.greetingContainer}>
@@ -53,7 +73,7 @@ export default class Main extends Component {
           />
         </View>
         <View style={styles.buttonView}>
-          <TouchableOpacity
+          <TouchableOpacity onPress={() => Actions.CreateTask({task: ""})}
             style={styles.submitButton}
             activeOpacity={.5}>
               <Image style ={styles.TextStyle} source={require('../../images/plus.png')}/>
@@ -67,18 +87,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    borderWidth: 0
   },
   greetingText: {
     marginLeft: 20,
     fontSize: responsiveSize(15)
   },
   greetingContainer: {
-<<<<<<< HEAD
     marginTop: 5
-=======
-    marginTop: 0
->>>>>>> 9c5fb88634490b052f04bc0cbeca802a96cfce5a
   },
   containerText: {
     marginTop: 0,
@@ -143,7 +158,6 @@ const styles = StyleSheet.create({
     width: PhoneWidth * 0.15,
     borderRadius: 30,
     borderWidth: 1,
-<<<<<<< HEAD
     borderColor: '#fff'
   },
   TextStyle: {
@@ -151,16 +165,6 @@ const styles = StyleSheet.create({
     width: responsiveSize(45),
     height: responsiveSize(45),
     marginTop:20
-=======
-    borderColor: '#fff',
-    marginTop: 10
-  },
-  TextStyle: {
-    alignSelf:'center',
-    width: responsiveSize(50), //buton size ı için responsive kullandık 
-    height: responsiveSize(50),
-    marginTop: 5
->>>>>>> 9c5fb88634490b052f04bc0cbeca802a96cfce5a
   }
 });
 
