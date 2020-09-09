@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { PhoneHeight } from '../config/env';
+import { PhoneHeight, responsiveSize, PhoneWidth } from '../config/env';
 
 export default class SideBar extends Component {
     constructor(props) {
@@ -10,21 +10,21 @@ export default class SideBar extends Component {
   render() {
     return (
        <View style ={styles.outContainer}>
-           <View style = {styles.container}>
-               <View style = {styles.deneme}>
-                <View style = {styles.textView}>
-                   <TouchableOpacity onPress={() => Actions.Main()}><Text style = {styles.title}> Home </Text></TouchableOpacity> 
-                </View>
-                <View style = {styles.textView}>
-                   <TouchableOpacity onPress={() => Actions.page2()}><Text style = {styles.title}> Kart Ekle </Text></TouchableOpacity> 
-                </View>
-                <View style = {styles.textView}>
-                   <TouchableOpacity onPress={() => Actions.page3()}><Text style = {styles.title}> Bana Gelen Görevler </Text></TouchableOpacity> 
-                </View>
-                <View style = {styles.textView}>
-                    <TouchableOpacity onPress={() => Actions.drawerClose()}><Text style = {styles.title}> Back </Text></TouchableOpacity> 
-                </View>
-            </View>
+         <View style = {styles.inContainer}>
+               <View style = {styles.textView}>
+                  <TouchableOpacity onPress={() => Actions.Main()}><Text style = {styles.title}> Anasayfa </Text></TouchableOpacity> 
+               </View>
+               <View style = {styles.textView}>
+                  <TouchableOpacity onPress={() => Actions.CreateTask({newTaskStatus: 'newCard', task: ""})}><Text style = {styles.title}> Kart Ekle </Text></TouchableOpacity> 
+               </View>
+               <View style = {styles.textView}>
+                  <TouchableOpacity onPress={() => Actions.page3()}><Text style = {styles.title}> Bana Gelen Görevler </Text></TouchableOpacity> 
+               </View>
+               <View style={styles.logOutContainer}>
+                  <TouchableOpacity onPress={() => Actions.goToLogin()}>
+                     <Text style={styles.logOutText}>ÇIKIŞ YAP</Text>
+                  </TouchableOpacity>
+               </View>
          </View>
        </View>       
       );
@@ -32,31 +32,40 @@ export default class SideBar extends Component {
 }
 
 let styles = StyleSheet.create({
-    container: {
-        flexDirection: 'column',
-        flex:1,
-
-        justifyContent:'space-between'
-
-
+   outContainer: {
+      flexDirection: 'column',
+      flex: 1,
+      backgroundColor: "white"
+     },
+     inContainer:{
+      backgroundColor: 'white',
+      width: "95%",
+      flexDirection: "column",
+      height: "100%",
+      marginTop: "20%"
+      // justifyContent: "center"
      },
      textView:{
-        height: PhoneHeight * 0.05 ,
-        width:'100%',
-        alignItems: 'center',
-        backgroundColor:'#852e4c',
-        borderRadius:10,
-        justifyContent:'space-between'
+      width: PhoneWidth * 0.55,
+      height: PhoneHeight * 0.050,
+      marginTop: 20,
+      borderTopLeftRadius: 0,
+      borderTopLeftRadius: 0,
+      borderTopRightRadius: 5,
+      borderBottomRightRadius: 5,
+      backgroundColor: "#852e4c",
+      justifyContent: "center",
      },
      title:{
-        backgroundColor:'#852e4c',
-        fontSize:18,
-        justifyContent:'space-between'
+      fontSize: responsiveSize(12),
+      color: "white",
+      marginLeft: 5
+     },
+     logOutContainer:{
+        alignSelf: "center",
+        top: "50%"
+     },
+     logOutText:{
+        fontSize: responsiveSize(13)
      }
-     ,deneme:{
-        backgroundColor:'green',
-        marginTop:'25%',
-        justifyContent:'space-between'
-
-     }   
 });

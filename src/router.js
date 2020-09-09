@@ -4,11 +4,11 @@ import SignIn from './components/authentication/signIn';
 import SignUp from './components/authentication/signUp';
 import SideBar from './components/helpComponents/sideBar';
 import Main from './components/pages/Main';
-import Page2 from './components/pages/Page2';
 import Page3 from './components/pages/Page3';
 import Users from './components/pages/Users';
 import CreateTask from './components/pages/CreateTask';
 import Examples from './components/pages/examples';
+
 
 export default class RouterComp extends Component {
  render() {
@@ -16,6 +16,9 @@ export default class RouterComp extends Component {
             <Router>
                 <Stack key="root" hideNavBar initial >
                     <Stack  key="auth" initial>
+                <Stack key="root" hideNavBar >
+                    <Stack  key="auth" >
+                        <Scene 
                         <Scene hideNavBar
                             key="signIn"
                             component={SignIn}
@@ -27,6 +30,27 @@ export default class RouterComp extends Component {
                         />
                     </Stack>
                     <Stack  key="main">
+                    <Stack initial  key="main" hideNavBar>
+                        <Drawer contentComponent={SideBar} >        
+                                <Scene initial key="Main" component={Main}/>
+                                <Scene key="page3" component={Page3}/>
+                        </Drawer>
+                    </Stack>    
+                    <Scene key="goToLogin"
+                        component={SignIn}
+                        title="Giriş Yap">       
+                    </Scene>
+                    <Scene key="goToSignUp"
+                        component={SignUp}
+                        title="Üye ol">       
+                    </Scene>
+                    <Scene 
+                        key="CreateTask"
+                        component={CreateTask}
+                        title="Yeni İş Kitle">
+                    </Scene>
+                    <Scene key="Users" component={Users} />
+                    <Stack initial key="main">
                         <Drawer contentComponent={SideBar} hideNavBar>
                             <Scene
                                 key="Main"
