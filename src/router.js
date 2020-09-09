@@ -7,7 +7,6 @@ import Main from './components/pages/Main';
 import Page3 from './components/pages/Page3';
 import Users from './components/pages/Users';
 import CreateTask from './components/pages/CreateTask';
-import Examples from './components/pages/examples';
 
 
 export default class RouterComp extends Component {
@@ -28,12 +27,12 @@ export default class RouterComp extends Component {
                         />
                     </Stack>
                     
-                    <Stack initial  key="main" hideNavBar>
+                    {/* <Stack initial  key="main" hideNavBar>
                         <Drawer contentComponent={SideBar} >        
                             <Scene initial key="Main" component={Main}/>
                             <Scene key="page3" component={Page3}/>
                         </Drawer>
-                    </Stack>    
+                    </Stack>     */}
         
                     <Scene 
                         key="CreateTask"
@@ -41,17 +40,17 @@ export default class RouterComp extends Component {
                         title="Yeni İş Kitle">
                     </Scene>
                     <Scene key="Users" component={Users} />
-                    <Stack initial key="main">
+                    <Stack  key="main" initial hideNavBar>
                         <Drawer contentComponent={SideBar} hideNavBar>
-                            <Scene
+                            <Scene 
                                 key="Main"
                                 component={Main} />
-                            <Scene key="page2" component={Page2} />
-                            <Scene key="page3" component={Page3} />
+                            <Scene key="page3" component={Page3} initial />
+                      
                         </Drawer>
             
                         <Scene key="Users" component={Users} />
-                        <Scene  key="examples" component={Examples} />
+                        
                     </Stack>
                 </Stack>
             </Router>

@@ -44,13 +44,13 @@ render() {
       <Text style={styles.greetingtext}>Merhaba Murat.</Text>
         <Text style={styles.containertext}>Sana kitlenenler burda</Text>
 
-          <ScrollView>
+          
             <FlatList style = {styles.missions}
                 data={mission}
                 renderItem={this.missionRenderItem}
                 keyExtractor={item => item.id}
               />
-          </ScrollView>
+          
       </View>
       <View style={styles.end}></View>
         <TouchableOpacity
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
 
   },infoTxt:{
     alignSelf:'center',
-    paddingTop:'5%',
+    paddingTop:'6%',
   },
   missionBodyBox: {
     width:PhoneWidth * 0.8,
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   }
   ,greetingtext:{
     fontSize:14,
-    paddingTop:6,
+    paddingTop:15,
   },
   titleTxt:{
     paddingTop:'10%',
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     padding:10
   },
   SubmitButtonStyle:{
-    paddingTop:'8%'
+    paddingTop:'1%'
   }
   
   

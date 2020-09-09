@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   },
   body: {
     marginTop: 20,
-    height: PhoneHeight * 0.40,
+    height: PhoneHeight * 0.45,
     paddingLeft: 20,
     borderWidth:0
   },
@@ -125,10 +125,10 @@ const styles = StyleSheet.create({
   taskBodyBox: {
     width: PhoneWidth * 0.57,
     height: PhoneHeight * 0.10,
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderColor: '#d8d8d8',
     marginLeft: 20,
-    marginTop: 0,
+    marginTop:0,
     
 
   },
@@ -161,7 +161,8 @@ const styles = StyleSheet.create({
     width: PhoneWidth * 0.15,
     borderRadius: 30,
     borderWidth: 1,
-    borderColor: '#fff'
+    borderColor: '#fff',
+    marginTop:0
   },
   TextStyle: {
     alignSelf:'center',
