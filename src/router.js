@@ -14,12 +14,10 @@ export default class RouterComp extends Component {
  render() {
       return (
             <Router>
-                <Stack key="root" hideNavBar initial >
                     <Stack  key="auth" initial>
                 <Stack key="root" hideNavBar >
-                    <Stack  key="auth" >
-                        <Scene 
-                        <Scene hideNavBar
+                 
+                       <Scene hideNavBar
                             key="signIn"
                             component={SignIn}
                         />
@@ -29,21 +27,14 @@ export default class RouterComp extends Component {
                             component={SignUp}
                         />
                     </Stack>
-                    <Stack  key="main">
+                    
                     <Stack initial  key="main" hideNavBar>
                         <Drawer contentComponent={SideBar} >        
-                                <Scene initial key="Main" component={Main}/>
-                                <Scene key="page3" component={Page3}/>
+                            <Scene initial key="Main" component={Main}/>
+                            <Scene key="page3" component={Page3}/>
                         </Drawer>
                     </Stack>    
-                    <Scene key="goToLogin"
-                        component={SignIn}
-                        title="Giriş Yap">       
-                    </Scene>
-                    <Scene key="goToSignUp"
-                        component={SignUp}
-                        title="Üye ol">       
-                    </Scene>
+        
                     <Scene 
                         key="CreateTask"
                         component={CreateTask}
@@ -58,12 +49,7 @@ export default class RouterComp extends Component {
                             <Scene key="page2" component={Page2} />
                             <Scene key="page3" component={Page3} />
                         </Drawer>
-                
-                        <Scene
-                            
-                            key="CreateTask"
-                            component={CreateTask}
-                            title="Yeni İş Kitle" />
+            
                         <Scene key="Users" component={Users} />
                         <Scene  key="examples" component={Examples} />
                     </Stack>
