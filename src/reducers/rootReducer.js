@@ -1,8 +1,6 @@
 import { combineReducers } from "redux";
-import  ExampleReducer from './exampleReducer';
-import ZSUReducer from './zsuReducer';
+import  authenticationReducer from '../reducers/authenticationReducer';
 
 export default combineReducers({
-    ExampleReducer,
-    ZSUReducer,
+    authenticationReducer
 })

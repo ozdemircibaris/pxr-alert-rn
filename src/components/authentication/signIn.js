@@ -4,29 +4,21 @@ import { Actions } from 'react-native-router-flux'
 import LinearGradient from 'react-native-linear-gradient';
 import {PhoneWidth , PhoneHeight, responsiveSize} from '../config/env';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { fullNameChange,emailChange, passwordChange ,signInClicked} from '../../actions/authenticationAction';
  
 
-export default class SignIn extends Component {
+export class SignIn extends Component {
 
   constructor(props) {
     super(props);
     this.state = {email:'',password:''};
     }
-
-signIn=()=> { //when the user press the button it will work.
-  axios.post('http://185.171.90.223:3000/users/signin', {
-    email: this.state.email,
-    password: this.state.password,
-  })
-  .then((response) => {
-    console.log(response);
-    Actions.Main();
-  })
-  .catch(error => {
-    alert('hatalı şifre veya email')
-    console.log(error);
-  });
-}
+ 
+    onEmailChanged    = (value) => this.props.emailChange(value)
+    onPasswordChanged = (value) => this.props.passwordChange(value)
+    onSignIn = () => this.props.signInClicked(this.props.emailValue, this.props.passwordValue)
+    
     render() {
         return (
 <View style = {styles.container}>
@@ -49,7 +41,7 @@ signIn=()=> { //when the user press the button it will work.
         />
       <View style ={styles.buttonBox}>
         <TouchableOpacity style={styles.LoginBtn}
-             onPress={()=> this.signIn()}>
+             onPress={()=> this.onSignIn()}>
           <Text style={styles.loginTxt}>Giriş Yap</Text>
         </TouchableOpacity>
       </View>
@@ -134,3 +126,22 @@ const styles = StyleSheet.create({
       fontSize:responsiveSize(13),
     }
   });
+
+const mapStateToProps = (state) => {
+  const {  emailValue, passwordValue } = state.authenticationReducer;
+  return {
+      emailValue,
+      passwordValue,
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  {
+      fullNameChange,
+      emailChange,
+      passwordChange,
+      signInClicked
+  
+  }
+)(SignIn)
