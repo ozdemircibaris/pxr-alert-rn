@@ -49,7 +49,7 @@ export default class Main extends Component {
     <TouchableOpacity 
       onPress={() => Actions.CreateTask({newTaskStatus: 'card', task: {item}})}
       style={styles.taskBodyBox}>
-      <Text style={styles.huseyin}>{item.title}</Text>
+      <Text style={styles.taskItemTitle}>{item.title}</Text>
       <Text>{item.body}</Text>
     </TouchableOpacity>
   </View>
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
     height: responsiveSize(45),
     marginTop:20
   },
-  huseyin:{
+  taskItemTitle:{
     fontWeight: "bold"
   }
 });
