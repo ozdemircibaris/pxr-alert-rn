@@ -6,13 +6,13 @@ import { color } from 'react-native-reanimated';
 import { PhoneWidth, PhoneHeight, responsiveSize } from '../config/env';
 
 const mission = [
-  { id: "1", title: "Çöp At", body: "Ofisten çıkmadan önce tüm çöpleri at", color: "#FFA1AC" },
-  { id: "2", title: "Temizlik", body: "Yarın toplu temizlik yapılacak.", color: "#ff78" },
-  { id: "3", title: "Hatırlatma", body: "Birlikte yapılacak işi unutma.!!", color: "#A2D5F2" },
+  { id: "1", title: "Hüseyin ve Murat Abiye Kahve", body: "Sabah gelince hüseyin ve murat abiye kahve yapılacak", color: "#FFA1AC" },
+  { id: "2", title: "Temizlik", body: "Yarın toplu temizlik yapılacak!", color: "#ff78" },
+  { id: "3", title: "Hatırlatma", body: "Birlikte yapılacak işi unutma!", color: "#A2D5F2" },
   { id: "4", title: "Randevu", body: "Birazdan müşteri görüşmesi var. Unutma!", color: "#C3AED6" },
-  { id: "5", title: "Bulaşıkları Yıka", body: "Ofise geldiğinde bulaşıkları yıkamayı unutma", color: "#ADE498" },
-  { id: "6", title: "İş", body: "Yarına yetiştirilecek iş var unutma.", color: "#FFBB91" },
-  { id: "7", title: "Toplantı", body: "Yarın saat 2:00' de toplantı var unutma unutturma.", color: "#FF847C" },
+  { id: "5", title: "Bulaşıkları Yıka", body: "Ofise geldiğinde bulaşıkları yıkamayı unutma!", color: "#ADE498" },
+  { id: "6", title: "İş", body: "Yarına yetiştirilecek iş var unutma!", color: "#FFBB91" },
+  { id: "7", title: "Toplantı", body: "Yarın saat 2:00'de toplantı var unutma,unutturma!", color: "#FF847C" },
 ];
 
 const Item = ({ title, body, color }) => (
@@ -22,7 +22,9 @@ const Item = ({ title, body, color }) => (
         <View style={styles.circle} backgroundColor={color}></View>
       </View>
     </View>
-    <TouchableOpacity style={styles.taskBodyBox}>
+    <TouchableOpacity 
+      onPress={() => Actions.CreateTask({newTaskStatus: 'own'})}
+      style={styles.taskBodyBox}>
       <Text>{title}</Text>
       <Text>{body}</Text>
     </TouchableOpacity>
@@ -33,11 +35,29 @@ export default class Main extends Component {
   constructor(props) {
     super(props);
   }
-  missionRenderItem = ({ item }) => (
-    <Item title={item.title} body={item.body} color={item.color} />
-  );
+  // missionRenderItem = ({ item }) => (
+  //   <Item title={item.title} body={item.body} color={item.color} item={item}/>
+  // );
+  missionRenderItem = ({ item }) => {
+    return(
+      <View style={styles.taskBox} >
+    <View style={styles.categoryColorView}>
+      <View style={styles.hr}>
+        <View style={styles.circle} backgroundColor={item.color}></View>
+      </View>
+    </View>
+    <TouchableOpacity 
+      onPress={() => Actions.CreateTask({newTaskStatus: 'card', task: {item}})}
+      style={styles.taskBodyBox}>
+      <Text style={styles.taskItemTitle}>{item.title}</Text>
+      <Text>{item.body}</Text>
+    </TouchableOpacity>
+  </View>
+    )
+    };
 
   render() {
+    // console.log(mission);
     return (
       <View style={styles.container}>
         <View style={styles.greetingContainer}>
@@ -53,7 +73,7 @@ export default class Main extends Component {
           />
         </View>
         <View style={styles.buttonView}>
-          <TouchableOpacity
+          <TouchableOpacity onPress={() => Actions.CreateTask({task: "", newTaskStatus: "newTask"})}
             style={styles.submitButton}
             activeOpacity={.5}>
               <Image style ={styles.TextStyle} source={require('../../images/plus.png')}/>
@@ -67,7 +87,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    borderWidth: 0
   },
   greetingText: {
     marginLeft: 20,
@@ -100,7 +119,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: PhoneHeight * 0.13,
     width: PhoneWidth * 0.75,
-    marginLeft: 20
+    marginLeft: 20,
+
   },
   taskBodyBox: {
     width: PhoneWidth * 0.57,
@@ -108,7 +128,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#d8d8d8',
     marginLeft: 20,
-    marginTop: 0
+    marginTop: 0,
+    
+
   },
   categoryColorView: {
     marginLeft: 20,
@@ -146,6 +168,9 @@ const styles = StyleSheet.create({
     width: responsiveSize(45),
     height: responsiveSize(45),
     marginTop:20
+  },
+  taskItemTitle:{
+    fontWeight: "bold"
   }
 });
 
