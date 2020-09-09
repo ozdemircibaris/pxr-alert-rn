@@ -3,6 +3,7 @@ import { Text, View, TextInput, TouchableOpacity, StyleSheet } from 'react-nativ
 import { connect } from 'react-redux';
 import { emailChange, passwordChange } from '../../actions/exampleAction';
 import { zsuInputChange } from '../../actions/zsuAction';
+import { buttonClicked } from '../../actions/buttonAction';
 import { PhoneWidth, PhoneHeight } from '../config/env';
 
 class Examples extends Component {
@@ -26,6 +27,7 @@ class Examples extends Component {
                         placeholder="password" />
 
                     <TouchableOpacity
+                     onPress={() => this.props.buttonClicked()}
                         style={styles.signIn}>
                         <Text style={styles.buttonTitle}> Sign in</Text>
                     </TouchableOpacity>
@@ -72,7 +74,8 @@ const mapStateToProps = (state) => {
     return {
         emailValue,
         passwordValue,
-        zsuInputValue
+        zsuInputValue,
+     
     }
 }
 
@@ -81,6 +84,8 @@ export default connect(
     {
         emailChange,
         passwordChange,
-        zsuInputChange
+        zsuInputChange,
+        buttonClicked
+        
     }
 )(Examples)

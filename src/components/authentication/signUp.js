@@ -2,33 +2,31 @@ import React, { Component } from 'react';
 import { Button,Text,TouchableOpacity,TextInput,View ,StyleSheet,Image, ImageBackground} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import LinearGradient from 'react-native-linear-gradient';
+import { connect } from 'react-redux';
 import { PhoneHeight,PhoneWidth,responsiveSize } from '../config/env';
+import { fullNameChange,emailChange, passwordChange ,signUpClicked} from '../../actions/authenticationAction';
 import axios from 'axios';
 
-export default class SignIn extends Component {
-  state = {
-    fullName: '',
-    email: '',
-    password: '',
-    phoneToken: 'zeynep12'
-  };
+class signUp extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      fullNameValue: "",
+      emailValue: "",
+      passwordValue: "",
+      phoneToken:"umutabcDff"
+      
+    }
+  }
+
+  onFullNameChanged = (value) => this.props.fullNameChange(value)
+  onEmailChanged    = (value) => this.props.emailChange(value)
+  onPasswordChanged = (value) => this.props.passwordChange(value)
+  onSignUp = () => this.props.signUpClicked(this.props.fullNameValue, this.props.emailValue, this.props.passwordValue)
   
-  signUp = () => {
-    axios.post('http://pxralert.ozdemircibaris.xyz/api/v1/users/signup', {
-      fullName: this.state.fullName,
-      email: this.state.email,
-      password: this.state.password,
-      phoneToken: this.state.phoneToken
-    })
-    .then(response => {
-      console.log(response);
-    })
-    .catch(error => {
-      console.log(error);
-    });
-    Actions.goToLogin();
-}
     render() {
+      const { emailValue, passwordValue, fullNameValue } = this.props;
         return (
           <View style={styles.background}>
             <Image style={styles.icon}
@@ -39,34 +37,26 @@ export default class SignIn extends Component {
                 style={styles.input}
                 placeholder='AD SOYAD'
                 placeholderTextColor='black'
-                onChangeText={(text)=>{
-                  this.setState({
-                      fullName:text
-                  })
-                }}
-                value={this.state.fullName}/>
+                onChangeText={(value) => this.props.fullNameChange(value)}
+                // value={this.state.fullName}
+                />
             <TextInput 
                 style={styles.input}
                 placeholder='E-POSTA'
                 placeholderTextColor='black'
-                onChangeText={(text) => {
-                  this.setState({
-                      email:text
-                  })
-                }}
-                value={this.state.email}/>
-             <TextInput 
+                onChangeText={(value) => this.props.emailChange(value)}
+                // value={this.state.email}
+                />
+             <TextInput
+             secureTextEntry 
                 style={styles.input}
                 placeholder='ŞİFRE'
                 placeholderTextColor='black'
-                onChangeText={(text) => {
-                  this.setState({
-                      password:text
-                  })
-                }}
-                value={this.state.password}/>            
+                onChangeText={(value) => this.props.passwordChange(value)}
+                // value={this.state.password}
+                />            
             <TouchableOpacity
-                onPress={() => this.signUp()} 
+                onPress={this.onSignUp}
                 style={styles.signUpButton}>
               <Text style={styles.signUpButtonText}> Kayıt Ol </Text> 
             </TouchableOpacity>
@@ -133,3 +123,22 @@ const styles = StyleSheet.create({
       color: "#852e4c"
     }
 });
+
+const mapStateToProps = (state) => {
+  const { fullNameValue, emailValue, passwordValue } = state.authenticationReducer;
+  return {
+      emailValue,
+      passwordValue,
+      fullNameValue
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  {
+      fullNameChange,
+      emailChange,
+      passwordChange,
+     signUpClicked
+  }
+)(signUp)
