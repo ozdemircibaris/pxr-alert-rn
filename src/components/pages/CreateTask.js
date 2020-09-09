@@ -10,6 +10,13 @@ import { PhoneHeight, PhoneWidth, responsiveSize } from '../config/env';
 export default class SignIn extends Component {
   state = {
     dateValue: new Date(),
+import 'moment/locale/tr';
+import { PhoneHeight,PhoneWidth,responsiveSize } from '../config/env';
+import DatePicker from 'react-native-datepicker'
+
+export default class SignIn extends Component {
+  state={
+    dateValue: moment().format('L'),
     pickerMode: 'date',
     show: false,
     modalVisible: false
@@ -96,12 +103,25 @@ export default class SignIn extends Component {
       )
     }else{
       return (
+  onChange = (event, selectedDate) => this.setState({ dateValue: selectedDate });
+
+  showDate = () => this.setState({ pickerMode: "date", show: true, })
+  showTime = () => this.setState({ pickerMode: "time", show: true, });
+
+  render() {
+    const { show, dateValue, pickerMode } = this.state
+    return (
+      <View style={styles.background}>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>Merhaba Murat.{"\n"}Birine iş kitlemek için harika bir gün!</Text>
+        </View>
         <View style={styles.container}>
           <TextInput
             style={styles.taskHeaderInput}
             placeholder="İşin Başlığı"
             value={this.props.task.item == null ? "" : this.props.task.item.title}
             placeholderTextColor='#852E4C'>
+            placeholderTextColor='#852e4c'>
           </TextInput>
           <TextInput
             style={styles.taskInfoInput}
@@ -110,6 +130,8 @@ export default class SignIn extends Component {
             placeholderTextColor='#852E4C'>
           </TextInput>
           
+            placeholderTextColor='#852e4c'>
+          </TextInput>
           <View style={styles.calendar}>
             <TouchableOpacity style={styles.dateButton} onPress={this.showDate}>
               <Text style={styles.dateButtonText}>Tarih</Text>
@@ -178,6 +200,40 @@ export default class SignIn extends Component {
         </View>
         <this.Deneme/>
       </View>
+        </View>
+        <DatePicker
+      style={{width: 200}}
+      date={this.state.dateValue}
+      mode="time"
+      placeholder="select date"
+      format={"DD.MM.YYYY"}
+      locale="tr"
+      minDate="01.01.2020"
+      maxDate="31.12.2020"
+      confirmBtnText="Confirm"
+      cancelBtnText="Cancel"
+
+      customStyles={{
+        dateIcon: {
+          position: 'absolute',
+          left: 0,
+          top: 4,
+          marginLeft: 0
+        },
+        dateInput: {
+          marginLeft: 36
+        }
+        // ... You can check the source to find the other keys.
+      }}
+      onDateChange={(date) => {this.setState({date: date})}}
+    />
+        <View style={styles.focusButtonContainer}>
+        <TouchableOpacity style={styles.focusButton}>
+            <Text style={styles.focusButtonText}>Hedefe Kitlen</Text>
+        </TouchableOpacity>
+        </View>
+        </View>
+      </View>  
     )
   }
 }
