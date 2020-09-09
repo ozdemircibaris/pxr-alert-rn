@@ -34,13 +34,6 @@ export const passwordChange = (value) => {
         payload: value
     }
 }
-// export const signUpClicked = () => {
-//     console.log("buton logu")
-//     Actions.signIn()
-//     return {
-//         type: SIGN_UP_CLICK
-//     }
-// }
 
 export const signUpClicked = (fullName, email, password) => {
     return dispatch => {
