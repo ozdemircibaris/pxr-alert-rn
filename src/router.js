@@ -25,8 +25,8 @@ export default class RouterComp extends Component {
         
                         />
                     </Stack>
-                    <Stack initial key="main" hideNavBar>
-                        <Drawer contentComponent={SideBar}>        
+                    <Stack initial  key="main" hideNavBar>
+                        <Drawer contentComponent={SideBar} >        
                                 <Scene initial key="Main" component={Main}/>
                                 <Scene key="page3" component={Page3}/>
                         </Drawer>

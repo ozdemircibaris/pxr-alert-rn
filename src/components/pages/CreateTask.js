@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Platform, Text, TextInput, View, TouchableOpacity, StyleSheet, Image, ImageBackground } from 'react-native';
+import { Button, Platform, Text, TextInput, View, TouchableOpacity, StyleSheet, Image, ImageBackground, Modal } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment'
@@ -7,30 +7,38 @@ import 'moment/dist/locale/tr';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { PhoneHeight, PhoneWidth, responsiveSize } from '../config/env';
 
-
-
-export default class CreateTask extends Component {
+export default class SignIn extends Component {
   state = {
     dateValue: new Date(),
     pickerMode: 'date',
     show: false,
+    modalVisible: false
   };
   Deneme = () => {
-    if (this.props.newTaskStatus == 'other') {
+    const { show, dateValue, pickerMode } = this.state
+    if (this.props.newTaskStatus == 'newTask') {
       return (
         <View style={styles.container}>
           <TextInput
             style={styles.taskHeaderInput}
             placeholder="İşin Başlığı"
             value={this.props.task.item == null ? "" : this.props.task.item.title}
-            placeholderTextColor='#852e4c'>
+            placeholderTextColor='#852E4C'>
           </TextInput>
           <TextInput
             style={styles.taskInfoInput}
             placeholder="İşin Tanımı"
             value={this.props.task.item == null ? "" : this.props.task.item.body}
-            placeholderTextColor='#852e4c'>
+            placeholderTextColor='#852E4C'>
           </TextInput>
+          <TouchableOpacity
+            style={styles.openButton}
+            onPress={() => {
+              this.setModalVisible(true);
+            }}
+          >
+            <Text style={styles.textStyle}>Kategori Seç</Text>
+          </TouchableOpacity>
           <View style={styles.calendar}>
             <TouchableOpacity style={styles.dateButton} onPress={this.showDate}>
               <Text style={styles.dateButtonText}>Tarih</Text>
@@ -38,7 +46,7 @@ export default class CreateTask extends Component {
             <TouchableOpacity style={styles.timeButton} onPress={this.showTime}>
               <Text style={styles.timeButtonText}>Saat</Text>
             </TouchableOpacity>
-            {this.state.show && (
+            {show && (
               <DateTimePicker
                 testID="dateTimePicker"
                 value={dateValue}
@@ -55,23 +63,30 @@ export default class CreateTask extends Component {
             </TouchableOpacity>
           </View>
         </View>
-      
     )
-    } else {
+    } else if(this.props.newTaskStatus == 'newCard'){
       return (
         <View style={styles.container}>
           <TextInput
             style={styles.taskHeaderInput}
             placeholder="İşin Başlığı"
             value={this.props.task.item == null ? "" : this.props.task.item.title}
-            placeholderTextColor='#852e4c'>
+            placeholderTextColor='#852E4C'>
           </TextInput>
           <TextInput
             style={styles.taskInfoInput}
             placeholder="İşin Tanımı"
             value={this.props.task.item == null ? "" : this.props.task.item.body}
-            placeholderTextColor='#852e4c'>
+            placeholderTextColor='#852E4C'>
           </TextInput>
+          <TouchableOpacity
+            style={styles.openButton}
+            onPress={() => {
+              this.setModalVisible(true);
+            }}
+          >
+            <Text style={styles.textStyle}>Kategori Seç</Text>
+          </TouchableOpacity>
           <View style={styles.focusButtonContainer}>
             <TouchableOpacity style={styles.focusButton}>
               <Text style={styles.focusButtonText}>Hedefe Kitlen</Text>
@@ -79,21 +94,85 @@ export default class CreateTask extends Component {
           </View>
         </View>
       )
+    }else{
+      return (
+        <View style={styles.container}>
+          <TextInput
+            style={styles.taskHeaderInput}
+            placeholder="İşin Başlığı"
+            value={this.props.task.item == null ? "" : this.props.task.item.title}
+            placeholderTextColor='#852E4C'>
+          </TextInput>
+          <TextInput
+            style={styles.taskInfoInput}
+            placeholder="İşin Tanımı"
+            value={this.props.task.item == null ? "" : this.props.task.item.body}
+            placeholderTextColor='#852E4C'>
+          </TextInput>
+          
+          <View style={styles.calendar}>
+            <TouchableOpacity style={styles.dateButton} onPress={this.showDate}>
+              <Text style={styles.dateButtonText}>Tarih</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.timeButton} onPress={this.showTime}>
+              <Text style={styles.timeButtonText}>Saat</Text>
+            </TouchableOpacity>
+            {show && (
+              <DateTimePicker
+                testID="dateTimePicker"
+                value={dateValue}
+                mode={pickerMode}
+                is24Hour={true}
+                display="spinner"
+                onChange={this.onChange}
+              />
+            )}
+          </View>
+          <View style={styles.focusButtonContainer}>
+            <TouchableOpacity style={styles.focusButton}>
+              <Text style={styles.focusButtonText}>Hedefe Kitlen</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+    )
     }
   }
-
+  setModalVisible = (visible) => {
+    this.setState({ modalVisible: visible });
+  }
   onChange = (event, selectedDate) => this.setState({ dateValue: selectedDate });
-
   showDate = () => this.setState({ pickerMode: "date", show: true, })
   showTime = () => this.setState({ pickerMode: "time", show: true, });
-
   render() {
-    const { show, dateValue, pickerMode } = this.state
-    // console.log("dateValue", moment(dateValue).format("LLL"));
-    const task = this.props.task.item;
-    console.log("task :", task);
+    const { show, dateValue, pickerMode, modalVisible} = this.state
     return (
       <View style={styles.background}>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <TouchableOpacity
+                style={styles.closeButton}
+                onPress={() => {
+                  this.setModalVisible(!modalVisible);
+                }}
+              >
+                <Image style={styles.closeIcon} source={require('../../images/arrow.png')} />
+              </TouchableOpacity>
+              <View style={styles.radioButtonsContainer}>
+                <TouchableOpacity style={styles.radioButtons} />
+                <TouchableOpacity style={styles.radioButtons} />
+                <TouchableOpacity style={styles.radioButtons} />
+              </View>
+            </View>
+          </View>
+        </Modal>
         <View style={styles.header}>
           <Text style={styles.headerText}>Merhaba Murat.{"\n"}Birine iş kitlemek için harika bir gün!</Text>
         </View>
@@ -196,5 +275,61 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-  }
+  },
+  openButton: {
+    borderRadius: 8,
+    marginTop: 20,
+    width: PhoneWidth * 0.38,
+    borderWidth: 2,
+    height: PhoneHeight * 0.057,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    borderColor: "#852E4C"
+},
+textStyle: {
+    color: "#852E4C",
+    textAlign: "center",
+    fontSize: responsiveSize(15),
+},
+centeredView: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: 'flex-end',
+    borderWidth: 0
+},
+modalView: {
+    backgroundColor: "pink",
+    padding: 35,
+    alignItems: "flex-start",
+    borderWidth: 0,
+    borderColor: '#852E4C',
+    width: PhoneWidth,
+    height: PhoneHeight * 0.3,
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8
+},
+closeButton:{
+    borderWidth: 0,
+    width: PhoneWidth * 0.05,
+    height: PhoneHeight * 0.02,
+    alignSelf: 'flex-end'
+},
+closeIcon:{
+    width: responsiveSize(15),
+    height: responsiveSize(15),
+},
+radioButtons:{
+    borderWidth:1,
+    borderColor:'rgba(0,0,0,0.2)',
+    alignItems:'center',
+    justifyContent:'center',
+    width: PhoneWidth * 0.05,
+    height: PhoneHeight * 0.03,
+    backgroundColor:'#fff',
+    borderRadius:50,
+    marginTop: 10
+},
+radioButtonsContainer:{
+    flexDirection: "column"
+}
 });
