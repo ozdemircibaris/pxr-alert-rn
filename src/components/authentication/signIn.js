@@ -6,20 +6,23 @@ import {PhoneWidth , PhoneHeight, responsiveSize} from '../config/env';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { fullNameChange,emailChange, passwordChange ,signInClicked} from '../../actions/authenticationAction';
+import { Value } from 'react-native-reanimated';
  
 
 export class SignIn extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {email:'',password:''};
+    this.state = {email:'',password:'', id : this.props.idValue};
+    console.log("deneme",this.props.idValue)
     }
- 
+    
     onEmailChanged    = (value) => this.props.emailChange(value)
     onPasswordChanged = (value) => this.props.passwordChange(value)
-    onSignIn = () => this.props.signInClicked(this.props.emailValue, this.props.passwordValue)
+    onSignIn = () => this.props.signInClicked(this.props.emailValue, this.props.passwordValue ,this.props.idValue)
     
     render() {
+      
         return (
 <View style = {styles.container}>
  <LinearGradient colors={['#FFFFFF', '#FFFFFF', '#FFFFFF']} style={styles.linearGradient}>
@@ -29,13 +32,14 @@ export class SignIn extends Component {
 <View style={styles.generalBox}>
     <TextInput
       style={styles.userNameWrapper}
-      onChangeText={text => this.setState({ email: text })}
+      onChangeText={(value) =>this.props.emailChange(value)}
       placeholder='E-POSTA'
       placeholderTextColor='black'
         />
     <TextInput
+      secureTextEntry
       style={styles.passwordWrapper}
-      onChangeText={text => this.setState({ password: text })}
+      onChangeText={(value) =>this.props.passwordChange(value)}
       placeholder='ŞİFRE'
       placeholderTextColor='black'
         />
@@ -128,13 +132,13 @@ const styles = StyleSheet.create({
   });
 
 const mapStateToProps = (state) => {
-  const {  emailValue, passwordValue } = state.authenticationReducer;
+  const {emailValue, passwordValue ,idValue} = state.authenticationReducer;
   return {
       emailValue,
       passwordValue,
+      idValue
   }
 }
-
 export default connect(
   mapStateToProps,
   {
@@ -142,6 +146,5 @@ export default connect(
       emailChange,
       passwordChange,
       signInClicked
-  
   }
 )(SignIn)
