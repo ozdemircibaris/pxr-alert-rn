@@ -14,6 +14,7 @@ const INITIAL_STATE = {
     fullNameValue: "",
     emailValue: "",
     passwordValue: "",
+    idValue: ""
 }
 export default (state = INITIAL_STATE, action) => {
     switch (action.type){
@@ -49,9 +50,11 @@ export default (state = INITIAL_STATE, action) => {
                 ...state, 
                             }
         case SIGN_IN_SUCCESS:
+             console.log("barıs", action.payload)
             return {
-                ...state, 
-                            }
+                ...state,
+                idValue: action.payload
+                           }       
         case SIGN_IN_FAILED:
             return {
                 ...state, 

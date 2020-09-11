@@ -6,6 +6,8 @@ import LinearGradient from 'react-native-linear-gradient';
 import { Actions } from 'react-native-router-flux';
 import { color } from 'react-native-reanimated';
 import { PhoneWidth, PhoneHeight,responsiveSize} from '../config/env';
+import { connect } from 'react-redux';
+import axios from 'axios';
 
 
 const mission = [
@@ -28,15 +30,37 @@ const Item = ({ title, body, color }) => (
     </View>
   </View>
 );
-export default class Page3 extends Component {
+ class Page3 extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      tasks:[] ,
+      idValue:""
+
+    }
   }
   missionRenderItem= ({ item }) => (
     <Item title={item.title} color={item.color} body={item.body}/>
   );
 
+  componentDidMount() {
+    axios.get(`http://pxralert.ozdemircibaris.xyz/api/v1/tasks/${this.props.idValue}`)
+        .then((res) => {
+          
+            console.log("res :", res)
+            this.setState({
+                tasks: res.data.data
+            })
+            console.log("array :", this.state.tasks)
+        })
+        .catch((error) => {
+            console.log("err :", error)
+        })
+}
+
+
 render() {
+  
   return (
    <View style={styles.container}>
        
@@ -44,13 +68,13 @@ render() {
       <Text style={styles.greetingtext}>Merhaba Murat.</Text>
         <Text style={styles.containertext}>Sana kitlenenler burda</Text>
 
-          <ScrollView>
+          
             <FlatList style = {styles.missions}
-                data={mission}
+                data={this.state.tasks}
                 renderItem={this.missionRenderItem}
                 keyExtractor={item => item.id}
               />
-          </ScrollView>
+          
       </View>
       <View style={styles.end}></View>
         <TouchableOpacity
@@ -61,6 +85,7 @@ render() {
     </View>
 
     );
+    
   }
 }
 
@@ -78,7 +103,7 @@ const styles = StyleSheet.create({
 
   },infoTxt:{
     alignSelf:'center',
-    paddingTop:'5%',
+    paddingTop:'6%',
   },
   missionBodyBox: {
     width:PhoneWidth * 0.8,
@@ -96,7 +121,7 @@ const styles = StyleSheet.create({
   }
   ,greetingtext:{
     fontSize:14,
-    paddingTop:6,
+    paddingTop:15,
   },
   titleTxt:{
     paddingTop:'10%',
@@ -122,9 +147,24 @@ const styles = StyleSheet.create({
     padding:10
   },
   SubmitButtonStyle:{
-    paddingTop:'8%'
+    paddingTop:'1%'
   }
   
   
 });
+const mapStateToProps = (state) => {
+  const {  emailValue, passwordValue ,idValue} = state.authenticationReducer;
+  return {
+      emailValue,
+      passwordValue,
+      idValue
+  }
+}
 
+export default connect(
+  mapStateToProps,
+  {
+    
+  
+  }
+)(Page3)

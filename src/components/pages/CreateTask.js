@@ -7,9 +7,9 @@ import 'moment/dist/locale/tr';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { PhoneHeight, PhoneWidth, responsiveSize } from '../config/env';
 
-export default class SignIn extends Component {
+export default class CreateTask extends Component {
   state={
-    dateValue: moment().format('L'),
+    dateValue: new Date(),
     pickerMode: 'date',
     show: false,
     modalVisible: false
@@ -39,6 +39,9 @@ export default class SignIn extends Component {
           >
             <Text style={styles.textStyle}>Kategori Seç</Text>
           </TouchableOpacity>
+          {/* tarih acıcı buton */}
+         
+
           <View style={styles.calendar}>
             <TouchableOpacity style={styles.dateButton} onPress={this.showDate}>
               <Text style={styles.dateButtonText}>Tarih</Text>
@@ -52,7 +55,7 @@ export default class SignIn extends Component {
                 value={dateValue}
                 mode={pickerMode}
                 is24Hour={true}
-                display="spinner"
+                display="calendar"
                 onChange={this.onChange}
               />
             )}
@@ -121,8 +124,9 @@ export default class SignIn extends Component {
                 testID="dateTimePicker"
                 value={dateValue}
                 mode={pickerMode}
+              
                 is24Hour={true}
-                display="spinner"
+                display="calendar"
                 onChange={this.onChange}
               />
             )}
@@ -151,7 +155,7 @@ export default class SignIn extends Component {
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
-            Alert.alert("Modal has been closed.");
+      alert("Modal has been closed.");
           }}
         >
           <View style={styles.centeredView}>
