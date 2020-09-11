@@ -35,6 +35,7 @@ export const passwordChange = (value) => {
     }
 }
 
+
 export const signUpClicked = (fullName, email, password) => {
     return dispatch => {
         dispatch({
@@ -48,7 +49,7 @@ export const signUpClicked = (fullName, email, password) => {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-             data: JSON.stringify({fullName: fullName, email: email, password: password, phoneToken: "hhssssssshhsssaaa"})       
+             data: JSON.stringify({fullName: fullName, email: email, password: password, phoneToken: "hhssssssdassshhsssaaa",})       
          }).then((result) => {
              console.log("resultttt" , result.data)
              if(result.data.status == "success"){
@@ -78,15 +79,20 @@ export const signInClicked = ( email, password) => {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-             data: JSON.stringify({ email: email, password: password, })       
+             data: JSON.stringify({ email: email, password: password })       
          }).then((result) => {
              console.log("resultttt" , result.data)
+             
              if(result.data.status == "success"){
-                Actions.Main()
+                 console.log("user Id", result.data.data.id)
+                  Actions.Main()
+                
                 dispatch({
                     type: SIGN_IN_SUCCESS,
+                    payload: result.data.data.id
                 })
-                
+
+                    
              }
          }).catch((err) => {
              console.log('errorrrruurr', err.response)

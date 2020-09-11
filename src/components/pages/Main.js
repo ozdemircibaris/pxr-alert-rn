@@ -4,6 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { Actions } from 'react-native-router-flux';
 import { color } from 'react-native-reanimated';
 import { PhoneWidth, PhoneHeight, responsiveSize } from '../config/env';
+import { connect } from 'react-redux';
 
 const mission = [
   { id: "1", title: "Hüseyin ve Murat Abiye Kahve", body: "Sabah gelince hüseyin ve murat abiye kahve yapılacak", color: "#FFA1AC" },
@@ -31,9 +32,15 @@ const Item = ({ title, body, color }) => (
   </View>
 );
 
-export default class Main extends Component {
+export  class Main extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      id: this.props.idValue
+
+    }
+   
+    
   }
   // missionRenderItem = ({ item }) => (
   //   <Item title={item.title} body={item.body} color={item.color} item={item}/>
@@ -57,6 +64,7 @@ export default class Main extends Component {
     };
 
   render() {
+    console.log("main dnemem", );
     // console.log(mission);
     return (
       <View style={styles.container}>
@@ -120,7 +128,6 @@ const styles = StyleSheet.create({
     height: PhoneHeight * 0.13,
     width: PhoneWidth * 0.75,
     marginLeft: 20,
-
   },
   taskBodyBox: {
     width: PhoneWidth * 0.57,
@@ -129,8 +136,6 @@ const styles = StyleSheet.create({
     borderColor: '#d8d8d8',
     marginLeft: 20,
     marginTop:0,
-    
-
   },
   categoryColorView: {
     marginLeft: 20,
@@ -174,4 +179,20 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   }
 });
+const mapStateToProps = (state) => {
+  const {  emailValue, passwordValue ,idValue} = state.authenticationReducer;
+  return {
+      emailValue,
+      passwordValue,
+      idValue
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  {
+    
+  
+  }
+)(Main)
 

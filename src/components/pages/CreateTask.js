@@ -7,7 +7,7 @@ import 'moment/dist/locale/tr';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { PhoneHeight, PhoneWidth, responsiveSize } from '../config/env';
 
-export default class SignIn extends Component {
+export default class CreateTask extends Component {
   state={
     dateValue: new Date(),
     pickerMode: 'date',
@@ -39,6 +39,9 @@ export default class SignIn extends Component {
           >
             <Text style={styles.textStyle}>Kategori Seç</Text>
           </TouchableOpacity>
+          {/* tarih acıcı buton */}
+         
+
           <View style={styles.calendar}>
             <TouchableOpacity style={styles.dateButton} onPress={this.showDate}>
               <Text style={styles.dateButtonText}>Tarih</Text>
