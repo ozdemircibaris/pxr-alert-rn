@@ -9,14 +9,16 @@ import { PhoneHeight, PhoneWidth, responsiveSize } from '../config/env';
 
 export default class CreateTask extends Component {
   state={
-    dateValue: new Date(),
-    pickerMode: 'date',
+    dateModalVisible: false,
+    isVisible : false,
+    date: new Date(1598051730000),
+    mode: "date",
     show: false,
     modalVisible: false
   };
   Deneme = () => {
-    const { show, dateValue, pickerMode } = this.state
-    if (this.props.newTaskStatus == 'newTask') {
+    const { show, dateValue, pickerMode, dateModalVisible } = this.state
+    if (this.props.newTaskStatus == 'newTask') { // + butonuna basınca calısacak olan kısım 
       return (
         <View style={styles.container}>
           <TextInput
@@ -43,13 +45,13 @@ export default class CreateTask extends Component {
          
 
           <View style={styles.calendar}>
-            <TouchableOpacity style={styles.dateButton} onPress={this.showDate}>
-              <Text style={styles.dateButtonText}>Tarih</Text>
+            <TouchableOpacity style={styles.dateButton}  onPress={() => {
+            this.showTimepicker(true);
+          }}>
+              <Text style={styles.dateButtonText}>Tarih & Saat</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.timeButton} onPress={this.showTime}>
-              <Text style={styles.timeButtonText}>Saat</Text>
-            </TouchableOpacity>
-            {show && (
+           
+            {/* {show && (
               <DateTimePicker
                 testID="dateTimePicker"
                 value={dateValue}
@@ -58,7 +60,7 @@ export default class CreateTask extends Component {
                 display="calendar"
                 onChange={this.onChange}
               />
-            )}
+            )} */}
           </View>
           <View style={styles.focusButtonContainer}>
             <TouchableOpacity style={styles.focusButton}>
@@ -67,7 +69,7 @@ export default class CreateTask extends Component {
           </View>
         </View>
     )
-    } else if(this.props.newTaskStatus == 'newCard'){
+    } else if(this.props.newTaskStatus == 'newCard'){ //sidebardan gelen yeni kart ekle sayfasında calıscak kısım 
       return (
         <View style={styles.container}>
           <TextInput
@@ -97,7 +99,7 @@ export default class CreateTask extends Component {
           </View>
         </View>
       )
-    }else{
+    }else{ //anaSayfadaki kartlara basılınca cıkacak olan kısım 
       return (
         <View style={styles.container}>
           <TextInput
@@ -113,13 +115,12 @@ export default class CreateTask extends Component {
             placeholderTextColor='#852E4C'>
           </TextInput>
           <View style={styles.calendar}>
-            <TouchableOpacity style={styles.dateButton} onPress={this.showDate}>
-              <Text style={styles.dateButtonText}>Tarih</Text>
+            <TouchableOpacity style={styles.dateButton} onPress={() => {
+                this.showTimepicker(!dateModalVisible);
+              }}>
+              <Text style={styles.dateButtonText}>Tarih && Saat</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.timeButton} onPress={this.showTime}>
-              <Text style={styles.timeButtonText}>Saat</Text>
-            </TouchableOpacity>
-            {show && (
+            {/* {show && (
               <DateTimePicker
                 testID="dateTimePicker"
                 value={dateValue}
@@ -129,7 +130,7 @@ export default class CreateTask extends Component {
                 display="calendar"
                 onChange={this.onChange}
               />
-            )}
+            )} */}
           </View>
           <View style={styles.focusButtonContainer}>
             <TouchableOpacity style={styles.focusButton}>
@@ -143,11 +144,30 @@ export default class CreateTask extends Component {
   setModalVisible = (visible) => {
     this.setState({ modalVisible: visible });
   }
-  onChange = (event, selectedDate) => this.setState({ dateValue: selectedDate });
-  showDate = () => this.setState({ pickerMode: "date", show: true, })
-  showTime = () => this.setState({ pickerMode: "time", show: true, });
+  onChange = (event, selectedDate) => {
+    currentDate = selectedDate || this.state.date;
+    this.setState({ show: Platform.OS === 'ios', date: currentDate })
+
+ };
+ setdateModalVisible = (visible) => {
+     this.setState({ dateModalVisible: visible });
+   }
+
+  showMode = (currentMode) => {
+    this.setState({ show: true, mode: currentMode })
+ };
+
+  showDatepicker = () => {
+     this.showMode("date")
+ };
+
+  showTimepicker = (visible) => {
+     this.showMode("time")
+     this.setState({ dateModalVisible: visible });
+     console.log("mode :", this.showMode)
+ };
   render() {
-    const { show, dateValue, pickerMode, modalVisible} = this.state
+    const { show, dateValue, pickerMode, modalVisible, dateModalVisible} = this.state
     return ( 
       <View style={styles.background}>
         <Modal
@@ -176,6 +196,43 @@ export default class CreateTask extends Component {
             </View>
           </View>
         </Modal>
+        <Modal
+              animationType="slide"
+              transparent={true}
+              visible={dateModalVisible}
+              onRequestClose={() => {
+                Alert.alert("Modal has been closed.");
+              }}
+            >
+              <View style={styles.dateCenteredView}>
+                <View style={styles.dateModalView}>
+                  <Text style={styles.dateModalText}>Ne zamanana kitlersin ? </Text>
+
+    <TouchableOpacity style={ styles.date}>
+            {this.state.show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={this.state.date}
+          locale="tr"
+          mode={"datetime"}
+          is24Hour={true}
+          display="default"
+          onChange={this.onChange}
+        />
+      )}
+    </TouchableOpacity>
+
+        <TouchableOpacity
+              style={styles.modalCloseBtn} //hide modal button 
+              onPress={() => {
+                this.showTimepicker(!dateModalVisible);
+              }}>
+            
+              <Text style={styles.dateTextStyle}>Boşveer</Text>
+        </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
         <View style={styles.header}>
           <Text style={styles.headerText}>Merhaba Murat.{"\n"}Birine iş kitlemek için harika bir gün!</Text>
         </View>
@@ -229,13 +286,13 @@ const styles = StyleSheet.create({
     height: PhoneHeight * 0.057,
     borderRadius: 8,
     borderColor: "#852e4c",
-    marginLeft: 16,
+    alignSelf:'center',
+    justifyContent:'center',
   },
   dateButtonText: {
     textAlign: "center",
     color: "#852e4c",
-    fontSize: responsiveSize(15),
-    marginTop: 5
+    fontSize: responsiveSize(15),  
   },
   timeButton: {
     width: PhoneWidth * 0.38,
@@ -262,7 +319,8 @@ const styles = StyleSheet.create({
     borderColor: "#852e4c",
     alignSelf: "center",
     marginTop: 20,
-    backgroundColor: "#852e4c"
+    backgroundColor: "#852e4c",
+    justifyContent:'center'
   },
   focusButtonText: {
     textAlign: "center",
@@ -274,7 +332,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     flexDirection: "row",
     marginTop: 15,
-    justifyContent: "space-between",
+    justifyContent: "center",
   },
   container: {
     flex: 1,
@@ -334,5 +392,48 @@ radioButtons:{
 },
 radioButtonsContainer:{
     flexDirection: "column"
+},
+// ininside of the date time modal
+dateCenteredView: {
+  flex: 1,
+  justifyContent:'flex-end'
+},
+dateModalView: {
+  alignItems:'center',
+  paddingTop:'20%',
+  backgroundColor: "#e3d8e3",
+  borderRadius: 40,
+  width:PhoneWidth*1,
+  height: PhoneHeight*0.6,
+  marginTop:2,
+  
+},
+modalCloseBtn: {
+  backgroundColor:'white',
+  borderRadius: 10,
+  width:PhoneWidth*0.4,
+  height:PhoneHeight*0.04,
+  flexDirection:'row',
+  justifyContent:'center',
+  marginTop:2,
+  
+},
+dateTextStyle: {
+  fontSize:20,  
+  color: "black",
+  fontWeight:'bold',
+  alignSelf:'center'
+},
+dateModalText: {
+  width:PhoneWidth*0.8,
+  height:PhoneHeight*0.06,
+  fontWeight:'bold',
+  paddingTop:-10,
+  fontSize:20,
+  textAlign:'center'
+  
+},
+date:{
+  width:PhoneWidth*0.7
 }
 });
