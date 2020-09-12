@@ -26,10 +26,10 @@ export default class RouterComp extends Component {
                         title="Yeni İş Kitle">
                     </Scene>
 
-                    <Scene key="Users" component={Users} />
-                    <Stack  key="main"  hideNavBar initial >
+                    <Scene key="Users" component={Users} initial />
+                    <Stack  key="main"  hideNavBar  >
                         <Drawer contentComponent={SideBar} hideNavBar>
-                            <Scene key="Main" component={Main} />
+                            <Scene key="Main" component={Main}  />
                             <Scene key="page3" component={Page3}   />
                             <Scene key="deneme" component={Example}  />
                       
