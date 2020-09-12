@@ -14,10 +14,6 @@ export default (state = INITIAL_STATE, action) => {
           selectedId: action.payload,
           usersId: state.usersId.concat(action.payload)
       }
-    case CHECKED_SUCCESS:
-      return {
-          ...state,  
-      }
     default:
       return state;
   }

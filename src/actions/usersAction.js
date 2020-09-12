@@ -13,13 +13,9 @@ export const selectUsers = ( item, selectedId ) => {
     })
     if(selectedId == item.id){  
       item.selected = "true";
-      dispatch({
-          type: CHECKED_SUCCESS,
-      })
+      
     }
       
   }
    
-  
-    
 }
