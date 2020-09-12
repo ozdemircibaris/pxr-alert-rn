@@ -64,7 +64,7 @@ export  class Main extends Component {
     };
 
   render() {
-    console.log("main dnemem", );
+    
     // console.log(mission);
     return (
       <View style={styles.container}>

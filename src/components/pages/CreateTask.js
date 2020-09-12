@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-import { Button, Platform, Text, TextInput, View, TouchableOpacity, StyleSheet, Image, ImageBackground, Modal } from 'react-native';
+import { Button, Platform, Text, TextInput, View, TouchableOpacity, StyleSheet, Image, ImageBackground, Modal,FlatList } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment'
 import 'moment/dist/locale/tr';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { PhoneHeight, PhoneWidth, responsiveSize } from '../config/env';
+
+const categories = [
+  {cat_id:1, title: "Temizlik", color: "red"},
+  {cat_id:2, title: "Yemek", color: "black"},
+  {cat_id:3, title: "Kahve", color: "pink"}
+]
 
 export default class CreateTask extends Component {
   state={
@@ -14,13 +20,16 @@ export default class CreateTask extends Component {
     date: new Date(1598051730000),
     mode: "date",
     show: false,
-    modalVisible: false
+    modalVisible: false,
+    cat_id: "",
+    selectedRadio: false,
   };
+  // 1598051730000
   Deneme = () => {
     const { show, dateValue, pickerMode, dateModalVisible } = this.state
     if (this.props.newTaskStatus == 'newTask') { // + butonuna basınca calısacak olan kısım 
       return (
-        <View style={styles.container}>
+       <View style={styles.container}>
           <TextInput
             style={styles.taskHeaderInput}
             placeholder="İşin Başlığı"
@@ -42,25 +51,14 @@ export default class CreateTask extends Component {
             <Text style={styles.textStyle}>Kategori Seç</Text>
           </TouchableOpacity>
           {/* tarih acıcı buton */}
-         
-
+      
           <View style={styles.calendar}>
             <TouchableOpacity style={styles.dateButton}  onPress={() => {
             this.showTimepicker(true);
           }}>
               <Text style={styles.dateButtonText}>Tarih & Saat</Text>
             </TouchableOpacity>
-           
-            {/* {show && (
-              <DateTimePicker
-                testID="dateTimePicker"
-                value={dateValue}
-                mode={pickerMode}
-                is24Hour={true}
-                display="calendar"
-                onChange={this.onChange}
-              />
-            )} */}
+    
           </View>
           <View style={styles.focusButtonContainer}>
             <TouchableOpacity style={styles.focusButton}>
@@ -118,19 +116,9 @@ export default class CreateTask extends Component {
             <TouchableOpacity style={styles.dateButton} onPress={() => {
                 this.showTimepicker(!dateModalVisible);
               }}>
-              <Text style={styles.dateButtonText}>Tarih && Saat</Text>
+              <Text style={styles.dateButtonText}>Tarih & Saat</Text>
             </TouchableOpacity>
-            {/* {show && (
-              <DateTimePicker
-                testID="dateTimePicker"
-                value={dateValue}
-                mode={pickerMode}
-              
-                is24Hour={true}
-                display="calendar"
-                onChange={this.onChange}
-              />
-            )} */}
+           
           </View>
           <View style={styles.focusButtonContainer}>
             <TouchableOpacity style={styles.focusButton}>
@@ -141,25 +129,51 @@ export default class CreateTask extends Component {
     )
     }
   }
+
+  // radio button kategori listeleme
+  categoriesRenderItem = ({item}) => {
+    return(
+      <View style={styles.radioButtonsContainer}>
+        <View style={styles.radioButtonsInContainer}>
+            <TouchableOpacity
+              onPress={(cat_id) => this.setState({
+                cat_id: item.cat_id,
+                selectedRadio: true
+              })
+              }
+              style= {{borderWidth:4,
+                borderColor:'rgba(0,0,0,0.2)',
+                alignItems:'center',
+                justifyContent:'center',
+                width: PhoneWidth * 0.05,
+                height: PhoneHeight * 0.03,
+                borderRadius:50,
+                marginTop: 10,
+                backgroundColor: ( this.state.cat_id==item.cat_id) ? "pink" : "white"
+                }}/>
+          <Text style={styles.radioButtonTitle} >{item.title}</Text>
+          </View>
+        </View>
+    )
+  }
+
   setModalVisible = (visible) => {
     this.setState({ modalVisible: visible });
   }
   onChange = (event, selectedDate) => {
     currentDate = selectedDate || this.state.date;
     this.setState({ show: Platform.OS === 'ios', date: currentDate })
-
+    console.log("deneme" , currentDate);
  };
- setdateModalVisible = (visible) => {
-     this.setState({ dateModalVisible: visible });
-   }
+
 
   showMode = (currentMode) => {
     this.setState({ show: true, mode: currentMode })
  };
 
-  showDatepicker = () => {
-     this.showMode("date")
- };
+//   showDatepicker = () => {
+//      this.showMode("date")
+//  };
 
   showTimepicker = (visible) => {
      this.showMode("time")
@@ -168,6 +182,7 @@ export default class CreateTask extends Component {
  };
   render() {
     const { show, dateValue, pickerMode, modalVisible, dateModalVisible} = this.state
+    console.log("kategori ıd", this.state.cat_id);
     return ( 
       <View style={styles.background}>
         <Modal
@@ -188,11 +203,11 @@ export default class CreateTask extends Component {
               >
                 <Image style={styles.closeIcon} source={require('../../images/arrow.png')} />
               </TouchableOpacity>
-              <View style={styles.radioButtonsContainer}>
-                <TouchableOpacity style={styles.radioButtons} />
-                <TouchableOpacity style={styles.radioButtons} />
-                <TouchableOpacity style={styles.radioButtons} />
-              </View>
+              <FlatList // listing category
+                data={categories}
+                renderItem={this.categoriesRenderItem}
+                keyExtractor={item => item.id}
+                />
             </View>
           </View>
         </Modal>
@@ -206,7 +221,7 @@ export default class CreateTask extends Component {
             >
               <View style={styles.dateCenteredView}>
                 <View style={styles.dateModalView}>
-                  <Text style={styles.dateModalText}>Ne zamanana kitlersin ? </Text>
+                  <Text style={styles.dateModalText}>Ne zamana kitlersin ? </Text>
 
     <TouchableOpacity style={ styles.date}>
             {this.state.show && (
@@ -406,7 +421,6 @@ dateModalView: {
   width:PhoneWidth*1,
   height: PhoneHeight*0.6,
   marginTop:2,
-  
 },
 modalCloseBtn: {
   backgroundColor:'white',
@@ -416,24 +430,42 @@ modalCloseBtn: {
   flexDirection:'row',
   justifyContent:'center',
   marginTop:2,
-  
 },
 dateTextStyle: {
-  fontSize:20,  
+  fontSize:17,  
   color: "black",
-  fontWeight:'bold',
   alignSelf:'center'
 },
 dateModalText: {
   width:PhoneWidth*0.8,
   height:PhoneHeight*0.06,
-  fontWeight:'bold',
   paddingTop:-10,
-  fontSize:20,
+  fontSize:17,
   textAlign:'center'
-  
 },
 date:{
   width:PhoneWidth*0.7
+},radioButtons:{
+  borderWidth:4,
+  borderColor:'rgba(0,0,0,0.2)',
+  alignItems:'center',
+  justifyContent:'center',
+  width: PhoneWidth * 0.05,
+  height: PhoneHeight * 0.03,
+  borderRadius:50,
+  marginTop: 10,
+},
+radioButtonsContainer:{
+  flexDirection: "column",
+  width: PhoneWidth
+},
+radioButtonsInContainer:{
+flexDirection: "row",
+width: PhoneWidth * 0.75,
+},
+radioButtonTitle:{
+marginTop: 8.5,
+fontSize: responsiveSize(15),
+marginLeft: 5
 }
 });
