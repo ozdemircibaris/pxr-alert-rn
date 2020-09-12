@@ -25,7 +25,7 @@ export default class CreateTask extends Component {
     selectedRadio: false,
   };
   // 1598051730000
-  Deneme = () => {
+  creatingTasks = () => {
     const { show, dateValue, pickerMode, dateModalVisible } = this.state
     if (this.props.newTaskStatus == 'newTask') { // + butonuna basınca calısacak olan kısım 
       return (
