@@ -37,7 +37,6 @@ const Item = ({ title, body, color }) => (
     this.state = {
       tasks:[] ,
       idValue:""
-
     }
   }
   missionRenderItem= ({ item }) => (
@@ -56,6 +55,7 @@ const Item = ({ title, body, color }) => (
         })
         .catch((error) => {
             console.log("err :", error)
+            a
         })
 }
 

@@ -3,29 +3,47 @@ import { Button, Platform, Text, TextInput, View, TouchableOpacity, StyleSheet, 
 import { Actions } from 'react-native-router-flux';
 import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment'
-import 'moment/dist/locale/tr';
+import 'moment/locale/tr';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { PhoneHeight, PhoneWidth, responsiveSize } from '../config/env';
-
-const categories = [
-  {cat_id:1, title: "Temizlik", color: "red"},
-  {cat_id:2, title: "Yemek", color: "black"},
-  {cat_id:3, title: "Kahve", color: "pink"}
-]
+import axios from 'axios';
 
 export default class CreateTask extends Component {
   state={
     dateModalVisible: false,
     isVisible : false,
-    date: new Date(1598051730000),
+    date: new Date(),
     mode: "date",
     show: false,
     modalVisible: false,
     cat_id: "",
     selectedRadio: false,
+    categories: [],
+    androidMode : "date",
   };
-  // 1598051730000
-  creatingTasks = () => {
+
+  // get category 
+  componentDidMount(){
+    console.log("cats: ", this.state.categories);
+    axios.get("http://pxralert.ozdemircibaris.xyz/api/v1/task-categories",{
+      headers: {
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6eyJpZCI6MjIsImZ1bGxOYW1lIjoiQWhtZXQiLCJlbWFpbCI6ImFobWV0bGlAZ21haWwuY29tIiwicGFzc3dvcmQiOiJhaG1ldDEyMzQiLCJwaG9uZVRva2VuIjoiaGhzc3Nzc3NkYXNzc2hoc3NzYWFhIiwiY3JlYXRlZEF0IjoiMjAyMC0wOS0xMFQxMDoxNDozOC4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMC0wOS0xMFQxMDoxNDozOC4wMDBaIn0sImVtYWlsIjoiYWhtZXRsaUBnbWFpbC5jb20iLCJpYXQiOjE2MDAyNTY1NzMsImV4cCI6MTYwMDI2Mzc3M30.u4rCDMqZi3wisxgjfVk6ahW6uKk-42vtQslZ2DsD4Bo '
+      }
+    }).
+    then((res) => {
+      console.log("result: " ,res.data.data)
+      this.setState({
+        categories: res.data.data
+      })
+    })
+    .catch((error) => {
+      console.log("error :", error)
+  })
+  }
+ 
+  //  ***FONKSIYONLAR***
+  dateTimePicking = () => {
+    
     const { show, dateValue, pickerMode, dateModalVisible } = this.state
     if (this.props.newTaskStatus == 'newTask') { // + butonuna basınca calısacak olan kısım 
       return (
@@ -53,15 +71,27 @@ export default class CreateTask extends Component {
           {/* tarih acıcı buton */}
       
           <View style={styles.calendar}>
-            <TouchableOpacity style={styles.dateButton}  onPress={() => {
-            this.showTimepicker(true);
-          }}>
-              <Text style={styles.dateButtonText}>Tarih & Saat</Text>
-            </TouchableOpacity>
-    
+          {
+
+              <TouchableOpacity style={styles.dateButton}  onPress={() => {
+                 //selinden gelen 
+                 if(Platform.OS == "ios"){
+                  console.log("iosa girdi");
+                  this.showTimepicker(true);
+                }else if(Platform.OS != "ios"){
+                 console.log("androide girdi");
+                   this.showAndroidDatepicker();
+                  // this.showTimepicker(false);
+                }
+               
+              }}>
+                  <Text style={styles.dateButtonText}>Tarih & Saat</Text>
+                </TouchableOpacity>
+        
+          }
           </View>
           <View style={styles.focusButtonContainer}>
-            <TouchableOpacity style={styles.focusButton}>
+            <TouchableOpacity style={styles.focusButton} onPress = {() => Actions.Users()}>
               <Text style={styles.focusButtonText}>Hedefe Kitlen</Text>
             </TouchableOpacity>
           </View>
@@ -91,7 +121,7 @@ export default class CreateTask extends Component {
             <Text style={styles.textStyle}>Kategori Seç</Text>
           </TouchableOpacity>
           <View style={styles.focusButtonContainer}>
-            <TouchableOpacity style={styles.focusButton}>
+            <TouchableOpacity style={styles.focusButton} >
               <Text style={styles.focusButtonText}>Hedefe Kitlen</Text>
             </TouchableOpacity>
           </View>
@@ -100,34 +130,106 @@ export default class CreateTask extends Component {
     }else{ //anaSayfadaki kartlara basılınca cıkacak olan kısım 
       return (
         <View style={styles.container}>
-          <TextInput
-            style={styles.taskHeaderInput}
-            placeholder="İşin Başlığı"
-            value={this.props.task.item == null ? "" : this.props.task.item.title}
-            placeholderTextColor='#852E4C'>
-          </TextInput>
-          <TextInput
-            style={styles.taskInfoInput}
-            placeholder="İşin Tanımı"
-            value={this.props.task.item == null ? "" : this.props.task.item.body}
-            placeholderTextColor='#852E4C'>
-          </TextInput>
+          <View style={styles.taskHeaderView}>
+            {/* style={styles.taskHeaderInput}
+            placeholder="İşin Başlığı" */}
+           <Text style={styles.taskHeaderTxt}>{this.props.task.item == null ? "detay bulunamadı" : this.props.task.item.title}</Text>
+            {/* placeholderTextColor='#852E4C'> */}
+          </View>
+          <View style={styles.taskInfoView}>
+            {/* // style={styles.taskInfoInput}
+            // placeholder="İşin Tanımı" */}
+            <Text style={styles.taskInfoTxt}>{this.props.task.item == null ? "detay b ulunamadı" : this.props.task.item.body}</Text>
+            {/* // placeholderTextColor='#852E4C' */}
+          </View>
           <View style={styles.calendar}>
             <TouchableOpacity style={styles.dateButton} onPress={() => {
-                this.showTimepicker(!dateModalVisible);
+                //selinden gelen 
+                if(Platform.OS == "ios"){
+                  console.log("iosa girdi");
+                  this.showTimepicker(true);
+                }else if(Platform.OS != "ios"){
+                 console.log("androide girdi");
+                   this.showAndroidDatepicker();
+                  // this.showTimepicker(false);
+                }
+               
               }}>
               <Text style={styles.dateButtonText}>Tarih & Saat</Text>
             </TouchableOpacity>
            
           </View>
           <View style={styles.focusButtonContainer}>
-            <TouchableOpacity style={styles.focusButton}>
-              <Text style={styles.focusButtonText}>Hedefe Kitlen</Text>
+            <TouchableOpacity style={styles.focusButton} onPress = {() => Actions.Users()}>
+              <Text style={styles.focusButtonText}>Hedefe Kitlen </Text>
             </TouchableOpacity>
           </View>
         </View>
     )
     }
+  }
+
+  getDateTime = () =>{
+    // this.showMode("time")
+    console.log("hello ANDROİD")
+    const { show, dateValue, pickerMode, dateModalVisible, androidMode } = this.state
+    if(Platform.OS == "ios"){
+      // console.log("nereye bu giriş");
+      return(
+        <Modal
+                animationType="slide"
+                transparent={true}
+                visible={dateModalVisible}
+                onRequestClose={() => {
+                  Alert.alert("Modal has been closed.");
+                }}
+              >
+                <View style={styles.dateCenteredView}>
+                  <View style={styles.dateModalView}>
+                    <Text style={styles.dateModalText}>Ne zamanana kitlersin ? </Text>
+      <TouchableOpacity style={ styles.date}>
+              {this.state.show && (
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={this.state.date}
+            locale="tr"
+            mode={"datetime"}
+            is24Hour={true}
+            display="default"
+            onChange={this.onChange}
+            // timeZoneOffsetInMinutes={0}
+          />
+        )}
+      </TouchableOpacity>
+          <TouchableOpacity
+                style={styles.modalCloseBtn} //hide modal button
+                onPress={() => {
+                  this.showTimepicker(!dateModalVisible);
+                }}>
+                <Text style={styles.dateTextStyle}>Kitle artık</Text>
+          </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+      )
+    }else{
+      return(
+        <TouchableOpacity style={ styles.date}>
+              {this.state.show && (
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={this.state.date}
+            locale="tr"
+            mode={androidMode}
+            is24Hour={true}
+            display="default"
+            onChange={this.onChange}
+          />
+        )}
+      </TouchableOpacity>
+      )
+    }
+    
   }
 
   // radio button kategori listeleme
@@ -137,7 +239,7 @@ export default class CreateTask extends Component {
         <View style={styles.radioButtonsInContainer}>
             <TouchableOpacity
               onPress={(cat_id) => this.setState({
-                cat_id: item.cat_id,
+                cat_id: item.id,
                 selectedRadio: true
               })
               }
@@ -149,7 +251,7 @@ export default class CreateTask extends Component {
                 height: PhoneHeight * 0.03,
                 borderRadius:50,
                 marginTop: 10,
-                backgroundColor: ( this.state.cat_id==item.cat_id) ? "pink" : "white"
+                backgroundColor: ( this.state.cat_id==item.id) ? "pink" : "white"
                 }}/>
           <Text style={styles.radioButtonTitle} >{item.title}</Text>
           </View>
@@ -160,29 +262,61 @@ export default class CreateTask extends Component {
   setModalVisible = (visible) => {
     this.setState({ modalVisible: visible });
   }
-  onChange = (event, selectedDate) => {
-    currentDate = selectedDate || this.state.date;
+ onChange = (event, selectedDate) => {
+  currentDate = selectedDate || this.state.date;
+  if(Platform.OS == "ios"){
     this.setState({ show: Platform.OS === 'ios', date: currentDate })
-    console.log("deneme" , currentDate);
- };
-
-
+    console.log("deneme ios" , moment(currentDate).format('LTS'));
+  }else{
+    if(this.state.aMode == "date"){
+      this.setState({  date: currentDate })
+    console.log("android" , )
+    this.showAndroidTimepicker();
+    }else{
+      // this.state.aDate.concat(currentDate);
+      this.setState({  date: currentDate })
+      console.log("else :" ,moment(currentDate).format('LTS'));
+    }
+  }
+  console.log("onchange")
+  console.log("date :",this.state.aDate)
+};
   showMode = (currentMode) => {
     this.setState({ show: true, mode: currentMode })
  };
-
-//   showDatepicker = () => {
-//      this.showMode("date")
-//  };
-
-  showTimepicker = (visible) => {
-     this.showMode("time")
+showTimepicker = (visible) => {
+    console.log("showtime a girdi");
+     this.showMode("date")
      this.setState({ dateModalVisible: visible });
      console.log("mode :", this.showMode)
+     console.log("date :" , this.state.date)     
  };
+ // For ANDROID
+ showModeAndroid = (currentMode) => {
+  this.setState({ show: true })
+  console.log("showmode")
+};
+showAndroidDatepicker = () => {
+  this.setState({
+    androidMode: "date"
+  })
+   this.showModeAndroid();
+   console.log("showdatepicker")
+};
+showAndroidTimepicker = () => {
+this.setState({
+  androidMode: "time"
+})
+this.showModeAndroid(true);
+console.log("showtimepicker")
+};
+
   render() {
-    const { show, dateValue, pickerMode, modalVisible, dateModalVisible} = this.state
+    const { show, dateValue, pickerMode, modalVisible, dateModalVisible, categories} = this.state
     console.log("kategori ıd", this.state.cat_id);
+    
+     
+  
     return ( 
       <View style={styles.background}>
         <Modal
@@ -211,50 +345,16 @@ export default class CreateTask extends Component {
             </View>
           </View>
         </Modal>
-        <Modal
-              animationType="slide"
-              transparent={true}
-              visible={dateModalVisible}
-              onRequestClose={() => {
-                Alert.alert("Modal has been closed.");
-              }}
-            >
-              <View style={styles.dateCenteredView}>
-                <View style={styles.dateModalView}>
-                  <Text style={styles.dateModalText}>Ne zamana kitlersin ? </Text>
+        <this.getDateTime/>
 
-    <TouchableOpacity style={ styles.date}>
-            {this.state.show && (
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={this.state.date}
-          locale="tr"
-          mode={"datetime"}
-          is24Hour={true}
-          display="default"
-          onChange={this.onChange}
-        />
-      )}
-    </TouchableOpacity>
-
-        <TouchableOpacity
-              style={styles.modalCloseBtn} //hide modal button 
-              onPress={() => {
-                this.showTimepicker(!dateModalVisible);
-              }}>
-            
-              <Text style={styles.dateTextStyle}>Boşveer</Text>
-        </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
         <View style={styles.header}>
           <Text style={styles.headerText}>Merhaba Murat.{"\n"}Birine iş kitlemek için harika bir gün!</Text>
         </View>
-        <this.Deneme/>
+        <this.dateTimePicking/>
       </View>  
     )
-  }
+    }
+    
 }
 const styles = StyleSheet.create({
   background: {
@@ -294,6 +394,39 @@ const styles = StyleSheet.create({
     fontSize: responsiveSize(15),
     marginTop: 20,
     alignSelf: "center",
+  },
+  taskHeaderView:{
+    borderWidth: 2,
+    width: PhoneWidth * 0.85,
+    height: PhoneHeight * 0.07,
+    borderColor: "#852e4c",
+    borderRadius: 8,
+    alignSelf: "center",
+  },
+  taskHeaderTxt:{
+    textAlign: "center",
+    fontSize: responsiveSize(15),
+    width: PhoneWidth * 0.85,
+    height: PhoneHeight * 0.07,
+    
+  },
+  taskInfoView: {
+    borderWidth: 2,
+    width: PhoneWidth * 0.85,
+    height: PhoneHeight * 0.25,
+    borderColor: "#852e4c",
+    borderRadius: 8,
+    textAlign: "center",
+    fontSize: responsiveSize(15),
+    marginTop: 20,
+    alignSelf: "center",
+  },
+  taskInfoTxt:{
+    textAlign: "center",
+    fontSize: responsiveSize(15),
+    marginTop: 20,
+    alignSelf: "center",
+
   },
   dateButton: {
     width: PhoneWidth * 0.38,
