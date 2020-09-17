@@ -89,7 +89,7 @@ export const signInClicked = ( email, password) => {
                 
                 dispatch({
                     type: SIGN_IN_SUCCESS,
-                    payload: result.data.data.id
+                    payload: {id: result.data.data.id, data: result.data}
                 })
 
                     

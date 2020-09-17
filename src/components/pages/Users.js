@@ -1,88 +1,80 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, CheckBox, Image, Button, TouchableOpacity, ScrollView, FlatList } from 'react-native';
-// import Header from '../leftBar/Header';
-import { Actions } from 'react-native-router-flux';
-import { color } from 'react-native-reanimated';
+import { StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { PhoneWidth, PhoneHeight, responsiveSize } from '../config/env';
 import axios from 'axios';
+import UsersRenderItem from '../helpComponents/usersRenderItem';
+import { connect } from 'react-redux';
+import { selectUsers } from '../../actions/usersAction';
 
-
-const Users = [
-    { id: "1", info: "Murat Erdoğan" },
-    { id: "2", info: "Seyithan Erdoğan" },
-    { id: "3", info: "Barış Özdemirci" },
-    { id: "4", info: "Sühacan Uluer" },
-    { id: "5", info: "Emir Akkurt" },
-    { id: "6", info: "Hüseyin Mercanlı" },
-    { id: "7", info: "İlayda Arslan" },
-    { id: "8", info: "Umut Güler" },
-    { id: "9", info: "Berat Üçgül" },
-    { id: "10", info: "Zeynep Altıparmak" }
-];
-
-const Item = ({ info }) => (
-    <View style={styles.users} >
-        <CheckBox style={styles.checkbox}
-            checkedIcon='dot-circle-o'
-            uncheckedIcon='circle-o'
-            title='checkbox 1'
-            checkedColor='red'
-            tintColors={{ true: 'black', false: 'black' }}
-        // checked1={this.state.checked1}
-        // onPress={() => this.setState({ checked1: !this.state.checked1 })}
-        />
-        <Text style={styles.usersName}>{info}</Text>
-    </View>
-);
-
-export default class Main extends Component {
+class Users extends Component {
     constructor(props) {
         super(props);
         this.state = {
             users: [],
-            checked: 'false'
+            color: "white",
         };
-
     }
-    usersRenderItem = ({ item }) => {
-        return <Item info={item.fullName} />
-    }
-
 
     componentDidMount() {
-        axios.get("http://185.171.90.223:3000/users/")
-            .then((res) => {
-                console.log("res :", res.data.data)
-                this.setState({
-                    users: res.data.data
-                })
-                console.log("array :", this.state.users)
+     axios.get("http://pxralert.ozdemircibaris.xyz/api/v1/users/")
+        .then((res) => {
+            // console.log("res :", res.data.data)
+            res.data.data.map((item) => {
+                item.selected = "false"
             })
-            .catch((error) => {
-                console.log("error :", error)
+            this.setState({
+                users: res.data.data,
+            })
+            // console.log("array :", this.state.users)
+        })
+        .catch((error) => {
+            console.log("error :", error)
+        })
+    }
+    createTask =() => {
+     const {title, body, date, cat_id} = this.props;
+        axios({
+            method: "POST",
+            url: `http:pxralert.ozdemircibaris.xyz/api/v1/tasks`,
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${this.props.userData[0].token} ` 
+            },
+                data: {cat_id: cat_id, title: title, subTitle: body, jobDate: date, user_id: "22"}     
+            }).then((result) => {
+                console.log("resultttt" , result.data)
+                if(result.data.status == "success"){
+                console.log("Başarılı")
+                
+                }
+            }).catch((err) => {
+                console.log('errorrrruurr', err.response)
+                alert('başarısız')
             })
     }
-    
-
 
     render() {
+        console.log("id users:", this.props.usersId ) 
         return (
-            <View style={styles.container}>
-                <View style={styles.header}>
-                    <Text style={styles.headertext}>Merhaba Murat</Text>
-                    <Text style={styles.headertext}> Bu şerefe kimlerin nail olacağını seç</Text>
-                </View>
-                <View style={styles.body}>
-                    <FlatList
-                        data={this.state.users}
-                        renderItem={this.usersRenderItem}
-                        keyExtractor={item => item.id}
-                    />
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.btnText}>KİTLEEE!</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
+          <View style={styles.container}>
+              <View style={styles.header}>
+                  <Text style={styles.headertext}>Merhaba Murat</Text>
+                  <Text style={styles.headertext}> Bu şerefe kimlerin nail olacağını seç</Text>
+              </View>
+              <View style={styles.body}>
+                  <FlatList
+                      data={this.state.users}
+                      renderItem={({item}) => <UsersRenderItem item= {item}/>}
+                      keyExtractor={item => item.id}  
+                  />
+                  <TouchableOpacity 
+                            style={styles.button}
+                            onPress={() => this.createTask()} >
+                      <Text style={styles.btnText}>KİTLEEE!</Text>
+                  </TouchableOpacity>
+              </View>
+          </View>
         );
     }
 }
@@ -116,12 +108,22 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     checkbox: {
-        marginLeft: 20
+        width: 25,
+        height: 25,
+        borderWidth: 0,
+        // borderColor: '#852e4c',
+    },
+    checkboxView: {
+        borderWidth: 2,
+        width: PhoneWidth * 0.06,
+        height: PhoneHeight * 0.038,
+        marginTop: 8
     },
     usersName: {
-        marginTop: 5,
+        marginTop: 8,
         color: 'black',
-        fontSize: responsiveSize(15)
+        fontSize: responsiveSize(15),
+        marginLeft: 20
     },
     button: {
         borderWidth: 0,
@@ -136,5 +138,24 @@ const styles = StyleSheet.create({
     btnText: {
         color: 'white',
         fontSize: responsiveSize(17)
+    },
+    tick: {
+        marginLeft: 4
     }
 });
+const mapStateToProps = (state) => {
+    const { usersId } = state.usersReducer;
+    const {userData} = state.authenticationReducer;
+    return {
+
+        usersId,
+        userData
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    {
+        selectUsers,
+    }
+)(Users)

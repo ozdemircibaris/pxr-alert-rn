@@ -21,12 +21,12 @@ import axios from 'axios';
 //   { id: "7", title: "Toplantı", body: "Yarın saat 2:00' de toplantı var unutma unutturma.", color: "#ff847c" },
 // ];
 
-const Item = ({ title, body, color }) => (
+const Item = ({ title, subTitle, color }) => (
   <View style={styles.missionBox} >
   
     <View style={styles.missionBodyBox} backgroundColor={color}>
-      <View style={styles.headersBtn}><Text style={styles.titleTxt}>{title}</Text>
-      <Text style={styles.infoTxt}>{body}</Text></View>
+<View style={styles.headersBtn}><Text style={styles.titleTxt}>{title}</Text>
+      <Text style={styles.infoTxt}>{subTitle}</Text></View>
       
     </View>
   </View>
@@ -40,7 +40,7 @@ const Item = ({ title, body, color }) => (
     }
   }
   missionRenderItem= ({ item }) => (
-    <Item title={item.title} color={item.color} body={item.body}/>
+    <Item title={item.title} color={item.color} subTitle={item.subTitle}/>
   );
 
   componentDidMount() {
@@ -56,12 +56,9 @@ const Item = ({ title, body, color }) => (
         .catch((error) => {
             console.log("err :", error)
             a
-        })
-}
-
+        })}
 
 render() {
-  
   return (
    <View style={styles.container}>
       <View style={styles.body}>
@@ -75,7 +72,7 @@ render() {
       </View>
       <View style={styles.end}></View>
         <TouchableOpacity
-          
+           onPress={() => Actions.CreateTask()}
           style={styles.SubmitButtonStyle}
           activeOpacity={.5}>
           <Image style ={styles.TextStyle} source={require('../../images/plus.png')}/>

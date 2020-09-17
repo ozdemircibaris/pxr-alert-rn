@@ -7,8 +7,9 @@ import 'moment/locale/tr';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { PhoneHeight, PhoneWidth, responsiveSize } from '../config/env';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
-export default class CreateTask extends Component {
+ class CreateTask extends Component {
   state={
     dateModalVisible: false,
     isVisible : false,
@@ -20,6 +21,8 @@ export default class CreateTask extends Component {
     selectedRadio: false,
     categories: [],
     androidMode : "date",
+    title: "",
+    body: ""
   };
 
   // get category 
@@ -27,7 +30,7 @@ export default class CreateTask extends Component {
     console.log("cats: ", this.state.categories);
     axios.get("http://pxralert.ozdemircibaris.xyz/api/v1/task-categories",{
       headers: {
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6eyJpZCI6MjIsImZ1bGxOYW1lIjoiQWhtZXQiLCJlbWFpbCI6ImFobWV0bGlAZ21haWwuY29tIiwicGFzc3dvcmQiOiJhaG1ldDEyMzQiLCJwaG9uZVRva2VuIjoiaGhzc3Nzc3NkYXNzc2hoc3NzYWFhIiwiY3JlYXRlZEF0IjoiMjAyMC0wOS0xMFQxMDoxNDozOC4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMC0wOS0xMFQxMDoxNDozOC4wMDBaIn0sImVtYWlsIjoiYWhtZXRsaUBnbWFpbC5jb20iLCJpYXQiOjE2MDAyNTY1NzMsImV4cCI6MTYwMDI2Mzc3M30.u4rCDMqZi3wisxgjfVk6ahW6uKk-42vtQslZ2DsD4Bo '
+        'Authorization': `Bearer ${this.props.userData[0].token} ` 
       }
     }).
     then((res) => {
@@ -44,21 +47,32 @@ export default class CreateTask extends Component {
   //  ***FONKSIYONLAR***
   dateTimePicking = () => {
     
-    const { show, dateValue, pickerMode, dateModalVisible } = this.state
+    const { show, dateValue, pickerMode, dateModalVisible, title, body, cat_id, date } = this.state
     if (this.props.newTaskStatus == 'newTask') { // + butonuna basınca calısacak olan kısım 
       return (
        <View style={styles.container}>
           <TextInput
             style={styles.taskHeaderInput}
-            placeholder="İşin Başlığı"
-            value={this.props.task.item == null ? "" : this.props.task.item.title}
-            placeholderTextColor='#852E4C'>
+            placeholder="İşin"
+            // value={this.props.task.item == null ? null : this.props.task.item.title}
+            placeholderTextColor='#852E4C'
+            onChangeText={(text) => {
+              this.setState({
+                title: text
+              })
+              console.log("title", this.state.title)
+            }}>
           </TextInput>
           <TextInput
             style={styles.taskInfoInput}
             placeholder="İşin Tanımı"
-            value={this.props.task.item == null ? "" : this.props.task.item.body}
-            placeholderTextColor='#852E4C'>
+            placeholderTextColor='#852E4C'
+            onChangeText={(value) => {
+              this.setState({
+                body: value
+              })
+              console.log("body:",this.state.body);
+            }}>
           </TextInput>
           <TouchableOpacity
             style={styles.openButton}
@@ -91,7 +105,7 @@ export default class CreateTask extends Component {
           }
           </View>
           <View style={styles.focusButtonContainer}>
-            <TouchableOpacity style={styles.focusButton} onPress = {() => Actions.Users()}>
+            <TouchableOpacity style={styles.focusButton} onPress = {() => Actions.Users({title: title, body: body, cat_id: cat_id, date: date})}>
               <Text style={styles.focusButtonText}>Hedefe Kitlen</Text>
             </TouchableOpacity>
           </View>
@@ -202,11 +216,18 @@ export default class CreateTask extends Component {
         )}
       </TouchableOpacity>
           <TouchableOpacity
-                style={styles.modalCloseBtn} //hide modal button
+                style={styles.modalApplyBtn} //hide modal button
                 onPress={() => {
                   this.showTimepicker(!dateModalVisible);
                 }}>
                 <Text style={styles.dateTextStyle}>Kitle artık</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+                style={styles.modalCloseBtn} //hide modal button
+                onPress={() => {
+                  this.showTimepicker(!dateModalVisible);
+                }}>
+                <Text style={styles.dateTextStyle}>Vazgeç</Text>
           </TouchableOpacity>
             </View>
           </View>
@@ -310,13 +331,11 @@ this.setState({
 this.showModeAndroid(true);
 console.log("showtimepicker")
 };
-
   render() {
-    const { show, dateValue, pickerMode, modalVisible, dateModalVisible, categories} = this.state
+    const { show, dateValue, pickerMode, modalVisible, dateModalVisible, categories, title, body} = this.state
     console.log("kategori ıd", this.state.cat_id);
-    
-     
-  
+    console.log("token bee ", this.props.userData[0].token);
+
     return ( 
       <View style={styles.background}>
         <Modal
@@ -354,7 +373,6 @@ console.log("showtimepicker")
       </View>  
     )
     }
-    
 }
 const styles = StyleSheet.create({
   background: {
@@ -555,7 +573,7 @@ dateModalView: {
   height: PhoneHeight*0.6,
   marginTop:2,
 },
-modalCloseBtn: {
+modalApplyBtn: {
   backgroundColor:'white',
   borderRadius: 10,
   width:PhoneWidth*0.4,
@@ -563,6 +581,15 @@ modalCloseBtn: {
   flexDirection:'row',
   justifyContent:'center',
   marginTop:2,
+},
+modalCloseBtn:{
+  backgroundColor:'white',
+  borderRadius: 10,
+  width:PhoneWidth*0.4,
+  height:PhoneHeight*0.04,
+  flexDirection:'row',
+  justifyContent:'center',
+  marginTop:8,
 },
 dateTextStyle: {
   fontSize:17,  
@@ -602,3 +629,19 @@ fontSize: responsiveSize(15),
 marginLeft: 5
 }
 });
+const mapStateToProps = (state) => {
+  const {  emailValue, passwordValue ,idValue, userData} = state.authenticationReducer;
+  return {
+      emailValue,
+      passwordValue,
+      idValue,
+      userData
+  }
+}
+export default connect(
+  mapStateToProps,
+  {
+    
+  
+  }
+)(CreateTask)
