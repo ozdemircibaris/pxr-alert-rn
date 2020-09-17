@@ -1,42 +1,57 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native';
-import { PhoneWidth, PhoneHeight, responsiveSize } from '../config/env';
-import axios from 'axios';
-import UsersRenderItem from '../helpComponents/usersRenderItem';
-import { connect } from 'react-redux';
-import { selectUsers } from '../../actions/usersAction';
-
-class Main extends Component {
+import React, { Component } from ‘react’;
+import { StyleSheet, View, Text, TouchableOpacity, FlatList } from ‘react-native’;
+import { PhoneWidth, PhoneHeight, responsiveSize } from ‘../config/env’;
+import axios from ‘axios’;
+import UsersRenderItem from ‘../helpComponents/usersRenderItem’;
+import { connect } from ‘react-redux’;
+import { selectUsers } from ‘../../actions/usersAction’;
+class Users extends Component {
     constructor(props) {
         super(props);
         this.state = {
             users: [],
-            color: "white",
+            color: “white”,
         };
     }
-
     componentDidMount() {
-        axios.get("http://pxralert.ozdemircibaris.xyz/api/v1/users/")
-            .then((res) => {
-                // console.log("res :", res.data.data)
-                res.data.data.map((item) => {
-                    item.selected = "false"
-                })
-                this.setState({
-                    users: res.data.data,
-                })
-                // console.log("array :", this.state.users)
+     axios.get(“http://pxralert.ozdemircibaris.xyz/api/v1/users/”)
+        .then((res) => {
+            // console.log(“res :“, res.data.data)
+            res.data.data.map((item) => {
+                item.selected = “false”
             })
-            .catch((error) => {
-                console.log("error :", error)
+            this.setState({
+                users: res.data.data,
+            })
+            // console.log(“array :“, this.state.users)
+        })
+        .catch((error) => {
+            console.log(“error :“, error)
+        })
+    }
+    createTask =() => {
+     const {title, body, date, cat_id} = this.props;
+        axios({
+            method: “POST”,
+            url: `http:pxralert.ozdemircibaris.xyz/api/v1/tasks`,
+            headers: {
+                ‘Content-Type’: ‘application/json’,
+                ‘Accept’: ‘application/json’,
+                ‘Authorization’: `Bearer ${this.props.userData[0].token} `
+            },
+                data: {cat_id: cat_id, title: title, subTitle: body, jobDate: date, user_id: “22"}
+            }).then((result) => {
+                console.log(“resultttt” , result.data)
+                if(result.data.status == “success”){
+                console.log(“Başarılı“)
+                }
+            }).catch((err) => {
+                console.log(‘errorrrruurr’, err.response)
+                alert(‘başarısız’)
             })
     }
-
-
-
     render() {
-        console.log("id users:", this.props.usersId )
-       
+        console.log(“id users:“, this.props.usersId )
         return (
           <View style={styles.container}>
               <View style={styles.header}>
@@ -47,9 +62,11 @@ class Main extends Component {
                   <FlatList
                       data={this.state.users}
                       renderItem={({item}) => <UsersRenderItem item= {item}/>}
-                      keyExtractor={item => item.id}  
+                      keyExtractor={item => item.id}
                   />
-                  <TouchableOpacity style={styles.button}>
+                  <TouchableOpacity
+                            style={styles.button}
+                            onPress={() => this.createTask()} >
                       <Text style={styles.btnText}>KİTLEEE!</Text>
                   </TouchableOpacity>
               </View>
@@ -65,13 +82,13 @@ const styles = StyleSheet.create({
     header: {
         flex: 0.3,
         marginTop: 20,
-        flexDirection: "column",
+        flexDirection: “column”,
         marginLeft: 10,
         marginBottom: 15
     },
     headertext: {
         fontSize: responsiveSize(16),
-        color: '#852e4c',
+        color: ‘#852E4C’,
     },
     body: {
         borderWidth: 0,
@@ -84,13 +101,13 @@ const styles = StyleSheet.create({
         borderWidth: 0,
         width: responsiveSize(290),
         height: responsiveSize(37),
-        flexDirection: 'row',
+        flexDirection: ‘row’,
     },
     checkbox: {
         width: 25,
         height: 25,
         borderWidth: 0,
-        // borderColor: '#852e4c',
+        // borderColor: ‘#852E4C’,
     },
     checkboxView: {
         borderWidth: 2,
@@ -100,7 +117,7 @@ const styles = StyleSheet.create({
     },
     usersName: {
         marginTop: 8,
-        color: 'black',
+        color: ‘black’,
         fontSize: responsiveSize(15),
         marginLeft: 20
     },
@@ -109,13 +126,13 @@ const styles = StyleSheet.create({
         height: responsiveSize(35),
         width: responsiveSize(190),
         top: 30,
-        alignSelf: 'center',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#852e4c'
+        alignSelf: ‘center’,
+        alignItems: ‘center’,
+        justifyContent: ‘center’,
+        backgroundColor: ‘#852E4C’
     },
     btnText: {
-        color: 'white',
+        color: ‘white’,
         fontSize: responsiveSize(17)
     },
     tick: {
@@ -124,15 +141,15 @@ const styles = StyleSheet.create({
 });
 const mapStateToProps = (state) => {
     const { usersId } = state.usersReducer;
+    const {userData} = state.authenticationReducer;
     return {
-
-        usersId
+        usersId,
+        userData
     }
 }
-
 export default connect(
     mapStateToProps,
     {
         selectUsers,
     }
-)(Main)
+)(Users)

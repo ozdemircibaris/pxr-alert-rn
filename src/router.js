@@ -7,33 +7,37 @@ import Main from './components/pages/Main';
 import Page3 from './components/pages/Page3';
 import Users from './components/pages/Users';
 import CreateTask from './components/pages/CreateTask';
-import Example from './components/pages/Example';
+
 
 export default class RouterComp extends Component {
  render() {
       return (
             <Router>
             <Stack  key="auth"   >
-                <Stack key="root" hideNavBar >
-                    <Scene hideNavBar key="signIn" component={SignIn} />
+                <Stack  initial key="root" hideNavBar >
+                    <Scene initial hideNavBar key="signIn" component={SignIn} />
                     <Scene hideNavBarkey="signUp" component={SignUp} />
                 </Stack>
                     
+                    {/* <Stack initial  key="main" hideNavBar>
+                        <Drawer contentComponent={SideBar} >        
+                            <Scene initial key="Main" component={Main}/>
+                            <Scene key="page3" component={Page3}/>
+                        </Drawer>
+      </Stack>     */}
                     <Scene 
                         key="CreateTask"
-                        initial
                         component={CreateTask}
                         title="Yeni İş Kitle">
                     </Scene>
 
+                    <Scene key="Users" component={Users} />
                     <Scene key="Users" component={Users} initial />
                     <Stack  key="main"  hideNavBar  >
                         <Drawer contentComponent={SideBar} hideNavBar>
                             <Scene key="Main" component={Main}  />
                             <Scene key="page3" component={Page3}   />
-                            <Scene key="deneme" component={Example}  />
-                      
-                        </Drawer>       
+                        </Drawer>  
                     </Stack>
                 </Stack>
             </Router>

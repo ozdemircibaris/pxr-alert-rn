@@ -1,6 +1,3 @@
-
-
-
 export const SELECT_USERS = "SELECT_USERS";
 export const CHECKED_SUCCESS = "CHECKED_SUCCESS";
 

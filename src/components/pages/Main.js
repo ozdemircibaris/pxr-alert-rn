@@ -7,44 +7,46 @@ import { PhoneWidth, PhoneHeight, responsiveSize } from '../config/env';
 import { connect } from 'react-redux';
 
 const mission = [
-  { id: "1", title: "Hüseyin ve Murat Abiye Kahve", body: "Sabah gelince hüseyin ve murat abiye kahve yapılacak", color: "#FFA1AC" },
-  { id: "2", title: "Temizlik", body: "Yarın toplu temizlik yapılacak!", color: "#ff78" },
-  { id: "3", title: "Hatırlatma", body: "Birlikte yapılacak işi unutma!", color: "#A2D5F2" },
-  { id: "4", title: "Randevu", body: "Birazdan müşteri görüşmesi var. Unutma!", color: "#C3AED6" },
-  { id: "5", title: "Bulaşıkları Yıka", body: "Ofise geldiğinde bulaşıkları yıkamayı unutma!", color: "#ADE498" },
-  { id: "6", title: "İş", body: "Yarına yetiştirilecek iş var unutma!", color: "#FFBB91" },
-  { id: "7", title: "Toplantı", body: "Yarın saat 2:00'de toplantı var unutma,unutturma!", color: "#FF847C" },
+  { id: "1", title: "Hüseyin ve Murat Abiye Kahve", body: "Sabah gelince hüseyin ve murat abiye kahve yapılacak", color: "#FFA1AC", date: "2020/09/12 11:00:00" },
+  { id: "2", title: "Temizlik", body: "Yarın toplu temizlik yapılacak!", color: "#ff78", date: "2020/09/11 09:00:00" },
+  { id: "3", title: "Hatırlatma", body: "Birlikte yapılacak işi unutma!", color: "#A2D5F2", date: "2020/09/14 12:30:00" },
+  { id: "4", title: "Randevu", body: "Birazdan müşteri görüşmesi var. Unutma!", color: "#C3AED6", date: "2020/09/14 18:00:00" },
+  { id: "5", title: "Bulaşıkları Yıka", body: "Ofise geldiğinde bulaşıkları yıkamayı unutma!", color: "#ADE498", date: "2020/09/17 21:00:00" },
+  { id: "6", title: "İş", body: "Yarına yetiştirilecek iş var unutma!", color: "#FFBB91", date: "2020/09/18 00:00:00" },
+  { id: "7", title: "Toplantı", body: "Yarın saat 2:00'de toplantı var unutma,unutturma!", color: "#FF847C", date: "2020/09/19 23:00:00" },
 ];
 
-const Item = ({ title, body, color }) => (
-  <View style={styles.taskBox} >
-    <View style={styles.categoryColorView}>
-      <View style={styles.hr}>
-        <View style={styles.circle} backgroundColor={color}></View>
-      </View>
-    </View>
-    <TouchableOpacity 
-      onPress={() => Actions.CreateTask({newTaskStatus: 'own'})}
-      style={styles.taskBodyBox}>
-      <Text>{title}</Text>
-      <Text>{body}</Text>
-    </TouchableOpacity>
-  </View>
-);
-
 export  class Main extends Component {
-  constructor(props) {
+  constructor(props){
     super(props);
     this.state = {
-      id: this.props.idValue
-
+      id: this.props.idValue,
+      data: this.props.userData,
+      missionDate: [],
+      minDate: []
     }
-   
-    
   }
-  // missionRenderItem = ({ item }) => (
-  //   <Item title={item.title} body={item.body} color={item.color} item={item}/>
-  // );
+  componentWillMount() {
+    mission.map((item) => {
+      this.state.missionDate.push(item.date)
+    })
+    console.log("date :", this.state.missionDate)
+    var sorted = this.state.missionDate.slice()
+      .sort(function (a, b) {
+        return new Date(b) < new Date();
+      });
+    var sortedPop = sorted.pop();
+    // this.state.minDate.push(sorted.shift())
+    console.log("min :", sorted.pop())
+    mission.map((item) => {
+      if (item.date == sortedPop) {
+        console.log(item)
+        this.state.minDate.push(item)
+      }
+    })
+    console.log("item", this.state.minDate)
+  }
+
   missionRenderItem = ({ item }) => {
     return(
       <View style={styles.taskBox} >
@@ -64,8 +66,7 @@ export  class Main extends Component {
     };
 
   render() {
-    console.log("main dnemem", );
-    // console.log(mission);
+    console.log("tokkeeennn", this.state.data);
     return (
       <View style={styles.container}>
         <View style={styles.greetingContainer}>
@@ -180,11 +181,12 @@ const styles = StyleSheet.create({
   }
 });
 const mapStateToProps = (state) => {
-  const {  emailValue, passwordValue ,idValue} = state.authenticationReducer;
+  const {  emailValue, passwordValue ,idValue, userData} = state.authenticationReducer;
   return {
       emailValue,
       passwordValue,
-      idValue
+      idValue,
+      userData
   }
 }
 
