@@ -82,10 +82,11 @@ export const signInClicked = ( email, password) => {
              data: JSON.stringify({ email: email, password: password })       
          }).then((result) => {
              console.log("resultttt" , result.data)
+             console.log("zeynepin logu " , result.data.data.fullName)
              
              if(result.data.status == "success"){
                  console.log("user Id", result.data.data.id)
-                  Actions.Main()
+                   Actions.Main()
                 
                 dispatch({
                     type: SIGN_IN_SUCCESS,

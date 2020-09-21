@@ -36,7 +36,8 @@ const Item = ({ title, subTitle, color }) => (
     super(props);
     this.state = {
       tasks:[] ,
-      idValue:""
+      idValue:"",
+      name: this.props.fullNameValue
     }
   }
   missionRenderItem= ({ item }) => (
@@ -62,8 +63,10 @@ render() {
   return (
    <View style={styles.container}>
       <View style={styles.body}>
-      <Text style={styles.greetingtext}>Merhaba Murat.</Text>
-        <Text style={styles.containertext}>Sana kitlenenler burda</Text>
+      <Text style={styles.greetingtext}>Merhaba, 
+          <Text style= {styles.userNameText}>{this.state.name}</Text>
+      </Text>
+      <Text style={styles.containertext}>Sana kitlenenler burda</Text>
             <FlatList style = {styles.missions}
                 data={this.state.tasks}
                 renderItem={this.missionRenderItem}
@@ -139,16 +142,20 @@ const styles = StyleSheet.create({
   },
   SubmitButtonStyle:{
     paddingTop:'1%'
+  },
+  userNameText:{
+    fontWeight: "bold"
   }
   
   
 });
 const mapStateToProps = (state) => {
-  const {  emailValue, passwordValue ,idValue} = state.authenticationReducer;
+  const {  emailValue, passwordValue ,idValue, fullNameValue} = state.authenticationReducer;
   return {
       emailValue,
       passwordValue,
-      idValue
+      idValue,
+      fullNameValue
   }
 }
 

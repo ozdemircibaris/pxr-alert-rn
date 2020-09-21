@@ -22,7 +22,8 @@ import { connect } from 'react-redux';
     categories: [],
     androidMode : "date",
     title: "",
-    body: ""
+    body: "",
+    name: this.props.fullNameValue
   };
 
   // get category 
@@ -367,7 +368,7 @@ console.log("showtimepicker")
         <this.getDateTime/>
 
         <View style={styles.header}>
-          <Text style={styles.headerText}>Merhaba Murat.{"\n"}Birine iş kitlemek için harika bir gün!</Text>
+          <Text style={styles.headerText}>Merhaba, {this.state.name}.{"\n"}Birine iş kitlemek için harika bir gün!</Text>
         </View>
         <this.dateTimePicking/>
       </View>  
@@ -630,12 +631,13 @@ marginLeft: 5
 }
 });
 const mapStateToProps = (state) => {
-  const {  emailValue, passwordValue ,idValue, userData} = state.authenticationReducer;
+  const {  emailValue, passwordValue ,idValue, userData, fullNameValue} = state.authenticationReducer;
   return {
       emailValue,
       passwordValue,
       idValue,
-      userData
+      userData,
+      fullNameValue
   }
 }
 export default connect(

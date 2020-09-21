@@ -51,11 +51,13 @@ export default (state = INITIAL_STATE, action) => {
                 ...state, 
                             }
         case SIGN_IN_SUCCESS:
-             console.log("barıs", action.payload)
+             console.log("barıs:", action.payload)
+             console.log("isim? ", action.payload.data.data.fullName)
             return {
                 ...state,
                 idValue: action.payload.id,
-                userData: state.userData.concat(action.payload.data)
+                userData: state.userData.concat(action.payload.data),
+                fullNameValue: state.userData.concat(action.payload.data.data.fullName)
                            }       
         case SIGN_IN_FAILED:
             return {

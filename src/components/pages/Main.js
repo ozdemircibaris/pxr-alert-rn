@@ -5,6 +5,7 @@ import { Actions } from 'react-native-router-flux';
 import { color } from 'react-native-reanimated';
 import { PhoneWidth, PhoneHeight, responsiveSize } from '../config/env';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 const mission = [
   { id: "1", title: "Hüseyin ve Murat Abiye Kahve", body: "Sabah gelince hüseyin ve murat abiye kahve yapılacak", color: "#FFA1AC", date: "2020/09/12 11:00:00" },
@@ -23,9 +24,28 @@ export  class Main extends Component {
       id: this.props.idValue,
       data: this.props.userData,
       missionDate: [],
-      minDate: []
+      minDate: [],
+      name: this.props.fullNameValue
     }
   }
+
+  componentDidMount() {
+    axios.get("http://pxralert.ozdemircibaris.xyz/api/v1/users/")
+       .then((res) => {
+           // console.log("res :", res.data.data)
+           res.data.data.map((item) => {
+               item.selected = "false"
+           })
+           this.setState({
+               users: res.data.data,
+           })
+           // console.log("array :", this.state.users)
+       })
+       .catch((error) => {
+           console.log("error :", error)
+       })
+   }
+
   componentWillMount() {
     mission.map((item) => {
       this.state.missionDate.push(item.date)
@@ -40,7 +60,7 @@ export  class Main extends Component {
     console.log("min :", sorted.pop())
     mission.map((item) => {
       if (item.date == sortedPop) {
-        console.log(item)
+        // console.log(item)
         this.state.minDate.push(item)
       }
     })
@@ -66,11 +86,12 @@ export  class Main extends Component {
     };
 
   render() {
-    console.log("tokkeeennn", this.state.data);
+    // console.log("isim: " ,this.state.name)
     return (
       <View style={styles.container}>
         <View style={styles.greetingContainer}>
-          <Text style={styles.greetingText}>Merhaba Murat.</Text>
+    <Text style={styles.greetingText}>Merhaba,
+     <Text style= {styles.userNameText}>{this.state.name}</Text></Text>
           <Text style={styles.containerText}>Sana kitlenenler burda</Text>
         </View>
         <View style={styles.currentTask}></View>
@@ -178,22 +199,25 @@ const styles = StyleSheet.create({
   },
   taskItemTitle:{
     fontWeight: "bold"
+  },
+  userNameText:{
+    fontWeight: "bold"
   }
 });
 const mapStateToProps = (state) => {
-  const {  emailValue, passwordValue ,idValue, userData} = state.authenticationReducer;
+  const {  emailValue, passwordValue ,idValue, userData, fullNameValue} = state.authenticationReducer;
   return {
       emailValue,
       passwordValue,
       idValue,
-      userData
+      userData,
+      fullNameValue
   }
 }
 
 export default connect(
   mapStateToProps,
-  {
-    
+  {  
   
   }
 )(Main)
