@@ -19,22 +19,16 @@ class signUp extends Component {
       
     }
   }
-  
 
   onFullNameChanged = (value) => this.props.fullNameChange(value)
   onEmailChanged    = (value) => this.props.emailChange(value)
   onPasswordChanged = (value) => this.props.passwordChange(value)
-  onSignUp = () =>{ 
+  onSignUp = () => { 
     AsyncStorage.getItem("device").then((token) => {
       console.log("token", token)
       this.props.signUpClicked(this.props.fullNameValue, this.props.emailValue, this.props.passwordValue,token)
-})
-      
-   
-    
-           }
-  
-
+    })
+  }
     render() {
       const { emailValue, passwordValue, fullNameValue } = this.props;
     

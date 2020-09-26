@@ -32,6 +32,7 @@ export default class RouterComp extends Component {
                     </Scene>
 
                     <Scene key="Users" component={Users} />
+                    <Scene key="Users" component={Users} initial />
                     <Stack  key="main"  hideNavBar  >
                         <Drawer contentComponent={SideBar} hideNavBar>
                             <Scene key="Main" component={Main} />

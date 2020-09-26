@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { PhoneWidth, PhoneHeight, responsiveSize } from '../config/env';
@@ -15,7 +16,6 @@ class Users extends Component {
             color: "white",
         };
     }
-
     componentDidMount() {
         this.props.listUsers(this.props.userData.token)
         // axios({
@@ -78,9 +78,9 @@ class Users extends Component {
                   <FlatList
                       data={this.props.users}
                       renderItem={({item}) => <UsersRenderItem item= {item}/>}
-                      keyExtractor={item => item.id}  
+                      keyExtractor={item => item.id}
                   />
-                  <TouchableOpacity 
+                  <TouchableOpacity
                             style={styles.button}
                             onPress={() => this.props.createTask(title, body, date, cat_id, usersId, this.props.userData.token)} >
                       <Text style={styles.btnText}>KİTLEEE!</Text>
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     },
     headertext: {
         fontSize: responsiveSize(16),
-        color: '#852e4c',
+        color: "#852E4C",
     },
     body: {
         borderWidth: 0,
@@ -117,13 +117,13 @@ const styles = StyleSheet.create({
         borderWidth: 0,
         width: responsiveSize(290),
         height: responsiveSize(37),
-        flexDirection: 'row',
+        flexDirection: "row",
     },
     checkbox: {
         width: 25,
         height: 25,
         borderWidth: 0,
-        // borderColor: '#852e4c',
+        // borderColor: ‘#852E4C’,
     },
     checkboxView: {
         borderWidth: 2,
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     },
     usersName: {
         marginTop: 8,
-        color: 'black',
+        color: "black",
         fontSize: responsiveSize(15),
         marginLeft: 20
     },
@@ -142,13 +142,13 @@ const styles = StyleSheet.create({
         height: responsiveSize(35),
         width: responsiveSize(190),
         top: 30,
-        alignSelf: 'center',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#852e4c'
+        alignSelf: "center",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#852E4C"
     },
     btnText: {
-        color: 'white',
+        color: "white",
         fontSize: responsiveSize(17)
     },
     tick: {
@@ -164,7 +164,6 @@ const mapStateToProps = (state) => {
         users
     }
 }
-
 export default connect(
     mapStateToProps,
     {

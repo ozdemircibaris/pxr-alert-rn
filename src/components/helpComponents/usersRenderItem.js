@@ -64,6 +64,8 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         width: PhoneWidth * 0.06,
         height: PhoneHeight * 0.028,
+=======
+        height: PhoneHeight * 0.038,
         marginTop: 8
     },
     usersName: {
