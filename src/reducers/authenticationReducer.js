@@ -15,7 +15,7 @@ const INITIAL_STATE = {
     emailValue: "",
     passwordValue: "",
     idValue: "",
-    userData:[]
+    userData:""
 }
 export default (state = INITIAL_STATE, action) => {
     switch (action.type){
@@ -51,11 +51,11 @@ export default (state = INITIAL_STATE, action) => {
                 ...state, 
                             }
         case SIGN_IN_SUCCESS:
-             console.log("barıs", action.payload)
+             console.log("userdatas", action.payload)
             return {
                 ...state,
                 idValue: action.payload.id,
-                userData: state.userData.concat(action.payload.data)
+                userData: action.payload.data
                            }       
         case SIGN_IN_FAILED:
             return {

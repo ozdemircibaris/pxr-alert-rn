@@ -5,6 +5,8 @@ import ReduxThunk from 'redux-thunk';
 import rootReducer from './src/reducers/rootReducer';
 import RouterComp from './src/router';
 import OneSignal from 'react-native-onesignal'; // Import package from node modules
+import { AsyncStorage } from 'react-native';
+import { PhoneHeight } from './src/components/config/env';
 
 
 export default class App extends Component {
@@ -64,9 +66,14 @@ export default class App extends Component {
     console.log('isActive: ', openResult.notification.isAppInFocus);
     console.log('openResult: ', openResult);
   }
+  
 
   onIds(device) {
-    console.log('Device info: ', device);
+    JSON.stringify(device);
+    const phoneToken = device.userId;
+    AsyncStorage.setItem("device",phoneToken )  
+    console.log('Device info: ', phoneToken); 
+
   }
 
   myiOSPromptCallback(permission){

@@ -6,6 +6,7 @@ import { PhoneHeight, responsiveSize, PhoneWidth } from '../config/env';
 export default class SideBar extends Component {
     constructor(props) {
         super(props);
+        
     }  
   render() {
     return (
@@ -18,7 +19,7 @@ export default class SideBar extends Component {
                   <TouchableOpacity onPress={() => Actions.CreateTask({newTaskStatus: 'newCard', task: ""})}><Text style = {styles.title}> Kart Ekle </Text></TouchableOpacity> 
                </View>
                <View style = {styles.textView}>
-                  <TouchableOpacity onPress={() => Actions.page3()}><Text style = {styles.title}> Bana Gelen Görevler </Text></TouchableOpacity> 
+                  <TouchableOpacity onPress={() => Actions.mytasks()}><Text style = {styles.title}> Bana Gelen Görevler </Text></TouchableOpacity> 
                </View>
                <View style={styles.logOutContainer}>
                   <TouchableOpacity onPress={() => Actions.goToLogin()}>

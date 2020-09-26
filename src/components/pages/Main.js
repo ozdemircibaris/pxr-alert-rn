@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, ImageBackground, Image, Button, TouchableOpacity, ScrollView, FlatList } from 'react-native';
+import { StyleSheet, View, Text, ImageBackground, Image, Button, TouchableOpacity, ScrollView, FlatList,Modal } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Actions } from 'react-native-router-flux';
 import { color } from 'react-native-reanimated';
 import { PhoneWidth, PhoneHeight, responsiveSize } from '../config/env';
 import { connect } from 'react-redux';
+import axios from 'axios';
+import moment from 'moment';
+import {deleteCard, listCard, listTasks, getTasks} from '../../actions/mainAction';
+import {API_BASE} from '../config/env';
+import createTaskReducer from '../../reducers/createTaskReducer';
 
-const mission = [
-  { id: "1", title: "Hüseyin ve Murat Abiye Kahve", body: "Sabah gelince hüseyin ve murat abiye kahve yapılacak", color: "#FFA1AC", date: "2020/09/12 11:00:00" },
-  { id: "2", title: "Temizlik", body: "Yarın toplu temizlik yapılacak!", color: "#ff78", date: "2020/09/11 09:00:00" },
-  { id: "3", title: "Hatırlatma", body: "Birlikte yapılacak işi unutma!", color: "#A2D5F2", date: "2020/09/14 12:30:00" },
-  { id: "4", title: "Randevu", body: "Birazdan müşteri görüşmesi var. Unutma!", color: "#C3AED6", date: "2020/09/14 18:00:00" },
-  { id: "5", title: "Bulaşıkları Yıka", body: "Ofise geldiğinde bulaşıkları yıkamayı unutma!", color: "#ADE498", date: "2020/09/17 21:00:00" },
-  { id: "6", title: "İş", body: "Yarına yetiştirilecek iş var unutma!", color: "#FFBB91", date: "2020/09/18 00:00:00" },
-  { id: "7", title: "Toplantı", body: "Yarın saat 2:00'de toplantı var unutma,unutturma!", color: "#FF847C", date: "2020/09/19 23:00:00" },
-];
 
 export  class Main extends Component {
   constructor(props){
@@ -23,60 +19,128 @@ export  class Main extends Component {
       id: this.props.idValue,
       data: this.props.userData,
       missionDate: [],
-      minDate: []
+      minDate: [],
+      deleteModal: false,
+      item: "",
+      currentTask: [this.props.minDate[0]]
     }
   }
-  componentWillMount() {
-    mission.map((item) => {
-      this.state.missionDate.push(item.date)
-    })
-    console.log("date :", this.state.missionDate)
-    var sorted = this.state.missionDate.slice()
-      .sort(function (a, b) {
-        return new Date(b) < new Date();
-      });
-    var sortedPop = sorted.pop();
-    // this.state.minDate.push(sorted.shift())
-    console.log("min :", sorted.pop())
-    mission.map((item) => {
-      if (item.date == sortedPop) {
-        console.log(item)
-        this.state.minDate.push(item)
-      }
-    })
-    console.log("item", this.state.minDate)
+
+  setModalVisible = (visible) => {
+    this.setState({ deleteModal: visible });
   }
+        
+  componentWillMount() {
+    this.props.getTasks(this.props.dateArray, this.props.minDate);
+    this.props.listCard(this.props.userData.token, this.props.userData.data.id , this.props.mainCards)
+    this.props.listTasks(this.props.userData.token, this.props.userData.data.id)
+    console.log("a",this.props.minDate)}
+
+  componentDidMount(){
+    console.log("mission map", this.props.mainTasks)
+  }
+  modalRender = (item) =>{
+    // console.log("bıktım",item.item.id)
+
+    return(
+      <View >
+        <Text>{item.item.title}</Text>
+        <Text> {item.item.subTitle} </Text>
+        <Text>{moment(item.item.jobDate).format("llll")}</Text>
+      </View>
+    )
+  }
+  
+ 
 
   missionRenderItem = ({ item }) => {
     return(
       <View style={styles.taskBox} >
-    <View style={styles.categoryColorView}>
+    <View style={styles.categoryColorView} >
       <View style={styles.hr}>
         <View style={styles.circle} backgroundColor={item.color}></View>
+        <TouchableOpacity 
+           onPress= {() => {this.setModalVisible()
+                           this.setState({
+                             item
+                           })}}
+           style={styles.deleteButton} >
+      <Image style= {styles.iconImg} source={require('../../images/deleteIcon.png')}></Image>
+      </TouchableOpacity>
       </View>
     </View>
     <TouchableOpacity 
       onPress={() => Actions.CreateTask({newTaskStatus: 'card', task: {item}})}
       style={styles.taskBodyBox}>
       <Text style={styles.taskItemTitle}>{item.title}</Text>
-      <Text>{item.body}</Text>
+      <Text>{item.subTitle}</Text>
     </TouchableOpacity>
   </View>
     )
     };
 
   render() {
-    console.log("tokkeeennn", this.state.data);
+    const {minDate} = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.greetingContainer}>
-          <Text style={styles.greetingText}>Merhaba Murat.</Text>
+          <Text style={styles.greetingText}>Merhaba {this.props.userData.data.fullName}</Text>
           <Text style={styles.containerText}>Sana kitlenenler burda</Text>
-        </View>
-        <View style={styles.currentTask}></View>
+        </View> 
+        {/* <View style={styles.currentTask}>
+        <Text>{minDate[0].title}</Text>
+          <Text> {minDate[0].subTitle} </Text>
+          <Text>{moment(minDate[0].jobDate).format("llll")}</Text>
+        </View> */}
+        <View style={styles.currentTask}>
+        <FlatList
+            data={minDate}
+            renderItem={this.modalRender}
+            keyExtractor={item => item.id}
+          />
+      </View>
+
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={this.state.deleteModal}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>Silmek istediğinize emin misiniz ?</Text>
+              <View style={styles.modalButtons}>
+              <TouchableOpacity
+                style={styles.deleteModalButton}
+                onPress={() => {
+                  // sildikten sonra modalı kapatır
+                  this.props.deleteCard(this.state.item.id,this.props.userData.token);
+                  this.setModalVisible(false);
+                }}
+              >
+                <Text style={styles.textStyle}>Evet</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.closeButton}
+                onPress={() => {
+                  // silmeden modalı kapatır
+                  this.setModalVisible(false);
+                }}
+              >
+                <Text style={styles.textStyle}>Hayır</Text> 
+               
+              </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </Modal> 
+
         <View style={styles.body}>
           <FlatList
-            data={mission}
+            data={this.props.cards}
             renderItem={this.missionRenderItem}
             keyExtractor={item => item.id}
           />
@@ -178,23 +242,95 @@ const styles = StyleSheet.create({
   },
   taskItemTitle:{
     fontWeight: "bold"
+  },
+  deleteButton:{
+    width: PhoneWidth * 0.04,
+    height: PhoneHeight * 0.03,
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    top: 10,
+  },
+  iconImg:{
+    height: PhoneHeight * 0.027,
+    width: PhoneWidth * 0.053,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  modalView: {
+    width: PhoneWidth * 0.85,
+    height: PhoneHeight * 0.25,
+    margin: 20,
+    backgroundColor: "#e1d9e2",
+    borderRadius: 10,
+    flexDirection: 'column',
+    justifyContent: 'space-around'
+  },
+  modalButtons:{
+    alignSelf:'center',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: PhoneWidth * 0.7,
+    height: PhoneHeight *0.05,
+    borderWidth: 0,
+  },
+  closeButton: {
+    justifyContent:'center',
+    backgroundColor: "#7b344c",
+    borderRadius: 10,
+    width: PhoneWidth * 0.25,
+    height: PhoneHeight * 0.06
+  },
+  deleteModalButton: {
+    justifyContent:'center',
+    backgroundColor: "#7b344c",
+    borderRadius: 10,
+    width: PhoneWidth * 0.25,
+    height: PhoneHeight * 0.06
+  },
+  textStyle: {
+    color: "white",
+    fontSize: responsiveSize(15),
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    textAlign: "center",
+    fontSize: responsiveSize(15)
   }
 });
 const mapStateToProps = (state) => {
   const {  emailValue, passwordValue ,idValue, userData} = state.authenticationReducer;
+  const { mainCards, mainTasks, dateArray, minDate, mission, tasks, missionDate , taskDate} = state.mainReducer;
+  const { cards } = state.createTaskReducer;
   return {
       emailValue,
       passwordValue,
       idValue,
-      userData
+      userData,
+      mainCards,
+      mainTasks,
+      dateArray,
+      minDate,
+      mission,
+      tasks,
+      missionDate,
+      cards,
+      taskDate
   }
 }
 
 export default connect(
   mapStateToProps,
   {
-    
-  
+    deleteCard,
+    listCard,
+    listTasks,
+    getTasks
   }
 )(Main)
 

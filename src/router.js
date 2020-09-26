@@ -4,7 +4,7 @@ import SignIn from './components/authentication/signIn';
 import SignUp from './components/authentication/signUp';
 import SideBar from './components/helpComponents/sideBar';
 import Main from './components/pages/Main';
-import Page3 from './components/pages/Page3';
+import MyTasks from './components/pages/MyTasks';
 import Users from './components/pages/Users';
 import CreateTask from './components/pages/CreateTask';
 
@@ -15,8 +15,8 @@ export default class RouterComp extends Component {
             <Router>
             <Stack  key="auth"   >
                 <Stack  initial key="root" hideNavBar >
-                    <Scene initial hideNavBar key="signIn" component={SignIn} />
-                    <Scene hideNavBarkey="signUp" component={SignUp} />
+                    <Scene  initial hideNavBar key="signIn" component={SignIn} />
+                    <Scene  hideNavBar key="signUp" component={SignUp} />
                 </Stack>
                     
                     {/* <Stack initial  key="main" hideNavBar>
@@ -35,7 +35,7 @@ export default class RouterComp extends Component {
                     <Stack  key="main"  hideNavBar  >
                         <Drawer contentComponent={SideBar} hideNavBar>
                             <Scene key="Main" component={Main} />
-                            <Scene key="page3" component={Page3}   />
+                            <Scene key="mytasks" component={MyTasks}   />
                         </Drawer>  
                     </Stack>
                 </Stack>

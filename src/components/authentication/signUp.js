@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button,Text,TouchableOpacity,TextInput,View ,StyleSheet,Image, ImageBackground} from 'react-native';
+import { Button,Text,TouchableOpacity,TextInput,View ,StyleSheet,Image, ImageBackground, AsyncStorage} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
@@ -15,18 +15,29 @@ class signUp extends Component {
       fullNameValue: "",
       emailValue: "",
       passwordValue: "",
-      phoneToken:"umutabcDff"
+      token : ""
       
     }
   }
+  
 
   onFullNameChanged = (value) => this.props.fullNameChange(value)
   onEmailChanged    = (value) => this.props.emailChange(value)
   onPasswordChanged = (value) => this.props.passwordChange(value)
-  onSignUp = () => this.props.signUpClicked(this.props.fullNameValue, this.props.emailValue, this.props.passwordValue)
+  onSignUp = () =>{ 
+    AsyncStorage.getItem("device").then((token) => {
+      console.log("token", token)
+      this.props.signUpClicked(this.props.fullNameValue, this.props.emailValue, this.props.passwordValue,token)
+})
+      
+   
+    
+           }
   
+
     render() {
       const { emailValue, passwordValue, fullNameValue } = this.props;
+    
         return (
           <View style={styles.background}>
             <Image style={styles.icon}
@@ -62,7 +73,7 @@ class signUp extends Component {
             </TouchableOpacity>
                 <Text style={styles.questionText}>Hesabın varsa burda ne işin var?
                     <Text style={styles.loginButtonText}
-                          onPress = {() => Actions.goToLogin()}> Giriş yap </Text>
+                          onPress = {() => Actions.signIn()}> Giriş yap </Text>
                 </Text>
             </View>
           </View>   
@@ -125,11 +136,12 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  const { fullNameValue, emailValue, passwordValue } = state.authenticationReducer;
+  const { fullNameValue, emailValue, passwordValue,phoneToken } = state.authenticationReducer;
   return {
       emailValue,
       passwordValue,
-      fullNameValue
+      fullNameValue,
+      phoneToken
   }
 }
 

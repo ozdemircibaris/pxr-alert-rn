@@ -8,6 +8,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { PhoneHeight, PhoneWidth, responsiveSize } from '../config/env';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { getCategories, newCard } from '../../actions/createTaskAction'
 
  class CreateTask extends Component {
   state={
@@ -19,7 +20,7 @@ import { connect } from 'react-redux';
     modalVisible: false,
     cat_id: "",
     selectedRadio: false,
-    categories: [],
+    // categories: [],
     androidMode : "date",
     title: "",
     body: ""
@@ -27,22 +28,9 @@ import { connect } from 'react-redux';
 
   // get category 
   componentDidMount(){
-    console.log("cats: ", this.state.categories);
-    axios.get("http://pxralert.ozdemircibaris.xyz/api/v1/task-categories",{
-      headers: {
-        'Authorization': `Bearer ${this.props.userData[0].token} ` 
-      }
-    }).
-    then((res) => {
-      console.log("result: " ,res.data.data)
-      this.setState({
-        categories: res.data.data
-      })
-    })
-    .catch((error) => {
-      console.log("error :", error)
-  })
+    this.props.getCategories(this.props.userData.token)
   }
+
  
   //  ***FONKSIYONLAR***
   dateTimePicking = () => {
@@ -117,14 +105,24 @@ import { connect } from 'react-redux';
           <TextInput
             style={styles.taskHeaderInput}
             placeholder="İşin Başlığı"
-            value={this.props.task.item == null ? "" : this.props.task.item.title}
-            placeholderTextColor='#852E4C'>
+            placeholderTextColor='#852E4C'
+            onChangeText={(text) => {
+              this.setState({
+                title: text
+              })
+              console.log("title", this.state.title)
+            }}>
           </TextInput>
           <TextInput
             style={styles.taskInfoInput}
             placeholder="İşin Tanımı"
-            value={this.props.task.item == null ? "" : this.props.task.item.body}
-            placeholderTextColor='#852E4C'>
+            placeholderTextColor='#852E4C'
+            onChangeText={(value) => {
+              this.setState({
+                body: value
+              })
+              console.log("body:",this.state.body);
+            }}>
           </TextInput>
           <TouchableOpacity
             style={styles.openButton}
@@ -135,7 +133,8 @@ import { connect } from 'react-redux';
             <Text style={styles.textStyle}>Kategori Seç</Text>
           </TouchableOpacity>
           <View style={styles.focusButtonContainer}>
-            <TouchableOpacity style={styles.focusButton} >
+            <TouchableOpacity style={styles.focusButton}
+                              onPress={() => this.props.newCard(cat_id, title, body, this.props.userData.data.id, this.props.userData.token)} >
               <Text style={styles.focusButtonText}>Hedefe Kitlen</Text>
             </TouchableOpacity>
           </View>
@@ -153,7 +152,7 @@ import { connect } from 'react-redux';
           <View style={styles.taskInfoView}>
             {/* // style={styles.taskInfoInput}
             // placeholder="İşin Tanımı" */}
-            <Text style={styles.taskInfoTxt}>{this.props.task.item == null ? "detay b ulunamadı" : this.props.task.item.body}</Text>
+            <Text style={styles.taskInfoTxt}>{this.props.task.item == null ? "detay b ulunamadı" : this.props.task.item.subTitle}</Text>
             {/* // placeholderTextColor='#852E4C' */}
           </View>
           <View style={styles.calendar}>
@@ -174,7 +173,7 @@ import { connect } from 'react-redux';
            
           </View>
           <View style={styles.focusButtonContainer}>
-            <TouchableOpacity style={styles.focusButton} onPress = {() => Actions.Users()}>
+            <TouchableOpacity style={styles.focusButton} onPress = {() => Actions.Users({cat_id: "1", title: this.props.task.item.title, body: this.props.task.item.body, date: date})}>
               <Text style={styles.focusButtonText}>Hedefe Kitlen </Text>
             </TouchableOpacity>
           </View>
@@ -289,7 +288,7 @@ import { connect } from 'react-redux';
     this.setState({ show: Platform.OS === 'ios', date: currentDate })
     console.log("deneme ios" , moment(currentDate).format('LTS'));
   }else{
-    if(this.state.aMode == "date"){
+    if(this.state.androidMode == "date"){
       this.setState({  date: currentDate })
     console.log("android" , )
     this.showAndroidTimepicker();
@@ -334,7 +333,7 @@ console.log("showtimepicker")
   render() {
     const { show, dateValue, pickerMode, modalVisible, dateModalVisible, categories, title, body} = this.state
     console.log("kategori ıd", this.state.cat_id);
-    console.log("token bee ", this.props.userData[0].token);
+    console.log("token bee ", this.props.userData.token);
 
     return ( 
       <View style={styles.background}>
@@ -357,7 +356,7 @@ console.log("showtimepicker")
                 <Image style={styles.closeIcon} source={require('../../images/arrow.png')} />
               </TouchableOpacity>
               <FlatList // listing category
-                data={categories}
+                data={this.props.categories}
                 renderItem={this.categoriesRenderItem}
                 keyExtractor={item => item.id}
                 />
@@ -367,7 +366,7 @@ console.log("showtimepicker")
         <this.getDateTime/>
 
         <View style={styles.header}>
-          <Text style={styles.headerText}>Merhaba Murat.{"\n"}Birine iş kitlemek için harika bir gün!</Text>
+          <Text style={styles.headerText}>Merhaba {this.props.userData.data.fullName}{"\n"}Birine iş kitlemek için harika bir gün!</Text>
         </View>
         <this.dateTimePicking/>
       </View>  
@@ -631,17 +630,20 @@ marginLeft: 5
 });
 const mapStateToProps = (state) => {
   const {  emailValue, passwordValue ,idValue, userData} = state.authenticationReducer;
+  const { categories } = state.createTaskReducer;
   return {
       emailValue,
       passwordValue,
       idValue,
-      userData
+      userData,
+      categories
   }
 }
 export default connect(
   mapStateToProps,
   {
-    
+    getCategories,
+    newCard
   
   }
 )(CreateTask)

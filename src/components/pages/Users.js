@@ -4,58 +4,70 @@ import { PhoneWidth, PhoneHeight, responsiveSize } from '../config/env';
 import axios from 'axios';
 import UsersRenderItem from '../helpComponents/usersRenderItem';
 import { connect } from 'react-redux';
-import { selectUsers } from '../../actions/usersAction';
+import { selectUsers, createTask, listUsers } from '../../actions/usersAction';
+import { Actions } from 'react-native-router-flux';
 
 class Users extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            users: [],
+            // users: [],
             color: "white",
         };
     }
 
     componentDidMount() {
-     axios.get("http://pxralert.ozdemircibaris.xyz/api/v1/users/")
-        .then((res) => {
-            // console.log("res :", res.data.data)
-            res.data.data.map((item) => {
-                item.selected = "false"
-            })
-            this.setState({
-                users: res.data.data,
-            })
-            // console.log("array :", this.state.users)
-        })
-        .catch((error) => {
-            console.log("error :", error)
-        })
+        this.props.listUsers(this.props.userData.token)
+        // axios({
+        //     method: "GET",
+        //     url: `http:pxralert.ozdemircibaris.xyz/api/v1/users`,
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Accept': 'application/json',
+        //         'Authorization': `Bearer ${this.props.userData[0].token} ` 
+        //     },
+        //         // data: {cat_id: cat_id, title: title, subTitle: body, jobDate: date, user_id: "22"}     
+        //     }).then((res) => {
+        //     // console.log("res :", res.data.data)
+        //     res.data.data.map((item) => {
+        //         item.selected = "false"
+        //     })
+        //     this.setState({
+        //         users: res.data.data,
+        //     })
+        //     // console.log("array :", this.state.users)
+        // })
+        // .catch((error) => {
+        //     console.log("error :", error)
+        // })
     }
-    createTask =() => {
-     const {title, body, date, cat_id} = this.props;
-        axios({
-            method: "POST",
-            url: `http:pxralert.ozdemircibaris.xyz/api/v1/tasks`,
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Authorization': `Bearer ${this.props.userData[0].token} ` 
-            },
-                data: {cat_id: cat_id, title: title, subTitle: body, jobDate: date, user_id: "22"}     
-            }).then((result) => {
-                console.log("resultttt" , result.data)
-                if(result.data.status == "success"){
-                console.log("Başarılı")
+    // createTask =() => {
+    //  const {title, body, date, cat_id} = this.props;
+    //     axios({
+    //         method: "POST",
+    //         url: `http:pxralert.ozdemircibaris.xyz/api/v1/tasks`,
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'Accept': 'application/json',
+    //             'Authorization': `Bearer ${this.props.userData[0].token} ` 
+    //         },
+    //             data: {cat_id: cat_id, title: title, subTitle: body, jobDate: date, user_id: "2"}     
+    //         }).then((result) => {
+    //             console.log("resultttt" , result.data)
+    //             if(result.data.status == "success"){
+    //             console.log("Başarılı")
+    //             Actions.page3()
                 
-                }
-            }).catch((err) => {
-                console.log('errorrrruurr', err.response)
-                alert('başarısız')
-            })
-    }
+    //             }
+    //         }).catch((err) => {
+    //             console.log('errorrrruurr', err.response)
+    //             alert('başarısız')
+    //         })
+    // }
 
     render() {
         console.log("id users:", this.props.usersId ) 
+        const {title, body, date, cat_id, usersId} = this.props;
         return (
           <View style={styles.container}>
               <View style={styles.header}>
@@ -64,13 +76,13 @@ class Users extends Component {
               </View>
               <View style={styles.body}>
                   <FlatList
-                      data={this.state.users}
+                      data={this.props.users}
                       renderItem={({item}) => <UsersRenderItem item= {item}/>}
                       keyExtractor={item => item.id}  
                   />
                   <TouchableOpacity 
                             style={styles.button}
-                            onPress={() => this.createTask()} >
+                            onPress={() => this.props.createTask(title, body, date, cat_id, usersId, this.props.userData.token)} >
                       <Text style={styles.btnText}>KİTLEEE!</Text>
                   </TouchableOpacity>
               </View>
@@ -144,12 +156,12 @@ const styles = StyleSheet.create({
     }
 });
 const mapStateToProps = (state) => {
-    const { usersId } = state.usersReducer;
+    const { usersId, users } = state.usersReducer;
     const {userData} = state.authenticationReducer;
     return {
-
         usersId,
-        userData
+        userData,
+        users
     }
 }
 
@@ -157,5 +169,7 @@ export default connect(
     mapStateToProps,
     {
         selectUsers,
+        createTask,
+        listUsers
     }
 )(Users)
