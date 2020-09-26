@@ -8,7 +8,7 @@ import { selectUsers } from '../../actions/usersAction';
 
 class UsersRenderItem extends Component {
 
-    select = (item) => this.props.selectUsers( item, this.props.selectedId )
+    select = (item) => this.props.selectUsers( item, this.props.selectedId , this.props.count)
 
     render() {
         const { item } = this.props;
@@ -94,10 +94,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-    const { selectedId, usersId } = state.usersReducer;
+    const { selectedId, usersId, count} = state.usersReducer;
     return {
         selectedId,
         usersId,
+        count
     }
 }
 export default connect(

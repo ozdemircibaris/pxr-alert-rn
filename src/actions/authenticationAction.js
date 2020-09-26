@@ -36,7 +36,8 @@ export const passwordChange = (value) => {
 }
 
 
-export const signUpClicked = (fullName, email, password) => {
+export const signUpClicked = (fullName, email, password, token) => {
+    console.log("token 3", token)
     return dispatch => {
         dispatch({
             type: SIGN_UP_CLICK,
@@ -49,7 +50,7 @@ export const signUpClicked = (fullName, email, password) => {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-             data: JSON.stringify({fullName: fullName, email: email, password: password, phoneToken: "hhssssssdassshhsssaaa",})       
+             data: JSON.stringify({fullName: fullName, email: email, password: password, phoneToken: token})       
          }).then((result) => {
              console.log("resultttt" , result.data)
              if(result.data.status == "success"){
@@ -81,21 +82,22 @@ export const signInClicked = ( email, password) => {
             },
              data: JSON.stringify({ email: email, password: password })       
          }).then((result) => {
-             console.log("resultttt" , result.data)
+             console.log("resultttt" , result)
              
              if(result.data.status == "success"){
                  console.log("user Id", result.data.data.id)
-                  Actions.Main()
-                
-                dispatch({
+                 dispatch({
                     type: SIGN_IN_SUCCESS,
                     payload: {id: result.data.data.id, data: result.data}
                 })
+                 Actions.Main()
+                
+                
 
                     
              }
          }).catch((err) => {
-             console.log('errorrrruurr', err.response)
+             console.log('errorrrruurr', err)
              alert('HATALI ŞİFRE VEYA E-POSTA')
          })
     }
