@@ -18,53 +18,9 @@ class Users extends Component {
     }
     componentDidMount() {
         this.props.listUsers(this.props.userData.token)
-        // axios({
-        //     method: "GET",
-        //     url: `http:pxralert.ozdemircibaris.xyz/api/v1/users`,
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'Accept': 'application/json',
-        //         'Authorization': `Bearer ${this.props.userData[0].token} ` 
-        //     },
-        //         // data: {cat_id: cat_id, title: title, subTitle: body, jobDate: date, user_id: "22"}     
-        //     }).then((res) => {
-        //     // console.log("res :", res.data.data)
-        //     res.data.data.map((item) => {
-        //         item.selected = "false"
-        //     })
-        //     this.setState({
-        //         users: res.data.data,
-        //     })
-        //     // console.log("array :", this.state.users)
-        // })
-        // .catch((error) => {
-        //     console.log("error :", error)
-        // })
+       
     }
-    // createTask =() => {
-    //  const {title, body, date, cat_id} = this.props;
-    //     axios({
-    //         method: "POST",
-    //         url: `http:pxralert.ozdemircibaris.xyz/api/v1/tasks`,
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Accept': 'application/json',
-    //             'Authorization': `Bearer ${this.props.userData[0].token} ` 
-    //         },
-    //             data: {cat_id: cat_id, title: title, subTitle: body, jobDate: date, user_id: "2"}     
-    //         }).then((result) => {
-    //             console.log("resultttt" , result.data)
-    //             if(result.data.status == "success"){
-    //             console.log("Başarılı")
-    //             Actions.page3()
-                
-    //             }
-    //         }).catch((err) => {
-    //             console.log('errorrrruurr', err.response)
-    //             alert('başarısız')
-    //         })
-    // }
-
+   
     render() {
         console.log("id users:", this.props.usersId ) 
         const {title, body, date, cat_id, usersId} = this.props;

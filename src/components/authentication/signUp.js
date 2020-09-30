@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
       width: PhoneWidth * 0.7,
       height: PhoneHeight * 0.05,
       margin: 10,
-      color: 'red',
+      color: 'black',
       fontSize: responsiveSize(11),
       textAlign: "center",
       borderColor: "#852e4c",

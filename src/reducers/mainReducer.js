@@ -1,11 +1,18 @@
 import{
-    DELETE_CLICK, LIST_CARD, LIST_CARD_SUCCESS, LIST_TASKS, LIST_TASKS_SUCCESS,DATE_MAP,
+    DELETE_CLICK, 
+    DELETE_CARD_SUCCESS,
+    LIST_CARD, 
+    LIST_CARD_SUCCESS, 
+    LIST_TASKS, 
+    LIST_TASKS_SUCCESS,
+    DATE_MAP,
     DATE_SORT,
     GET_MIN_TASK,
     GET_TASKS,
     GET_TASKS_SUCCESS,
     TASKS_MAP
 } from "../actions/mainAction";
+import { SUCCESS } from "../actions/createTaskAction"
 
 
 const INITIAL_STATE = {
@@ -19,7 +26,7 @@ const INITIAL_STATE = {
     sorted: [],
     sortedMin: [],
     minDate: [],
-    taskDate: []
+    taskDate: ""
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -27,6 +34,13 @@ export default (state = INITIAL_STATE, action) => {
         case DELETE_CLICK:
             return {
                 ...state, 
+            }
+            case DELETE_CARD_SUCCESS:
+            let index = state.mainCards.indexOf(action.payload);
+            console.log("index", index)
+            state.mainCards.splice(index, 1)
+            return {
+                ...state,
             }
             case LIST_CARD:
             return {
@@ -37,6 +51,11 @@ export default (state = INITIAL_STATE, action) => {
                 ...state, 
                 mainCards: state.mainCards.concat(action.payload)  
             }
+            case SUCCESS:
+                return {
+                    ...state, 
+                    mainCards: state.mainCards.concat(action.payload)  
+                }
             case LIST_TASKS:
             return {
                 ...state, 
@@ -78,6 +97,7 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
             }
         case DATE_SORT:
+            console.log("bu ne", action.payload)
             return {
                 ...state,
                 sorted: action.payload.sorted,
@@ -86,13 +106,13 @@ export default (state = INITIAL_STATE, action) => {
         case GET_MIN_TASK:
             state.tasks.map((item) => {
                 if (item.jobDate == state.sortedMin) {
-                    return {
-                        ...state,
-                        minDate: state.minDate.push(item),
-                        taskDate: state.minDate[0]
-                    }
+                    state.minDate.push(item)
                 }
             })
+            return {
+                ...state,
+                taskDate: state.minDate[0]
+            }
             default:
                     return state;
                 

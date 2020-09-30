@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import signIn from '../authentication/signIn';
 import { PhoneHeight, responsiveSize, PhoneWidth } from '../config/env';
 
 export default class SideBar extends Component {
     constructor(props) {
         super(props);
-        
-    }  
+     
+   }  
   render() {
     return (
        <View style ={styles.outContainer}>
@@ -22,7 +23,9 @@ export default class SideBar extends Component {
                   <TouchableOpacity onPress={() => Actions.mytasks()}><Text style = {styles.title}> Bana Gelen Görevler </Text></TouchableOpacity> 
                </View>
                <View style={styles.logOutContainer}>
-                  <TouchableOpacity onPress={() => Actions.goToLogin()}>
+                  <TouchableOpacity
+                   style={styles.logOutBtn}
+                   onPress={() => Actions.jump('signIn')}>
                      <Text style={styles.logOutText}>ÇIKIŞ YAP</Text>
                   </TouchableOpacity>
                </View>
@@ -67,6 +70,19 @@ let styles = StyleSheet.create({
         top: "50%"
      },
      logOutText:{
-        fontSize: responsiveSize(13)
+        fontSize: responsiveSize(13),
+        color:'white'
+     },
+     logOutBtn:{
+      width: PhoneWidth * 0.55,
+      height: PhoneHeight * 0.050,
+      marginTop: 20,
+      borderTopLeftRadius: 0,
+      borderTopLeftRadius: 0,
+      borderTopRightRadius: 5,
+      borderBottomRightRadius: 5,
+      backgroundColor: "#852e4c",
+      justifyContent: "center",
+      alignItems:'center'
      }
 });

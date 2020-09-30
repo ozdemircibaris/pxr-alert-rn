@@ -3,6 +3,7 @@ import { API_BASE } from '../components/config/env';
 import { Actions } from 'react-native-router-flux';
 
 export const DELETE_CLICK= "delete_clicked";
+export const DELETE_CARD_SUCCESS = "DELETE_CARD_SUCCESS"
 export const LIST_CARD = "LIST_CARD"
 export const LIST_CARD_SUCCESS = "LIST_CARD_SUCCESS";
 export const LIST_TASKS = "LIST_TASKS"
@@ -68,23 +69,25 @@ export const listCard = (token, id,cards) => {
     })
     }
   }
-export const deleteCard = (value, data) => {
+export const deleteCard = (itemId, token, item) => {
     return dispatch => {
         dispatch({
-            type: DELETE_CLICK,
-            payload:value
+            type: DELETE_CLICK
         })
-        console.log("value:", value)
+        console.log("itemId:", item)
         axios({
             method: "DELETE",
-            url: `${API_BASE}/mytasks/delete/${value}`,
+            url: `${API_BASE}/mytasks/delete/${itemId}`,
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                'Authorization': `Bearer ${data}`
-            },
-            //  data: JSON.stringify({fullName: fullName, email: email, password: password, phoneToken: "hhssssssdassshhsssaaa",})       
+                'Authorization': `Bearer ${token}`
+            },     
          }).then((result) => {
+           dispatch({
+             type: DELETE_CARD_SUCCESS,
+             payload: item
+           })
              console.log("resultttt" , result)
             
          }).catch((err) => {
@@ -93,15 +96,15 @@ export const deleteCard = (value, data) => {
          })
     }
 }
-export const getTasks = ( dateArray, mission) => {
+export const getTasks = ( dateArray, mission, id, token) => {
   return dispatch => {
       dispatch({
           type: GET_TASKS,
           payload: []
       })
-      axios.get(`${API_BASE}/tasks/2`, {
+      axios.get(`${API_BASE}/tasks/${id}`, {
           headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6eyJpZCI6MiwiZnVsbE5hbWUiOiJVbXV0IGfDvGxlIiwiZW1haWwiOiJVbXV0QGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiNDQ1MjYxIiwicGhvbmVUb2tlbiI6Imhoc3Nzc3NzZGFzc3NoaHNzc2FhYSJ9LCJlbWFpbCI6IlVtdXRAZ21haWwuY29tIiwiaWF0IjoxNjAwNjk4NDkwLCJleHAiOjE2MDA3MDU2OTB9.fJXi-THSQFyMXW9QpMI1PfxCZXvMD4sGk0nTeRqtDqU '
+            'Authorization': `Bearer ${token} `
           },
         }).then((result) => {
             dispatch({
@@ -121,9 +124,9 @@ export const getTasks = ( dateArray, mission) => {
           })
             var sorted = dateArray.slice()
               .sort(function (a, b) {
-                return new Date(b) < new Date(a);
+                return new Date(a) < new Date(b);
               });
-              var sortedMin = sorted[0];
+              var sortedMin = sorted[sorted.length - 1];
               dispatch({
                   type: DATE_SORT,
                   payload: {sorted: sorted, sortedMin: sortedMin}
