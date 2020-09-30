@@ -8,6 +8,7 @@ import { color } from 'react-native-reanimated';
 import { PhoneWidth, PhoneHeight,responsiveSize} from '../config/env';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import moment from 'moment';
 import {getData, deleteTask} from '../../actions/MyTasksAction';
 
  export class MyTasks extends Component {
@@ -30,7 +31,7 @@ import {getData, deleteTask} from '../../actions/MyTasksAction';
     return(
       <View style={styles.missionBox} >
   
-      <View style={styles.missionBodyBox} backgroundColor={"red"}>
+      <View style={styles.missionBodyBox} backgroundColor={item.taskCategoriesModel.color}>
       
       <TouchableOpacity 
            onPress= {() => {this.setModalVisible()
@@ -38,18 +39,21 @@ import {getData, deleteTask} from '../../actions/MyTasksAction';
                              item
                            })}}
            style={styles.deleteButton} >
-      <Image style= {styles.iconImg} source={require('../../images/deleteIcon.png')}></Image>
+      
       </TouchableOpacity>
 
   <View style={styles.headersBtn}><Text style={styles.titleTxt}>{item.title}</Text>
-   <Text style={styles.infoTxt}>{item.subTitle}</Text></View>
+   <Text style={styles.infoTxt}>{item.subTitle}</Text>
+   <Text style={styles.infoTxt}>{moment(item.jobDate).format("llll")}</Text>
+   </View>
+ 
         
       </View>
     </View>
     )
     };
 
-  componentWillMount(){
+  componentWillMount(){ 
     this.props.getData(this.props.userData.token, this.props.userData.data.id);
     
   }
@@ -109,6 +113,7 @@ render() {
       <View style={styles.end}></View>
 
         <TouchableOpacity
+          onPress={() => Actions.CreateTask({task: "", newTaskStatus: "newTask"})}
           style={styles.SubmitButtonStyle}
           activeOpacity={.5}>
           <Image style ={styles.TextStyle} source={require('../../images/plus.png')}/>
@@ -128,7 +133,8 @@ const styles = StyleSheet.create({
   },
   headersBtn:{
 
-  },infoTxt:{
+  },
+  infoTxt:{
     alignSelf:'center',
     paddingTop:'6%',
   },
@@ -177,14 +183,14 @@ const styles = StyleSheet.create({
   SubmitButtonStyle:{
     paddingTop:'1%'
   },
-  deleteButton: {
-    borderWidth: 1,
-    width: PhoneWidth * 0.05,
-    height: PhoneHeight * 0.02,
-    alignSelf: 'flex-end',
-    backgroundColor: 'black',
-    borderRadius: 5
-  },
+  // deleteButton: {
+  //   borderWidth: 1,
+  //   width: PhoneWidth * 0.05,
+  //   height: PhoneHeight * 0.02,
+  //   alignSelf: 'flex-end',
+  //   backgroundColor: 'black',
+  //   borderRadius: 5
+  // },
   iconImg:{
     height: PhoneHeight * 0.027,
     width: PhoneWidth * 0.053,

@@ -36,12 +36,12 @@ import { getCategories, newCard } from '../../actions/createTaskAction'
   dateTimePicking = () => {
     
     const { show, dateValue, pickerMode, dateModalVisible, title, body, cat_id, date } = this.state
-    if (this.props.newTaskStatus == 'newTask') { // + butonuna basınca calısacak olan kısım 
+    if (this.props.newTaskStatus == 'newTask') { // + butonuna basÄ±nca calÄ±sacak olan kÄ±sÄ±m 
       return (
        <View style={styles.container}>
           <TextInput
             style={styles.taskHeaderInput}
-            placeholder="İşin"
+            placeholder="İşin Adı"
             // value={this.props.task.item == null ? null : this.props.task.item.title}
             placeholderTextColor='#852E4C'
             onChangeText={(text) => {
@@ -70,7 +70,7 @@ import { getCategories, newCard } from '../../actions/createTaskAction'
           >
             <Text style={styles.textStyle}>Kategori Seç</Text>
           </TouchableOpacity>
-          {/* tarih acıcı buton */}
+          {/* tarih acÄ±cÄ± buton */}
       
           <View style={styles.calendar}>
           {
@@ -99,7 +99,7 @@ import { getCategories, newCard } from '../../actions/createTaskAction'
           </View>
         </View>
     )
-    } else if(this.props.newTaskStatus == 'newCard'){ //sidebardan gelen yeni kart ekle sayfasında calıscak kısım 
+    } else if(this.props.newTaskStatus == 'newCard'){ //sidebardan gelen yeni kart ekle sayfasında calÄ±scak kÄ±sÄ±m 
       return (
         <View style={styles.container}>
           <TextInput
@@ -140,19 +140,19 @@ import { getCategories, newCard } from '../../actions/createTaskAction'
           </View>
         </View>
       )
-    }else{ //anaSayfadaki kartlara basılınca cıkacak olan kısım 
+    }else{ //anaSayfadaki kartlara basÄ±lÄ±nca cÄ±kacak olan kÄ±sÄ±m 
       return (
         <View style={styles.container}>
           <View style={styles.taskHeaderView}>
             {/* style={styles.taskHeaderInput}
-            placeholder="İşin Başlığı" */}
-           <Text style={styles.taskHeaderTxt}>{this.props.task.item == null ? "detay bulunamadı" : this.props.task.item.title}</Text>
+            placeholder="Ä°ÅŸin BaÅŸlÄ±ÄŸÄ±" */}
+           <Text style={styles.taskHeaderTxt}>{this.props.task.item == null ? "detay bulunamadÄ±" : this.props.task.item.title}</Text>
             {/* placeholderTextColor='#852E4C'> */}
           </View>
           <View style={styles.taskInfoView}>
             {/* // style={styles.taskInfoInput}
-            // placeholder="İşin Tanımı" */}
-            <Text style={styles.taskInfoTxt}>{this.props.task.item == null ? "detay b ulunamadı" : this.props.task.item.subTitle}</Text>
+            // placeholder="Ä°ÅŸin TanÄ±mÄ±" */}
+            <Text style={styles.taskInfoTxt}>{this.props.task.item == null ? "detay b ulunamadÄ±" : this.props.task.item.subTitle}</Text>
             {/* // placeholderTextColor='#852E4C' */}
           </View>
           <View style={styles.calendar}>
@@ -173,7 +173,7 @@ import { getCategories, newCard } from '../../actions/createTaskAction'
            
           </View>
           <View style={styles.focusButtonContainer}>
-            <TouchableOpacity style={styles.focusButton} onPress = {() => Actions.Users({cat_id: "1", title: this.props.task.item.title, body: this.props.task.item.body, date: date})}>
+            <TouchableOpacity style={styles.focusButton} onPress = {() => Actions.Users({cat_id: cat_id, title: this.props.task.item.title, body: this.props.task.item.subTitle, date: date})}>
               <Text style={styles.focusButtonText}>Hedefe Kitlen </Text>
             </TouchableOpacity>
           </View>
@@ -184,10 +184,10 @@ import { getCategories, newCard } from '../../actions/createTaskAction'
 
   getDateTime = () =>{
     // this.showMode("time")
-    console.log("hello ANDROİD")
+    console.log("hello ANDROÄ°D")
     const { show, dateValue, pickerMode, dateModalVisible, androidMode } = this.state
     if(Platform.OS == "ios"){
-      // console.log("nereye bu giriş");
+      // console.log("nereye bu giriÅŸ");
       return(
         <Modal
                 animationType="slide"
@@ -199,7 +199,7 @@ import { getCategories, newCard } from '../../actions/createTaskAction'
               >
                 <View style={styles.dateCenteredView}>
                   <View style={styles.dateModalView}>
-                    <Text style={styles.dateModalText}>Ne zamanana kitlersin ? </Text>
+                    <Text style={styles.dateModalText}>Ne zamanana kitlersin? </Text>
       <TouchableOpacity style={ styles.date}>
               {this.state.show && (
           <DateTimePicker
@@ -271,7 +271,8 @@ import { getCategories, newCard } from '../../actions/createTaskAction'
                 height: PhoneHeight * 0.03,
                 borderRadius:50,
                 marginTop: 10,
-                backgroundColor: ( this.state.cat_id==item.id) ? "pink" : "white"
+                backgroundColor: ( this.state.cat_id == item.id) ? "#852e4c" : "white",
+            
                 }}/>
           <Text style={styles.radioButtonTitle} >{item.title}</Text>
           </View>
@@ -332,7 +333,7 @@ console.log("showtimepicker")
 };
   render() {
     const { show, dateValue, pickerMode, modalVisible, dateModalVisible, categories, title, body} = this.state
-    console.log("kategori ıd", this.state.cat_id);
+    console.log("kategori adı", this.state.cat_id);
     console.log("token bee ", this.props.userData.token);
 
     return ( 
@@ -366,7 +367,7 @@ console.log("showtimepicker")
         <this.getDateTime/>
 
         <View style={styles.header}>
-          <Text style={styles.headerText}>Merhaba {this.props.userData.data.fullName}{"\n"}Birine iş kitlemek için harika bir gün!</Text>
+          <Text style={styles.headerText}>Merhaba, {this.props.userData.data.fullName}{"\n"}Birine iş kitlemek için harika bir gün!</Text>
         </View>
         <this.dateTimePicking/>
       </View>  
@@ -410,7 +411,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: responsiveSize(15),
     marginTop: 20,
-    alignSelf: "center",
+    alignSelf: "center"
   },
   taskHeaderView:{
     borderWidth: 2,
@@ -524,10 +525,10 @@ centeredView: {
     borderWidth: 0
 },
 modalView: {
-    backgroundColor: "pink",
+    backgroundColor: "white",
     padding: 35,
     alignItems: "flex-start",
-    borderWidth: 0,
+    borderWidth: 1,
     borderColor: '#852E4C',
     width: PhoneWidth,
     height: PhoneHeight * 0.3,

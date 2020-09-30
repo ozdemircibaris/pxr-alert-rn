@@ -31,34 +31,21 @@ export  class Main extends Component {
   }
         
   componentWillMount() {
-    this.props.getTasks(this.props.dateArray, this.props.minDate);
+    this.props.getTasks(this.props.dateArray, this.props.minDate, this.props.userData.data.id, this.props.userData.token);
     this.props.listCard(this.props.userData.token, this.props.userData.data.id , this.props.mainCards)
-    this.props.listTasks(this.props.userData.token, this.props.userData.data.id)
+    // this.props.listTasks(this.props.userData.token, this.props.userData.data.id)
     console.log("a",this.props.minDate)}
 
   componentDidMount(){
     console.log("mission map", this.props.mainTasks)
   }
-  modalRender = (item) =>{
-    // console.log("bıktım",item.item.id)
 
-    return(
-      <View >
-        <Text>{item.item.title}</Text>
-        <Text> {item.item.subTitle} </Text>
-        <Text>{moment(item.item.jobDate).format("llll")}</Text>
-      </View>
-    )
-  }
-  
- 
-
-  missionRenderItem = ({ item }) => {
+ missionRenderItem = ({ item }) => {
     return(
       <View style={styles.taskBox} >
     <View style={styles.categoryColorView} >
       <View style={styles.hr}>
-        <View style={styles.circle} backgroundColor={item.color}></View>
+        <View style={styles.circle} backgroundColor={item.taskCategoriesModel.color}></View>
         <TouchableOpacity 
            onPress= {() => {this.setModalVisible()
                            this.setState({
@@ -80,25 +67,18 @@ export  class Main extends Component {
     };
 
   render() {
-    const {minDate} = this.props;
+    const {minDate, taskDate} = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.greetingContainer}>
           <Text style={styles.greetingText}>Merhaba {this.props.userData.data.fullName}</Text>
           <Text style={styles.containerText}>Sana kitlenenler burda</Text>
         </View> 
-        {/* <View style={styles.currentTask}>
-        <Text>{minDate[0].title}</Text>
-          <Text> {minDate[0].subTitle} </Text>
-          <Text>{moment(minDate[0].jobDate).format("llll")}</Text>
-        </View> */}
-        <View style={styles.currentTask}>
-        <FlatList
-            data={minDate}
-            renderItem={this.modalRender}
-            keyExtractor={item => item.id}
-          />
-      </View>
+        <ScrollView style={styles.currentTask} backgroundColor={taskDate.taskCategoriesModel.color}>
+        <Text style={styles.jobTitle}>{taskDate.title}</Text>
+          <Text style={styles.subTitle}> {taskDate.subTitle} </Text>
+          <Text style={styles.jobDate}>{moment(taskDate.jobDate).format("llll")}</Text>
+        </ScrollView>
 
         <Modal
           animationType="slide"
@@ -116,7 +96,7 @@ export  class Main extends Component {
                 style={styles.deleteModalButton}
                 onPress={() => {
                   // sildikten sonra modalı kapatır
-                  this.props.deleteCard(this.state.item.id,this.props.userData.token);
+                  this.props.deleteCard(this.state.item.id, this.props.userData.token, this.state.item);
                   this.setModalVisible(false);
                 }}
               >
@@ -140,7 +120,7 @@ export  class Main extends Component {
 
         <View style={styles.body}>
           <FlatList
-            data={this.props.cards}
+            data={this.props.mainCards}
             renderItem={this.missionRenderItem}
             keyExtractor={item => item.id}
           />
@@ -174,10 +154,9 @@ const styles = StyleSheet.create({
     fontSize: responsiveSize(14)
   },
   currentTask: {
-    backgroundColor: 'pink',
     alignSelf: "center",
-    width: PhoneWidth * 0.65,
-    height: PhoneHeight * 0.20,
+    width: PhoneWidth * 0.87,
+    height: PhoneHeight * 0.10,
     borderRadius: 10,
     marginTop: 20
   },
@@ -238,7 +217,6 @@ const styles = StyleSheet.create({
     alignSelf:'center',
     width: responsiveSize(45),
     height: responsiveSize(45),
-    marginTop:20
   },
   taskItemTitle:{
     fontWeight: "bold"
@@ -301,6 +279,29 @@ const styles = StyleSheet.create({
   modalText: {
     textAlign: "center",
     fontSize: responsiveSize(15)
+  },
+  jobTitle:{
+    fontWeight:'bold',
+    fontSize: responsiveSize(25),
+    alignSelf:'center',
+    color:'#591f33'
+  },
+  subTitle:{
+    fontSize: responsiveSize(20),
+    alignSelf:'center',
+    color:'#591f33',
+    marginTop:'7%'
+  },
+  jobDate:{
+    fontSize: responsiveSize(15),
+    color:'#591f33',
+    alignSelf:'center'
+  },
+  jobInfoBox:{
+    borderWidth:0,
+    alignSelf:'center',
+    width:PhoneWidth*0.6,
+    height:PhoneWidth*0.43
   }
 });
 const mapStateToProps = (state) => {
