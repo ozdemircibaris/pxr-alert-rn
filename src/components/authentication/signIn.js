@@ -37,7 +37,6 @@ export class SignIn extends Component {
  <LinearGradient colors={['#FFFFFF', '#FFFFFF', '#FFFFFF']} style={styles.linearGradient}>
     <Image style ={styles.image} source={require('../../images/candies.png')}/>
   <View style={styles.whiteBox}>
-    <Text style={styles.txt}>Girmek için parolayı söyle</Text>
 <View style={styles.generalBox}>
     <TextInput
       style={styles.userNameWrapper}
@@ -131,7 +130,7 @@ const styles = StyleSheet.create({
     ,noAccountTxt:{
       alignSelf:'center',
       fontSize:responsiveSize(13),
-      paddingTop:10
+      paddingTop: 17
       //to last text of the page
     },
     sıgnUpTxt:{

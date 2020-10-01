@@ -24,9 +24,8 @@ export default class SideBar extends Component {
                </View>
                <View style={styles.logOutContainer}>
                   <TouchableOpacity
-                   style={styles.logOutBtn}
                    onPress={() => Actions.jump('signIn')}>
-                     <Text style={styles.logOutText}>ÇIKIŞ YAP</Text>
+                     <Text style={styles.logOutText}>Çıkış Yap</Text>
                   </TouchableOpacity>
                </View>
          </View>
@@ -34,7 +33,6 @@ export default class SideBar extends Component {
       );
   }
 }
-
 let styles = StyleSheet.create({
    outContainer: {
       flexDirection: 'column',
@@ -70,19 +68,8 @@ let styles = StyleSheet.create({
         top: "50%"
      },
      logOutText:{
-        fontSize: responsiveSize(13),
-        color:'white'
-     },
-     logOutBtn:{
-      width: PhoneWidth * 0.55,
-      height: PhoneHeight * 0.050,
-      marginTop: 20,
-      borderTopLeftRadius: 0,
-      borderTopLeftRadius: 0,
-      borderTopRightRadius: 5,
-      borderBottomRightRadius: 5,
-      backgroundColor: "#852e4c",
-      justifyContent: "center",
-      alignItems:'center'
+        fontSize: responsiveSize(15),
+        color:'#852e4c',
+        fontWeight: "bold"
      }
 });

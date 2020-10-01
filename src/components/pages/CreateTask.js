@@ -42,8 +42,9 @@ import { getCategories, newCard } from '../../actions/createTaskAction'
           <TextInput
             style={styles.taskHeaderInput}
             placeholder="İşin Adı"
+            multiline
             // value={this.props.task.item == null ? null : this.props.task.item.title}
-            placeholderTextColor='#852E4C'
+            // placeholderTextColor='#852E4C'
             onChangeText={(text) => {
               this.setState({
                 title: text
@@ -54,7 +55,8 @@ import { getCategories, newCard } from '../../actions/createTaskAction'
           <TextInput
             style={styles.taskInfoInput}
             placeholder="İşin Tanımı"
-            placeholderTextColor='#852E4C'
+            multiline
+            // placeholderTextColor='#852E4C'
             onChangeText={(value) => {
               this.setState({
                 body: value
@@ -105,7 +107,7 @@ import { getCategories, newCard } from '../../actions/createTaskAction'
           <TextInput
             style={styles.taskHeaderInput}
             placeholder="İşin Başlığı"
-            placeholderTextColor='#852E4C'
+            multiline
             onChangeText={(text) => {
               this.setState({
                 title: text
@@ -116,7 +118,7 @@ import { getCategories, newCard } from '../../actions/createTaskAction'
           <TextInput
             style={styles.taskInfoInput}
             placeholder="İşin Tanımı"
-            placeholderTextColor='#852E4C'
+            multiline 
             onChangeText={(value) => {
               this.setState({
                 body: value
@@ -377,15 +379,14 @@ console.log("showtimepicker")
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
+    paddingLeft: responsiveSize(15),
+    paddingRight: responsiveSize(15),
   },
   header: {
     flex: 0.3,
     height: PhoneHeight * 0.30,
     alignItems: "center",
-    justifyContent: "center",
-    marginTop: 5,
+    justifyContent: "center"
   },
   headerText: {
     fontSize: responsiveSize(19),
@@ -393,28 +394,29 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   taskHeaderInput: {
-    borderWidth: 2,
+    borderWidth: 1.5,
     width: PhoneWidth * 0.85,
     height: PhoneHeight * 0.07,
     borderColor: "#852e4c",
     borderRadius: 8,
     textAlign: "center",
-    fontSize: responsiveSize(15),
+    fontSize: responsiveSize(13),
     alignSelf: "center",
   },
   taskInfoInput: {
-    borderWidth: 2,
+    borderWidth: 1.5,
     width: PhoneWidth * 0.85,
     height: PhoneHeight * 0.25,
     borderColor: "#852e4c",
     borderRadius: 8,
-    textAlign: "center",
-    fontSize: responsiveSize(15),
+    fontSize: responsiveSize(14),
     marginTop: 20,
-    alignSelf: "center"
-  },
+    alignSelf: "center",
+    textAlign: "center",
+    textAlignVertical: "top"
+    },
   taskHeaderView:{
-    borderWidth: 2,
+    borderWidth: 1.5,
     width: PhoneWidth * 0.85,
     height: PhoneHeight * 0.07,
     borderColor: "#852e4c",
@@ -507,7 +509,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginTop: 20,
     width: PhoneWidth * 0.38,
-    borderWidth: 2,
+    borderWidth: 1.5,
     height: PhoneHeight * 0.057,
     alignSelf: 'center',
     justifyContent: 'center',
@@ -516,7 +518,7 @@ const styles = StyleSheet.create({
 textStyle: {
     color: "#852E4C",
     textAlign: "center",
-    fontSize: responsiveSize(15),
+    fontSize: responsiveSize(15)
 },
 centeredView: {
     flex: 1,
