@@ -7,7 +7,7 @@ import moment from 'moment';
 import {deleteCard, listCard, listTasks, getTasks} from '../../actions/mainAction';
 import createTaskReducer from '../../reducers/createTaskReducer';
 import { Header } from 'react-native/Libraries/NewAppScreen';
-​
+
 export  class Main extends Component {
   constructor(props){
     super(props);
@@ -21,20 +21,20 @@ export  class Main extends Component {
       currentTask: [this.props.minDate[0]]
     }
   }
-​
+
   setModalVisible = (visible) => {
     this.setState({ deleteModal: visible });
   }
-        
+
   componentWillMount() {
     this.props.getTasks(this.props.dateArray, this.props.minDate, this.props.userData.data.id, this.props.userData.token);
     this.props.listCard(this.props.userData.token, this.props.userData.data.id , this.props.mainCards)
-    console.log("a",this.props.minDate)}
-​
+    console.log("a",this.props.minDate)
+  }
   componentDidMount(){
     console.log("mission map", this.props.mainTasks)
   }
-​
+
  missionRenderItem = ({ item }) => {
     return(
       <View style={styles.taskBox} >
@@ -316,7 +316,7 @@ const mapStateToProps = (state) => {
       taskDate
   }
 }
-​
+
 export default connect(
   mapStateToProps,
   {

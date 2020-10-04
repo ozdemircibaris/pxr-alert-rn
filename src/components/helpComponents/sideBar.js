@@ -3,12 +3,10 @@ import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import signIn from '../authentication/signIn';
 import { PhoneHeight, responsiveSize, PhoneWidth } from '../config/env';
-​
 export default class SideBar extends Component {
     constructor(props) {
         super(props);
-     
-   }  
+   }
   render() {
     return (
        <View style ={styles.outContainer}>
@@ -29,7 +27,7 @@ export default class SideBar extends Component {
                   </TouchableOpacity>
                </View>
          </View>
-       </View>       
+       </View>
       );
   }
 }

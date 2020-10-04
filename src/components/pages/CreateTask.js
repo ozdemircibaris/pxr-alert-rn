@@ -7,7 +7,6 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { PhoneHeight, PhoneWidth, responsiveSize } from '../config/env';
 import { connect } from 'react-redux';
 import { getCategories, newCard } from '../../actions/createTaskAction'
-import { ScrollView } from 'react-native-gesture-handler';
 
 class CreateTask extends Component {
   state={
