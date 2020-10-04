@@ -14,6 +14,7 @@ export default (state = INITIAL_STATE, action) => {
         case GET_MYTASKS:
             return {
                 ...state, 
+                myTasks: []
             }
             case GET_MTSUCCESS:
                 console.log("tasksmap: ", action.payload)
@@ -26,7 +27,6 @@ export default (state = INITIAL_STATE, action) => {
                 ...state, 
             }
             case DELETE_SUCCESS:
-                console.log("index",umut)
             return {
                 ...state, 
             }

@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import { Button, Platform, Text, TextInput, View, TouchableOpacity, StyleSheet, Image, ImageBackground, Modal,FlatList } from 'react-native';
+import { Platform, Text, TextInput, View, TouchableOpacity, StyleSheet, Image, Modal,FlatList, ScrollView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment'
 import 'moment/locale/tr';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { PhoneHeight, PhoneWidth, responsiveSize } from '../config/env';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { getCategories, newCard } from '../../actions/createTaskAction'
 
- class CreateTask extends Component {
+class CreateTask extends Component {
   state={
     dateModalVisible: false,
     isVisible : false,
@@ -38,12 +36,13 @@ import { getCategories, newCard } from '../../actions/createTaskAction'
     const { show, dateValue, pickerMode, dateModalVisible, title, body, cat_id, date } = this.state
     if (this.props.newTaskStatus == 'newTask') { // + butonuna basÄ±nca calÄ±sacak olan kÄ±sÄ±m 
       return (
-       <View style={styles.container}>
+       <ScrollView style={styles.container}>
           <TextInput
             style={styles.taskHeaderInput}
             placeholder="İşin Adı"
+            multiline
             // value={this.props.task.item == null ? null : this.props.task.item.title}
-            placeholderTextColor='#852E4C'
+            // placeholderTextColor='#852E4C'
             onChangeText={(text) => {
               this.setState({
                 title: text
@@ -54,7 +53,8 @@ import { getCategories, newCard } from '../../actions/createTaskAction'
           <TextInput
             style={styles.taskInfoInput}
             placeholder="İşin Tanımı"
-            placeholderTextColor='#852E4C'
+            multiline
+            // placeholderTextColor='#852E4C'
             onChangeText={(value) => {
               this.setState({
                 body: value
@@ -97,15 +97,15 @@ import { getCategories, newCard } from '../../actions/createTaskAction'
               <Text style={styles.focusButtonText}>Hedefe Kitlen</Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </ScrollView>
     )
     } else if(this.props.newTaskStatus == 'newCard'){ //sidebardan gelen yeni kart ekle sayfasında calÄ±scak kÄ±sÄ±m 
       return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
           <TextInput
             style={styles.taskHeaderInput}
             placeholder="İşin Başlığı"
-            placeholderTextColor='#852E4C'
+            multiline
             onChangeText={(text) => {
               this.setState({
                 title: text
@@ -116,7 +116,7 @@ import { getCategories, newCard } from '../../actions/createTaskAction'
           <TextInput
             style={styles.taskInfoInput}
             placeholder="İşin Tanımı"
-            placeholderTextColor='#852E4C'
+            multiline 
             onChangeText={(value) => {
               this.setState({
                 body: value
@@ -138,11 +138,11 @@ import { getCategories, newCard } from '../../actions/createTaskAction'
               <Text style={styles.focusButtonText}>Hedefe Kitlen</Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </ScrollView>
       )
     }else{ //anaSayfadaki kartlara basÄ±lÄ±nca cÄ±kacak olan kÄ±sÄ±m 
       return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
           <View style={styles.taskHeaderView}>
             {/* style={styles.taskHeaderInput}
             placeholder="Ä°ÅŸin BaÅŸlÄ±ÄŸÄ±" */}
@@ -173,11 +173,11 @@ import { getCategories, newCard } from '../../actions/createTaskAction'
            
           </View>
           <View style={styles.focusButtonContainer}>
-            <TouchableOpacity style={styles.focusButton} onPress = {() => Actions.Users({cat_id: cat_id, title: this.props.task.item.title, body: this.props.task.item.subTitle, date: date})}>
+            <TouchableOpacity style={styles.focusButton} onPress = {() => Actions.Users({cat_id: this.props.task.item.cat_id, title: this.props.task.item.title, body: this.props.task.item.subTitle, date: date})}>
               <Text style={styles.focusButtonText}>Hedefe Kitlen </Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </ScrollView>
     )
     }
   }
@@ -295,7 +295,8 @@ import { getCategories, newCard } from '../../actions/createTaskAction'
     this.showAndroidTimepicker();
     }else{
       // this.state.aDate.concat(currentDate);
-      this.setState({  date: currentDate })
+      this.setState({  date: currentDate,
+                       show: false})
       console.log("else :" ,moment(currentDate).format('LTS'));
     }
   }
@@ -377,15 +378,14 @@ console.log("showtimepicker")
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
+    paddingLeft: responsiveSize(15),
+    paddingRight: responsiveSize(15),
   },
   header: {
     flex: 0.3,
     height: PhoneHeight * 0.30,
     alignItems: "center",
-    justifyContent: "center",
-    marginTop: 5,
+    justifyContent: "center"
   },
   headerText: {
     fontSize: responsiveSize(19),
@@ -393,28 +393,29 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   taskHeaderInput: {
-    borderWidth: 2,
+    borderWidth: 1.5,
     width: PhoneWidth * 0.85,
     height: PhoneHeight * 0.07,
     borderColor: "#852e4c",
     borderRadius: 8,
     textAlign: "center",
-    fontSize: responsiveSize(15),
+    fontSize: responsiveSize(13),
     alignSelf: "center",
   },
   taskInfoInput: {
-    borderWidth: 2,
+    borderWidth: 1.5,
     width: PhoneWidth * 0.85,
     height: PhoneHeight * 0.25,
     borderColor: "#852e4c",
     borderRadius: 8,
-    textAlign: "center",
-    fontSize: responsiveSize(15),
+    fontSize: responsiveSize(14),
     marginTop: 20,
-    alignSelf: "center"
-  },
+    alignSelf: "center",
+    textAlign: "center",
+    textAlignVertical: "top"
+    },
   taskHeaderView:{
-    borderWidth: 2,
+    borderWidth: 1.5,
     width: PhoneWidth * 0.85,
     height: PhoneHeight * 0.07,
     borderColor: "#852e4c",
@@ -448,17 +449,17 @@ const styles = StyleSheet.create({
   },
   dateButton: {
     width: PhoneWidth * 0.38,
-    borderWidth: 2,
+    borderWidth: 1.5,
     height: PhoneHeight * 0.057,
     borderRadius: 8,
     borderColor: "#852e4c",
-    alignSelf:'center',
+    alignSelf: 'center',
     justifyContent:'center',
   },
   dateButtonText: {
     textAlign: "center",
     color: "#852e4c",
-    fontSize: responsiveSize(15),  
+    fontSize: responsiveSize(13),  
   },
   timeButton: {
     width: PhoneWidth * 0.38,
@@ -475,8 +476,7 @@ const styles = StyleSheet.create({
     marginTop: 5
   },
   focusButtonContainer: {
-    marginTop: 20,
-    paddingTop: 20
+    paddingTop: responsiveSize(10)
   },
   focusButton: {
     width: PhoneWidth * 0.85,
@@ -507,7 +507,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginTop: 20,
     width: PhoneWidth * 0.38,
-    borderWidth: 2,
+    borderWidth: 1.5,
     height: PhoneHeight * 0.057,
     alignSelf: 'center',
     justifyContent: 'center',
@@ -516,7 +516,7 @@ const styles = StyleSheet.create({
 textStyle: {
     color: "#852E4C",
     textAlign: "center",
-    fontSize: responsiveSize(15),
+    fontSize: responsiveSize(13)
 },
 centeredView: {
     flex: 1,

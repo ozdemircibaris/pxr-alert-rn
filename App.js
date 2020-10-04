@@ -69,8 +69,7 @@ export default class App extends Component {
   
 
   onIds(device) {
-    JSON.stringify(device);
-    const phoneToken = device.userId;
+    const phoneToken = JSON.stringify(device.userId);
     AsyncStorage.setItem("device",phoneToken )  
     console.log('Device info: ', phoneToken); 
 

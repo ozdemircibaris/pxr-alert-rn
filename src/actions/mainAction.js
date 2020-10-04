@@ -74,7 +74,6 @@ export const deleteCard = (itemId, token, item) => {
         dispatch({
             type: DELETE_CLICK
         })
-        console.log("itemId:", item)
         axios({
             method: "DELETE",
             url: `${API_BASE}/mytasks/delete/${itemId}`,
@@ -114,11 +113,6 @@ export const getTasks = ( dateArray, mission, id, token) => {
           dispatch({
               type:TASKS_MAP
           })
-          // mission.map((item) => {
-          //   item.map((index) => {
-          //     this.state.tasks.push(index)
-          //     this.state.missionDate.push(index.jobDate)
-          //   })
           dispatch({
               type: DATE_MAP
           })
