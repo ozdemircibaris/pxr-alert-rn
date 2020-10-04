@@ -62,7 +62,7 @@ export const signUpClicked = (fullName, email, password, token) => {
              }
          }).catch((err) => {
              console.log('errorrrruurr', err.response)
-             alert('kayıt olamadınız')
+             alert('Kayıt Olamadınız')
          })
     }
 }

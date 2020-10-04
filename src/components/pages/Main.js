@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, ImageBackground, Image, Button, TouchableOpacity, ScrollView, FlatList, Modal } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, FlatList,Modal } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { color } from 'react-native-reanimated';
 import { PhoneWidth, PhoneHeight, responsiveSize } from '../config/env';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import moment from 'moment';
-import { deleteCard, listCard, listTasks, getTasks } from '../../actions/mainAction';
-import { API_BASE } from '../config/env';
+import {deleteCard, listCard, listTasks, getTasks} from '../../actions/mainAction';
 import createTaskReducer from '../../reducers/createTaskReducer';
-
-
-export class Main extends Component {
-  constructor(props) {
+import { Header } from 'react-native/Libraries/NewAppScreen';
+​
+export  class Main extends Component {
+  constructor(props){
     super(props);
     this.state = {
       id: this.props.idValue,
@@ -25,60 +21,61 @@ export class Main extends Component {
       currentTask: [this.props.minDate[0]]
     }
   }
-
+​
   setModalVisible = (visible) => {
     this.setState({ deleteModal: visible });
   }
-
+        
   componentWillMount() {
     this.props.getTasks(this.props.dateArray, this.props.minDate, this.props.userData.data.id, this.props.userData.token);
-    this.props.listCard(this.props.userData.token, this.props.userData.data.id, this.props.mainCards)
+    this.props.listCard(this.props.userData.token, this.props.userData.data.id , this.props.mainCards)
+    console.log("a",this.props.minDate)}
+​
+  componentDidMount(){
+    console.log("mission map", this.props.mainTasks)
   }
-
-  missionRenderItem = ({ item }) => {
-    return (
+​
+ missionRenderItem = ({ item }) => {
+    return(
       <View style={styles.taskBox} >
-        <View style={styles.categoryColorView} >
-          <View style={styles.hr}>
-            <View style={styles.circle}
+       <View style={styles.categoryColorView} >
+       <View style={styles.hr}>
+        <View style={styles.circle} 
               backgroundColor={item.taskCategoriesModel != undefined ? item.taskCategoriesModel.color : null}></View>
-            <TouchableOpacity
-              onPress={() => {
-                this.setModalVisible()
-                this.setState({
-                  item
-                })
-              }}
-              style={styles.deleteButton} >
-              <Image style={styles.iconImg} source={require('../../images/deleteIcon.png')}></Image>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <TouchableOpacity
-          onPress={() => Actions.CreateTask({ newTaskStatus: 'card', task: { item } })}
-          style={styles.taskBodyBox}>
-          <View style={styles.taskItemTitle}>
-            <Text >{item.title}</Text>
-            <Text style={styles.cardSubtitleText}>{item.subTitle}</Text>
-          </View>
-        </TouchableOpacity>
+        <TouchableOpacity 
+           onPress= {() => {this.setModalVisible()
+                           this.setState({
+                             item
+                           })}}
+           style={styles.deleteButton} >
+      <Image style= {styles.iconImg} source={require('../../images/deleteIcon.png')}></Image>
+      </TouchableOpacity>
       </View>
+    </View>
+    <TouchableOpacity 
+      onPress={() => Actions.CreateTask({newTaskStatus: 'card', task: {item}})}
+      style={styles.taskBodyBox}>
+        <View style={styles.taskItemTitle}>
+        <Text >{item.title}</Text>
+      <Text style={ styles.cardSubtitleText}>{item.subTitle}</Text>
+        </View>
+    </TouchableOpacity>
+  </View>
     )
-  };
-
+    };
   render() {
-    const { minDate, taskDate } = this.props;
+    const {minDate, taskDate} = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.greetingContainer}>
           <Text style={styles.greetingText}>Merhaba,
-              <Text style={styles.userNameText}>{this.props.userData.data.fullName}</Text></Text>
+            <Text style= {styles.userNameText}>{this.props.userData.data.fullName}</Text></Text>
           <Text style={styles.containerText}>Sana kitlenenler burda.</Text>
-        </View>
-        <ScrollView style={styles.currentTask} backgroundColor={taskDate.taskCategoriesModel != undefined ? taskDate.taskCategoriesModel.color : null}>
-          <Text style={styles.jobTitle}>{taskDate != undefined ? taskDate.title : null}</Text>
+        </View> 
+        <ScrollView style={styles.currentTask} backgroundColor= {taskDate.taskCategoriesModel != undefined ? taskDate.taskCategoriesModel.color : null}>
+        <Text style={styles.jobTitle}>{taskDate != undefined ? taskDate.title : null}</Text>
           <Text style={styles.subTitle}> {taskDate != undefined ? taskDate.subTitle : null} </Text>
-          <Text style={styles.jobDate}>{taskDate != undefined ? moment(taskDate.jobDate).format("llll") : null}</Text>
+          <Text style={styles.jobDate}>{moment(taskDate.jobDate).format("llll")}</Text>
         </ScrollView>
         <Modal
           animationType="fade"
@@ -92,28 +89,28 @@ export class Main extends Component {
             <View style={styles.modalView}>
               <Text style={styles.modalText}>Silmek istediğinize emin misiniz ?</Text>
               <View style={styles.modalButtons}>
-                <TouchableOpacity
-                  style={styles.deleteModalButton}
-                  onPress={() => {
-                    // sildikten sonra modalı kapatır
-                    this.props.deleteCard(this.state.item.id, this.props.userData.token, this.state.item);
-                    this.setModalVisible(false);
-                  }}>
-                  <Text style={styles.yesnoTextStyle}>Evet</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.closeButton}
-                  onPress={() => {
-                    // silmeden modalı kapatır
-                    this.setModalVisible(false);
-                  }}
-                >
-                  <Text style={styles.yesnoTextStyle}>Hayır</Text>
-                </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.deleteModalButton}
+                onPress={() => {
+                  // sildikten sonra modalı kapatır
+                  this.props.deleteCard(this.state.item.id, this.props.userData.token, this.state.item);
+                  this.setModalVisible(false);
+                }}>
+                <Text style={styles.yesnoTextStyle}>Evet</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.closeButton}
+                onPress={() => {
+                  // silmeden modalı kapatır
+                  this.setModalVisible(false);
+                }}
+              >
+                <Text style={styles.yesnoTextStyle}>Hayır</Text> 
+              </TouchableOpacity>
               </View>
             </View>
           </View>
-        </Modal>
+        </Modal> 
         <View style={styles.body}>
           <FlatList
             data={this.props.mainCards}
@@ -122,10 +119,10 @@ export class Main extends Component {
           />
         </View>
         <View style={styles.buttonView}>
-          <TouchableOpacity onPress={() => Actions.CreateTask({ task: "", newTaskStatus: "newTask" })}
+          <TouchableOpacity onPress={() => Actions.CreateTask({task: "", newTaskStatus: "newTask"})}
             style={styles.submitButton}
             activeOpacity={.5}>
-            <Image style={styles.plusIcon} source={require('../../images/plus.png')} />
+              <Image style ={styles.plusIcon} source={require('../../images/plus.png')}/>
           </TouchableOpacity>
         </View>
       </View>
@@ -160,7 +157,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     height: PhoneHeight * 0.45,
     paddingLeft: 20,
-    borderWidth: 0
+    borderWidth:0
   },
   taskBox: {
     flex: 0,
@@ -197,7 +194,7 @@ const styles = StyleSheet.create({
     left: 0,
     alignSelf: "center"
   },
-  buttonView: {
+  buttonView:{
     alignItems: 'center',
     marginBottom: responsiveSize(8)
   },
@@ -209,15 +206,15 @@ const styles = StyleSheet.create({
     borderColor: '#fff'
   },
   plusIcon: {
-    alignSelf: 'center',
+    alignSelf:'center',
     width: responsiveSize(45),
     height: responsiveSize(45)
   },
-  taskItemTitle: {
+  taskItemTitle:{
     fontWeight: "bold",
     margin: 8
   },
-  deleteButton: {
+  deleteButton:{
     width: PhoneWidth * 0.05,
     height: PhoneHeight * 0.04,
     alignItems: "center",
@@ -226,7 +223,7 @@ const styles = StyleSheet.create({
     top: 10,
     borderWidth: 0
   },
-  iconImg: {
+  iconImg:{
     height: responsiveSize(15),
     width: responsiveSize(15),
   },
@@ -244,24 +241,24 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-around'
   },
-  modalButtons: {
-    alignSelf: 'center',
+  modalButtons:{
+    alignSelf:'center',
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
     width: PhoneWidth * 0.7,
-    height: PhoneHeight * 0.05,
+    height: PhoneHeight *0.05,
     borderWidth: 0,
   },
   closeButton: {
-    justifyContent: 'center',
+    justifyContent:'center',
     backgroundColor: "#7b344c",
     borderRadius: 10,
     width: PhoneWidth * 0.25,
     height: PhoneHeight * 0.06
   },
   deleteModalButton: {
-    justifyContent: 'center',
+    justifyContent:'center',
     backgroundColor: "#7b344c",
     borderRadius: 10,
     width: PhoneWidth * 0.25,
@@ -277,49 +274,49 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: responsiveSize(15)
   },
-  jobTitle: {
+  jobTitle:{
     fontWeight: 'bold',
     fontSize: responsiveSize(20),
-    alignSelf: 'center',
-    color: 'black',
+    alignSelf:'center',
+    color:'black',
     marginTop: 13,
     marginBottom: 5
   },
-  subTitle: {
+  subTitle:{
     fontSize: responsiveSize(17),
-    alignSelf: 'center',
-    color: 'black'
+    alignSelf:'center',
+    color:'black'
   },
-  jobDate: {
+  jobDate:{
     fontSize: responsiveSize(15),
-    color: 'black',
-    alignSelf: 'center'
+    color:'black',
+    alignSelf:'center'
   },
-  userNameText: {
+  userNameText:{
     fontWeight: "bold"
   }
 });
 const mapStateToProps = (state) => {
-  const { emailValue, passwordValue, idValue, userData } = state.authenticationReducer;
-  const { mainCards, mainTasks, dateArray, minDate, mission, tasks, missionDate, taskDate } = state.mainReducer;
+  const {  emailValue, passwordValue ,idValue, userData} = state.authenticationReducer;
+  const { mainCards, mainTasks, dateArray, minDate, mission, tasks, missionDate , taskDate} = state.mainReducer;
   const { cards } = state.createTaskReducer;
   return {
-    emailValue,
-    passwordValue,
-    idValue,
-    userData,
-    mainCards,
-    mainTasks,
-    dateArray,
-    minDate,
-    mission,
-    tasks,
-    missionDate,
-    cards,
-    taskDate
+      emailValue,
+      passwordValue,
+      idValue,
+      userData,
+      mainCards,
+      mainTasks,
+      dateArray,
+      minDate,
+      mission,
+      tasks,
+      missionDate,
+      cards,
+      taskDate
   }
 }
-
+​
 export default connect(
   mapStateToProps,
   {
@@ -329,4 +326,3 @@ export default connect(
     getTasks
   }
 )(Main)
-

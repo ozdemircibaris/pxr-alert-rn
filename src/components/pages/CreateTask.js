@@ -7,6 +7,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { PhoneHeight, PhoneWidth, responsiveSize } from '../config/env';
 import { connect } from 'react-redux';
 import { getCategories, newCard } from '../../actions/createTaskAction'
+import { ScrollView } from 'react-native-gesture-handler';
 
 class CreateTask extends Component {
   state={
@@ -355,7 +356,8 @@ console.log("showtimepicker")
                   this.setModalVisible(!modalVisible);
                 }}
               >
-                <Image style={styles.closeIcon} source={require('../../images/arrow.png')} />
+                <Text style= {styles.closeIcon}>Vazgeç</Text>
+                {/* <Image style={styles.closeIcon} source={require('../../images/arrow.png')} /> */}
               </TouchableOpacity>
               <FlatList // listing category
                 data={this.props.categories}
@@ -536,14 +538,14 @@ modalView: {
     borderTopRightRadius: 8
 },
 closeButton:{
-    borderWidth: 0,
-    width: PhoneWidth * 0.05,
-    height: PhoneHeight * 0.02,
-    alignSelf: 'flex-end'
+    width: PhoneWidth * 0.2,
+    height: PhoneHeight * 0.03,
+    alignSelf: "flex-end",
+    marginRight: responsiveSize(10),
+    alignItems: "center"
 },
 closeIcon:{
-    width: responsiveSize(15),
-    height: responsiveSize(15),
+  fontWeight: "bold"
 },
 radioButtons:{
     borderWidth:1,
