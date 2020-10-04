@@ -9,6 +9,7 @@ import { PhoneHeight, PhoneWidth, responsiveSize } from '../config/env';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { getCategories, newCard } from '../../actions/createTaskAction'
+import { ScrollView } from 'react-native-gesture-handler';
 
  class CreateTask extends Component {
   state={
@@ -38,7 +39,7 @@ import { getCategories, newCard } from '../../actions/createTaskAction'
     const { show, dateValue, pickerMode, dateModalVisible, title, body, cat_id, date } = this.state
     if (this.props.newTaskStatus == 'newTask') { // + butonuna basÄ±nca calÄ±sacak olan kÄ±sÄ±m 
       return (
-       <View style={styles.container}>
+       <ScrollView style={styles.container}>
           <TextInput
             style={styles.taskHeaderInput}
             placeholder="İşin Adı"
@@ -99,11 +100,11 @@ import { getCategories, newCard } from '../../actions/createTaskAction'
               <Text style={styles.focusButtonText}>Hedefe Kitlen</Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </ScrollView>
     )
     } else if(this.props.newTaskStatus == 'newCard'){ //sidebardan gelen yeni kart ekle sayfasında calÄ±scak kÄ±sÄ±m 
       return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
           <TextInput
             style={styles.taskHeaderInput}
             placeholder="İşin Başlığı"
@@ -140,11 +141,11 @@ import { getCategories, newCard } from '../../actions/createTaskAction'
               <Text style={styles.focusButtonText}>Hedefe Kitlen</Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </ScrollView>
       )
     }else{ //anaSayfadaki kartlara basÄ±lÄ±nca cÄ±kacak olan kÄ±sÄ±m 
       return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
           <View style={styles.taskHeaderView}>
             {/* style={styles.taskHeaderInput}
             placeholder="Ä°ÅŸin BaÅŸlÄ±ÄŸÄ±" */}
@@ -175,11 +176,11 @@ import { getCategories, newCard } from '../../actions/createTaskAction'
            
           </View>
           <View style={styles.focusButtonContainer}>
-            <TouchableOpacity style={styles.focusButton} onPress = {() => Actions.Users({cat_id: cat_id, title: this.props.task.item.title, body: this.props.task.item.subTitle, date: date})}>
+            <TouchableOpacity style={styles.focusButton} onPress = {() => Actions.Users({cat_id: this.props.task.item.cat_id, title: this.props.task.item.title, body: this.props.task.item.subTitle, date: date})}>
               <Text style={styles.focusButtonText}>Hedefe Kitlen </Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </ScrollView>
     )
     }
   }
@@ -297,7 +298,8 @@ import { getCategories, newCard } from '../../actions/createTaskAction'
     this.showAndroidTimepicker();
     }else{
       // this.state.aDate.concat(currentDate);
-      this.setState({  date: currentDate })
+      this.setState({  date: currentDate,
+                       show: false})
       console.log("else :" ,moment(currentDate).format('LTS'));
     }
   }
@@ -356,7 +358,8 @@ console.log("showtimepicker")
                   this.setModalVisible(!modalVisible);
                 }}
               >
-                <Image style={styles.closeIcon} source={require('../../images/arrow.png')} />
+                <Text style= {styles.closeIcon}>Vazgeç</Text>
+                {/* <Image style={styles.closeIcon} source={require('../../images/arrow.png')} /> */}
               </TouchableOpacity>
               <FlatList // listing category
                 data={this.props.categories}
@@ -450,17 +453,17 @@ const styles = StyleSheet.create({
   },
   dateButton: {
     width: PhoneWidth * 0.38,
-    borderWidth: 2,
+    borderWidth: 1.5,
     height: PhoneHeight * 0.057,
     borderRadius: 8,
     borderColor: "#852e4c",
-    alignSelf:'center',
+    alignSelf: 'center',
     justifyContent:'center',
   },
   dateButtonText: {
     textAlign: "center",
     color: "#852e4c",
-    fontSize: responsiveSize(15),  
+    fontSize: responsiveSize(13),  
   },
   timeButton: {
     width: PhoneWidth * 0.38,
@@ -477,8 +480,7 @@ const styles = StyleSheet.create({
     marginTop: 5
   },
   focusButtonContainer: {
-    marginTop: 20,
-    paddingTop: 20
+    paddingTop: responsiveSize(10)
   },
   focusButton: {
     width: PhoneWidth * 0.85,
@@ -518,7 +520,7 @@ const styles = StyleSheet.create({
 textStyle: {
     color: "#852E4C",
     textAlign: "center",
-    fontSize: responsiveSize(15)
+    fontSize: responsiveSize(13)
 },
 centeredView: {
     flex: 1,
@@ -538,14 +540,14 @@ modalView: {
     borderTopRightRadius: 8
 },
 closeButton:{
-    borderWidth: 0,
-    width: PhoneWidth * 0.05,
-    height: PhoneHeight * 0.02,
-    alignSelf: 'flex-end'
+    width: PhoneWidth * 0.2,
+    height: PhoneHeight * 0.03,
+    alignSelf: "flex-end",
+    marginRight: responsiveSize(10),
+    alignItems: "center"
 },
 closeIcon:{
-    width: responsiveSize(15),
-    height: responsiveSize(15),
+  fontWeight: "bold"
 },
 radioButtons:{
     borderWidth:1,

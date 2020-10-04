@@ -12,7 +12,7 @@ import{
     GET_TASKS_SUCCESS,
     TASKS_MAP
 } from "../actions/mainAction";
-import { SUCCESS } from "../actions/createTaskAction"
+import { NEW_CARD_SUCCESS } from "../actions/createTaskAction"
 
 
 const INITIAL_STATE = {
@@ -45,13 +45,14 @@ export default (state = INITIAL_STATE, action) => {
             case LIST_CARD:
             return {
                 ...state, 
+                mainCards: []
             }
             case LIST_CARD_SUCCESS:
             return {
                 ...state, 
                 mainCards: state.mainCards.concat(action.payload)  
             }
-            case SUCCESS:
+            case NEW_CARD_SUCCESS:
                 return {
                     ...state, 
                     mainCards: state.mainCards.concat(action.payload)  

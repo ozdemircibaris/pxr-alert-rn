@@ -3,10 +3,10 @@ import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, FlatList,M
 import { Actions } from 'react-native-router-flux';
 import { PhoneWidth, PhoneHeight, responsiveSize } from '../config/env';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import moment from 'moment';
 import {deleteCard, listCard, listTasks, getTasks} from '../../actions/mainAction';
 import createTaskReducer from '../../reducers/createTaskReducer';
+import { Header } from 'react-native/Libraries/NewAppScreen';
 
 export  class Main extends Component {
   constructor(props){
@@ -41,7 +41,7 @@ export  class Main extends Component {
        <View style={styles.categoryColorView} >
        <View style={styles.hr}>
         <View style={styles.circle} 
-              backgroundColor={item.taskCategoriesModel.color}></View>
+              backgroundColor={item.taskCategoriesModel != undefined ? item.taskCategoriesModel.color : null}></View>
         <TouchableOpacity 
            onPress= {() => {this.setModalVisible()
                            this.setState({
@@ -74,7 +74,7 @@ export  class Main extends Component {
         </View> 
         <ScrollView style={styles.currentTask} backgroundColor= {taskDate.taskCategoriesModel != undefined ? taskDate.taskCategoriesModel.color : null}>
         <Text style={styles.jobTitle}>{taskDate != undefined ? taskDate.title : null}</Text>
-          <Text style={styles.subTitle}> {taskDate != undefined ? taskDate.sub : null} </Text>
+          <Text style={styles.subTitle}> {taskDate != undefined ? taskDate.subTitle : null} </Text>
           <Text style={styles.jobDate}>{moment(taskDate.jobDate).format("llll")}</Text>
         </ScrollView>
         <Modal
@@ -215,16 +215,17 @@ const styles = StyleSheet.create({
     margin: 8
   },
   deleteButton:{
-    width: PhoneWidth * 0.04,
-    height: PhoneHeight * 0.03,
+    width: PhoneWidth * 0.05,
+    height: PhoneHeight * 0.04,
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
     top: 10,
+    borderWidth: 0
   },
   iconImg:{
-    height: responsiveSize(13),
-    width: responsiveSize(13),
+    height: responsiveSize(15),
+    width: responsiveSize(15),
   },
   centeredView: {
     flex: 1,
@@ -278,13 +279,13 @@ const styles = StyleSheet.create({
     fontSize: responsiveSize(20),
     alignSelf:'center',
     color:'black',
-    marginTop: 10
+    marginTop: 13,
+    marginBottom: 5
   },
   subTitle:{
     fontSize: responsiveSize(17),
     alignSelf:'center',
-    color:'black',
-    marginTop: '7%'
+    color:'black'
   },
   jobDate:{
     fontSize: responsiveSize(15),

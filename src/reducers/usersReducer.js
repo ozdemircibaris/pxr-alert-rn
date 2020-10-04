@@ -57,6 +57,7 @@ export default (state = INITIAL_STATE, action) => {
       case LIST_USERS:
       return {
           ...state,
+          users: []
       }
       case LIST_SUCCESS:
         console.log("usersmap: ", action.payload)

@@ -14,13 +14,13 @@ export default class SideBar extends Component {
        <View style ={styles.outContainer}>
          <View style = {styles.inContainer}>
                <View style = {styles.textView}>
-                  <TouchableOpacity onPress={() => Actions.Main()}><Text style = {styles.title}> Anasayfa </Text></TouchableOpacity> 
+                  <TouchableOpacity onPress={() => Actions.Main() || Actions.drawerClose()}><Text style = {styles.title}> Anasayfa </Text></TouchableOpacity> 
                </View>
                <View style = {styles.textView}>
                   <TouchableOpacity onPress={() => Actions.CreateTask({newTaskStatus: 'newCard', task: ""})}><Text style = {styles.title}> Kart Ekle </Text></TouchableOpacity> 
                </View>
                <View style = {styles.textView}>
-                  <TouchableOpacity onPress={() => Actions.mytasks()}><Text style = {styles.title}> Bana Gelen Görevler </Text></TouchableOpacity> 
+                  <TouchableOpacity onPress={() => Actions.mytasks() || Actions.drawerClose()}><Text style = {styles.title}> Bana Gelen Görevler </Text></TouchableOpacity> 
                </View>
                <View style={styles.logOutContainer}>
                   <TouchableOpacity

@@ -5,7 +5,7 @@ import ReduxThunk from 'redux-thunk';
 import rootReducer from './src/reducers/rootReducer';
 import RouterComp from './src/router';
 import OneSignal from 'react-native-onesignal'; // Import package from node modules
-import { AsyncStorage } from 'react-native';
+import {AsyncStorage } from 'react-native';
 import { PhoneHeight } from './src/components/config/env';
 
 
@@ -69,8 +69,8 @@ export default class App extends Component {
   
 
   onIds(device) {
-    JSON.stringify(device);
-    const phoneToken = device.userId;
+ 
+    const phoneToken = JSON.stringify(device.userId);
     AsyncStorage.setItem("device",phoneToken )  
     console.log('Device info: ', phoneToken); 
 
