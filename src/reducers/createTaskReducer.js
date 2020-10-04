@@ -2,7 +2,7 @@ import {
     GET_CATEGORIES,
     GET_SUCCESS,
     NEW_CARD,
-    SUCCESS
+    NEW_CARD_SUCCESS
 } from "../actions/createTaskAction";
 const INITIAL_STATE = {
     categories: [],
@@ -24,7 +24,7 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
             }
-            case SUCCESS:
+            case NEW_CARD_SUCCESS:
                 return {
                     ...state,
                     cards: state.cards.concat(action.payload)

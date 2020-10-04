@@ -60,7 +60,6 @@ export default (state = INITIAL_STATE, action) => {
           users: []
       }
       case LIST_SUCCESS:
-        console.log("usersmap: ", action.payload)
       return {
           ...state,
           users: state.users.concat(action.payload)

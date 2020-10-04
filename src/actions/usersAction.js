@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { API_BASE } from '../components/config/env';
 import { Actions } from 'react-native-router-flux';
-import { SIGN_IN_SUCCESS } from './authenticationAction';
 
 export const SELECT_USERS = "SELECT_USERS";
 export const CHECKED_SUCCESS = "CHECKED_SUCCESS";
@@ -49,10 +48,8 @@ export const listUsers = (token) => {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
           'Authorization': `Bearer ${token} ` 
-      },
-          // data: {cat_id: cat_id, title: title, subTitle: body, jobDate: date, user_id: "22"}     
+      },  
       }).then((res) => {
-      // console.log("res :", res.data.data)
       res.data.data.map((item) => {
           item.selected = "false"
       })
@@ -60,8 +57,6 @@ export const listUsers = (token) => {
         type: LIST_SUCCESS,
         payload: res.data.data
       })
-      
-      // console.log("array :", this.state.users)
   })
   .catch((error) => {
       console.log("error :", error)

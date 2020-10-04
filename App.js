@@ -7,21 +7,21 @@ import RouterComp from './src/router';
 import OneSignal from 'react-native-onesignal'; // Import package from node modules
 import {AsyncStorage } from 'react-native';
 import { PhoneHeight } from './src/components/config/env';
-
-
+​
+​
 export default class App extends Component {
   constructor(properties) {
     super(properties);
     //Remove this method to stop OneSignal Debugging
     OneSignal.setLogLevel(6, 0)
-
+​
     // Replace 'YOUR_ONESIGNAL_APP_ID' with your OneSignal App ID.
     OneSignal.init("85709f52-b07d-4e2b-8a75-6703178bb15a", {kOSSettingsKeyAutoPrompt : false, kOSSettingsKeyInAppLaunchURL: false, kOSSettingsKeyInFocusDisplayOption:2});
     OneSignal.inFocusDisplaying(2); // Controls what should happen if a notification is received while the app is open. 2 means that the notification will go directly to the device's notification center.
-
+​
     // The promptForPushNotifications function code will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step below)
     OneSignal.promptForPushNotificationsWithUserResponse(this.myiOSPromptCallback);
-
+​
      OneSignal.addEventListener('received', this.onReceived);
      OneSignal.addEventListener('opened', this.onOpened);
      OneSignal.addEventListener('ids', this.onIds);
@@ -43,7 +43,7 @@ export default class App extends Component {
     //   );
     //   // navigation.navigate(remoteMessage.data.type);
     // });
-
+​
     // // Check whether an initial notification is available
     // messaging()
     //   .getInitialNotification()
@@ -55,11 +55,11 @@ export default class App extends Component {
     // })
     // messaging().setBackgroundMessageHandler(this.requestUserPermissionNotifiee)
   }
-
+​
   onReceived(notification) {
     console.log("Notification received: ", notification);
   }
-
+​
   onOpened(openResult) {
     console.log('Message: ', openResult.notification.payload.body);
     console.log('Data: ', openResult.notification.payload.additionalData);
@@ -67,30 +67,30 @@ export default class App extends Component {
     console.log('openResult: ', openResult);
   }
   
-
+​
   onIds(device) {
  
     const phoneToken = JSON.stringify(device.userId);
     AsyncStorage.setItem("device",phoneToken )  
     console.log('Device info: ', phoneToken); 
-
+​
   }
-
+​
   myiOSPromptCallback(permission){
   // do something with permission value
   }
   // async requestUserPermission() {
   //   const authStatus = await messaging().requestPermission();
   //   const enabled = authStatus === messaging.AuthorizationStatus.AUTHORIZED || authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-
+​
   //   if (enabled) {
   //     console.log('Authorization status:', authStatus);
   //   }
   // }
-
+​
   // async requestUserPermissionNotifiee() {
   //   const settings = await notifee.requestPermission();
-
+​
   //   if (settings.authorizationStatus >= IOSAuthorizationStatus.AUTHORIZED) {
   //     console.log('Permission settings:', settings);
   //   } else {

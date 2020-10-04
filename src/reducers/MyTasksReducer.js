@@ -27,7 +27,6 @@ export default (state = INITIAL_STATE, action) => {
                 ...state, 
             }
             case DELETE_SUCCESS:
-                console.log("index",umut)
             return {
                 ...state, 
             }

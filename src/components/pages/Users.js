@@ -5,13 +5,11 @@ import { PhoneWidth, PhoneHeight, responsiveSize } from '../config/env';
 import UsersRenderItem from '../helpComponents/usersRenderItem';
 import { connect } from 'react-redux';
 import { selectUsers, createTask, listUsers } from '../../actions/usersAction';
-import { Actions } from 'react-native-router-flux';
 
 class Users extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // users: [],
             color: "white",
         };
     }

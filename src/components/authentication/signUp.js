@@ -6,11 +6,11 @@ import { connect } from 'react-redux';
 import { PhoneHeight,PhoneWidth,responsiveSize } from '../config/env';
 import { fullNameChange,emailChange, passwordChange ,signUpClicked} from '../../actions/authenticationAction';
 import axios from 'axios';
-
+​
 class signUp extends Component {
   constructor(props) {
     super(props);
-
+​
     this.state = {
       fullNameValue: "",
       emailValue: "",
@@ -19,7 +19,7 @@ class signUp extends Component {
       
     }
   }
-
+​
   onFullNameChanged = (value) => this.props.fullNameChange(value)
   onEmailChanged    = (value) => this.props.emailChange(value)
   onPasswordChanged = (value) => this.props.passwordChange(value)
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
       color: "#852e4c"
     }
 });
-
+​
 const mapStateToProps = (state) => {
   const { fullNameValue, emailValue, passwordValue,phoneToken } = state.authenticationReducer;
   return {
@@ -138,7 +138,7 @@ const mapStateToProps = (state) => {
       phoneToken
   }
 }
-
+​
 export default connect(
   mapStateToProps,
   {

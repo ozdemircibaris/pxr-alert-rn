@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
-import { Button, Platform, Text, TextInput, View, TouchableOpacity, StyleSheet, Image, ImageBackground, Modal,FlatList } from 'react-native';
+import { Platform, Text, TextInput, View, TouchableOpacity, StyleSheet, Image, Modal,FlatList, ScrollView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment'
 import 'moment/locale/tr';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { PhoneHeight, PhoneWidth, responsiveSize } from '../config/env';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { getCategories, newCard } from '../../actions/createTaskAction'
 import { ScrollView } from 'react-native-gesture-handler';
 
- class CreateTask extends Component {
+class CreateTask extends Component {
   state={
     dateModalVisible: false,
     isVisible : false,
