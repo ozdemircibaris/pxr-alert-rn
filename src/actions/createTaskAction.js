@@ -5,16 +5,16 @@ import { Actions } from 'react-native-router-flux';
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_SUCCESS = "GET_SUCCESS";
 export const NEW_CARD = "NEW_CARD"
-export const SUCCESS = "SUCCESS"
+export const NEW_CARD_SUCCESS = "NEW_CARD_SUCCESS"
 
-export const getCategories = (value) => {
+export const getCategories = (token) => {
     return dispatch => {
         dispatch({
             type: GET_CATEGORIES
         })
         axios.get(`${API_BASE}/task-categories`,{
             headers: {
-                'Authorization': `Bearer ${value}`
+                'Authorization': `Bearer ${token}`
             },
             //  data: JSON.stringify({fullName: fullName, email: email, password: password, phoneToken: “hhssssssdassshhsssaaa”,})
          }).then((result) => {
@@ -44,13 +44,13 @@ export const newCard =(cat_id, title, body, user_id , token) => {
                'Accept': 'application/json',
                'Authorization': `Bearer ${token} ` 
            },
-               data: { title: title, subTitle: body, user_id: user_id, cat_id: "1"}     
+               data: { title: title, subTitle: body, user_id: user_id, cat_id: cat_id}     
            }).then((result) => {
                console.log("resultttt" , result.data)
                if(result.data.status == "success"){
                console.log("Başarılı")
                dispatch({
-                type: SUCCESS,
+                type: NEW_CARD_SUCCESS,
                 payload: result.data.data
               })
                Actions.Main()

@@ -14,6 +14,7 @@ export default (state = INITIAL_STATE, action) => {
         case GET_MYTASKS:
             return {
                 ...state, 
+                myTasks: []
             }
             case GET_MTSUCCESS:
                 console.log("tasksmap: ", action.payload)

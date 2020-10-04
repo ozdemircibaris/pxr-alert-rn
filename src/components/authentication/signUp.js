@@ -67,7 +67,7 @@ class signUp extends Component {
             </TouchableOpacity>
                 <Text style={styles.questionText}>Hesabın varsa burda ne işin var?
                     <Text style={styles.loginButtonText}
-                          onPress = {() => Actions.signIn()}> Giriş yap </Text>
+                          onPress = {() => Actions.signIn()}> Giriş yap! </Text>
                 </Text>
             </View>
           </View>   
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     
     },
     questionText:{
-      paddingTop:10,
+      paddingTop:15,
       fontSize: responsiveSize(13),
     },
     loginButtonText:{

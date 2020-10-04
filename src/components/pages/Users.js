@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { PhoneWidth, PhoneHeight, responsiveSize } from '../config/env';
-import axios from 'axios';
 import UsersRenderItem from '../helpComponents/usersRenderItem';
 import { connect } from 'react-redux';
 import { selectUsers, createTask, listUsers } from '../../actions/usersAction';
