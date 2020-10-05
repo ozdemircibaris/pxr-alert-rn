@@ -2,6 +2,7 @@ import axios from 'axios'
 import { API_BASE } from '../components/config/env'
 import { Actions } from 'react-native-router-flux';
 import { createPersistoid } from 'redux-persist';
+​
 export const EMAIL_CHANGE    = "EMAIL_CHANGE";
 export const PASSWORD_CHANGE = "PASSWORD_CHANGE";
 export const FULL_NAME_CHANGE   = "FULL_NAME_CHANGE";
@@ -13,6 +14,10 @@ export const SIGN_UP_FAILED       = "sign_up_failed";
 export const SIGN_IN_CLICK          = "sign_in_click";
 export const SIGN_IN_SUCCESS        = "sign_in_success";
 export const SIGN_IN_FAILED         = "sign_in_failed";
+​
+export const LOG_OUT_CLICK = "log_out_click";
+export const LOG_OUT_SUCCESS = "log_out_success";
+export const LOG_OUT_FAILED = "log_out_failed";
 
 export const fullNameChange = (value) => {
     return {
@@ -34,7 +39,6 @@ export const passwordChange = (value) => {
         payload: value
     }
 }
-
 
 export const signUpClicked = (fullName, email, password, token) => {
     console.log("token 3", token)
@@ -72,7 +76,6 @@ export const signInClicked = ( email, password) => {
         dispatch({
             type: SIGN_IN_CLICK,
         })
-        console.log({ email, password});
         axios({
             method: "POST",
             url: `${API_BASE}/users/signin`,
@@ -80,10 +83,9 @@ export const signInClicked = ( email, password) => {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-             data: JSON.stringify({ email: email, password: password })       
+             data: JSON.stringify({ email: email, password: password })
          }).then((result) => {
              console.log("resultttt" , result)
-             
              if(result.data.status == "success"){
                  console.log("user Id", result.data.data.id)
                  dispatch({
@@ -91,10 +93,6 @@ export const signInClicked = ( email, password) => {
                     payload: {id: result.data.data.id, data: result.data}
                 })
                  Actions.Main()
-                
-                
-
-                    
              }
          }).catch((err) => {
              console.log('errorrrruurr', err)
@@ -102,5 +100,16 @@ export const signInClicked = ( email, password) => {
          })
     }
 }
-
-
+export const logOut = () => {
+    return dispatch => {
+        dispatch({
+            type: LOG_OUT_CLICK
+        })
+        Actions.jump("signIn")
+        setTimeout(() => {
+            dispatch({
+                type: LOG_OUT_SUCCESS,
+            })
+        }, 1000);
+    }
+}

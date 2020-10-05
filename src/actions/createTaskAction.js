@@ -18,13 +18,11 @@ export const getCategories = (token) => {
             },
             //  data: JSON.stringify({fullName: fullName, email: email, password: password, phoneToken: “hhssssssdassshhsssaaa”,})
          }).then((result) => {
-             console.log("resultttt" , result.data.data)
              dispatch({
                  type: GET_SUCCESS,
                  payload: result.data.data
              })
          }).catch((err) => {
-             console.log('errorrrruurr', err.response)
              console.log("get işlemi gerceklesmedi");
          })
     }
@@ -32,7 +30,6 @@ export const getCategories = (token) => {
 
 export const newCard =(cat_id, title, body, user_id , token) => {
     return dispatch => {
-        console.log("oldu mu", user_id)
         dispatch({
             type: NEW_CARD
         })
@@ -42,22 +39,18 @@ export const newCard =(cat_id, title, body, user_id , token) => {
            headers: {
                'Content-Type': 'application/json',
                'Accept': 'application/json',
-               'Authorization': `Bearer ${token} ` 
+               'Authorization': `Bearer ${token} `
            },
-               data: { title: title, subTitle: body, user_id: user_id, cat_id: cat_id}     
+               data: { title: title, subTitle: body, user_id: user_id, cat_id: cat_id}
            }).then((result) => {
-               console.log("resultttt" , result.data)
                if(result.data.status == "success"){
-               console.log("Başarılı")
                dispatch({
                 type: NEW_CARD_SUCCESS,
                 payload: result.data.data
               })
                Actions.Main()
-               
                }
            }).catch((err) => {
-               console.log('errorcard', err.response)
                alert('başarısız')
            })
    }}

@@ -26,20 +26,15 @@ export const listCard = (token, id,cards) => {
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-            'Authorization': `Bearer ${token}` 
-        },  
+            'Authorization': `Bearer ${token}`
+        },
         }).then((res) => {
-            
-        
         dispatch({
           type: LIST_CARD_SUCCESS,
           payload: res.data.data
-          
         })
-        
     })
     .catch((error) => {
-        console.log("errorcard :", error)
     })
     }
   }
@@ -54,11 +49,9 @@ export const listCard = (token, id,cards) => {
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-            'Authorization': `Bearer ${token}` 
-        },  
+            'Authorization': `Bearer ${token}`
+        },
         }).then((res) => {
-         //   console.log("gelen görev:" , res.data.data)
-        
         dispatch({
           type: LIST_TASKS_SUCCESS,
           payload: res.data.data
@@ -81,16 +74,13 @@ export const deleteCard = (itemId, token, item) => {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
                 'Authorization': `Bearer ${token}`
-            },     
+            },
          }).then((result) => {
            dispatch({
              type: DELETE_CARD_SUCCESS,
              payload: item
            })
-             console.log("resultttt" , result)
-            
          }).catch((err) => {
-             console.log('errorrrruurr', err.response)
              console.log("silme işlemi gerceklesmedi");
          })
     }

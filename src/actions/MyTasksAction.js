@@ -18,11 +18,9 @@ export const getData= (token, id) => {
           headers: {
               'Content-Type': 'application/json',
               'Accept': 'application/json',
-              'Authorization': `Bearer ${token}` 
-          },  
+              'Authorization': `Bearer ${token}`
+          },
           }).then((res) => {
-              
-          
           dispatch({
             type: GET_MTSUCCESS,
             payload: res.data.data
@@ -38,7 +36,6 @@ export const getData= (token, id) => {
             dispatch({
                 type: DELETE_TASK
             })
-            console.log("value:", item)
             axios({
                 method: "DELETE",
                 url: `${API_BASE}/tasks/${item.item.id}`,
@@ -49,15 +46,12 @@ export const getData= (token, id) => {
                 },
                 //  data: JSON.stringify({fullName: fullName, email: email, password: password, phoneToken: "hhssssssdassshhsssaaa",})       
              }).then((result) => {
-                console.log("resultttt" , result)
                  if(result.status == 200){
                      dispatch({
                     type: DELETE_SUCCESS,
                     payload: item
                 })
                  }
-                 
-                
              }).catch((err) => {
                  console.log('errorrrruurr', err.response)
                  console.log("silme işlemi gerceklesmedi");

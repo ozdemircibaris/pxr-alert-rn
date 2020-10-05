@@ -15,11 +15,10 @@ class Users extends Component {
     }
     componentDidMount() {
         this.props.listUsers(this.props.userData.token)
-       
     }
-   
+
     render() {
-        console.log("id users:", this.props.usersId ) 
+        console.log("id users:", this.props.usersId )
         const {title, body, date, cat_id, usersId} = this.props;
         return (
           <View style={styles.container}>
@@ -31,7 +30,7 @@ class Users extends Component {
                   <FlatList
                       data={this.props.users}
                       renderItem={({item}) => <UsersRenderItem item= {item}/>}
-                      keyExtractor={item => item.id}
+                      keyExtractor={item => item.id.toString()}
                   />
                   <TouchableOpacity
                             style={styles.button}

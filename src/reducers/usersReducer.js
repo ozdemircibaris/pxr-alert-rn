@@ -1,70 +1,40 @@
-import { SELECT_USERS, CHECKED_SUCCESS, LIST_USERS, LIST_SUCCESS, UNSELECT_USERS } from "../actions/usersAction";
+import { FETCH_USERS, CHECKED_SUCCESS, LIST_SUCCESS, SELECTED_USER  } from "../actions/usersAction";
 
 const INITIAL_STATE = {
   selectedId: "",
   usersId: [],
   count: "",
   users: [],
-  tasks: []
+  tasks: [],
+  selectedUsers: []
 }
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case SELECT_USERS:
-      let counter = 0;
-      if(state.usersId.length == 0){
-        return{
-          ...state,
-          count: state.count + 1,
-          selectedId: action.payload,
-          usersId: state.usersId.concat(action.payload)
+    case CHECKED_SUCCESS:
+      return {
+        ...state,
+      }
+    case FETCH_USERS:
+      action.payload.map((item) => {
+        item.selected = false;
+      })
+      return {
+        ...state,
+        users: action.payload
+      }
+    case SELECTED_USER:
+      state.users.map((item) => {
+        if(item.id == action.payload && item.selected == false) {
+          item.selected = true;
+        } else if(item.id == action.payload && item.selected == true) {
+          item.selected = false
         }
-      }else{
-        state.usersId.map((item) =>{
-          if(item == action.payload){
-            counter = counter + 1;
-          }
-        })
-        if(counter == 0){
-          return{
-            ...state,
-            count: state.count + 1,
-            selectedId: action.payload,
-            usersId: state.usersId.concat(action.payload)
-          }
-        }else{
-          return{
-            ...state,
-            count: state.count + 1,
-            selectedId: action.payload
-          }
-        }
-      }
-      case UNSELECT_USERS:
-        let index = state.usersId.indexOf(action.payload);
-        for( var i = 0; i < state.usersId.length; i++){
-          if ( state.usersId[i] === action.payload) { 
-            return{
-              ...state,
-              userUd: state.usersId.splice(index, 1)
-            }
-          }
-       }
-      case CHECKED_SUCCESS:
+      })
       return {
-          ...state,
+        ...state,
+        selectedUsers: [...state.selectedUsers, action.payload],
       }
-      case LIST_USERS:
-      return {
-          ...state,
-          users: []
-      }
-      case LIST_SUCCESS:
-      return {
-          ...state,
-          users: state.users.concat(action.payload)
-      }
-      
     default:
       return state;
   }

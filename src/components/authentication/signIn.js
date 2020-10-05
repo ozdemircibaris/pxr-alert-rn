@@ -6,23 +6,22 @@ import {PhoneWidth , PhoneHeight, responsiveSize} from '../config/env';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { fullNameChange,emailChange, passwordChange ,signInClicked} from '../../actions/authenticationAction';
-import { Value } from 'react-native-reanimated';
 export class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email:'',
-      password:'', 
-      id : this.props.idValue, 
-      phoneToken: ""};
-    console.log("deneme",this.props.idValue)
+      email:'Umut@gmail.com',
+      password:'445261',
+      id : this.props.idValue,
+      phoneToken: ""
+    };
     }
 
     onEmailChanged    = (value) => this.props.emailChange(value)
     onPasswordChanged = (value) => this.props.passwordChange(value)
-    onSignIn = () =>this.props.signInClicked(this.props.emailValue, this.props.passwordValue ,this.props.idValue)
+    onSignIn = () => this.props.signInClicked(this.props.emailValue, this.props.passwordValue ,this.props.idValue)
 
-    render() { 
+    render() {
         return (
 <View style = {styles.container}>
  <LinearGradient colors={['#FFFFFF', '#FFFFFF', '#FFFFFF']} style={styles.linearGradient}>
@@ -33,12 +32,14 @@ export class SignIn extends Component {
       style={styles.userNameWrapper}
       onChangeText={(value) =>this.props.emailChange(value)}
       placeholder='E-POSTA'
+      value={this.props.emailValue}
       placeholderTextColor='black'
         />
     <TextInput
       secureTextEntry
       style={styles.passwordWrapper}
       onChangeText={(value) =>this.props.passwordChange(value)}
+      value={this.props.passwordValue}
       placeholder='ŞİFRE'
       placeholderTextColor='black'
         />
@@ -48,8 +49,13 @@ export class SignIn extends Component {
           <Text style={styles.loginTxt}>Giriş Yap</Text>
         </TouchableOpacity>
       </View>
-    <Text style={styles.noAccountTxt}>Hesabın yok di mi?
-     <Text style={styles.sıgnUpTxt} onPress={()=>Actions.signUp()}> Üye Ol! </Text></Text>
+      <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: PhoneHeight * 0.01}}>
+
+    <Text style={styles.noAccountTxt}>Hesabın yok di mi?</Text>
+    <TouchableOpacity onPress={()=>Actions.signUp()}>
+      <Text style={styles.sıgnUpTxt} > Üye Ol! </Text>
+    </TouchableOpacity>
+      </View>
     </View>
   </View>
  </LinearGradient>
@@ -119,9 +125,10 @@ const styles = StyleSheet.create({
       alignSelf:'center'
     }
     ,noAccountTxt:{
+      justifyContent: 'center',
       alignSelf:'center',
       fontSize:responsiveSize(13),
-      paddingTop: 17
+      // paddingTop: 17,
       //to last text of the page
     },
     sıgnUpTxt:{

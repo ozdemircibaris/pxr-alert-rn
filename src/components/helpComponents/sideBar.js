@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import signIn from '../authentication/signIn';
+import { connect } from 'react-redux';
+import { logOut } from '../../actions/authenticationAction';
 import { PhoneHeight, responsiveSize, PhoneWidth } from '../config/env';
-export default class SideBar extends Component {
+export class SideBar extends Component {
     constructor(props) {
         super(props);
    }
@@ -22,7 +24,7 @@ export default class SideBar extends Component {
                </View>
                <View style={styles.logOutContainer}>
                   <TouchableOpacity
-                   onPress={() => Actions.jump('signIn')}>
+                     onPress={() => this.props.logOut()}>
                      <Text style={styles.logOutText}>Çıkış Yap</Text>
                   </TouchableOpacity>
                </View>
@@ -32,6 +34,7 @@ export default class SideBar extends Component {
   }
 }
 let styles = StyleSheet.create({
+​
    outContainer: {
       flexDirection: 'column',
       flex: 1,
@@ -43,7 +46,6 @@ let styles = StyleSheet.create({
       flexDirection: "column",
       height: "100%",
       marginTop: "20%"
-      // justifyContent: "center"
      },
      textView:{
       width: PhoneWidth * 0.55,
@@ -71,3 +73,15 @@ let styles = StyleSheet.create({
         fontWeight: "bold"
      }
 });
+​
+​
+const mapStateToProps = state => {
+   return {}
+}
+​
+export default connect(
+   mapStateToProps,
+   {
+       logOut
+   }
+)(SideBar)

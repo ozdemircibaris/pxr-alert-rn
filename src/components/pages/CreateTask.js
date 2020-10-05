@@ -47,7 +47,6 @@ class CreateTask extends Component {
               this.setState({
                 title: text
               })
-              console.log("title", this.state.title)
             }}>
           </TextInput>
           <TextInput
@@ -59,7 +58,6 @@ class CreateTask extends Component {
               this.setState({
                 body: value
               })
-              console.log("body:",this.state.body);
             }}>
           </TextInput>
           <TouchableOpacity
@@ -78,10 +76,8 @@ class CreateTask extends Component {
               <TouchableOpacity style={styles.dateButton}  onPress={() => {
                  //selinden gelen 
                  if(Platform.OS == "ios"){
-                  console.log("iosa girdi");
                   this.showTimepicker(true);
                 }else if(Platform.OS != "ios"){
-                 console.log("androide girdi");
                    this.showAndroidDatepicker();
                   // this.showTimepicker(false);
                 }
@@ -110,7 +106,6 @@ class CreateTask extends Component {
               this.setState({
                 title: text
               })
-              console.log("title", this.state.title)
             }}>
           </TextInput>
           <TextInput
@@ -121,7 +116,6 @@ class CreateTask extends Component {
               this.setState({
                 body: value
               })
-              console.log("body:",this.state.body);
             }}>
           </TextInput>
           <TouchableOpacity
@@ -159,10 +153,8 @@ class CreateTask extends Component {
             <TouchableOpacity style={styles.dateButton} onPress={() => {
                 //selinden gelen 
                 if(Platform.OS == "ios"){
-                  console.log("iosa girdi");
                   this.showTimepicker(true);
                 }else if(Platform.OS != "ios"){
-                 console.log("androide girdi");
                    this.showAndroidDatepicker();
                   // this.showTimepicker(false);
                 }
@@ -184,7 +176,6 @@ class CreateTask extends Component {
 
   getDateTime = () =>{
     // this.showMode("time")
-    console.log("hello ANDROÄ°D")
     const { show, dateValue, pickerMode, dateModalVisible, androidMode } = this.state
     if(Platform.OS == "ios"){
       // console.log("nereye bu giriÅŸ");
@@ -307,11 +298,8 @@ class CreateTask extends Component {
     this.setState({ show: true, mode: currentMode })
  };
 showTimepicker = (visible) => {
-    console.log("showtime a girdi");
      this.showMode("date")
      this.setState({ dateModalVisible: visible });
-     console.log("mode :", this.showMode)
-     console.log("date :" , this.state.date)     
  };
  // For ANDROID
  showModeAndroid = (currentMode) => {
@@ -334,10 +322,7 @@ console.log("showtimepicker")
 };
   render() {
     const { show, dateValue, pickerMode, modalVisible, dateModalVisible, categories, title, body} = this.state
-    console.log("kategori adı", this.state.cat_id);
-    console.log("token bee ", this.props.userData.token);
-
-    return ( 
+    return (
       <View style={styles.background}>
         <Modal
           animationType="slide"

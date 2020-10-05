@@ -7,15 +7,19 @@ import{
     SIGN_UP_FAILED,
     SIGN_IN_CLICK,
     SIGN_IN_SUCCESS,
-    SIGN_IN_FAILED
+    SIGN_IN_FAILED,
+    LOG_OUT_CLICK,
+    LOG_OUT_SUCCESS
 } from "../actions/authenticationAction";
-
+​
 const INITIAL_STATE = {
     fullNameValue: "",
-    emailValue: "",
-    passwordValue: "",
+    emailValue: "Umut@gmail.com",
+    passwordValue: "445261",
     idValue: "",
-    userData:""
+    userData:"",
+    isAuthLogin: false,
+    isMainLogin: false
 }
 export default (state = INITIAL_STATE, action) => {
     switch (action.type){
@@ -42,7 +46,7 @@ export default (state = INITIAL_STATE, action) => {
                 emailValue: action.payload
                     }
         case PASSWORD_CHANGE:
-            return {
+            return {
                 ...state,
                 passwordValue: action.payload
                         }
@@ -55,13 +59,25 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 idValue: action.payload.id,
-                userData: action.payload.data
+                userData: action.payload.data,
+                isMainLogin: true
                            }       
         case SIGN_IN_FAILED:
             return {
                 ...state, 
                             }
-                default:
-                    return state;
+​
+        case LOG_OUT_CLICK:
+            return {
+                ...state,
+            }
+        case LOG_OUT_SUCCESS:
+            return {
+                ...state,
+                isMainLogin: false,
+                isAuthLogin: true,
+            }
+            default:
+                return state;
     }
 }

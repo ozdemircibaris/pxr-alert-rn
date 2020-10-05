@@ -29,10 +29,8 @@ export  class Main extends Component {
   componentWillMount() {
     this.props.getTasks(this.props.dateArray, this.props.minDate, this.props.userData.data.id, this.props.userData.token);
     this.props.listCard(this.props.userData.token, this.props.userData.data.id , this.props.mainCards)
-    console.log("a",this.props.minDate)
   }
   componentDidMount(){
-    console.log("mission map", this.props.mainTasks)
   }
 
  missionRenderItem = ({ item }) => {
@@ -115,7 +113,7 @@ export  class Main extends Component {
           <FlatList
             data={this.props.mainCards}
             renderItem={this.missionRenderItem}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.id.toString()}
           />
         </View>
         <View style={styles.buttonView}>
