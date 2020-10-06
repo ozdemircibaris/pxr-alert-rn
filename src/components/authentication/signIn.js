@@ -25,7 +25,7 @@ export class SignIn extends Component {
         return (
 <View style = {styles.container}>
  <LinearGradient colors={['#FFFFFF', '#FFFFFF', '#FFFFFF']} style={styles.linearGradient}>
-    <Image style ={styles.image} source={require('../../images/candies.png')}/>
+    <Image style ={styles.image} source={require('../../images/pxrr.png')}/>
   <View style={styles.whiteBox}>
 <View style={styles.generalBox}>
     <TextInput
@@ -79,15 +79,15 @@ const styles = StyleSheet.create({
       paddingTop:30
     }
     ,image:{
-      width: responsiveSize(80),
-      height: responsiveSize(80),
+      width: responsiveSize(100),
+      height: responsiveSize(100),
       marginLeft:'0%',
       marginTop:20,
       alignSelf:'center',
       resizeMode:"contain",
     }
     ,LoginBtn:{
-      backgroundColor:'#852E4C',
+      backgroundColor:'#2a2124',
       height: responsiveSize(28),
       width: responsiveSize(170),
       marginTop:'5%',
@@ -105,9 +105,9 @@ const styles = StyleSheet.create({
       borderWidth:1.5,
       height: PhoneHeight * 0.05,
       width: PhoneWidth * 0.7,
-      borderColor:'#852E4C',
+      borderColor:'#445c8b',
       borderRadius: 8,
-      fontSize:11,
+      fontSize: responsiveSize(10),
       borderWidth:2,
     }
     ,passwordWrapper:{
@@ -116,9 +116,9 @@ const styles = StyleSheet.create({
       borderWidth:2,
       height: PhoneHeight * 0.05,
       width: PhoneWidth * 0.7,
-      borderColor:'#852E4C',
+      borderColor:'#445c8b',
       borderRadius: 8,
-      fontSize:11
+      fontSize: responsiveSize(10)
     }
     ,loginTxt:{
       color:'white',
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
       //to last text of the page
     },
     sıgnUpTxt:{
-      color:'#852E4C',
+      color:'#445c8b',
       fontSize:responsiveSize(13),
     }
   });

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { selectedUser } from '../../actions/usersAction';
-import { responsiveSize, } from '../config/env';
+import { PhoneHeight, responsiveSize, } from '../config/env';
 
 
 class UsersRenderItem extends Component {
@@ -12,8 +12,8 @@ class UsersRenderItem extends Component {
         <View style={styles.container}>
             <TouchableOpacity
                 onPress={() => this.props.selectedUser(item.id)}
-                style={[styles.checkBox, { backgroundColor: item.selected == true ?"green":'red'}]} />
-            <Text> {item.fullName} </Text>
+                style={[styles.checkBox, { backgroundColor: item.selected == true ?"#445c8b":'#2a2124'}]} />
+            <Text style= {styles.usersName}> {item.fullName} </Text>
         </View>
      )
     }
@@ -22,15 +22,22 @@ class UsersRenderItem extends Component {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        marginVertical: 5,
-        alignItems: 'center'
+        marginVertical: responsiveSize(3),
+        alignItems: 'center',
+        paddingLeft: "10%",
+        height: PhoneHeight * 0.05,
+        borderWidth:0
     },
     checkBox: {
-        width: responsiveSize(20),
-        height: responsiveSize(20),
-        borderRadius: 10,
-        marginRight: 5
-    }
+        width: responsiveSize(18),
+        height: responsiveSize(18),
+        borderRadius: 30,
+    },
+    usersName: {
+        color: "black",
+        fontSize: responsiveSize(15),
+        marginLeft: 5
+    },
 });
 
 const mapStateToProps = (state) => {

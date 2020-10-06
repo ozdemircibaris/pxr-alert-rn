@@ -46,7 +46,7 @@ export  class Main extends Component {
                              item
                            })}}
            style={styles.deleteButton} >
-      <Image style= {styles.iconImg} source={require('../../images/deleteIcon.png')}></Image>
+      <Image style= {styles.iconImg} source={require('../../images/remove.png')}></Image>
       </TouchableOpacity>
       </View>
     </View>
@@ -120,7 +120,7 @@ export  class Main extends Component {
           <TouchableOpacity onPress={() => Actions.CreateTask({task: "", newTaskStatus: "newTask"})}
             style={styles.submitButton}
             activeOpacity={.5}>
-              <Image style ={styles.plusIcon} source={require('../../images/plus.png')}/>
+              <Image style ={styles.plusIcon} source={require('../../images/add.png')}/>
           </TouchableOpacity>
         </View>
       </View>

@@ -21,14 +21,14 @@ class CreateTask extends Component {
     // categories: [],
     androidMode : "date",
     title: "",
-    body: ""
+    body: "",
+    cat_title: "Kategori Seç"
   };
 
   // get category 
   componentDidMount(){
     this.props.getCategories(this.props.userData.token)
   }
-
  
   //  ***FONKSIYONLAR***
   dateTimePicking = () => {
@@ -41,8 +41,6 @@ class CreateTask extends Component {
             style={styles.taskHeaderInput}
             placeholder="İşin Adı"
             multiline
-            // value={this.props.task.item == null ? null : this.props.task.item.title}
-            // placeholderTextColor='#852E4C'
             onChangeText={(text) => {
               this.setState({
                 title: text
@@ -53,7 +51,6 @@ class CreateTask extends Component {
             style={styles.taskInfoInput}
             placeholder="İşin Tanımı"
             multiline
-            // placeholderTextColor='#852E4C'
             onChangeText={(value) => {
               this.setState({
                 body: value
@@ -66,9 +63,8 @@ class CreateTask extends Component {
               this.setModalVisible(true);
             }}
           >
-            <Text style={styles.textStyle}>Kategori Seç</Text>
+            <Text style={styles.textStyle}>{this.state.cat_title}</Text>
           </TouchableOpacity>
-          {/* tarih acÄ±cÄ± buton */}
       
           <View style={styles.calendar}>
           {
@@ -138,16 +134,10 @@ class CreateTask extends Component {
       return (
         <ScrollView style={styles.container}>
           <View style={styles.taskHeaderView}>
-            {/* style={styles.taskHeaderInput}
-            placeholder="Ä°ÅŸin BaÅŸlÄ±ÄŸÄ±" */}
            <Text style={styles.taskHeaderTxt}>{this.props.task.item == null ? "detay bulunamadÄ±" : this.props.task.item.title}</Text>
-            {/* placeholderTextColor='#852E4C'> */}
           </View>
           <View style={styles.taskInfoView}>
-            {/* // style={styles.taskInfoInput}
-            // placeholder="Ä°ÅŸin TanÄ±mÄ±" */}
             <Text style={styles.taskInfoTxt}>{this.props.task.item == null ? "detay b ulunamadÄ±" : this.props.task.item.subTitle}</Text>
-            {/* // placeholderTextColor='#852E4C' */}
           </View>
           <View style={styles.calendar}>
             <TouchableOpacity style={styles.dateButton} onPress={() => {
@@ -156,7 +146,6 @@ class CreateTask extends Component {
                   this.showTimepicker(true);
                 }else if(Platform.OS != "ios"){
                    this.showAndroidDatepicker();
-                  // this.showTimepicker(false);
                 }
                
               }}>
@@ -251,7 +240,9 @@ class CreateTask extends Component {
             <TouchableOpacity
               onPress={(cat_id) => this.setState({
                 cat_id: item.id,
-                selectedRadio: true
+                selectedRadio: true,
+                modalVisible: false,
+                cat_title: item.title
               })
               }
               style= {{borderWidth:4,
@@ -262,7 +253,7 @@ class CreateTask extends Component {
                 height: PhoneHeight * 0.03,
                 borderRadius:50,
                 marginTop: 10,
-                backgroundColor: ( this.state.cat_id == item.id) ? "#852e4c" : "white",
+                backgroundColor: ( this.state.cat_id == item.id) ? "#445c8b" : "white",
             
                 }}/>
           <Text style={styles.radioButtonTitle} >{item.title}</Text>
@@ -335,13 +326,14 @@ console.log("showtimepicker")
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <TouchableOpacity
-                style={styles.closeButton}
+                style={styles.closeButtonWithoutSaving}
                 onPress={() => {
-                  this.setModalVisible(!modalVisible);
+                  this.setState({
+                    modalVisible: false
+                  });
                 }}
               >
-                <Text style= {styles.closeIcon}>Vazgeç</Text>
-                {/* <Image style={styles.closeIcon} source={require('../../images/arrow.png')} /> */}
+                <Image style={styles.dontSaveClose} source={require('../../images/arrow.png')} />
               </TouchableOpacity>
               <FlatList // listing category
                 data={this.props.categories}
@@ -368,21 +360,21 @@ const styles = StyleSheet.create({
     paddingRight: responsiveSize(15),
   },
   header: {
-    flex: 0.3,
+    flex: 0.2,    
     height: PhoneHeight * 0.30,
     alignItems: "center",
     justifyContent: "center"
   },
   headerText: {
     fontSize: responsiveSize(19),
-    color: "#852e4c",
+    color: "#445c8b",
     fontWeight: "bold"
   },
   taskHeaderInput: {
     borderWidth: 1.5,
     width: PhoneWidth * 0.85,
     height: PhoneHeight * 0.07,
-    borderColor: "#852e4c",
+    borderColor: "#445c8b",
     borderRadius: 8,
     textAlign: "center",
     fontSize: responsiveSize(13),
@@ -392,7 +384,7 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     width: PhoneWidth * 0.85,
     height: PhoneHeight * 0.25,
-    borderColor: "#852e4c",
+    borderColor: "#445c8b",
     borderRadius: 8,
     fontSize: responsiveSize(14),
     marginTop: 20,
@@ -404,7 +396,7 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     width: PhoneWidth * 0.85,
     height: PhoneHeight * 0.07,
-    borderColor: "#852e4c",
+    borderColor: "#445c8b",
     borderRadius: 8,
     alignSelf: "center",
   },
@@ -419,7 +411,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     width: PhoneWidth * 0.85,
     height: PhoneHeight * 0.25,
-    borderColor: "#852e4c",
+    borderColor: "#445c8b",
     borderRadius: 8,
     textAlign: "center",
     fontSize: responsiveSize(15),
@@ -438,13 +430,13 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     height: PhoneHeight * 0.057,
     borderRadius: 8,
-    borderColor: "#852e4c",
+    borderColor: "#445c8b",
     alignSelf: 'center',
     justifyContent:'center',
   },
   dateButtonText: {
     textAlign: "center",
-    color: "#852e4c",
+    color: "#445c8b",
     fontSize: responsiveSize(13),  
   },
   timeButton: {
@@ -452,12 +444,12 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     height: PhoneHeight * 0.057,
     borderRadius: 8,
-    borderColor: "#852e4c",
+    borderColor: "#445c8b",
     marginRight: 16
   },
   timeButtonText: {
     textAlign: "center",
-    color: "#852e4c",
+    color: "#445c8b",
     fontSize: responsiveSize(15),
     marginTop: 5
   },
@@ -468,17 +460,17 @@ const styles = StyleSheet.create({
     width: PhoneWidth * 0.85,
     borderWidth: 2,
     height: PhoneHeight * 0.057,
-    borderColor: "#852e4c",
+    borderColor: "#445c8b",
     alignSelf: "center",
     marginTop: 20,
-    backgroundColor: "#852e4c",
+    backgroundColor: "#445c8b",
     justifyContent:'center'
   },
   focusButtonText: {
     textAlign: "center",
     color: "white",
     fontSize: responsiveSize(15),
-    marginTop: 4
+    textAlign: "center"
   },
   calendar: {
     textAlign: "center",
@@ -497,10 +489,10 @@ const styles = StyleSheet.create({
     height: PhoneHeight * 0.057,
     alignSelf: 'center',
     justifyContent: 'center',
-    borderColor: "#852E4C"
+    borderColor: "#445c8b"
 },
 textStyle: {
-    color: "#852E4C",
+    color: "#445c8b",
     textAlign: "center",
     fontSize: responsiveSize(13)
 },
@@ -515,21 +507,20 @@ modalView: {
     padding: 35,
     alignItems: "flex-start",
     borderWidth: 1,
-    borderColor: '#852E4C',
+    borderColor: '#445c8b',
     width: PhoneWidth,
     height: PhoneHeight * 0.3,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8
 },
-closeButton:{
-    width: PhoneWidth * 0.2,
+closeButtonWithoutSaving:{
+    width: PhoneWidth * 0.08,
     height: PhoneHeight * 0.03,
-    alignSelf: "flex-end",
-    marginRight: responsiveSize(10),
-    alignItems: "center"
+    alignSelf: "flex-end"
 },
-closeIcon:{
-  fontWeight: "bold"
+dontSaveClose:{
+  width: PhoneWidth * 0.05,
+  height: PhoneHeight * 0.03,
 },
 radioButtons:{
     borderWidth:1,

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Button,Text,TouchableOpacity,TextInput,View ,StyleSheet,Image, ImageBackground, AsyncStorage} from 'react-native';
+import {Text,TouchableOpacity,TextInput,View ,StyleSheet,Image} from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
 import { PhoneHeight,PhoneWidth,responsiveSize } from '../config/env';
 import { fullNameChange,emailChange, passwordChange ,signUpClicked} from '../../actions/authenticationAction';
-import axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
 
 class signUp extends Component {
   constructor(props) {
@@ -33,7 +32,7 @@ class signUp extends Component {
         return (
           <View style={styles.background}>
             <Image style={styles.icon}
-                source={require('../../images/candies.png')}>
+                source={require('../../images/pxrr.png')}>
              </Image>
             <View style={styles.container}>
             <TextInput 
@@ -79,8 +78,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     },
     icon:{
-      width: responsiveSize(80),
-      height: responsiveSize(80),
+      width: responsiveSize(100),
+      height: responsiveSize(100),
       resizeMode: "contain",
       alignSelf: "center",
     },
@@ -94,7 +93,7 @@ const styles = StyleSheet.create({
       height: PhoneHeight * 0.05,
       margin: 10,
       color: 'black',
-      fontSize: responsiveSize(11),
+      fontSize: responsiveSize(10),
       textAlign: "center",
       borderColor: "#852e4c",
       borderWidth: 2,
@@ -126,7 +125,6 @@ const styles = StyleSheet.create({
       color: "#852e4c"
     }
 });
-
 const mapStateToProps = (state) => {
   const { fullNameValue, emailValue, passwordValue,phoneToken } = state.authenticationReducer;
   return {
@@ -136,7 +134,6 @@ const mapStateToProps = (state) => {
       phoneToken
   }
 }
-
 export default connect(
   mapStateToProps,
   {
