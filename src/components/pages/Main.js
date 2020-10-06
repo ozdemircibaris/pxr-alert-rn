@@ -7,6 +7,7 @@ import moment from 'moment';
 import {deleteCard, listCard, listTasks, getTasks} from '../../actions/mainAction';
 import createTaskReducer from '../../reducers/createTaskReducer';
 import { Header } from 'react-native/Libraries/NewAppScreen';
+import MissionRenderItem from '../helpComponents/missionRenderItem';
 
 export  class Main extends Component {
   constructor(props){
@@ -112,7 +113,7 @@ export  class Main extends Component {
         <View style={styles.body}>
           <FlatList
             data={this.props.mainCards}
-            renderItem={this.missionRenderItem}
+            renderItem={({item}) => <MissionRenderItem item={item} />}
             keyExtractor={item => item.id.toString()}
           />
         </View>
