@@ -26,14 +26,15 @@ const INITIAL_STATE = {
     sorted: [],
     sortedMin: [],
     minDate: [],
-    taskDate: ""
+    taskDate: "",
+    deleteCount: 0
 }
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type){
         case DELETE_CLICK:
             return {
-                ...state, 
+                ...state,
             }
             case DELETE_CARD_SUCCESS:
             let index = state.mainCards.indexOf(action.payload);
@@ -41,31 +42,32 @@ export default (state = INITIAL_STATE, action) => {
             state.mainCards.splice(index, 1)
             return {
                 ...state,
+                deleteCount: state.deleteCount + 1
             }
             case LIST_CARD:
             return {
-                ...state, 
+                ...state,
                 mainCards: []
             }
             case LIST_CARD_SUCCESS:
             return {
-                ...state, 
-                mainCards: state.mainCards.concat(action.payload)  
+                ...state,
+                mainCards: state.mainCards.concat(action.payload)
             }
             case NEW_CARD_SUCCESS:
                 return {
-                    ...state, 
-                    mainCards: state.mainCards.concat(action.payload)  
+                    ...state,
+                    mainCards: state.mainCards.concat(action.payload)
                 }
             case LIST_TASKS:
             return {
-                ...state, 
+                ...state,
             }
             case LIST_TASKS_SUCCESS:
                 //console.log("tasksmap: ", action.payload)
             return {
                 ...state,
-                mainTasks: state.mainTasks.concat(action.payload)  
+                mainTasks: state.mainTasks.concat(action.payload)
             }
             case GET_TASKS:
             return {
@@ -116,6 +118,5 @@ export default (state = INITIAL_STATE, action) => {
             }
             default:
                     return state;
-                
                 }
             }
