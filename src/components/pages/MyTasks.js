@@ -43,7 +43,7 @@ render() {
           onPress= {() => Actions.CreateTask({task: "", newTaskStatus: "newTask"})}
           style= {styles.submitButtonStyle}
           activeOpacity= {.5}>
-          <Image style = {styles.plusIcon} source={require('../../images/plus.png')}/>
+          <Image style = {styles.plusIcon} source={require('../../images/add.png')}/>
         </TouchableOpacity>
     </View>
     );

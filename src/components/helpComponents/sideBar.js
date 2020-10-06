@@ -34,7 +34,7 @@ export class SideBar extends Component {
   }
 }
 let styles = StyleSheet.create({
-​
+
    outContainer: {
       flexDirection: 'column',
       flex: 1,
@@ -55,7 +55,7 @@ let styles = StyleSheet.create({
       borderTopLeftRadius: 0,
       borderTopRightRadius: 5,
       borderBottomRightRadius: 5,
-      backgroundColor: "#852e4c",
+      backgroundColor: "#445c8b",
       justifyContent: "center",
      },
      title:{
@@ -69,16 +69,14 @@ let styles = StyleSheet.create({
      },
      logOutText:{
         fontSize: responsiveSize(15),
-        color:'#852e4c',
+        color:'#445c8b',
         fontWeight: "bold"
      }
 });
-​
-​
+
 const mapStateToProps = state => {
    return {}
 }
-​
 export default connect(
    mapStateToProps,
    {
