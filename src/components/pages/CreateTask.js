@@ -120,7 +120,7 @@ class CreateTask extends Component {
               this.setModalVisible(true);
             }}
           >
-            <Text style={styles.textStyle}>Kategori Seç</Text>
+            <Text style={styles.textStyle}>{this.state.cat_title}</Text>
           </TouchableOpacity>
           <View style={styles.focusButtonContainer}>
             <TouchableOpacity style={styles.focusButton}
