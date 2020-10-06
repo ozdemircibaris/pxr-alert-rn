@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, FlatList} from 'react-native';
 import { PhoneWidth, PhoneHeight, responsiveSize } from '../config/env';
 import UsersRenderItem from '../helpComponents/usersRenderItem';
 import { connect } from 'react-redux';
@@ -23,8 +23,10 @@ class Users extends Component {
         return (
           <View style={styles.container}>
               <View style={styles.header}>
-                  <Text style={styles.headertext}>Merhaba Murat</Text>
-                  <Text style={styles.headertext}> Bu şerefe kimlerin nail olacağını seç</Text>
+                  <Text style={styles.headertext}>Merhaba,
+                  <Text style= {styles.userNameText}>{this.props.userData.data.fullName}</Text>
+                  </Text>
+                  <Text style={styles.headertext}>Bu şerefe kimlerin nail olacağını seç</Text>
               </View>
               <View style={styles.body}>
                   <FlatList
@@ -32,72 +34,45 @@ class Users extends Component {
                       renderItem={({item}) => <UsersRenderItem item= {item}/>}
                       keyExtractor={item => item.id.toString()}
                   />
-                  <TouchableOpacity
+              </View>
+              <TouchableOpacity
                             style={styles.button}
                             onPress={() => this.props.createTask(title, body, date, cat_id, usersId, this.props.userData.token)} >
                       <Text style={styles.btnText}>KİTLEEE!</Text>
                   </TouchableOpacity>
-              </View>
           </View>
         );
     }
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        padding: 20
+        flex: 1
     },
     header: {
         flex: 0.3,
         marginTop: 20,
         flexDirection: "column",
-        marginLeft: 10,
-        marginBottom: 15
+        margin: 15
     },
     headertext: {
         fontSize: responsiveSize(16),
-        color: "#852E4C",
+        color: "#445c8b",
+        marginLeft: 10
     },
-    body: {
-        borderWidth: 0,
-        width: responsiveSize(295),
-        height: responsiveSize(322),
-        padding: 0,
+    body: {   
         marginTop: 20,
-    },
-    users: {
-        borderWidth: 0,
-        width: responsiveSize(290),
-        height: responsiveSize(37),
-        flexDirection: "row",
-    },
-    checkbox: {
-        width: 25,
-        height: 25,
-        borderWidth: 0,
-        // borderColor: ‘#852E4C’,
-    },
-    checkboxView: {
-        borderWidth: 2,
-        width: PhoneWidth * 0.06,
-        height: PhoneHeight * 0.038,
-        marginTop: 8
-    },
-    usersName: {
-        marginTop: 8,
-        color: "black",
-        fontSize: responsiveSize(15),
-        marginLeft: 20
+        width: PhoneWidth,
+        height: PhoneHeight * 0.6,
     },
     button: {
         borderWidth: 0,
-        height: responsiveSize(35),
-        width: responsiveSize(190),
+        width: PhoneWidth * 0.5,
+        height: PhoneHeight * 0.05,
         top: 30,
         alignSelf: "center",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#852E4C"
+        backgroundColor: "#445c8b"
     },
     btnText: {
         color: "white",
@@ -105,7 +80,10 @@ const styles = StyleSheet.create({
     },
     tick: {
         marginLeft: 4
-    }
+    },
+    userNameText:{
+        fontWeight: "bold"
+      }
 });
 const mapStateToProps = (state) => {
     const { usersId, users } = state.usersReducer;

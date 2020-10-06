@@ -11,7 +11,7 @@ import{
     LOG_OUT_CLICK,
     LOG_OUT_SUCCESS
 } from "../actions/authenticationAction";
-​
+
 const INITIAL_STATE = {
     fullNameValue: "",
     emailValue: "Umut@gmail.com",
@@ -55,7 +55,6 @@ export default (state = INITIAL_STATE, action) => {
                 ...state, 
                             }
         case SIGN_IN_SUCCESS:
-             console.log("userdatas", action.payload)
             return {
                 ...state,
                 idValue: action.payload.id,
@@ -66,7 +65,7 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state, 
                             }
-​
+
         case LOG_OUT_CLICK:
             return {
                 ...state,
