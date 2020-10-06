@@ -18,8 +18,8 @@ class Users extends Component {
     }
 
     render() {
-        console.log("id users:", this.props.usersId )
-        const {title, body, date, cat_id, usersId} = this.props;
+        console.log("id users:", this.props.selectedUsers )
+        const {title, body, date, cat_id, selectedUsers} = this.props;
         return (
           <View style={styles.container}>
               <View style={styles.header}>
@@ -37,7 +37,7 @@ class Users extends Component {
               </View>
               <TouchableOpacity
                             style={styles.button}
-                            onPress={() => this.props.createTask(title, body, date, cat_id, usersId, this.props.userData.token)} >
+                            onPress={() => this.props.createTask(title, body, date, cat_id, selectedUsers, this.props.userData.token)} >
                       <Text style={styles.btnText}>KİTLEEE!</Text>
                   </TouchableOpacity>
           </View>
@@ -86,12 +86,13 @@ const styles = StyleSheet.create({
       }
 });
 const mapStateToProps = (state) => {
-    const { usersId, users } = state.usersReducer;
+    const { usersId, users, selectedUsers} = state.usersReducer;
     const {userData} = state.authenticationReducer;
     return {
         usersId,
         userData,
-        users
+        users,
+        selectedUsers
     }
 }
 export default connect(

@@ -12,7 +12,8 @@ class UsersRenderItem extends Component {
         <View style={styles.container}>
             <TouchableOpacity
                 onPress={() => this.props.selectedUser(item.id)}
-                style={[styles.checkBox, { backgroundColor: item.selected == true ?"#445c8b":'#2a2124'}]} />
+                style={[styles.checkBox, { backgroundColor: item.selected == true ?"#b7e2f5":'#2a2124'}]} 
+                />
             <Text style= {styles.usersName}> {item.fullName} </Text>
         </View>
      )

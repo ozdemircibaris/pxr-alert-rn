@@ -21,19 +21,24 @@ export default (state = INITIAL_STATE, action) => {
       })
       return {
         ...state,
-        users: action.payload
+        users: action.payload,
+        selectedUsers: []
       }
     case SELECTED_USER:
       state.users.map((item) => {
         if(item.id == action.payload && item.selected == false) {
           item.selected = true;
+          state.selectedUsers = state.selectedUsers.concat(action.payload)
         } else if(item.id == action.payload && item.selected == true) {
           item.selected = false
+          let index = state.selectedUsers.indexOf(action.payload);
+          console.log("index :", index)
+          state.selectedUsers.splice(index, 1)
         }
       })
       return {
         ...state,
-        selectedUsers: [...state.selectedUsers, action.payload],
+        selectedUsers: [...state.selectedUsers],
       }
     default:
       return state;
