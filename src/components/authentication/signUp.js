@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
       color: 'black',
       fontSize: responsiveSize(10),
       textAlign: "center",
-      borderColor: "#852e4c",
+      borderColor: "#445c8b",
       borderWidth: 2,
       borderRadius: 8,
     },
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
       width: responsiveSize(170), 
       alignSelf: "center",
       marginTop: 10,
-      backgroundColor: "#852e4c",
+      backgroundColor: "#2a2124",
       justifyContent:"center"
     },
     signUpButtonText:{
@@ -119,10 +119,10 @@ const styles = StyleSheet.create({
     },
     loginButtonText:{
       paddingTop:10,
-      color: "#852e4c",
+      color: "#445c8b",
     },
     login:{
-      color: "#852e4c"
+      color: "#445c8b"
     }
 });
 const mapStateToProps = (state) => {

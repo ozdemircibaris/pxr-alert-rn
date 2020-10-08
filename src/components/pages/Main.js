@@ -29,6 +29,37 @@ export  class Main extends Component {
     this.props.listCard(this.props.userData.token, this.props.userData.data.id , this.props.mainCards)
   }
  
+  componentDidMount(){
+  }
+
+ missionRenderItem = ({ item }) => {
+    return(
+      <View style={styles.taskBox} >
+       <View style={styles.categoryColorView} >
+       <View style={styles.hr}>
+        <View style={styles.circle} 
+              backgroundColor={item.taskCategoriesModel != undefined ? item.taskCategoriesModel.color : null}></View>
+        <TouchableOpacity 
+           onPress= {() => {this.setModalVisible()
+                           this.setState({
+                             item
+                           })}}
+           style={styles.deleteButton} >
+      <Image style= {styles.iconImg} source={require('../../images/delete.png')}></Image>
+      </TouchableOpacity>
+      </View>
+    </View>
+    <TouchableOpacity 
+      onPress={() => Actions.CreateTask({newTaskStatus: 'card', task: {item}})}
+      style={styles.taskBodyBox}>
+        <View style={styles.taskItemTitle}>
+        <Text >{item.title}</Text>
+      <Text style={ styles.cardSubtitleText}>{item.subTitle}</Text>
+        </View>
+    </TouchableOpacity>
+  </View>
+    )
+    };
   render() {
     const {taskDate} = this.props;
     console.log("taskDate", taskDate)
@@ -150,8 +181,8 @@ const styles = StyleSheet.create({
   },
   plusIcon: {
     alignSelf:'center',
-    width: responsiveSize(45),
-    height: responsiveSize(45)
+    width: responsiveSize(40),
+    height: responsiveSize(40)
   },
   taskItemTitle:{
     fontWeight: "bold",
@@ -179,7 +210,7 @@ const styles = StyleSheet.create({
     width: PhoneWidth * 0.85,
     height: PhoneHeight * 0.25,
     margin: 20,
-    backgroundColor: "#e1d9e2",
+    backgroundColor: "#2a2124",
     borderRadius: 10,
     flexDirection: 'column',
     justifyContent: 'space-around'
