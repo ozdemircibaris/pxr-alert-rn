@@ -20,42 +20,38 @@ import {responsiveSize} from './components/config/env';
         <Router>
             <Stack key="root" hideNavBar >
                 <Stack initial= {isAuthLogin} key="auth" hideNavBar >
-                    <Scene 
-                        hideNavBar 
-                        key="signIn" 
+                    <Scene
+                        hideNavBar
+                        key="signIn"
                         component={SignIn} />
-                    <Scene 
-                        hideNavBar 
-                        key="signUp" 
+                    <Scene
+                        hideNavBar
+                        key="signUp"
                         component={SignUp} />
                 </Stack>
-                <Stack key= "main">
-                <Scene
-                    key="CreateTask"
-                    component={CreateTask}
-                    title="Yeni İş Kitle">
-                </Scene>
-                <Scene 
-                    key="Users" 
-                    component={Users}
-                    title= "Kitlenecekler" />
-                <Drawer
-                    tapToClose={true}
-                    hideNavBar
-                    drawerIcon= {DrawerIcon}
-                    contentComponent={SideBar}
-                    initial={isMainLogin}>
-                    <Scene hideNavBar 
-                            key="signIn"
-                            component={SignIn} />
-                    <Scene title= "Anasayfa" 
-                            key="Main" 
-                            component={Main}/>
-                    <Scene title= "Bana Gelen Görevler" 
-                            key="mytasks" 
-                            component={MyTasks}/>
-                </Drawer>
-                </Stack>      
+                <Stack initial={isMainLogin} key= "main">
+                    <Drawer
+                        tapToClose={true}
+                        hideNavBar
+                        drawerIcon= {DrawerIcon}
+                        contentComponent={SideBar}>
+                        <Scene title= "Anasayfa"
+                                key="Main"
+                                component={Main}/>
+                        <Scene title= "Bana Gelen Görevler"
+                                key="mytasks"
+                                component={MyTasks}/>
+                    </Drawer>
+                    <Scene
+                        key="CreateTask"
+                        component={CreateTask}
+                        title="Yeni İş Kitle">
+                    </Scene>
+                    <Scene
+                        key="Users"
+                        component={Users}
+                        title= "Kitlenecekler" />
+                </Stack>
              </Stack>
         </Router>
         )

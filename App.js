@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
+import { persistStore, } from 'redux-persist';
+import { PersistGate } from 'redux-persist/es/integration/react';
 import ReduxThunk from 'redux-thunk';
 import rootReducer from './src/reducers/rootReducer';
 import RouterComp from './src/router';
@@ -107,9 +109,12 @@ export default class App extends Component {
   // }
   render() {
     const store = createStore(rootReducer, {}, applyMiddleware(ReduxThunk))
+    const persisStore = persistStore(store)
     return (
       <Provider store={store}>
-        <RouterComp />
+        <PersistGate persistor={persisStore} loading={null}>
+          <RouterComp />
+        </PersistGate>
       </Provider>
     )
   }
