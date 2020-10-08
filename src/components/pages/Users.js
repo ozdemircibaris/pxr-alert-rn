@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, FlatList} from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, FlatList, Alert} from 'react-native';
 import { PhoneWidth, PhoneHeight, responsiveSize } from '../config/env';
 import UsersRenderItem from '../helpComponents/usersRenderItem';
 import { connect } from 'react-redux';
@@ -37,7 +37,14 @@ class Users extends Component {
               </View>
               <TouchableOpacity
                             style={styles.button}
-                            onPress={() => this.props.createTask(title, body, date, cat_id, selectedUsers, this.props.userData.token)} >
+                            onPress={() => {
+                                if(selectedUsers != ""){
+            
+                                    this.props.createTask(title, body, date, cat_id, selectedUsers, this.props.userData.token)
+                                }else{
+                                    Alert.alert("Uyarı","Kitlenecek kişi seç.")
+                                }
+                            }} >
                       <Text style={styles.btnText}>KİTLEEE!</Text>
                   </TouchableOpacity>
           </View>

@@ -2,6 +2,7 @@ import axios from 'axios'
 import { API_BASE } from '../components/config/env'
 import { Actions } from 'react-native-router-flux';
 import { createPersistoid } from 'redux-persist';
+import { Alert } from 'react-native';
 
 export const EMAIL_CHANGE    = "EMAIL_CHANGE";
 export const PASSWORD_CHANGE = "PASSWORD_CHANGE";
@@ -59,13 +60,11 @@ export const signUpClicked = (fullName, email, password, token) => {
              console.log("resultttt" , result.data)
              if(result.data.status == "success"){
                 Actions.signIn()
-                dispatch({
-                    type: SIGN_UP_SUCCESS,
-                })
+                
              }
          }).catch((err) => {
              console.log('errorrrruurr', err.response)
-             alert('Kayıt Olamadınız')
+             Alert.alert("Uyarı",'Kayıt Olamadınız.')
          })
     }
 }
@@ -95,7 +94,7 @@ export const signInClicked = ( email, password) => {
              }
          }).catch((err) => {
              console.log('errorrrruurr', err)
-             alert('HATALI ŞİFRE VEYA E-POSTA')
+             Alert.alert("Uyarı",'HATALI E-POSTA VEYA ŞİFRE')
          })
     }
 }

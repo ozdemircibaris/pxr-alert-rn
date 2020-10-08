@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, Text, TextInput, View, TouchableOpacity, StyleSheet, Image, Modal,FlatList, ScrollView } from 'react-native';
+import { Platform, Text, TextInput, View, TouchableOpacity, StyleSheet, Image, Modal,FlatList, ScrollView, Alert} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import moment from 'moment'
 import 'moment/locale/tr';
@@ -85,7 +85,14 @@ class CreateTask extends Component {
           }
           </View>
           <View style={styles.focusButtonContainer}>
-            <TouchableOpacity style={styles.focusButton} onPress = {() => Actions.Users({title: title, body: body, cat_id: cat_id, date: date})}>
+            <TouchableOpacity style={styles.focusButton} 
+                              onPress = {() => {
+                                if(cat_id != "" && title != "" && body != "" && date != ""){
+                                  Actions.Users({title: title, body: body, cat_id: cat_id, date: date})
+                                }else{
+                                  Alert.alert("Uyarı","Boş alan bırakılamaz.")
+                                }
+                              }}>
               <Text style={styles.focusButtonText}>Hedefe Kitlen</Text>
             </TouchableOpacity>
           </View>
@@ -124,7 +131,13 @@ class CreateTask extends Component {
           </TouchableOpacity>
           <View style={styles.focusButtonContainer}>
             <TouchableOpacity style={styles.focusButton}
-                              onPress={() => this.props.newCard(cat_id, title, body, this.props.userData.data.id, this.props.userData.token)} >
+                              onPress={() => {
+                                if(cat_id != "" && title != "" && body != ""){
+                                  this.props.newCard(cat_id, title, body, this.props.userData.data.id, this.props.userData.token)
+                               }else{
+                                Alert.alert("Uyarı","Boş alan bırakılamaz")
+                              }
+                                }} >
               <Text style={styles.focusButtonText}>Hedefe Kitlen</Text>
             </TouchableOpacity>
           </View>
@@ -154,7 +167,14 @@ class CreateTask extends Component {
            
           </View>
           <View style={styles.focusButtonContainer}>
-            <TouchableOpacity style={styles.focusButton} onPress = {() => Actions.Users({cat_id: this.props.task.item.cat_id, title: this.props.task.item.title, body: this.props.task.item.subTitle, date: date})}>
+            <TouchableOpacity style={styles.focusButton} 
+                              onPress = {() => {
+                                if(cat_id != "" && title != "" && body != "" && date != ""){
+                                  Actions.Users({cat_id: this.props.task.item.cat_id, title: this.props.task.item.title, body: this.props.task.item.subTitle, date: date})
+                                }else{
+                                  Alert.alert("Uyarı","Boş alan bırakılamaz")
+                                }
+                              }}>
               <Text style={styles.focusButtonText}>Hedefe Kitlen </Text>
             </TouchableOpacity>
           </View>

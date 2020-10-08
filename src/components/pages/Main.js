@@ -15,11 +15,8 @@ export  class Main extends Component {
     this.state = {
       id: this.props.idValue,
       data: this.props.userData,
-      missionDate: [],
-      minDate: [],
       deleteModal: false,
       item: "",
-      currentTask: [this.props.minDate[0]]
     }
   }
 
@@ -31,6 +28,7 @@ export  class Main extends Component {
     this.props.getTasks(this.props.dateArray, this.props.minDate, this.props.userData.data.id, this.props.userData.token);
     this.props.listCard(this.props.userData.token, this.props.userData.data.id , this.props.mainCards)
   }
+ 
   componentDidMount(){
   }
 
@@ -63,7 +61,8 @@ export  class Main extends Component {
     )
     };
   render() {
-    const {minDate, taskDate} = this.props;
+    const {taskDate} = this.props;
+    console.log("taskDate", taskDate)
     return (
       <View style={styles.container}>
         <View style={styles.greetingContainer}>
@@ -71,45 +70,21 @@ export  class Main extends Component {
             <Text style= {styles.userNameText}>{this.props.userData.data.fullName}</Text></Text>
           <Text style={styles.containerText}>Sana kitlenenler burda.</Text>
         </View> 
-        <ScrollView style={styles.currentTask} backgroundColor= {taskDate.taskCategoriesModel != undefined ? taskDate.taskCategoriesModel.color : null}>
+        {
+          taskDate 
+          ? 
+          <ScrollView style={styles.currentTask} backgroundColor= {taskDate != undefined ? taskDate.taskCategoriesModel.color : null}>
         <Text style={styles.jobTitle}>{taskDate != undefined ? taskDate.title : null}</Text>
           <Text style={styles.subTitle}> {taskDate != undefined ? taskDate.subTitle : null} </Text>
-          <Text style={styles.jobDate}>{moment(taskDate.jobDate).format("llll")}</Text>
+          <Text style={styles.jobDate}>{taskDate != undefined ? moment(taskDate.jobDate).format("llll") : null}</Text>
+        </ScrollView> 
+        :
+        <ScrollView style={styles.currentTask} >
+        <Text style={{...styles.subTitle, fontWeight: "bold", color: "#2a2124"}}>Kitlenmiş bir işiniz bulunmamaktadır.</Text>
+          
         </ScrollView>
-        <Modal
-          animationType="fade"
-          transparent={true}
-          visible={this.state.deleteModal}
-          onRequestClose={() => {
-            Alert.alert("Modal has been closed.");
-          }}
-        >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>Silmek istediğinize emin misiniz ?</Text>
-              <View style={styles.modalButtons}>
-              <TouchableOpacity
-                style={styles.deleteModalButton}
-                onPress={() => {
-                  // sildikten sonra modalı kapatır
-                  this.props.deleteCard(this.state.item.id, this.props.userData.token, this.state.item);
-                  this.setModalVisible(false);
-                }}>
-                <Text style={styles.yesnoTextStyle}>Evet</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.closeButton}
-                onPress={() => {
-                  // silmeden modalı kapatır
-                  this.setModalVisible(false);
-                }}
-              >
-                <Text style={styles.yesnoTextStyle}>Hayır</Text> 
-              </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-        </Modal> 
+        }
+        
         <View style={styles.body}>
           <FlatList
             data={this.props.mainCards}
@@ -296,21 +271,15 @@ const styles = StyleSheet.create({
   }
 });
 const mapStateToProps = (state) => {
-  const {  emailValue, passwordValue ,idValue, userData} = state.authenticationReducer;
-  const { mainCards, mainTasks, dateArray, minDate, mission, tasks, missionDate , taskDate} = state.mainReducer;
+  const {idValue, userData} = state.authenticationReducer;
+  const { mainCards, dateArray, minDate, taskDate} = state.mainReducer;
   const { cards } = state.createTaskReducer;
   return {
-      emailValue,
-      passwordValue,
       idValue,
       userData,
       mainCards,
-      mainTasks,
       dateArray,
       minDate,
-      mission,
-      tasks,
-      missionDate,
       cards,
       taskDate
   }
