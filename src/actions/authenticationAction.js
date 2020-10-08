@@ -75,6 +75,7 @@ export const signInClicked = ( email, password) => {
         dispatch({
             type: SIGN_IN_CLICK,
         })
+        console.log({email, password});
         axios({
             method: "POST",
             url: `${API_BASE}/users/signin`,

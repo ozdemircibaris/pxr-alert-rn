@@ -14,8 +14,8 @@ import{
 
 const INITIAL_STATE = {
     fullNameValue: "",
-    emailValue: "Umut@gmail.com",
-    passwordValue: "445261",
+    emailValue: "bariss",
+    passwordValue: "123456",
     idValue: "",
     userData:"",
     isAuthLogin: false,

@@ -3,15 +3,14 @@ import { Text, View,StyleSheet, TouchableOpacity,Button,SafeAreaView ,TextInput,
 import { Actions } from 'react-native-router-flux'
 import LinearGradient from 'react-native-linear-gradient';
 import {PhoneWidth , PhoneHeight, responsiveSize} from '../config/env';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { fullNameChange,emailChange, passwordChange ,signInClicked} from '../../actions/authenticationAction';
 export class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email:'Umut@gmail.com',
-      password:'445261',
+      email:'bariss',
+      password:'123456',
       id : this.props.idValue,
       phoneToken: ""
     };
@@ -30,7 +29,7 @@ export class SignIn extends Component {
 <View style={styles.generalBox}>
     <TextInput
       style={styles.userNameWrapper}
-      onChangeText={(value) =>this.props.emailChange(value)}
+      onChangeText={(value) => this.props.emailChange(value)}
       placeholder='E-POSTA'
       value={this.props.emailValue}
       placeholderTextColor='black'
