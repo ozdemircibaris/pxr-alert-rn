@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { API_BASE } from '../components/config/env';
 import { Actions } from 'react-native-router-flux';
+import { Alert } from 'react-native';
 
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_SUCCESS = "GET_SUCCESS";
@@ -51,6 +52,6 @@ export const newCard =(cat_id, title, body, user_id , token) => {
                Actions.Main()
                }
            }).catch((err) => {
-               alert('başarısız')
+               Alert.alert("Uyarı",'Yeni kart oluşturulamadı.')
            })
    }}
