@@ -63,14 +63,14 @@ class MissionRenderItem extends Component {
        <View style={styles.categoryColorView} >
        {/* <View style={styles.hr} /> */}
         <View style={styles.circle}
-              backgroundColor={item.taskCategoriesModel != undefined ? item.taskCategoriesModel.color : null}></View>
+              backgroundColor={item != undefined ? item.taskCategoriesModel.color : null}></View>
         <TouchableOpacity
            onPress= {() => {
             this.setModalVisible()
             this.setState({ item })
             }}
            style={styles.deleteButton} >
-      <Image style= {styles.iconImg} source={require('../../images/deleteIcon.png')}></Image>
+      <Image style= {styles.iconImg} source={require('../../images/delete.png')}></Image>
       </TouchableOpacity>
     </View>
     <TouchableOpacity
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
       width: PhoneWidth * 0.85,
       height: PhoneHeight * 0.25,
       margin: 20,
-      backgroundColor: "#e1d9e2",
+      backgroundColor: "#2a2124",
       borderRadius: 10,
       flexDirection: 'column',
       justifyContent: 'space-around'
@@ -213,14 +213,14 @@ const styles = StyleSheet.create({
     },
     closeButton: {
       justifyContent:'center',
-      backgroundColor: "#7b344c",
+      backgroundColor: "#445c8b",
       borderRadius: 10,
       width: PhoneWidth * 0.25,
       height: PhoneHeight * 0.06
     },
     deleteModalButton: {
       justifyContent:'center',
-      backgroundColor: "#7b344c",
+      backgroundColor: "#445c8b",
       borderRadius: 10,
       width: PhoneWidth * 0.25,
       height: PhoneHeight * 0.06
@@ -232,6 +232,7 @@ const styles = StyleSheet.create({
       textAlign: "center",
     },
     modalText: {
+      color: "white",
       textAlign: "center",
       fontSize: responsiveSize(15)
     },

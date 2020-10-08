@@ -49,11 +49,11 @@ export const createTask =(title, body, date, cat_id , user_id, token) => {
              console.log("resultttt" , result.data)
              if(result.data.status == "success"){
              console.log("Başarılı")
-             Actions.mytasks();
+             Actions.Main();
              }
          }).catch((err) => {
              console.log('errorrrruurr', err.response)
-             alert('başarısız')
+             Alert.alert("Uyarı","Kitleme başarısız.")
          })
         }
  }
