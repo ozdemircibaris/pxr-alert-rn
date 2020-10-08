@@ -29,6 +29,7 @@ export const listCard = (token, id,cards) => {
             'Authorization': `Bearer ${token}`
         },
         }).then((res) => {
+          console.log('res', res.data)
         dispatch({
           type: LIST_CARD_SUCCESS,
           payload: res.data.data

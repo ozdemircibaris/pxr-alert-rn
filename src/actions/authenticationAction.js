@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { API_BASE } from '../components/config/env'
 import { Actions } from 'react-native-router-flux';
-import { createPersistoid } from 'redux-persist';
 
 export const EMAIL_CHANGE    = "EMAIL_CHANGE";
 export const PASSWORD_CHANGE = "PASSWORD_CHANGE";
@@ -77,7 +76,7 @@ export const signInClicked = ( email, password) => {
         })
         console.log({email, password});
         axios({
-            method: "POST",
+            method: "post",
             url: `${API_BASE}/users/signin`,
             headers: {
                 'Content-Type': 'application/json',
@@ -87,8 +86,8 @@ export const signInClicked = ( email, password) => {
          }).then((result) => {
              console.log("resultttt" , result)
              if(result.data.status == "success"){
-                 console.log("user Id", result.data.data.id)
-                 dispatch({
+                console.log("user Id", result.data.data.id)
+                dispatch({
                     type: SIGN_IN_SUCCESS,
                     payload: {id: result.data.data.id, data: result.data}
                 })

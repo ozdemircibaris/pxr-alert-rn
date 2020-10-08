@@ -25,15 +25,15 @@ export default (state = INITIAL_STATE, action) => {
     switch (action.type){
         case SIGN_UP_CLICK:
             return {
-                ...state, 
+                ...state,
             }
         case SIGN_UP_SUCCESS:
             return{
-                ...state, 
+                ...state,
             }
         case SIGN_UP_FAILED:
             return{
-                ...state,  
+                ...state,
                 }
         case FULL_NAME_CHANGE:
             return {
@@ -52,7 +52,7 @@ export default (state = INITIAL_STATE, action) => {
                         }
         case SIGN_IN_CLICK:
             return {
-                ...state, 
+                ...state,
                             }
         case SIGN_IN_SUCCESS:
             return {
@@ -60,11 +60,11 @@ export default (state = INITIAL_STATE, action) => {
                 idValue: action.payload.id,
                 userData: action.payload.data,
                 isMainLogin: true
-                           }       
+            }
         case SIGN_IN_FAILED:
             return {
-                ...state, 
-                            }
+                ...state,
+            }
 
         case LOG_OUT_CLICK:
             return {
