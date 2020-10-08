@@ -63,7 +63,7 @@ class MissionRenderItem extends Component {
        <View style={styles.categoryColorView} >
        {/* <View style={styles.hr} /> */}
         <View style={styles.circle}
-              backgroundColor={item != undefined ? item.taskCategoriesModel.color : null}></View>
+              backgroundColor={item.taskCategoriesModel != undefined ? item.taskCategoriesModel.color : null}></View>
         <TouchableOpacity
            onPress= {() => {
             this.setModalVisible()
