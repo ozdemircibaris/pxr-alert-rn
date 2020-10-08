@@ -28,7 +28,6 @@ export  class Main extends Component {
     this.props.getTasks(this.props.dateArray, this.props.minDate, this.props.userData.data.id, this.props.userData.token);
     this.props.listCard(this.props.userData.token, this.props.userData.data.id , this.props.mainCards)
   }
-
   render() {
     const {taskDate} = this.props;
     console.log("taskDate", taskDate)
@@ -49,7 +48,7 @@ export  class Main extends Component {
         </ScrollView> 
         :
         <ScrollView style={styles.currentTask} >
-        <Text style={{...styles.subTitle, fontWeight: "bold", color: "#2a2124"}}>Kitlenmiş bir işiniz bulunmamaktadır.</Text>
+        <Text style={styles.alertText}>Kitlenmiş bir işiniz bulunmamaktadır.</Text>
           
         </ScrollView>
         }
@@ -94,7 +93,14 @@ const styles = StyleSheet.create({
     width: PhoneWidth * 0.87,
     height: PhoneHeight * 0.10,
     borderRadius: 10,
-    marginTop: 20
+    marginTop: 20,
+  },
+  alertText:{
+    fontWeight: "bold",
+    color: "#2a2124",
+    alignSelf: "center",
+    fontSize: responsiveSize(17),
+    marginTop: PhoneHeight * 0.07
   },
   body: {
     marginTop: 20,
