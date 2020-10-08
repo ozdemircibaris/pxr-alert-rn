@@ -47,7 +47,7 @@ export  class Main extends Component {
                              item
                            })}}
            style={styles.deleteButton} >
-      <Image style= {styles.iconImg} source={require('../../images/remove.png')}></Image>
+      <Image style= {styles.iconImg} source={require('../../images/delete.png')}></Image>
       </TouchableOpacity>
       </View>
     </View>
@@ -206,8 +206,8 @@ const styles = StyleSheet.create({
   },
   plusIcon: {
     alignSelf:'center',
-    width: responsiveSize(45),
-    height: responsiveSize(45)
+    width: responsiveSize(40),
+    height: responsiveSize(40)
   },
   taskItemTitle:{
     fontWeight: "bold",
@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
     width: PhoneWidth * 0.85,
     height: PhoneHeight * 0.25,
     margin: 20,
-    backgroundColor: "#e1d9e2",
+    backgroundColor: "#2a2124",
     borderRadius: 10,
     flexDirection: 'column',
     justifyContent: 'space-around'
