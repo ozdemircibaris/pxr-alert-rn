@@ -10,10 +10,6 @@ const INITIAL_STATE = {
 }
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case GET_CATEGORIES:
-            return {
-                ...state,
-            }
         case GET_SUCCESS:
             console.log('zeynep:',action.payload)
             return {

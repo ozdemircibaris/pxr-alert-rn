@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, Text, TextInput, View, TouchableOpacity, StyleSheet, Image, Modal,FlatList, ScrollView, Alert} from 'react-native';
+import { Platform, Text, TextInput, View, TouchableOpacity, StyleSheet, Image, Modal,FlatList, ScrollView, Alert,Picker} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import moment from 'moment'
 import 'moment/locale/tr';
@@ -7,6 +7,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { PhoneHeight, PhoneWidth, responsiveSize } from '../config/env';
 import { connect } from 'react-redux';
 import { getCategories, newCard } from '../../actions/createTaskAction'
+
 
 class CreateTask extends Component {
   state={
@@ -18,7 +19,6 @@ class CreateTask extends Component {
     modalVisible: false,
     cat_id: "",
     selectedRadio: false,
-    // categories: [],
     androidMode : "date",
     title: "",
     body: "",
@@ -26,7 +26,7 @@ class CreateTask extends Component {
   };
 
   // get category 
-  componentDidMount(){
+  componentWillMount(){
     this.props.getCategories(this.props.userData.token)
   }
  
@@ -169,7 +169,7 @@ class CreateTask extends Component {
           <View style={styles.focusButtonContainer}>
             <TouchableOpacity style={styles.focusButton} 
                               onPress = {() => {
-                                if(cat_id != "" && title != "" && body != "" && date != ""){
+                                if(date != ""){
                                   Actions.Users({cat_id: this.props.task.item.cat_id, title: this.props.task.item.title, body: this.props.task.item.subTitle, date: date})
                                 }else{
                                   Alert.alert("Uyarı","Boş alan bırakılamaz")
@@ -182,10 +182,103 @@ class CreateTask extends Component {
     )
     }
   }
+  
+ listingCategoriesWrtPlatform =() =>{
+  const { show, dateValue, pickerMode, modalVisible, dateModalVisible, categories, title, body} = this.state
+   if(Platform.OS == "ios"){
+    return(
+      <Modal
+    animationType="slide"
+    transparent={true}
+    visible={modalVisible}
+    onRequestClose={() => {
+alert("Modal has been closed.");
+    }}
+  >
+          <View style={styles.centeredView}>
+        <View style={styles.modalView}>
+          <TouchableOpacity
+            style={styles.closeButtonWithoutSaving}
+            onPress={() => {
+              this.setState({
+                modalVisible: false
+              });
+            }}
+          >
+            <Image style={styles.dontSaveClose} source={require('../../images/arrow.png')} />
+          </TouchableOpacity>
+          {/* <FlatList // listing category
+            data={this.props.categories}
+            renderItem={this.categoriesRenderItem}
+            keyExtractor={item => item.id}
+            /> */}
+             <Picker
+                  selectedValue={this.state.cat_id}
+                  itemStyle={{fontSize: responsiveSize(18)}}
+                  style={{height: 50, width: PhoneWidth, alignSelf: 'center'}}
+                  
+                  onValueChange={(item) => {
+                    console.log("1",item.id);
+                    console.log("2",item.title)
+                    this.setState({
+                    cat_id: item.id,
+                    modalVisible:false,
+                    cat_title: item.title
+                      
+                  }
+                  )
+                  } }>
+                    
+                  {
+                      this.props.categories.map((item, index) => {
+                          return <Picker.Item key={item.id} label={item.title} value={item} />
+                      })
+                  }
+             </Picker>
+        </View>
+      </View>
 
+    </Modal>
+    )
+
+   }
+   else{
+  
+   return(
+    <Modal
+    animationType="slide"
+    transparent={true}
+    visible={modalVisible}
+    onRequestClose={() => {
+alert("Modal has been closed.");
+    }}
+  >
+    <View style={styles.centeredView}>
+      <View style={styles.modalView}>
+        <TouchableOpacity
+          style={styles.closeButtonWithoutSaving}
+          onPress={() => {
+            this.setState({
+              modalVisible: false
+            });
+          }}
+        >
+          <Image style={styles.dontSaveClose} source={require('../../images/arrow.png')} />
+        </TouchableOpacity>
+        <FlatList // listing category
+          data={this.props.categories}
+          renderItem={this.categoriesRenderItem}
+          keyExtractor={item => item.id}
+          />
+      </View>
+    </View>
+  </Modal>
+   )
+   }
+ }
   getDateTime = () =>{
     // this.showMode("time")
-    const { show, dateValue, pickerMode, dateModalVisible, androidMode } = this.state
+    const { show, dateValue, pickerMode, dateModalVisible, androidMode } = this.state;
     if(Platform.OS == "ios"){
       // console.log("nereye bu giriÅŸ");
       return(
@@ -335,7 +428,7 @@ console.log("showtimepicker")
     const { show, dateValue, pickerMode, modalVisible, dateModalVisible, categories, title, body} = this.state
     return (
       <View style={styles.background}>
-        <Modal
+        {/* <Modal
           animationType="slide"
           transparent={true}
           visible={modalVisible}
@@ -362,8 +455,9 @@ console.log("showtimepicker")
                 />
             </View>
           </View>
-        </Modal>
+        </Modal> */}
         <this.getDateTime/>
+        <this.listingCategoriesWrtPlatform/>
 
         <View style={styles.header}>
           <Text style={styles.headerText}>Merhaba, {this.props.userData.data.fullName}{"\n"}Birine iş kitlemek için harika bir gün!</Text>
