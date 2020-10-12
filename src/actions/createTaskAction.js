@@ -10,14 +10,11 @@ export const NEW_CARD_SUCCESS = "NEW_CARD_SUCCESS"
 
 export const getCategories = (token) => {
     return dispatch => {
-        dispatch({
-            type: GET_CATEGORIES
-        })
+       
         axios.get(`${API_BASE}/task-categories`,{
             headers: {
                 'Authorization': `Bearer ${token}`
             },
-            //  data: JSON.stringify({fullName: fullName, email: email, password: password, phoneToken: “hhssssssdassshhsssaaa”,})
          }).then((result) => {
              dispatch({
                  type: GET_SUCCESS,
