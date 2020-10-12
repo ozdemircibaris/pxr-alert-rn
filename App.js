@@ -25,35 +25,6 @@ export default class App extends Component {
      OneSignal.addEventListener('opened', this.onOpened);
      OneSignal.addEventListener('ids', this.onIds);
   }
-  componentWillMount() {
-    OneSignal.removeEventListener('received', this.onReceived);
-    OneSignal.removeEventListener('opened', this.onOpened);
-    OneSignal.removeEventListener('ids', this.onIds);
-    // this.requestUserPermission()
-    // this.requestUserPermissionNotifiee()
-    //   messaging()
-    //   .getToken()
-    //   .then((token) => {
-    //     console.log("token", token)
-    //   messaging().onNotificationOpenedApp(remoteMessage => {
-    //   console.log(
-    //     'Notification caused app to open from background state:',
-    //     remoteMessage.notification,
-    //   );
-    //   // navigation.navigate(remoteMessage.data.type);
-    // });
-
-    // // Check whether an initial notification is available
-    // messaging()
-    //   .getInitialNotification()
-    //   .then(remoteMessage => {
-    //     if (remoteMessage) {
-    //       console.log('Notification caused app to open from quit state:', remoteMessage.notification, );
-    //     }
-    //   })
-    // })
-    // messaging().setBackgroundMessageHandler(this.requestUserPermissionNotifiee)
-  }
 
   onReceived(notification) {
     console.log("Notification received: ", notification);
@@ -71,42 +42,6 @@ export default class App extends Component {
     AsyncStorage.setItem("device",phoneToken )
     console.log('Device info: ', phoneToken);
   }
-
-  myiOSPromptCallback(permission){
-  // do something with permission value
-  }
-  // async requestUserPermission() {
-  //   const authStatus = await messaging().requestPermission();
-  //   const enabled = authStatus === messaging.AuthorizationStatus.AUTHORIZED || authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-  //   if (enabled) {
-  //     console.log('Authorization status:', authStatus);
-  //   }
-  // }
-
-  // async requestUserPermissionNotifiee() {
-  //   const settings = await notifee.requestPermission();
-  //   if (settings.authorizationStatus >= IOSAuthorizationStatus.AUTHORIZED) {
-  //     console.log('Permission settings:', settings);
-  //   } else {
-  //     console.log('User declined permissions');
-  //   }
-  //   // settings.sound('sound2.mp3 ')
-  //   notifee.createChannel({
-  //     name: "custom",
-  //     id: 'custom-sound',
-  //     title: 'Channel with custom sound',
-  //     sound: 'sound2',
-  //   });
-  //   // notifee.displayNotification({
-  //   //   body: 'Custom sound',
-  //   //   ios: {
-  //   //     // iOS ringtone name
-  //   //     sound: "./src/sounds/sound2.mp3"
-  //   //     // iOS resource (.wav, aiff, .caf)
-  //   //     // sound: 'local.wav',
-  //   //   },
-  //   // });
-  // }
   render() {
     const store = createStore(rootReducer, {}, applyMiddleware(ReduxThunk))
     const persisStore = persistStore(store)
