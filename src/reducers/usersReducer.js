@@ -40,6 +40,11 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         selectedUsers: [...state.selectedUsers],
       }
+     case FETCH_TASKS_FINALLY:
+        return {
+            ...state,
+            tasksFinallyValue: "finally"
+        }
     default:
       return state;
   }
