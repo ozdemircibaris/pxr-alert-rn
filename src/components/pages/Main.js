@@ -28,6 +28,12 @@ export  class Main extends Component {
     this.props.getTasks(this.props.dateArray, this.props.minDate, this.props.userData.data.id, this.props.userData.token);
     this.props.listCard(this.props.userData.token, this.props.userData.data.id , this.props.mainCards)
   }
+componentDidUpdate() {
+    const { tasksFinallyValue } = this.props;
+      if(tasksFinallyValue == "finally") {
+      this.props.getTasks(this.props.dateArray, this.props.minDate, this.props.userData.data.id, this.props.userData.data.access_token);
+    }
+  }
   render() {
     const {taskDate} = this.props;
     console.log("taskDate", taskDate)
@@ -248,6 +254,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   const {idValue, userData} = state.authenticationReducer;
   const { mainCards, dateArray, minDate, taskDate} = state.mainReducer;
+  const { tasksFinallyValue } = state.usersReducer;
   const { cards } = state.createTaskReducer;
   return {
       idValue,
@@ -256,7 +263,8 @@ const mapStateToProps = (state) => {
       dateArray,
       minDate,
       cards,
-      taskDate
+      taskDate,
+      tasksFinallyValue
   }
 }
 
