@@ -42,6 +42,11 @@ export default class App extends Component {
     AsyncStorage.setItem("device",phoneToken )
     console.log('Device info: ', phoneToken);
   }
+
+  myiOSPromptCallback(permission){
+    // do something with permission value
+    }
+
   render() {
     const store = createStore(rootReducer, {}, applyMiddleware(ReduxThunk))
     const persisStore = persistStore(store)

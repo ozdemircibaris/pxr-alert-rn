@@ -4,7 +4,8 @@ import { StyleSheet, View, Text, TouchableOpacity, FlatList, Alert} from 'react-
 import { PhoneWidth, PhoneHeight, responsiveSize } from '../config/env';
 import UsersRenderItem from '../helpComponents/usersRenderItem';
 import { connect } from 'react-redux';
-import { selectUsers, createTask, listUsers } from '../../actions/usersAction';
+import { selectedUsers, listUsers } from '../../actions/usersAction';
+import { createTask } from '../../actions/tasksAction';
 
 class Users extends Component {
     constructor(props) {
@@ -105,7 +106,7 @@ const mapStateToProps = (state) => {
 export default connect(
     mapStateToProps,
     {
-        selectUsers,
+        selectedUsers,
         createTask,
         listUsers
     }

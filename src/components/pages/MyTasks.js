@@ -4,7 +4,7 @@ import { Actions } from 'react-native-router-flux';
 import { PhoneWidth, PhoneHeight,responsiveSize} from '../config/env';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import {getData, deleteTask} from '../../actions/MyTasksAction';
+import {getTasks, deleteTask} from '../../actions/tasksAction';
 
  export class MyTasks extends Component {
   constructor(props) {
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
 });
 const mapStateToProps = (state) => {
   const { userData} = state.authenticationReducer;
-  const { myTasks } = state.MyTasksReducer;
+  const { myTasks } = state.tasksReducer;
   return {
       userData,
       myTasks
@@ -115,7 +115,7 @@ const mapStateToProps = (state) => {
 export default connect(
   mapStateToProps,
   {
-  getData,
+  getTasks,
   deleteTask
   }
 )(MyTasks)

@@ -41,7 +41,6 @@ export const passwordChange = (value) => {
 }
 
 export const signUpClicked = (fullName, email, password, token) => {
-    console.log("token 3", token)
     return dispatch => {
         dispatch({
             type: SIGN_UP_CLICK,
@@ -73,7 +72,6 @@ export const signInClicked = ( email, password) => {
         dispatch({
             type: SIGN_IN_CLICK,
         })
-        console.log({email, password});
         axios({
             method: "post",
             url: `${API_BASE}/users/signin`,
@@ -83,9 +81,7 @@ export const signInClicked = ( email, password) => {
             },
              data: JSON.stringify({ email: email, password: password })
          }).then((result) => {
-             console.log("resultttt" , result)
              if(result.data.status == "success"){
-                console.log("user Id", result.data.data.id)
                 dispatch({
                     type: SIGN_IN_SUCCESS,
                     payload: {id: result.data.data.id, data: result.data}
@@ -93,7 +89,7 @@ export const signInClicked = ( email, password) => {
                  Actions.Main()
              }
          }).catch((err) => {
-             console.log('errorrrruurr', err)
+             console.log("error",err)
              Alert.alert("Uyarı",'HATALI E-POSTA VEYA ŞİFRE')
          })
     }
