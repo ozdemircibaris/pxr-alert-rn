@@ -7,6 +7,7 @@ export const CREATE_TASK = "CREATE_TASK";
 export const FETCH_USERS = "fetch_users";
 
 export const SELECTED_USER = "selected_user"
+export const FETCH_TASKS_FINALLY = "fetch_tasks_finally";
 
 export const listUsers = (token) => {
   return dispatch => {
@@ -54,7 +55,11 @@ export const createTask =(title, body, date, cat_id , user_id, token) => {
          }).catch((err) => {
              console.log('errorrrruurr', err.response)
              Alert.alert("Uyarı","Kitleme başarısız.")
-         })
+         }).finally(() => {
+          dispatch({
+            type: FETCH_TASKS_FINALLY
+          })
+        })
         }
  }
 
