@@ -9,13 +9,6 @@ import AsyncStorage from '@react-native-community/async-storage';
 class signUp extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      fullNameValue: "",
-      emailValue: "",
-      passwordValue: "",
-      token : ""
-    }
   }
 
   onFullNameChanged = (value) => this.props.fullNameChange(value)
@@ -28,7 +21,6 @@ class signUp extends Component {
     })
   }
     render() {
-      const { emailValue, passwordValue, fullNameValue } = this.props;
         return (
           <View style={styles.background}>
             <Image style={styles.icon}
@@ -40,14 +32,12 @@ class signUp extends Component {
                 placeholder='AD SOYAD'
                 placeholderTextColor='black'
                 onChangeText={(value) => this.props.fullNameChange(value)}
-                // value={this.state.fullName}
                 />
             <TextInput 
                 style={styles.input}
                 placeholder='E-POSTA'
                 placeholderTextColor='black'
                 onChangeText={(value) => this.props.emailChange(value)}
-                // value={this.state.email}
                 />
              <TextInput
              secureTextEntry 
@@ -55,7 +45,6 @@ class signUp extends Component {
                 placeholder='ŞİFRE'
                 placeholderTextColor='black'
                 onChangeText={(value) => this.props.passwordChange(value)}
-                // value={this.state.password}
                 />            
             <TouchableOpacity
                 onPress={this.onSignUp}
@@ -81,12 +70,12 @@ const styles = StyleSheet.create({
       width: responsiveSize(100),
       height: responsiveSize(100),
       resizeMode: "contain",
-      alignSelf: "center",
+      alignSelf: "center"
     },
     container:{
       height: PhoneHeight * 0.50,  
-      justifyContent:"center",
-      alignItems:"center"
+      justifyContent: "center",
+      alignItems: "center"
     },
     input: {
       width: PhoneWidth * 0.7,
@@ -100,8 +89,8 @@ const styles = StyleSheet.create({
       borderRadius: 8,
     },
     signUpButton:{
-      height: responsiveSize(28),
-      width: responsiveSize(170), 
+      height: PhoneHeight * 0.05,
+      width: PhoneWidth * 0.5, 
       alignSelf: "center",
       marginTop: 10,
       backgroundColor: "#2a2124",
@@ -111,14 +100,13 @@ const styles = StyleSheet.create({
       color: "white",
       textAlign: "center",
       fontSize: responsiveSize(14),
-    
     },
     questionText:{
-      paddingTop:15,
+      paddingTop: 15,
       fontSize: responsiveSize(13),
     },
     loginButtonText:{
-      paddingTop:10,
+      paddingTop: 10,
       color: "#445c8b",
     },
     login:{

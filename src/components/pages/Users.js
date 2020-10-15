@@ -4,7 +4,8 @@ import { StyleSheet, View, Text, TouchableOpacity, FlatList, Alert} from 'react-
 import { PhoneWidth, PhoneHeight, responsiveSize } from '../config/env';
 import UsersRenderItem from '../helpComponents/usersRenderItem';
 import { connect } from 'react-redux';
-import { selectUsers, createTask, listUsers } from '../../actions/usersAction';
+import { selectedUsers, listUsers } from '../../actions/usersAction';
+import { createTask } from '../../actions/tasksAction';
 
 class Users extends Component {
     constructor(props) {
@@ -14,7 +15,7 @@ class Users extends Component {
         };
     }
     componentDidMount() {
-        this.props.listUsers(this.props.userData.token)
+        this.props.listUsers(this.props.userData.access_token)
     }
 
     render() {
@@ -24,7 +25,7 @@ class Users extends Component {
           <View style={styles.container}>
               <View style={styles.header}>
                   <Text style={styles.headertext}>Merhaba,
-                  <Text style= {styles.userNameText}>{this.props.userData.data.fullName}</Text>
+                  <Text style= {styles.userNameText}>{this.props.userData.fullName}</Text>
                   </Text>
                   <Text style={styles.headertext}>Bu şerefe kimlerin nail olacağını seç</Text>
               </View>
@@ -40,7 +41,7 @@ class Users extends Component {
                             onPress={() => {
                                 if(selectedUsers != ""){
             
-                                    this.props.createTask(title, body, date, cat_id, selectedUsers, this.props.userData.token)
+                                    this.props.createTask(title, body, date, cat_id, selectedUsers, this.props.userData.access_token)
                                 }else{
                                     Alert.alert("Uyarı","Kitlenecek kişi seç.")
                                 }
@@ -105,7 +106,7 @@ const mapStateToProps = (state) => {
 export default connect(
     mapStateToProps,
     {
-        selectUsers,
+        selectedUsers,
         createTask,
         listUsers
     }

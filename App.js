@@ -10,6 +10,7 @@ import OneSignal from 'react-native-onesignal'; // Import package from node modu
 import {AsyncStorage } from 'react-native';
 import { PhoneHeight } from './src/components/config/env';
 export default class App extends Component {
+ 
   constructor(properties) {
     super(properties);
     //Remove this method to stop OneSignal Debugging
@@ -29,6 +30,9 @@ export default class App extends Component {
   onReceived(notification) {
     console.log("Notification received: ", notification);
   }
+  myiOSPromptCallback(permission){
+    // do something with permission value
+    }
 
   onOpened(openResult) {
     console.log('Message: ', openResult.notification.payload.body);
