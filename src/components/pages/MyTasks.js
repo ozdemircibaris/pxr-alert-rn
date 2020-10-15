@@ -4,7 +4,7 @@ import { Actions } from 'react-native-router-flux';
 import { PhoneWidth, PhoneHeight,responsiveSize} from '../config/env';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import {getData, deleteTask} from '../../actions/MyTasksAction';
+import {getTasks, deleteTask} from '../../actions/tasksAction';
 
  export class MyTasks extends Component {
   constructor(props) {
@@ -23,15 +23,15 @@ import {getData, deleteTask} from '../../actions/MyTasksAction';
       </View>
     )
    };
-  componentWillMount(){ 
-    this.props.getData(this.props.userData.token, this.props.userData.data.id);
-  }
+  // componentWillMount(){ 
+  //   this.props.getData(this.props.userData.access_token, this.props.userData.id);
+  // }
 render() {
   return (
    <View style= {styles.container}>
       <View style= {styles.body}>
        <Text style= {styles.greetingText}>Merhaba,
-        <Text style= {styles.userNameText}> {this.props.userData.data.fullName}</Text> </Text>
+        <Text style= {styles.userNameText}> {this.props.userData.fullName}</Text> </Text>
        <Text style= {styles.greetingSubText}>Sana kitlenenler burda.</Text>
             <FlatList style= {styles.missions}
                 data= {this.props.myTasks}
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
 });
 const mapStateToProps = (state) => {
   const { userData} = state.authenticationReducer;
-  const { myTasks } = state.MyTasksReducer;
+  const { myTasks } = state.tasksReducer;
   return {
       userData,
       myTasks
@@ -115,7 +115,7 @@ const mapStateToProps = (state) => {
 export default connect(
   mapStateToProps,
   {
-  getData,
+  getTasks,
   deleteTask
   }
 )(MyTasks)

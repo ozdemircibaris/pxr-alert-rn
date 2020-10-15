@@ -1,20 +1,18 @@
-import { FETCH_USERS, CHECKED_SUCCESS, LIST_SUCCESS, SELECTED_USER  } from "../actions/usersAction";
+import {
+   FETCH_USERS, 
+   SELECTED_USER  
+  } from "../actions/usersAction";
 
 const INITIAL_STATE = {
   selectedId: "",
   usersId: [],
   count: "",
   users: [],
-  tasks: [],
   selectedUsers: []
 }
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case CHECKED_SUCCESS:
-      return {
-        ...state,
-      }
     case FETCH_USERS:
       action.payload.map((item) => {
         item.selected = false;
@@ -40,11 +38,6 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         selectedUsers: [...state.selectedUsers],
       }
-     case FETCH_TASKS_FINALLY:
-        return {
-            ...state,
-            tasksFinallyValue: "finally"
-        }
     default:
       return state;
   }

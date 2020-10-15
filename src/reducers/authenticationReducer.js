@@ -16,8 +16,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 const INITIAL_STATE = {
     fullNameValue: "",
-    emailValue: "bariss",
-    passwordValue: "123456",
+    emailValue: "",
+    passwordValue: "",
     idValue: "",
     userData:"",
     isAuthLogin: false,

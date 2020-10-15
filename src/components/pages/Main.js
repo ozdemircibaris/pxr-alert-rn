@@ -1,23 +1,18 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, FlatList,Modal } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { PhoneWidth, PhoneHeight, responsiveSize } from '../config/env';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import {deleteCard, listCard, listTasks, getTasks} from '../../actions/mainAction';
-import createTaskReducer from '../../reducers/createTaskReducer';
-import { Header } from 'react-native/Libraries/NewAppScreen';
+import { listTasks, getTasks } from '../../actions/tasksAction';
+import { deleteCard, listCard } from '../../actions/cardsAction';
+
 import MissionRenderItem from '../helpComponents/missionRenderItem';
 
+ 
 export  class Main extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      id: this.props.idValue,
-      data: this.props.userData,
-      deleteModal: false,
-      item: "",
-    }
   }
 
   setModalVisible = (visible) => {
@@ -25,32 +20,32 @@ export  class Main extends Component {
   }
 
   componentWillMount() {
-    this.props.getTasks(this.props.dateArray, this.props.minDate, this.props.userData.data.id, this.props.userData.token);
-    this.props.listCard(this.props.userData.token, this.props.userData.data.id , this.props.mainCards)
+    console.log(this.props.userData)
+    this.props.getTasks(this.props.dateArray, this.props.userData.id, this.props.userData.access_token);
+    this.props.listCard(this.props.userData.access_token, this.props.userData.id , this.props.mainCards)
   }
 componentDidUpdate() {
     const { tasksFinallyValue } = this.props;
       if(tasksFinallyValue == "finally") {
-      this.props.getTasks(this.props.dateArray, this.props.minDate, this.props.userData.data.id, this.props.userData.data.access_token);
+      this.props.getTasks(this.props.dateArray, this.props.userData.id, this.props.userData.access_token);
     }
   }
   render() {
-    const {taskDate} = this.props;
-    console.log("taskDate", taskDate)
+    const {minTaskDate} = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.greetingContainer}>
           <Text style={styles.greetingText}>Merhaba,
-            <Text style= {styles.userNameText}>{this.props.userData.data.fullName}</Text></Text>
+            <Text style= {styles.userNameText}>{this.props.userData.fullName}</Text></Text>
           <Text style={styles.containerText}>Sana kitlenenler burda.</Text>
         </View> 
         {
-          taskDate 
+          minTaskDate 
           ? 
-          <ScrollView style={styles.currentTask} backgroundColor= {taskDate != undefined ? taskDate.taskCategoriesModel.color : null}>
-        <Text style={styles.jobTitle}>{taskDate != undefined ? taskDate.title : null}</Text>
-          <Text style={styles.subTitle}> {taskDate != undefined ? taskDate.subTitle : null} </Text>
-          <Text style={styles.jobDate}>{taskDate != undefined ? moment(taskDate.jobDate).format("llll") : null}</Text>
+          <ScrollView style={styles.currentTask} backgroundColor= {minTaskDate != undefined ? minTaskDate.taskCategoriesModel.color : null}>
+        <Text style={styles.jobTitle}>{minTaskDate != undefined ? minTaskDate.title : null}</Text>
+          <Text style={styles.subTitle}> {minTaskDate != undefined ? minTaskDate.subTitle : null} </Text>
+          <Text style={styles.jobDate}>{minTaskDate != undefined ? moment(minTaskDate.jobDate).format("llll") : null}</Text>
         </ScrollView> 
         :
         <ScrollView style={styles.currentTask} >
@@ -253,9 +248,8 @@ const styles = StyleSheet.create({
 });
 const mapStateToProps = (state) => {
   const {idValue, userData} = state.authenticationReducer;
-  const { mainCards, dateArray, minDate, taskDate} = state.mainReducer;
-  const { tasksFinallyValue } = state.usersReducer;
-  const { cards } = state.createTaskReducer;
+  const { dateArray, minDate, minTaskDate, tasksFinallyValue} = state.tasksReducer;
+  const { cards,mainCards } = state.cardsReducer;
   return {
       idValue,
       userData,
@@ -263,7 +257,7 @@ const mapStateToProps = (state) => {
       dateArray,
       minDate,
       cards,
-      taskDate,
+      minTaskDate,
       tasksFinallyValue
   }
 }
@@ -273,7 +267,6 @@ export default connect(
   {
     deleteCard,
     listCard,
-    listTasks,
     getTasks
   }
 )(Main)

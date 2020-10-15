@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Text, Image, ScrollView, FlatList, Modal, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import {deleteCard, listCard, listTasks, getTasks} from '../../actions/mainAction';
+import {deleteCard, listCard} from '../../actions/cardsAction';
+import {listTasks, getTasks} from '../../actions/tasksAction';
 import { Actions } from 'react-native-router-flux';
 import { PhoneHeight, PhoneWidth, responsiveSize } from '../config/env';
 
@@ -42,7 +43,7 @@ class MissionRenderItem extends Component {
                 style={styles.deleteModalButton}
                 onPress={() => {
                   // sildikten sonra modalı kapatır
-                  this.props.deleteCard(this.state.item.id, this.props.userData.token, this.state.item);
+                  this.props.deleteCard(this.state.item.id, this.props.userData.access_token, this.state.item);
                   this.setModalVisible(false);
                 }}>
                 <Text style={styles.yesnoTextStyle}>Evet</Text>
@@ -260,9 +261,9 @@ const styles = StyleSheet.create({
   });
 
   const mapStateToProps = (state) => {
-    const {  emailValue, passwordValue ,idValue, userData} = state.authenticationReducer;
-    const { mainCards, mainTasks, dateArray, minDate, mission, tasks, missionDate , taskDate} = state.mainReducer;
-    const { cards } = state.createTaskReducer;
+    const { emailValue, passwordValue ,idValue, userData} = state.authenticationReducer;
+    const { mainTasks, dateArray, minDate, myTasks, tasks, missionDate , taskDate} = state.tasksReducer;
+    const { cards , mainCards} = state.cardsReducer;
     return {
         emailValue,
         passwordValue,
@@ -272,7 +273,7 @@ const styles = StyleSheet.create({
         mainTasks,
         dateArray,
         minDate,
-        mission,
+        myTasks,
         tasks,
         missionDate,
         cards,

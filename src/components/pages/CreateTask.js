@@ -6,8 +6,8 @@ import 'moment/locale/tr';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { PhoneHeight, PhoneWidth, responsiveSize } from '../config/env';
 import { connect } from 'react-redux';
-import { getCategories, newCard } from '../../actions/createTaskAction'
-
+import { createNewCard } from '../../actions/cardsAction';
+import { getCategories } from '../../actions/tasksAction'
 
 class CreateTask extends Component {
   state={
@@ -27,14 +27,14 @@ class CreateTask extends Component {
 
   // get category 
   componentWillMount(){
-    this.props.getCategories(this.props.userData.token)
+    this.props.getCategories(this.props.userData.access_token)
+    console.log(this.props.userData)
   }
  
   //  ***FONKSIYONLAR***
   dateTimePicking = () => {
-    
     const { show, dateValue, pickerMode, dateModalVisible, title, body, cat_id, date } = this.state
-    if (this.props.newTaskStatus == 'newTask') { // + butonuna basÄ±nca calÄ±sacak olan kÄ±sÄ±m 
+    if (this.props.newTaskStatus == 'newTask') { // + butonuna basınca calışacak olan kısım 
       return (
        <ScrollView style={styles.container}>
           <TextInput
@@ -70,12 +70,11 @@ class CreateTask extends Component {
           {
 
               <TouchableOpacity style={styles.dateButton}  onPress={() => {
-                 //selinden gelen 
+                  
                  if(Platform.OS == "ios"){
                   this.showTimepicker(true);
                 }else if(Platform.OS != "ios"){
                    this.showAndroidDatepicker();
-                  // this.showTimepicker(false);
                 }
                
               }}>
@@ -133,7 +132,7 @@ class CreateTask extends Component {
             <TouchableOpacity style={styles.focusButton}
                               onPress={() => {
                                 if(cat_id != "" && title != "" && body != ""){
-                                  this.props.newCard(cat_id, title, body, this.props.userData.data.id, this.props.userData.token)
+                                  this.props.createNewCard(cat_id, title, body, this.props.userData.id, this.props.userData.access_token)
                                }else{
                                 Alert.alert("Uyarı","Boş alan bırakılamaz")
                               }
@@ -303,7 +302,6 @@ alert("Modal has been closed.");
             is24Hour={true}
             display="default"
             onChange={this.onChange}
-            // timeZoneOffsetInMinutes={0}
           />
         )}
       </TouchableOpacity>
@@ -460,7 +458,7 @@ console.log("showtimepicker")
         <this.listingCategoriesWrtPlatform/>
 
         <View style={styles.header}>
-          <Text style={styles.headerText}>Merhaba, {this.props.userData.data.fullName}{"\n"}Birine iş kitlemek için harika bir gün!</Text>
+          <Text style={styles.headerText}>Merhaba, {this.props.userData.fullName}{"\n"}Birine iş kitlemek için harika bir gün!</Text>
         </View>
         <this.dateTimePicking/>
       </View>  
@@ -722,7 +720,7 @@ marginLeft: 5
 });
 const mapStateToProps = (state) => {
   const {  emailValue, passwordValue ,idValue, userData} = state.authenticationReducer;
-  const { categories } = state.createTaskReducer;
+  const { categories } = state.tasksReducer;
   return {
       emailValue,
       passwordValue,
@@ -735,7 +733,7 @@ export default connect(
   mapStateToProps,
   {
     getCategories,
-    newCard
+    createNewCard
   
   }
 )(CreateTask)
