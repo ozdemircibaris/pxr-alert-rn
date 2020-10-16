@@ -5,7 +5,7 @@ import { PhoneWidth, PhoneHeight, responsiveSize } from '../config/env';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { listTasks, getTasks } from '../../actions/tasksAction';
-import { deleteCard, listCard } from '../../actions/cardsAction';
+import { deleteCard, listCard,  } from '../../actions/myCardsTasksAction';
 
 import MissionRenderItem from '../helpComponents/missionRenderItem';
 
@@ -21,13 +21,13 @@ export  class Main extends Component {
 
   componentWillMount() {
     console.log(this.props.userData)
-    this.props.getTasks(this.props.dateArray, this.props.userData.id, this.props.userData.access_token);
-    this.props.listCard(this.props.userData.access_token, this.props.userData.id , this.props.mainCards)
+    this.props.getTasks(this.props.dateArray, this.props.userData.id, this.props.userData.data.access_token);
+    this.props.listCard(this.props.userData.data.access_token, this.props.userData.data.id , this.props.mainCards)
   }
 componentDidUpdate() {
     const { tasksFinallyValue } = this.props;
       if(tasksFinallyValue == "finally") {
-      this.props.getTasks(this.props.dateArray, this.props.userData.id, this.props.userData.access_token);
+      this.props.getTasks(this.props.dateArray, this.props.userData.data.id, this.props.userData.data.access_token);
     }
   }
   render() {
@@ -36,7 +36,7 @@ componentDidUpdate() {
       <View style={styles.container}>
         <View style={styles.greetingContainer}>
           <Text style={styles.greetingText}>Merhaba,
-            <Text style= {styles.userNameText}>{this.props.userData.fullName}</Text></Text>
+            <Text style= {styles.userNameText}>{this.props.userData.data.fullName}</Text></Text>
           <Text style={styles.containerText}>Sana kitlenenler burda.</Text>
         </View> 
         {
@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   const {idValue, userData} = state.authenticationReducer;
   const { dateArray, minDate, minTaskDate, tasksFinallyValue} = state.tasksReducer;
-  const { cards,mainCards } = state.cardsReducer;
+  const { cards,mainCards } = state.myCardsTasksReducer;
   return {
       idValue,
       userData,

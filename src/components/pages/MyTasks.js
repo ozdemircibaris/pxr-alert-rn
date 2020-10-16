@@ -31,7 +31,7 @@ render() {
    <View style= {styles.container}>
       <View style= {styles.body}>
        <Text style= {styles.greetingText}>Merhaba,
-        <Text style= {styles.userNameText}> {this.props.userData.fullName}</Text> </Text>
+        <Text style= {styles.userNameText}> {this.props.userData.data.fullName}</Text> </Text>
        <Text style= {styles.greetingSubText}>Sana kitlenenler burda.</Text>
             <FlatList style= {styles.missions}
                 data= {this.props.myTasks}

@@ -15,7 +15,7 @@ class Users extends Component {
         };
     }
     componentDidMount() {
-        this.props.listUsers(this.props.userData.access_token)
+        this.props.listUsers(this.props.userData.data.access_token)
     }
 
     render() {
@@ -25,7 +25,7 @@ class Users extends Component {
           <View style={styles.container}>
               <View style={styles.header}>
                   <Text style={styles.headertext}>Merhaba,
-                  <Text style= {styles.userNameText}>{this.props.userData.fullName}</Text>
+                  <Text style= {styles.userNameText}>{this.props.userData.data.fullName}</Text>
                   </Text>
                   <Text style={styles.headertext}>Bu şerefe kimlerin nail olacağını seç</Text>
               </View>
@@ -41,7 +41,7 @@ class Users extends Component {
                             onPress={() => {
                                 if(selectedUsers != ""){
             
-                                    this.props.createTask(title, body, date, cat_id, selectedUsers, this.props.userData.access_token)
+                                    this.props.createTask(title, body, date, cat_id, selectedUsers, this.props.userData.data.access_token)
                                 }else{
                                     Alert.alert("Uyarı","Kitlenecek kişi seç.")
                                 }

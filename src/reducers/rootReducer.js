@@ -1,14 +1,13 @@
 import { combineReducers } from "redux";
-import  authenticationReducer from '../reducers/authenticationReducer';
+import authenticationReducer from '../reducers/authenticationReducer';
 import usersReducer from '../reducers/usersReducer';
-import cardsReducer from '../reducers/cardsReducer';
+import myCardsTasksReducer from '../reducers/myCardsTasksReducer';
 import tasksReducer from '../reducers/tasksReducer';
 
 
 export default combineReducers({
     authenticationReducer,
     usersReducer,
-    cardsReducer,
+    myCardsTasksReducer,
     tasksReducer,
-    
 })

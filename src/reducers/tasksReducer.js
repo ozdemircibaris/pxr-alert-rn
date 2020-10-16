@@ -37,7 +37,6 @@ export default (state = INITIAL_STATE, action) => {
         case GET_TASKS:
             return {
                 ...state,
-                myTasks: action.payload
             }
         case GET_TASKS_SUCCESS:
             return {

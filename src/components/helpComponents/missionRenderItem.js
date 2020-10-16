@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Text, Image, ScrollView, FlatList, Modal, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import {deleteCard, listCard} from '../../actions/cardsAction';
+import {deleteCard, listCard} from '../../actions/myCardsTasksAction';
 import {listTasks, getTasks} from '../../actions/tasksAction';
 import { Actions } from 'react-native-router-flux';
 import { PhoneHeight, PhoneWidth, responsiveSize } from '../config/env';
@@ -43,7 +43,7 @@ class MissionRenderItem extends Component {
                 style={styles.deleteModalButton}
                 onPress={() => {
                   // sildikten sonra modalı kapatır
-                  this.props.deleteCard(this.state.item.id, this.props.userData.access_token, this.state.item);
+                  this.props.deleteCard(this.state.item.id, this.props.userData.data.access_token, this.state.item);
                   this.setModalVisible(false);
                 }}>
                 <Text style={styles.yesnoTextStyle}>Evet</Text>
