@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
   const mapStateToProps = (state) => {
     const { emailValue, passwordValue ,idValue, userData} = state.authenticationReducer;
     const { mainTasks, dateArray, minDate, myTasks, tasks, missionDate , taskDate} = state.tasksReducer;
-    const { cards , mainCards} = state.cardsReducer;
+    const { cards , mainCards} = state.myCardsTasksReducer;
     return {
         emailValue,
         passwordValue,
